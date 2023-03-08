@@ -31,9 +31,16 @@ type
     Splitter1: TSplitter;
     OpenDialog1: TOpenDialog;
     SaveDialog1: TSaveDialog;
+    procedure btnFirstClick(Sender: TObject);
+    procedure btnLastClick(Sender: TObject);
+    procedure btnNextClick(Sender: TObject);
+    procedure btnPlayStopClick(Sender: TObject);
+    procedure btnPrevClick(Sender: TObject);
     procedure btnToggleClick(Sender: TObject);
+    procedure FormCreate(Sender: TObject);
     procedure mnuExitClick(Sender: TObject);
   private
+    procedure LoadImage;
 
   public
 
@@ -46,10 +53,28 @@ implementation
 
 {$R *.lfm}
 
-{ TForm1 }
+uses
+  uAppFuncs, uImagesList;
 
 const
   P2_DEFAULT_WIDTH = 250;
+  MIN_PLAY_MS = 100;
+
+var
+  ImagesList: TImagesList;
+
+{ TForm1 }
+
+procedure TForm1.LoadImage;
+var
+  filename: String;
+begin
+  if ImagesList.Count = 0 then Exit;
+  filename := ImagesList.CurrentImage;
+  StatusBar1.SimpleText := '(' + IntToStr(ImagesList.Index + 1) + ' of '
+    + IntToStr(ImagesList.Count) + ') ' + ExtractFileName(filename);
+  Image1.Picture.LoadFromFile(filename);
+end;
 
 procedure TForm1.mnuExitClick(Sender: TObject);
 begin
@@ -68,6 +93,51 @@ begin
       Splitter1.Left := Panel3.Left - 2;
       btnToggle.ImageIndex := 1;
     end;
+end;
+
+procedure TForm1.btnFirstClick(Sender: TObject);
+begin
+  ImagesList.GoFirst;
+  LoadImage;
+end;
+
+procedure TForm1.btnLastClick(Sender: TObject);
+begin
+  ImagesList.GoLast;
+  LoadImage;
+end;
+
+procedure TForm1.btnNextClick(Sender: TObject);
+begin
+  ImagesList.GoNext;
+  LoadImage;
+end;
+
+procedure TForm1.btnPlayStopClick(Sender: TObject);
+begin
+  (*
+  if Timer1.Enabled then
+     begin
+       Timer1.Enabled := False;
+       btnPlay.Caption := 'Play';
+     end
+  else
+    begin
+      Timer1.Enabled := True;
+      btnPlay.Caption := 'Stop';
+    end;
+  *)
+end;
+
+procedure TForm1.btnPrevClick(Sender: TObject);
+begin
+  ImagesList.GoPrevious;
+  LoadImage;
+end;
+
+procedure TForm1.FormCreate(Sender: TObject);
+begin
+  ImagesList := TImagesList.Create;
 end;
 
 end.

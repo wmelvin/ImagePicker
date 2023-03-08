@@ -41,6 +41,16 @@
         <ResourceBaseClass Value="Form"/>
         <UnitName Value="uForm1"/>
       </Unit>
+      <Unit>
+        <Filename Value="uimageslist.pas"/>
+        <IsPartOfProject Value="True"/>
+        <UnitName Value="uImagesList"/>
+      </Unit>
+      <Unit>
+        <Filename Value="uappfuncs.pas"/>
+        <IsPartOfProject Value="True"/>
+        <UnitName Value="uAppFuncs"/>
+      </Unit>
     </Units>
   </ProjectOptions>
   <CompilerOptions>

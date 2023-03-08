@@ -7,6 +7,7 @@ object Form1: TForm1
   ClientHeight = 433
   ClientWidth = 718
   Menu = MainMenu1
+  OnCreate = FormCreate
   LCLVersion = '2.2.0.4'
   object StatusBar1: TStatusBar
     Left = 0
@@ -76,6 +77,7 @@ object Form1: TForm1
       Width = 36
       Images = ImageList1
       ImageIndex = 2
+      OnClick = btnFirstClick
       ShowHint = True
       ParentShowHint = False
     end
@@ -87,6 +89,7 @@ object Form1: TForm1
       Width = 36
       Images = ImageList1
       ImageIndex = 3
+      OnClick = btnPrevClick
       ShowHint = True
       ParentShowHint = False
     end
@@ -98,6 +101,7 @@ object Form1: TForm1
       Width = 36
       Images = ImageList1
       ImageIndex = 4
+      OnClick = btnPlayStopClick
       ShowHint = True
       ParentShowHint = False
     end
@@ -109,6 +113,7 @@ object Form1: TForm1
       Width = 36
       Images = ImageList1
       ImageIndex = 6
+      OnClick = btnNextClick
       ShowHint = True
       ParentShowHint = False
     end
@@ -120,6 +125,7 @@ object Form1: TForm1
       Width = 36
       Images = ImageList1
       ImageIndex = 7
+      OnClick = btnLastClick
       ShowHint = True
       ParentShowHint = False
     end
