@@ -13,6 +13,7 @@ type
   { TForm1 }
 
   TForm1 = class(TForm)
+    ImageList1: TImageList;
     MainMenu1: TMainMenu;
     mnuFile: TMenuItem;
     mnuExit: TMenuItem;
@@ -50,9 +51,15 @@ end;
 procedure TForm1.btnToggleClick(Sender: TObject);
 begin
   if Panel3.Left - Splitter1.Left < 5 then
-    Splitter1.Left := Panel3.Left - P2_DEFAULT_WIDTH
+    begin
+      Splitter1.Left := Panel3.Left - P2_DEFAULT_WIDTH;
+      btnToggle.ImageIndex := 0;
+    end
   else
-    Splitter1.Left := Panel3.Left - 2;
+    begin
+      Splitter1.Left := Panel3.Left - 2;
+      btnToggle.ImageIndex := 1;
+    end;
 end;
 
 end.
