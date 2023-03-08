@@ -8,6 +8,7 @@ object Form1: TForm1
   ClientWidth = 718
   Menu = MainMenu1
   OnCreate = FormCreate
+  OnShow = FormShow
   LCLVersion = '2.2.0.4'
   object StatusBar1: TStatusBar
     Left = 0
@@ -34,6 +35,9 @@ object Form1: TForm1
       Top = 4
       Width = 537
       Align = alClient
+      AutoSize = True
+      Center = True
+      Proportional = True
     end
   end
   object Panel2: TPanel
@@ -41,20 +45,20 @@ object Form1: TForm1
     Left = 545
     Height = 415
     Top = 0
-    Width = 119
+    Width = 87
     Align = alRight
     Anchors = [akTop, akLeft, akRight, akBottom]
     Caption = 'Panel2'
     TabOrder = 2
   end
   object Panel3: TPanel
-    Left = 664
+    Left = 632
     Height = 415
     Top = 0
-    Width = 54
+    Width = 86
     Align = alRight
     ClientHeight = 415
-    ClientWidth = 54
+    ClientWidth = 86
     TabOrder = 3
     object btnToggle: TSpeedButton
       Left = 8
@@ -128,6 +132,19 @@ object Form1: TForm1
       OnClick = btnLastClick
       ShowHint = True
       ParentShowHint = False
+    end
+    object SpinEdit1: TSpinEdit
+      Left = 3
+      Height = 28
+      Hint = 'Play speed in milliseconds'
+      Top = 273
+      Width = 77
+      Increment = 100
+      MaxValue = 10000
+      MinValue = 100
+      OnChange = SpinEdit1Change
+      TabOrder = 0
+      Value = 1000
     end
   end
   object Splitter1: TSplitter
@@ -217,5 +234,11 @@ object Form1: TForm1
   object SaveDialog1: TSaveDialog
     Left = 304
     Top = 330
+  end
+  object Timer1: TTimer
+    Enabled = False
+    OnTimer = Timer1Timer
+    Left = 382
+    Top = 334
   end
 end

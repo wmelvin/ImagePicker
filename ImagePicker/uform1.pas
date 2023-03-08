@@ -6,7 +6,7 @@ interface
 
 uses
   Classes, SysUtils, Forms, Controls, Graphics, Dialogs, Menus, ComCtrls,
-  ExtCtrls, Buttons;
+  ExtCtrls, Buttons, Spin;
 
 type
 
@@ -27,10 +27,12 @@ type
     btnPlayStop: TSpeedButton;
     btnNext: TSpeedButton;
     btnLast: TSpeedButton;
+    SpinEdit1: TSpinEdit;
     StatusBar1: TStatusBar;
     Splitter1: TSplitter;
     OpenDialog1: TOpenDialog;
     SaveDialog1: TSaveDialog;
+    Timer1: TTimer;
     procedure btnFirstClick(Sender: TObject);
     procedure btnLastClick(Sender: TObject);
     procedure btnNextClick(Sender: TObject);
@@ -38,7 +40,10 @@ type
     procedure btnPrevClick(Sender: TObject);
     procedure btnToggleClick(Sender: TObject);
     procedure FormCreate(Sender: TObject);
+    procedure FormShow(Sender: TObject);
     procedure mnuExitClick(Sender: TObject);
+    procedure SpinEdit1Change(Sender: TObject);
+    procedure Timer1Timer(Sender: TObject);
   private
     procedure LoadImage;
 
@@ -81,6 +86,18 @@ begin
   Close;
 end;
 
+procedure TForm1.SpinEdit1Change(Sender: TObject);
+begin
+  if SpinEdit1.Value < MIN_PLAY_MS then SpinEdit1.Value := MIN_PLAY_MS;
+  Timer1.Interval := SpinEdit1.Value;
+end;
+
+procedure TForm1.Timer1Timer(Sender: TObject);
+begin
+  ImagesList.PlayNext;
+  LoadImage;
+end;
+
 procedure TForm1.btnToggleClick(Sender: TObject);
 begin
   if Panel3.Left - Splitter1.Left < 5 then
@@ -115,18 +132,16 @@ end;
 
 procedure TForm1.btnPlayStopClick(Sender: TObject);
 begin
-  (*
   if Timer1.Enabled then
      begin
        Timer1.Enabled := False;
-       btnPlay.Caption := 'Play';
+       btnPlayStop.ImageIndex := 4;
      end
   else
     begin
       Timer1.Enabled := True;
-      btnPlay.Caption := 'Stop';
+      btnPlayStop.ImageIndex := 5;
     end;
-  *)
 end;
 
 procedure TForm1.btnPrevClick(Sender: TObject);
@@ -138,6 +153,11 @@ end;
 procedure TForm1.FormCreate(Sender: TObject);
 begin
   ImagesList := TImagesList.Create;
+end;
+
+procedure TForm1.FormShow(Sender: TObject);
+begin
+  ImagesList.Load('/home/bill/Pictures/');
 end;
 
 end.

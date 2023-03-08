@@ -24,12 +24,17 @@ type
       procedure GoNext;
       procedure GoLast;
       procedure PlayNext;
+      procedure Load(FileName: String);
+    published
       property Count: Integer read GetCount;
       property Index: Integer read FListIndex;
       property DoLoop: Boolean read FDoLoop write FDoLoop;
   end;
 
 implementation
+
+uses
+  uAppFuncs;
 
 constructor TImagesList.Create;
 begin
@@ -101,6 +106,37 @@ begin
   inc(FListIndex);
   if FListIndex >= FFileList.Count then
      FListIndex := 0;  // Always loop
+end;
+
+procedure TImagesList.Load(FileName: String);
+var
+  dirpath: String;
+  fspec: String;
+  sr: TSearchRec;
+  isDir: Boolean;
+begin
+  FFileList.Clear;
+  FListIndex := -1;
+
+  isDir := FileGetAttr(FileName) AND faDirectory = faDirectory;
+
+  if isDir then
+    dirpath := FileName
+  else
+    dirpath := ExtractFileDir(FileName);
+
+  dirpath := AsPath(dirpath);
+  fSpec := dirpath + '*';
+  if FindFirst(fspec, faAnyfile, sr) = 0 then
+  repeat
+    if (sr.Name <> '.') and (sr.Name <> '..') then
+    begin
+      if not (sr.Attr AND faDirectory = faDirectory) then
+        if IncludeFile(sr.Name) then
+          FFileList.Append(dirpath + sr.Name);
+    end;
+  until FindNext(sr) <> 0;
+  FindClose(sr);
 end;
 
 end.
