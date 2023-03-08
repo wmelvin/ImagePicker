@@ -110,10 +110,10 @@ object Form1: TForm1
       ParentShowHint = False
     end
     object btnNext: TSpeedButton
-      Left = 8
+      Left = 44
       Height = 36
       Hint = 'Next'
-      Top = 176
+      Top = 96
       Width = 36
       Images = ImageList1
       ImageIndex = 6
@@ -122,10 +122,10 @@ object Form1: TForm1
       ParentShowHint = False
     end
     object btnLast: TSpeedButton
-      Left = 8
+      Left = 44
       Height = 36
       Hint = 'Last'
-      Top = 216
+      Top = 59
       Width = 36
       Images = ImageList1
       ImageIndex = 7
@@ -137,7 +137,7 @@ object Form1: TForm1
       Left = 3
       Height = 28
       Hint = 'Play speed in milliseconds'
-      Top = 273
+      Top = 176
       Width = 77
       Increment = 100
       MaxValue = 10000
