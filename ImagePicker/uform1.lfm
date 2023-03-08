@@ -4,43 +4,74 @@ object Form1: TForm1
   Top = 140
   Width = 718
   Caption = 'Form1'
-  ClientHeight = 457
+  ClientHeight = 433
   ClientWidth = 718
   Menu = MainMenu1
   LCLVersion = '2.2.0.4'
   object StatusBar1: TStatusBar
     Left = 0
     Height = 18
-    Top = 439
+    Top = 415
     Width = 718
     Panels = <>
   end
   object Panel1: TPanel
-    Left = 21
-    Height = 50
-    Top = 90
-    Width = 170
+    Left = 0
+    Height = 415
+    Top = 0
+    Width = 545
+    Align = alClient
     Caption = 'Panel1'
     TabOrder = 1
   end
   object Panel2: TPanel
-    Left = 248
-    Height = 50
-    Top = 84
-    Width = 170
+    AnchorSideLeft.Control = Splitter1
+    Left = 545
+    Height = 415
+    Top = 0
+    Width = 123
+    Align = alRight
+    Anchors = [akTop, akLeft, akRight, akBottom]
     Caption = 'Panel2'
     TabOrder = 2
   end
   object Panel3: TPanel
-    Left = 503
-    Height = 50
-    Top = 73
-    Width = 170
+    Left = 668
+    Height = 415
+    Top = 0
+    Width = 50
+    Align = alRight
     Caption = 'Panel3'
+    ClientHeight = 415
+    ClientWidth = 50
     TabOrder = 3
+    object btnToggle: TSpeedButton
+      Left = 10
+      Height = 22
+      Hint = 'Toggle panel'
+      Top = 13
+      Width = 23
+      OnClick = btnToggleClick
+      ShowHint = True
+      ParentShowHint = False
+    end
+  end
+  object Splitter1: TSplitter
+    Left = 545
+    Height = 439
+    Top = 16
+    Width = 5
+    Align = alNone
   end
   object MainMenu1: TMainMenu
     Left = 63
     Top = 36
+    object mnuFile: TMenuItem
+      Caption = '&File'
+      object mnuExit: TMenuItem
+        Caption = 'e&Xit'
+        OnClick = mnuExitClick
+      end
+    end
   end
 end

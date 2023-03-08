@@ -6,7 +6,7 @@ interface
 
 uses
   Classes, SysUtils, Forms, Controls, Graphics, Dialogs, Menus, ComCtrls,
-  ExtCtrls;
+  ExtCtrls, Buttons;
 
 type
 
@@ -14,10 +14,16 @@ type
 
   TForm1 = class(TForm)
     MainMenu1: TMainMenu;
+    mnuFile: TMenuItem;
+    mnuExit: TMenuItem;
     Panel1: TPanel;
     Panel2: TPanel;
     Panel3: TPanel;
+    btnToggle: TSpeedButton;
     StatusBar1: TStatusBar;
+    Splitter1: TSplitter;
+    procedure btnToggleClick(Sender: TObject);
+    procedure mnuExitClick(Sender: TObject);
   private
 
   public
@@ -30,6 +36,24 @@ var
 implementation
 
 {$R *.lfm}
+
+{ TForm1 }
+
+const
+  P2_DEFAULT_WIDTH = 250;
+
+procedure TForm1.mnuExitClick(Sender: TObject);
+begin
+  Close;
+end;
+
+procedure TForm1.btnToggleClick(Sender: TObject);
+begin
+  if Panel3.Left - Splitter1.Left < 5 then
+    Splitter1.Left := Panel3.Left - P2_DEFAULT_WIDTH
+  else
+    Splitter1.Left := Panel3.Left - 2;
+end;
 
 end.
 
