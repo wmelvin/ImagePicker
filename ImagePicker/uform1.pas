@@ -22,6 +22,11 @@ type
     Panel2: TPanel;
     Panel3: TPanel;
     btnToggle: TSpeedButton;
+    btnFirst: TSpeedButton;
+    btnPrev: TSpeedButton;
+    btnPlayStop: TSpeedButton;
+    btnNext: TSpeedButton;
+    btnLast: TSpeedButton;
     StatusBar1: TStatusBar;
     Splitter1: TSplitter;
     OpenDialog1: TOpenDialog;

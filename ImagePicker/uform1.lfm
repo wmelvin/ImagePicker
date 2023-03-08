@@ -40,31 +40,86 @@ object Form1: TForm1
     Left = 545
     Height = 415
     Top = 0
-    Width = 123
+    Width = 119
     Align = alRight
     Anchors = [akTop, akLeft, akRight, akBottom]
     Caption = 'Panel2'
     TabOrder = 2
   end
   object Panel3: TPanel
-    Left = 668
+    Left = 664
     Height = 415
     Top = 0
-    Width = 50
+    Width = 54
     Align = alRight
     ClientHeight = 415
-    ClientWidth = 50
+    ClientWidth = 54
     TabOrder = 3
     object btnToggle: TSpeedButton
-      Left = 10
-      Height = 32
+      Left = 8
+      Height = 36
       Hint = 'Toggle panel'
       Top = 13
-      Width = 32
+      Width = 36
       Images = ImageList1
       ImageIndex = 0
       ImageWidth = 25
       OnClick = btnToggleClick
+      ShowHint = True
+      ParentShowHint = False
+    end
+    object btnFirst: TSpeedButton
+      Left = 8
+      Height = 36
+      Hint = 'First'
+      Top = 59
+      Width = 36
+      Images = ImageList1
+      ImageIndex = 2
+      ShowHint = True
+      ParentShowHint = False
+    end
+    object btnPrev: TSpeedButton
+      Left = 8
+      Height = 36
+      Hint = 'Previous'
+      Top = 96
+      Width = 36
+      Images = ImageList1
+      ImageIndex = 3
+      ShowHint = True
+      ParentShowHint = False
+    end
+    object btnPlayStop: TSpeedButton
+      Left = 8
+      Height = 36
+      Hint = 'Play/Stop'
+      Top = 136
+      Width = 36
+      Images = ImageList1
+      ImageIndex = 4
+      ShowHint = True
+      ParentShowHint = False
+    end
+    object btnNext: TSpeedButton
+      Left = 8
+      Height = 36
+      Hint = 'Next'
+      Top = 176
+      Width = 36
+      Images = ImageList1
+      ImageIndex = 6
+      ShowHint = True
+      ParentShowHint = False
+    end
+    object btnLast: TSpeedButton
+      Left = 8
+      Height = 36
+      Hint = 'Last'
+      Top = 216
+      Width = 36
+      Images = ImageList1
+      ImageIndex = 7
       ShowHint = True
       ParentShowHint = False
     end
