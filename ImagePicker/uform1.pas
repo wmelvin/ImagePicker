@@ -13,6 +13,7 @@ type
   { TForm1 }
 
   TForm1 = class(TForm)
+    Image1: TImage;
     ImageList1: TImageList;
     MainMenu1: TMainMenu;
     mnuFile: TMenuItem;
@@ -23,6 +24,8 @@ type
     btnToggle: TSpeedButton;
     StatusBar1: TStatusBar;
     Splitter1: TSplitter;
+    OpenDialog1: TOpenDialog;
+    SaveDialog1: TSaveDialog;
     procedure btnToggleClick(Sender: TObject);
     procedure mnuExitClick(Sender: TObject);
   private
