@@ -227,10 +227,17 @@ end;
 procedure TForm1.mnuSaveClick(Sender: TObject);
 var
   fn: String;
+  title: String;
 begin
-  fn := AsPath(GetCurrentDir) + 'ztest-'
+  title := StringReplace(editTitle.Text, ' ', '_', [rfReplaceAll]);
+  if 0 < Length(title) then
+    title := title + '-';
+
+  fn := AsPath(GetCurrentDir) + 'ImageList-' + title
     + FormatDateTime('yyyymmdd_hhnnss', Now) + '.txt';
+
   SaveDialog1.FileName := fn;
+
   if SaveDialog1.Execute then
     SaveList(SaveDialog1.FileName);
 end;

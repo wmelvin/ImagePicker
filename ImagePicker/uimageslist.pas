@@ -50,7 +50,9 @@ var
 begin
   IncludeFile := False;
   ext := LowerCase(ExtractFileExt(FileName));
-  if (ext = '.jpg') or (ext = '.png') then IncludeFile := True;
+  if (ext = '.jpg') or (ext = '.png') or (ext = '.jpeg')
+  or (ext = '.bmp') or (ext = '.gif') then
+    IncludeFile := True;
 end;
 
 procedure TImagesList.Add(FileName: String);
