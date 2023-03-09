@@ -87,10 +87,12 @@ procedure TForm1.LoadImage;
 var
   filename: String;
 begin
-  if ImagesList.Count = 0 then Exit;
   filename := ImagesList.CurrentImage;
+  if Length(filename) = 0 then
+    Exit;
   StatusBar1.SimpleText := '(' + IntToStr(ImagesList.Index + 1) + ' of '
     + IntToStr(ImagesList.Count) + ') ' + ExtractFileName(filename);
+  Panel1.Caption := '';
   Image1.Picture.LoadFromFile(filename);
 end;
 
@@ -243,8 +245,25 @@ begin
 end;
 
 procedure TForm1.FormShow(Sender: TObject);
+var
+  params: TStringList;
+  s: String;
 begin
-  // TODO: Remove?
+  params := TStringList.Create;
+  try
+    Application.GetNonOptions('', [], params);
+    if 0 < params.Count then
+      // Take first argument as file or directory to load.
+      begin
+        s := params[0];
+        ImagesList.Load(s);
+        if not ImagesList.SetCurrentImage(s) then
+          ImagesList.GoFirst;
+        LoadImage;
+      end;
+  finally
+    FreeAndNil(params);
+  end;
 end;
 
 procedure TForm1.Image1DblClick(Sender: TObject);

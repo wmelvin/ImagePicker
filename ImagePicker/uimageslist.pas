@@ -66,7 +66,7 @@ end;
 
 function TImagesList.CurrentImage: String;
 begin
-  if FFileList.Count = 0 then
+  if (FFileList.Count = 0) or (FListIndex < 0) then
     CurrentImage := ''
   else
     CurrentImage := FFileList[FListIndex];
