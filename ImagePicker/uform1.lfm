@@ -176,6 +176,14 @@ object Form1: TForm1
     Top = 36
     object mnuFile: TMenuItem
       Caption = '&File'
+      object mnuOpen: TMenuItem
+        Caption = '&Open'
+        OnClick = mnuOpenClick
+      end
+      object mnuSave: TMenuItem
+        Caption = '&Save'
+        OnClick = mnuSaveClick
+      end
       object mnuExit: TMenuItem
         Caption = 'e&Xit'
         OnClick = mnuExitClick

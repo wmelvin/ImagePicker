@@ -17,6 +17,8 @@ type
     ImageList1: TImageList;
     ListBox1: TListBox;
     MainMenu1: TMainMenu;
+    mnuOpen: TMenuItem;
+    mnuSave: TMenuItem;
     mnuFile: TMenuItem;
     mnuExit: TMenuItem;
     Panel1: TPanel;
@@ -45,6 +47,8 @@ type
     procedure FormShow(Sender: TObject);
     procedure Image1DblClick(Sender: TObject);
     procedure mnuExitClick(Sender: TObject);
+    procedure mnuOpenClick(Sender: TObject);
+    procedure mnuSaveClick(Sender: TObject);
     procedure SpinEdit1Change(Sender: TObject);
     procedure Timer1Timer(Sender: TObject);
   private
@@ -131,6 +135,23 @@ begin
   Close;
 end;
 
+procedure TForm1.mnuOpenClick(Sender: TObject);
+begin
+  if OpenDialog1.Execute then
+    begin
+      ImagesList.Load(OpenDialog1.FileName);
+      if ImagesList.SetCurrentImage(OpenDialog1.FileName) then
+        LoadImage
+      else
+        StatusBar1.SimpleText := 'Not a supported image type.';
+    end;
+end;
+
+procedure TForm1.mnuSaveClick(Sender: TObject);
+begin
+  // TODO: dialog
+end;
+
 procedure TForm1.SpinEdit1Change(Sender: TObject);
 begin
   if SpinEdit1.Value < MIN_PLAY_MS then SpinEdit1.Value := MIN_PLAY_MS;
@@ -202,7 +223,7 @@ end;
 
 procedure TForm1.FormShow(Sender: TObject);
 begin
-  ImagesList.Load('/home/bill/Pictures/');
+  // TODO: Remove?
 end;
 
 procedure TForm1.Image1DblClick(Sender: TObject);
