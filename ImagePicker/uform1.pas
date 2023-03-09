@@ -144,6 +144,10 @@ begin
         LoadImage
       else
         StatusBar1.SimpleText := 'Not a supported image type.';
+      if ImagesList.Count = 0 then
+        Panel1.Caption := 'No images.'
+      else
+        Panel1.Caption := '';
     end;
 end;
 
@@ -206,6 +210,8 @@ end;
 procedure TForm1.FormCreate(Sender: TObject);
 begin
   ImagesList := TImagesList.Create;
+  Panel1.Caption := 'No images.';
+  StatusBar1.SimpleText := 'No images.';
 end;
 
 procedure TForm1.FormKeyDown(Sender: TObject; var Key: Word; Shift: TShiftState
