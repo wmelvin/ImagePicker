@@ -15,6 +15,7 @@ type
   TForm1 = class(TForm)
     btnDelete: TButton;
     btnApply: TButton;
+    btnAdd: TButton;
     chkAutoTag: TCheckBox;
     Image1: TImage;
     ImageList1: TImageList;
@@ -41,6 +42,7 @@ type
     OpenDialog1: TOpenDialog;
     SaveDialog1: TSaveDialog;
     Timer1: TTimer;
+    procedure btnAddClick(Sender: TObject);
     procedure btnApplyClick(Sender: TObject);
     procedure btnFirstClick(Sender: TObject);
     procedure btnLastClick(Sender: TObject);
@@ -49,7 +51,11 @@ type
     procedure btnPrevClick(Sender: TObject);
     procedure btnToggleClick(Sender: TObject);
     procedure btnDeleteClick(Sender: TObject);
+    procedure editTagEnter(Sender: TObject);
+    procedure editTagExit(Sender: TObject);
     procedure editTitleChange(Sender: TObject);
+    procedure editTitleEnter(Sender: TObject);
+    procedure editTitleExit(Sender: TObject);
     procedure FormCreate(Sender: TObject);
     procedure FormKeyDown(Sender: TObject; var Key: Word; Shift: TShiftState);
     procedure FormShow(Sender: TObject);
@@ -58,14 +64,18 @@ type
     procedure mnuOpenClick(Sender: TObject);
     procedure mnuSaveClick(Sender: TObject);
     procedure SpinEdit1Change(Sender: TObject);
+    procedure SpinEdit1Enter(Sender: TObject);
+    procedure SpinEdit1Exit(Sender: TObject);
     procedure Timer1Timer(Sender: TObject);
   private
+    InEdit: Boolean;
     procedure LoadImage;
     procedure ImageFirst;
     procedure ImagePrev;
     procedure ImageNext;
     procedure ImageLast;
     procedure PlayStop;
+    procedure AddCurrentImage;
     procedure SaveList(FileName: String);
   public
 
@@ -231,6 +241,16 @@ begin
   Timer1.Interval := SpinEdit1.Value;
 end;
 
+procedure TForm1.SpinEdit1Enter(Sender: TObject);
+begin
+  InEdit := True;
+end;
+
+procedure TForm1.SpinEdit1Exit(Sender: TObject);
+begin
+  InEdit := False;
+end;
+
 procedure TForm1.Timer1Timer(Sender: TObject);
 begin
   ImagesList.PlayNext;
@@ -264,9 +284,29 @@ begin
         end;
 end;
 
+procedure TForm1.editTagEnter(Sender: TObject);
+begin
+  InEdit := True;
+end;
+
+procedure TForm1.editTagExit(Sender: TObject);
+begin
+  InEdit := False;
+end;
+
 procedure TForm1.editTitleChange(Sender: TObject);
 begin
   // btnApply.Enabled := (0 < Length(editTitle.Text));
+end;
+
+procedure TForm1.editTitleEnter(Sender: TObject);
+begin
+  InEdit := True;
+end;
+
+procedure TForm1.editTitleExit(Sender: TObject);
+begin
+  InEdit := False;
 end;
 
 procedure TForm1.btnFirstClick(Sender: TObject);
@@ -293,6 +333,11 @@ begin
       end;
 end;
 
+procedure TForm1.btnAddClick(Sender: TObject);
+begin
+  AddCurrentImage;
+end;
+
 procedure TForm1.btnLastClick(Sender: TObject);
 begin
   ImageLast;
@@ -315,6 +360,7 @@ end;
 
 procedure TForm1.FormCreate(Sender: TObject);
 begin
+  InEdit := False;
   ImagesList := TImagesList.Create;
   Panel1.Caption := 'No images.';
   StatusBar1.SimpleText := 'No images.';
@@ -323,12 +369,13 @@ end;
 procedure TForm1.FormKeyDown(Sender: TObject; var Key: Word; Shift: TShiftState
   );
 begin
+  if InEdit then Exit;
   case Key of
     VK_HOME: ImageFirst;
     VK_LEFT: ImagePrev;
     VK_RIGHT: ImageNext;
     VK_END: ImageLast;
-    VK_SPACE: PlayStop;
+    VK_F5: PlayStop;
   end;
 
 end;
@@ -355,7 +402,7 @@ begin
   end;
 end;
 
-procedure TForm1.Image1DblClick(Sender: TObject);
+procedure TForm1.AddCurrentImage;
 var
   s: String;
   t: String;
@@ -371,6 +418,11 @@ begin
     info := TImageInfo.Create(s, t);
     ListBox1.Items.AddObject(info.GetFileName, info);
   end;
+end;
+
+procedure TForm1.Image1DblClick(Sender: TObject);
+begin
+  AddCurrentImage;
 end;
 
 end.
