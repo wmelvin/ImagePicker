@@ -218,10 +218,10 @@ procedure TForm1.FormKeyDown(Sender: TObject; var Key: Word; Shift: TShiftState
   );
 begin
   case Key of
-    VK_F: ImageFirst;
-    VK_P: ImagePrev;
-    VK_N: ImageNext;
-    VK_L: ImageLast;
+    VK_F, VK_HOME: ImageFirst;
+    VK_P, VK_LEFT: ImagePrev;
+    VK_N, VK_RIGHT: ImageNext;
+    VK_L, VK_END: ImageLast;
     VK_SPACE: PlayStop;
   end;
 
