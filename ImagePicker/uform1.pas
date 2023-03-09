@@ -60,6 +60,7 @@ type
     procedure ImageNext;
     procedure ImageLast;
     procedure PlayStop;
+    procedure SaveList(FileName: String);
   public
 
   end;
@@ -72,7 +73,7 @@ implementation
 {$R *.lfm}
 
 uses
-  uImageInfo, uImagesList, LCLType;
+  uAppFuncs, uImageInfo, uImagesList, LCLType;
 
 const
   P2_DEFAULT_WIDTH = 250;
@@ -155,9 +156,67 @@ begin
     end;
 end;
 
-procedure TForm1.mnuSaveClick(Sender: TObject);
+procedure TForm1.SaveList(FileName: String);
+var
+  tf: TextFile;
+  i: Integer;
+  item: TImageInfo;
+  n: Integer;
+  pad: Integer;
 begin
-  // TODO: dialog
+  StatusBar1.SimpleText := 'Save as ' + FileName;
+  AssignFile(tf, FileName);
+  try
+    rewrite(tf);
+
+    // Write file paths.
+    for i := 0 to ListBox1.Items.Count - 1 do
+    begin
+      item := TImageInfo(ListBox1.Items.Objects[i]);
+      writeln(tf, item.FullName);
+    end;
+
+    // Get length of longest file name in items with a tag.
+    pad := 0;
+    for i := 0 to ListBox1.Items.Count - 1 do
+    begin
+      item := TImageInfo(ListBox1.Items.Objects[i]);
+      if item.HasTag then
+        begin
+          n := Length(item.GetFileName);
+          if pad < n then
+            pad := n;
+        end;
+    end;
+
+    if 0 < pad then
+      // Write move/rename list for items with a tag.
+      begin
+        writeln(tf, '');
+        for i := 0 to ListBox1.Items.Count - 1 do
+        begin
+          item := TImageInfo(ListBox1.Items.Objects[i]);
+          if item.HasTag then
+            writeln(tf, '# ' + item.AsMvCmd(pad));
+        end;
+      end;
+
+    CloseFile(tf);
+  except
+    on E: EInOutError do
+      StatusBar1.SimpleText := 'ERROR: ' + E.Message;
+  end;
+end;
+
+procedure TForm1.mnuSaveClick(Sender: TObject);
+var
+  fn: String;
+begin
+  fn := AsPath(GetCurrentDir) + 'ztest-'
+    + FormatDateTime('yyyymmdd_hhnnss', Now) + '.txt';
+  SaveDialog1.FileName := fn;
+  if SaveDialog1.Execute then
+    SaveList(SaveDialog1.FileName);
 end;
 
 procedure TForm1.SpinEdit1Change(Sender: TObject);
@@ -274,7 +333,7 @@ begin
   s := ImagesList.CurrentImage;
   if 0 < Length(s) then
   begin
-    info := TImageInfo.Create(s, '');
+    info := TImageInfo.Create(s, 'testtag'); // TODO: Actual tag.
     ListBox1.Items.AddObject(info.GetFileName, info);
   end;
 end;
