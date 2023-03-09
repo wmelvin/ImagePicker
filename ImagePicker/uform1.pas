@@ -40,13 +40,18 @@ type
     procedure btnPrevClick(Sender: TObject);
     procedure btnToggleClick(Sender: TObject);
     procedure FormCreate(Sender: TObject);
+    procedure FormKeyDown(Sender: TObject; var Key: Word; Shift: TShiftState);
     procedure FormShow(Sender: TObject);
     procedure mnuExitClick(Sender: TObject);
     procedure SpinEdit1Change(Sender: TObject);
     procedure Timer1Timer(Sender: TObject);
   private
     procedure LoadImage;
-
+    procedure ImageFirst;
+    procedure ImagePrev;
+    procedure ImageNext;
+    procedure ImageLast;
+    procedure PlayStop;
   public
 
   end;
@@ -59,7 +64,7 @@ implementation
 {$R *.lfm}
 
 uses
-  uAppFuncs, uImagesList;
+  uAppFuncs, uImagesList, LCLType;
 
 const
   P2_DEFAULT_WIDTH = 250;
@@ -79,6 +84,44 @@ begin
   StatusBar1.SimpleText := '(' + IntToStr(ImagesList.Index + 1) + ' of '
     + IntToStr(ImagesList.Count) + ') ' + ExtractFileName(filename);
   Image1.Picture.LoadFromFile(filename);
+end;
+
+procedure TForm1.ImageFirst;
+begin
+  ImagesList.GoFirst;
+  LoadImage;
+end;
+
+procedure TForm1.ImagePrev;
+begin
+  ImagesList.GoPrevious;
+  LoadImage;
+end;
+
+procedure TForm1.ImageNext;
+begin
+  ImagesList.GoNext;
+  LoadImage;
+end;
+
+procedure TForm1.ImageLast;
+begin
+  ImagesList.GoLast;
+  LoadImage;
+end;
+
+procedure TForm1.PlayStop;
+begin
+  if Timer1.Enabled then
+     begin
+       Timer1.Enabled := False;
+       btnPlayStop.ImageIndex := 4;
+     end
+  else
+    begin
+      Timer1.Enabled := True;
+      btnPlayStop.ImageIndex := 5;
+    end;
 end;
 
 procedure TForm1.mnuExitClick(Sender: TObject);
@@ -114,45 +157,45 @@ end;
 
 procedure TForm1.btnFirstClick(Sender: TObject);
 begin
-  ImagesList.GoFirst;
-  LoadImage;
+  ImageFirst;
 end;
 
 procedure TForm1.btnLastClick(Sender: TObject);
 begin
-  ImagesList.GoLast;
-  LoadImage;
+  ImageLast;
 end;
 
 procedure TForm1.btnNextClick(Sender: TObject);
 begin
-  ImagesList.GoNext;
-  LoadImage;
+  ImageNext;
 end;
 
 procedure TForm1.btnPlayStopClick(Sender: TObject);
 begin
-  if Timer1.Enabled then
-     begin
-       Timer1.Enabled := False;
-       btnPlayStop.ImageIndex := 4;
-     end
-  else
-    begin
-      Timer1.Enabled := True;
-      btnPlayStop.ImageIndex := 5;
-    end;
+  PlayStop;
 end;
 
 procedure TForm1.btnPrevClick(Sender: TObject);
 begin
-  ImagesList.GoPrevious;
-  LoadImage;
+  ImagePrev;
 end;
 
 procedure TForm1.FormCreate(Sender: TObject);
 begin
   ImagesList := TImagesList.Create;
+end;
+
+procedure TForm1.FormKeyDown(Sender: TObject; var Key: Word; Shift: TShiftState
+  );
+begin
+  case Key of
+    VK_F: ImageFirst;
+    VK_P: ImagePrev;
+    VK_N: ImageNext;
+    VK_L: ImageLast;
+    VK_SPACE: PlayStop;
+  end;
+
 end;
 
 procedure TForm1.FormShow(Sender: TObject);

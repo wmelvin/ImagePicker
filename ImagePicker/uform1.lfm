@@ -6,8 +6,10 @@ object Form1: TForm1
   Caption = 'Form1'
   ClientHeight = 433
   ClientWidth = 718
+  KeyPreview = True
   Menu = MainMenu1
   OnCreate = FormCreate
+  OnKeyDown = FormKeyDown
   OnShow = FormShow
   LCLVersion = '2.2.0.4'
   object StatusBar1: TStatusBar
