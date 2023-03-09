@@ -17,8 +17,9 @@ type
       function GetFileName: String;
       function AsMvCmd(PadLen: Integer): String;
       function HasTag: Boolean;
+      procedure SetTag(ATag: String);
     published
-      property Tag: String read FTag write FTag;
+      property Tag: String read FTag write SetTag;
       property FullName: String read FPath;
   end;
 
@@ -29,6 +30,11 @@ constructor TImageInfo.Create(APath: String; ATag: String);
 begin
   FPath := APath;
   FTag := ATag;
+end;
+
+procedure TImageInfo.SetTag(ATag: String);
+begin
+  FTag := StringReplace(Trim(ATag), ' ', '_', [rfReplaceAll]);
 end;
 
 function TImageInfo.GetFileName: String;
