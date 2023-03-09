@@ -23,35 +23,50 @@ object Form1: TForm1
     Left = 0
     Height = 415
     Top = 0
-    Width = 545
+    Width = 350
     Align = alClient
     BevelInner = bvLowered
     BorderWidth = 2
     Caption = 'No image.'
     ClientHeight = 415
-    ClientWidth = 545
+    ClientWidth = 350
     TabOrder = 1
     object Image1: TImage
       Left = 4
       Height = 407
       Top = 4
-      Width = 537
+      Width = 342
       Align = alClient
       AutoSize = True
       Center = True
+      OnDblClick = Image1DblClick
       Proportional = True
     end
   end
   object Panel2: TPanel
     AnchorSideLeft.Control = Splitter1
-    Left = 545
+    Left = 350
     Height = 415
     Top = 0
-    Width = 87
+    Width = 282
     Align = alRight
     Anchors = [akTop, akLeft, akRight, akBottom]
-    Caption = 'Panel2'
+    ClientHeight = 415
+    ClientWidth = 282
     TabOrder = 2
+    object ListBox1: TListBox
+      Left = 16
+      Height = 283
+      Top = 13
+      Width = 256
+      Anchors = [akTop, akLeft, akRight, akBottom]
+      ItemHeight = 0
+      MultiSelect = True
+      ParentShowHint = False
+      ShowHint = True
+      TabOrder = 0
+      TopIndex = -1
+    end
   end
   object Panel3: TPanel
     Left = 632
@@ -150,7 +165,7 @@ object Form1: TForm1
     end
   end
   object Splitter1: TSplitter
-    Left = 545
+    Left = 350
     Height = 439
     Top = 16
     Width = 5
@@ -230,17 +245,17 @@ object Form1: TForm1
     }
   end
   object OpenDialog1: TOpenDialog
-    Left = 252
+    Left = 216
     Top = 332
   end
   object SaveDialog1: TSaveDialog
-    Left = 304
-    Top = 330
+    Left = 288
+    Top = 332
   end
   object Timer1: TTimer
     Enabled = False
     OnTimer = Timer1Timer
-    Left = 382
-    Top = 334
+    Left = 144
+    Top = 332
   end
 end

@@ -6,7 +6,7 @@ interface
 
 uses
   Classes, SysUtils, Forms, Controls, Graphics, Dialogs, Menus, ComCtrls,
-  ExtCtrls, Buttons, Spin;
+  ExtCtrls, Buttons, Spin, StdCtrls;
 
 type
 
@@ -15,6 +15,7 @@ type
   TForm1 = class(TForm)
     Image1: TImage;
     ImageList1: TImageList;
+    ListBox1: TListBox;
     MainMenu1: TMainMenu;
     mnuFile: TMenuItem;
     mnuExit: TMenuItem;
@@ -42,6 +43,7 @@ type
     procedure FormCreate(Sender: TObject);
     procedure FormKeyDown(Sender: TObject; var Key: Word; Shift: TShiftState);
     procedure FormShow(Sender: TObject);
+    procedure Image1DblClick(Sender: TObject);
     procedure mnuExitClick(Sender: TObject);
     procedure SpinEdit1Change(Sender: TObject);
     procedure Timer1Timer(Sender: TObject);
@@ -64,7 +66,7 @@ implementation
 {$R *.lfm}
 
 uses
-  uAppFuncs, uImagesList, LCLType;
+  uImageInfo, uImagesList, LCLType;
 
 const
   P2_DEFAULT_WIDTH = 250;
@@ -201,6 +203,19 @@ end;
 procedure TForm1.FormShow(Sender: TObject);
 begin
   ImagesList.Load('/home/bill/Pictures/');
+end;
+
+procedure TForm1.Image1DblClick(Sender: TObject);
+var
+  s: String;
+  info: TImageInfo;
+begin
+  s := ImagesList.CurrentImage;
+  if 0 < Length(s) then
+  begin
+    info := TImageInfo.Create(s, '');
+    ListBox1.Items.AddObject(info.GetFileName, info);
+  end;
 end;
 
 end.

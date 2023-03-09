@@ -53,6 +53,11 @@
         <IsPartOfProject Value="True"/>
         <UnitName Value="uAppFuncs"/>
       </Unit>
+      <Unit>
+        <Filename Value="uimageinfo.pas"/>
+        <IsPartOfProject Value="True"/>
+        <UnitName Value="uImageInfo"/>
+      </Unit>
     </Units>
   </ProjectOptions>
   <CompilerOptions>
