@@ -369,12 +369,31 @@ end;
 procedure TForm1.FormKeyDown(Sender: TObject; var Key: Word; Shift: TShiftState
   );
 begin
-  if InEdit then Exit;
   case Key of
-    VK_HOME: ImageFirst;
-    VK_LEFT: ImagePrev;
-    VK_RIGHT: ImageNext;
-    VK_END: ImageLast;
+    VK_HOME: if not InEdit then
+      begin
+        ImageFirst;
+        Key := 0;
+      end;
+
+    VK_LEFT: if not InEdit then
+      begin
+        ImagePrev;
+        Key := 0;
+      end;
+
+    VK_RIGHT: if not InEdit then
+      begin
+        ImageNext;
+        Key := 0;
+      end;
+
+    VK_END: if not InEdit then
+      begin
+        ImageLast;
+        Key := 0;
+      end;
+
     VK_F5: PlayStop;
   end;
 
