@@ -13,6 +13,7 @@ type
   { TForm1 }
 
   TForm1 = class(TForm)
+    btnDelete: TButton;
     Image1: TImage;
     ImageList1: TImageList;
     ListBox1: TListBox;
@@ -42,6 +43,7 @@ type
     procedure btnPlayStopClick(Sender: TObject);
     procedure btnPrevClick(Sender: TObject);
     procedure btnToggleClick(Sender: TObject);
+    procedure btnDeleteClick(Sender: TObject);
     procedure FormCreate(Sender: TObject);
     procedure FormKeyDown(Sender: TObject; var Key: Word; Shift: TShiftState);
     procedure FormShow(Sender: TObject);
@@ -180,6 +182,19 @@ begin
       Splitter1.Left := Panel3.Left - 2;
       btnToggle.ImageIndex := 1;
     end;
+end;
+
+procedure TForm1.btnDeleteClick(Sender: TObject);
+var
+  i: Integer;
+begin
+  if 0 < ListBox1.SelCount then
+    for i := ListBox1.Items.Count - 1 downto 0 do
+      if ListBox1.Selected[i] then
+        begin
+          ListBox1.Items.Objects[i].Free;  // TImageInfo object
+          ListBox1.Items.Delete(i);
+        end;
 end;
 
 procedure TForm1.btnFirstClick(Sender: TObject);
