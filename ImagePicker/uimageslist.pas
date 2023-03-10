@@ -56,8 +56,12 @@ begin
 end;
 
 procedure TImagesList.Add(FileName: String);
+var
+  dup: Integer;
 begin
-  FFileList.Append(FileName);
+  dup := FFileList.IndexOf(FileName);
+  if dup = -1 then
+    FFileList.Append(FileName);
 end;
 
 function TImagesList.GetCount: Integer;

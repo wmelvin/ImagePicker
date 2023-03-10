@@ -13,7 +13,7 @@ type
   { TForm1 }
 
   TForm1 = class(TForm)
-    btnDelete: TButton;
+    btnRemove: TButton;
     btnApply: TButton;
     btnAdd: TButton;
     btnShow: TButton;
@@ -52,7 +52,7 @@ type
     procedure btnPrevClick(Sender: TObject);
     procedure btnShowClick(Sender: TObject);
     procedure btnToggleClick(Sender: TObject);
-    procedure btnDeleteClick(Sender: TObject);
+    procedure btnRemoveClick(Sender: TObject);
     procedure editTagEnter(Sender: TObject);
     procedure editTagExit(Sender: TObject);
     procedure editTitleChange(Sender: TObject);
@@ -309,10 +309,15 @@ begin
   TogglePanel2;
 end;
 
-procedure TForm1.btnDeleteClick(Sender: TObject);
+procedure TForm1.btnRemoveClick(Sender: TObject);
 var
   i: Integer;
 begin
+  if not MessageDlg('Confirm', 'Remove selected item(s) from list?',
+    mtConfirmation, [mbYes, mbNo],0
+  ) = mrYes then
+    Exit;
+
   if 0 < ListBox1.SelCount then
     for i := ListBox1.Items.Count - 1 downto 0 do
       if ListBox1.Selected[i] then
@@ -473,17 +478,22 @@ procedure TForm1.AddCurrentImage;
 var
   s: String;
   t: String;
+  dup: Integer;
   info: TImageInfo;
 begin
   s := ImagesList.CurrentImage;
   if 0 < Length(s) then
   begin
-    if chkAutoTag.Checked then
-      t := editTag.Text
-    else
-      t := '';
-    info := TImageInfo.Create(s, t);
-    ListBox1.Items.AddObject(info.GetFileName, info);
+    dup := ListBox1.Items.IndexOf(ExtractFileName(s));
+    if dup = -1 then
+    begin
+      if chkAutoTag.Checked then
+        t := editTag.Text
+      else
+        t := '';
+      info := TImageInfo.Create(s, t);
+      ListBox1.Items.AddObject(info.GetFileName, info);
+    end;
   end;
 end;
 
