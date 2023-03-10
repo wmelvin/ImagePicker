@@ -72,7 +72,7 @@ type
     procedure Timer1Timer(Sender: TObject);
   private
     InEdit: Boolean;
-    procedure LoadImage;
+    procedure LoadImage(const ATag: String = '');
     procedure ImageFirst;
     procedure ImagePrev;
     procedure ImageNext;
@@ -105,16 +105,24 @@ var
 
 { TForm1 }
 
-procedure TForm1.LoadImage;
+procedure TForm1.LoadImage(const ATag: String = '');
 var
   filename: String;
+  t: String;
 begin
+  t := ATag;
+  if 0 < Length(t) then
+    t := ' [' + t + ']';
+
   filename := ImagesList.CurrentImage;
   if Length(filename) = 0 then
     Exit;
+
   StatusBar1.SimpleText := '(' + IntToStr(ImagesList.Index + 1) + ' of '
-    + IntToStr(ImagesList.Count) + ') ' + ExtractFileName(filename);
+    + IntToStr(ImagesList.Count) + ') ' + ExtractFileName(filename) + t;
+
   Panel1.Caption := '';
+
   Image1.Picture.LoadFromFile(filename);
 end;
 
@@ -506,6 +514,7 @@ procedure TForm1.ShowSelectedImage;
 var
   i: Integer;
   fn: String;
+  t: String;
 begin
   fn := '';
   // Get the full file name of the first selected item.
@@ -513,13 +522,18 @@ begin
     for i := 0 to ListBox1.Items.Count - 1 do
       if ListBox1.Selected[i] then
         begin
-          fn := TImageInfo(ListBox1.Items.Objects[i]).FullName;
+          // fn := TImageInfo(ListBox1.Items.Objects[i]).FullName;
+          with TImageInfo(ListBox1.Items.Objects[i]) do
+          begin
+            fn := FullName;
+            t := Tag;
+          end;
           break;
         end;
   // If there is a file name, show the image.
   if 0 < Length(fn) then
      if ImagesList.SetCurrentImage(fn) then
-        LoadImage;
+        LoadImage(t);
 end;
 
 procedure TForm1.btnShowClick(Sender: TObject);
