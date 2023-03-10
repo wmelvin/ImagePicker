@@ -37,6 +37,7 @@ object Form1: TForm1
       Height = 370
       Top = 4
       Width = 342
+      AntialiasingMode = amOn
       Align = alClient
       AutoSize = True
       Center = True
