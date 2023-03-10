@@ -26,6 +26,7 @@ type
       procedure PlayNext;
       procedure Load(FileName: String);
       function SetCurrentImage(FileName: String): Boolean;
+      function SetCurrentIndex(Index: Integer): Boolean;
     published
       property Count: Integer read GetCount;
       property Index: Integer read FListIndex;
@@ -90,6 +91,17 @@ begin
       FListIndex := i;
       SetCurrentImage := True;
     end;
+end;
+
+function TImagesList.SetCurrentIndex(Index: Integer): Boolean;
+var
+  i: Integer;
+begin
+  SetCurrentIndex := False;
+  if FFileList.Count = 0 then Exit;
+  if FFileList.Count <= Index then Exit;
+  FListIndex := Index;
+  SetCurrentIndex := True;
 end;
 
 procedure TImagesList.GoFirst;

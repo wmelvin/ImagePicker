@@ -43,6 +43,7 @@ type
     OpenDialog1: TOpenDialog;
     SaveDialog1: TSaveDialog;
     Timer1: TTimer;
+    TrackBar1: TTrackBar;
     procedure btnAddClick(Sender: TObject);
     procedure btnApplyClick(Sender: TObject);
     procedure btnFirstClick(Sender: TObject);
@@ -70,6 +71,8 @@ type
     procedure SpinEdit1Enter(Sender: TObject);
     procedure SpinEdit1Exit(Sender: TObject);
     procedure Timer1Timer(Sender: TObject);
+    procedure TrackBar1MouseUp(Sender: TObject; Button: TMouseButton;
+      Shift: TShiftState; X, Y: Integer);
   private
     InEdit: Boolean;
     procedure LoadImage(const ATag: String = '');
@@ -82,6 +85,7 @@ type
     procedure AddCurrentImage;
     procedure ShowSelectedImage;
     procedure SaveList(FileName: String);
+    procedure LoadImagesList(FileName: String);
   public
 
   end;
@@ -124,6 +128,8 @@ begin
   Panel1.Caption := '';
 
   Image1.Picture.LoadFromFile(filename);
+
+  TrackBar1.Position := ImagesList.Index + 1;
 end;
 
 procedure TForm1.ImageFirst;
@@ -169,20 +175,31 @@ begin
   Close;
 end;
 
+procedure TForm1.LoadImagesList(FileName: String);
+begin
+  ImagesList.Load(FileName);
+  if ImagesList.SetCurrentImage(FileName) then
+    LoadImage
+  else
+    StatusBar1.SimpleText := 'Not a supported image type.';
+  if ImagesList.Count = 0 then
+    begin
+      Panel1.Caption := 'No images.';
+      TrackBar1.Enabled := False;
+    end
+  else
+    begin
+      Panel1.Caption := '';
+      TrackBar1.Min := 1;
+      TrackBar1.Max := ImagesList.Count;
+      TrackBar1.Enabled := True;
+    end;
+end;
+
 procedure TForm1.mnuOpenClick(Sender: TObject);
 begin
   if OpenDialog1.Execute then
-    begin
-      ImagesList.Load(OpenDialog1.FileName);
-      if ImagesList.SetCurrentImage(OpenDialog1.FileName) then
-        LoadImage
-      else
-        StatusBar1.SimpleText := 'Not a supported image type.';
-      if ImagesList.Count = 0 then
-        Panel1.Caption := 'No images.'
-      else
-        Panel1.Caption := '';
-    end;
+    LoadImagesList(OpenDialog1.FileName);
 end;
 
 procedure TForm1.SaveList(FileName: String);
@@ -296,6 +313,16 @@ procedure TForm1.Timer1Timer(Sender: TObject);
 begin
   ImagesList.PlayNext;
   LoadImage;
+end;
+
+procedure TForm1.TrackBar1MouseUp(Sender: TObject; Button: TMouseButton;
+  Shift: TShiftState; X, Y: Integer);
+var
+  p: Integer;
+begin
+  p := TrackBar1.Position;
+  if ImagesList.SetCurrentIndex(p - 1) then
+    LoadImage;
 end;
 
 procedure TForm1.TogglePanel2;
@@ -472,10 +499,13 @@ begin
       // Take first argument as file or directory to load.
       begin
         s := params[0];
+        LoadImagesList(s);
+        (*
         ImagesList.Load(s);
         if not ImagesList.SetCurrentImage(s) then
           ImagesList.GoFirst;
         LoadImage;
+        *)
       end;
   finally
     FreeAndNil(params);

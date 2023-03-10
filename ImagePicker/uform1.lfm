@@ -34,7 +34,7 @@ object Form1: TForm1
     TabOrder = 1
     object Image1: TImage
       Left = 4
-      Height = 407
+      Height = 370
       Top = 4
       Width = 342
       Align = alClient
@@ -42,6 +42,16 @@ object Form1: TForm1
       Center = True
       OnDblClick = Image1DblClick
       Proportional = True
+    end
+    object TrackBar1: TTrackBar
+      Left = 4
+      Height = 37
+      Top = 374
+      Width = 342
+      Position = 0
+      Align = alBottom
+      OnMouseUp = TrackBar1MouseUp
+      TabOrder = 0
     end
   end
   object Panel2: TPanel
@@ -343,17 +353,17 @@ object Form1: TForm1
     }
   end
   object OpenDialog1: TOpenDialog
-    Left = 216
-    Top = 332
+    Left = 208
+    Top = 304
   end
   object SaveDialog1: TSaveDialog
-    Left = 288
-    Top = 332
+    Left = 280
+    Top = 304
   end
   object Timer1: TTimer
     Enabled = False
     OnTimer = Timer1Timer
     Left = 144
-    Top = 332
+    Top = 304
   end
 end
