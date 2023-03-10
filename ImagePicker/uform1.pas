@@ -180,11 +180,18 @@ var
   item: TImageInfo;
   n: Integer;
   pad: Integer;
+  title: String;
 begin
   StatusBar1.SimpleText := 'Save as ' + FileName;
   AssignFile(tf, FileName);
   try
     rewrite(tf);
+
+    // Write title to first line.
+    title := Trim(editTitle.Text);
+    writeln(tf, '# Title: ' + title);
+    writeln(tf, '');
+    writeln(tf, '');
 
     // Write file paths.
     for i := 0 to ListBox1.Items.Count - 1 do
@@ -207,9 +214,23 @@ begin
     end;
 
     if 0 < pad then
-      // Write move/rename list for items with a tag.
+      // There are one or more items with a tag.
       begin
         writeln(tf, '');
+        writeln(tf, '');
+        writeln(tf, '## -- Tagged Images:');
+        for i := 0 to ListBox1.Items.Count - 1 do
+        begin
+          item := TImageInfo(ListBox1.Items.Objects[i]);
+          if item.HasTag then
+            writeln(tf,
+              '# Tag: "' + item.Tag + '", "' + item.GetFileName + '"'
+            );
+        end;
+
+        writeln(tf, '');
+        writeln(tf, '');
+        writeln(tf, '## -- To move (rename) tagged image files:');
         for i := 0 to ListBox1.Items.Count - 1 do
         begin
           item := TImageInfo(ListBox1.Items.Objects[i]);
