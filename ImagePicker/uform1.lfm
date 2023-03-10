@@ -75,6 +75,7 @@ object Form1: TForm1
       Hint = 'Delete selected item from the list.'
       Top = 352
       Width = 75
+      Anchors = [akRight, akBottom]
       Caption = '&Remove'
       OnClick = btnRemoveClick
       ParentShowHint = False
@@ -135,6 +136,7 @@ object Form1: TForm1
       Hint = 'Add the current image.'
       Top = 352
       Width = 75
+      Anchors = [akRight, akBottom]
       Caption = '&Add'
       OnClick = btnAddClick
       ParentShowHint = False
@@ -146,6 +148,7 @@ object Form1: TForm1
       Height = 25
       Top = 352
       Width = 75
+      Anchors = [akRight, akBottom]
       Caption = 'Sho&w'
       OnClick = btnShowClick
       TabOrder = 7
