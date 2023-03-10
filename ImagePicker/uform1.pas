@@ -31,6 +31,7 @@ type
     Panel1: TPanel;
     Panel2: TPanel;
     Panel3: TPanel;
+    Panel4: TPanel;
     btnToggle: TSpeedButton;
     btnFirst: TSpeedButton;
     btnPrev: TSpeedButton;
@@ -39,7 +40,6 @@ type
     btnLast: TSpeedButton;
     SpinEdit1: TSpinEdit;
     StatusBar1: TStatusBar;
-    Splitter1: TSplitter;
     OpenDialog1: TOpenDialog;
     SaveDialog1: TSaveDialog;
     Timer1: TTimer;
@@ -56,7 +56,6 @@ type
     procedure btnRemoveClick(Sender: TObject);
     procedure editTagEnter(Sender: TObject);
     procedure editTagExit(Sender: TObject);
-    procedure editTitleChange(Sender: TObject);
     procedure editTitleEnter(Sender: TObject);
     procedure editTitleExit(Sender: TObject);
     procedure FormCreate(Sender: TObject);
@@ -101,6 +100,9 @@ uses
   uAppFuncs, uImageInfo, uImagesList, LCLType;
 
 const
+  APP_NAME = 'ImagePicker';
+  APP_VERSION = '230310.1';
+  APP_TITLE = APP_NAME + '  (' + APP_VERSION + ')';
   P2_DEFAULT_WIDTH = 282;
   MIN_PLAY_MS = 100;
 
@@ -178,10 +180,8 @@ end;
 procedure TForm1.LoadImagesList(FileName: String);
 begin
   ImagesList.Load(FileName);
-  if ImagesList.SetCurrentImage(FileName) then
-    LoadImage
-  else
-    StatusBar1.SimpleText := 'Not a supported image type.';
+  if not ImagesList.SetCurrentImage(FileName) then
+    ImagesList.GoFirst;
   if ImagesList.Count = 0 then
     begin
       Panel1.Caption := 'No images.';
@@ -193,6 +193,7 @@ begin
       TrackBar1.Min := 1;
       TrackBar1.Max := ImagesList.Count;
       TrackBar1.Enabled := True;
+      LoadImage;
     end;
 end;
 
@@ -327,16 +328,17 @@ end;
 
 procedure TForm1.TogglePanel2;
 begin
-  if Panel3.Left - Splitter1.Left < 5 then
+  if Panel2.Width < P2_DEFAULT_WIDTH then
     begin
-      Splitter1.Left := Panel3.Left - P2_DEFAULT_WIDTH;
+      Panel2.Width := P2_DEFAULT_WIDTH;
       btnToggle.ImageIndex := 0;
     end
   else
     begin
-      Splitter1.Left := Panel3.Left - 2;
+      Panel2.Width := 4;
       btnToggle.ImageIndex := 1;
     end;
+  Panel4.Width := Panel2.Width + Panel3.Width + 4;
 end;
 
 procedure TForm1.btnToggleClick(Sender: TObject);
@@ -370,11 +372,6 @@ end;
 procedure TForm1.editTagExit(Sender: TObject);
 begin
   InEdit := False;
-end;
-
-procedure TForm1.editTitleChange(Sender: TObject);
-begin
-  // btnApply.Enabled := (0 < Length(editTitle.Text));
 end;
 
 procedure TForm1.editTitleEnter(Sender: TObject);
@@ -438,6 +435,7 @@ end;
 
 procedure TForm1.FormCreate(Sender: TObject);
 begin
+  Form1.Caption := APP_TITLE;
   InEdit := False;
   ImagesList := TImagesList.Create;
   Panel1.Caption := 'No images.';
@@ -500,12 +498,6 @@ begin
       begin
         s := params[0];
         LoadImagesList(s);
-        (*
-        ImagesList.Load(s);
-        if not ImagesList.SetCurrentImage(s) then
-          ImagesList.GoFirst;
-        LoadImage;
-        *)
       end;
   finally
     FreeAndNil(params);

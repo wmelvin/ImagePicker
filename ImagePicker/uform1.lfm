@@ -2,11 +2,11 @@ object Form1: TForm1
   Left = 471
   Height = 457
   Top = 140
-  Width = 718
+  Width = 972
   ActiveControl = Panel1
   Caption = 'Form1'
   ClientHeight = 433
-  ClientWidth = 718
+  ClientWidth = 972
   KeyPreview = True
   Menu = MainMenu1
   OnCreate = FormCreate
@@ -17,26 +17,26 @@ object Form1: TForm1
     Left = 0
     Height = 18
     Top = 415
-    Width = 718
+    Width = 972
     Panels = <>
   end
   object Panel1: TPanel
     Left = 0
     Height = 415
     Top = 0
-    Width = 350
+    Width = 580
     Align = alClient
     BevelInner = bvLowered
     BorderWidth = 2
     Caption = 'No image.'
     ClientHeight = 415
-    ClientWidth = 350
+    ClientWidth = 580
     TabOrder = 1
     object Image1: TImage
       Left = 4
       Height = 370
       Top = 4
-      Width = 342
+      Width = 572
       AntialiasingMode = amOn
       Align = alClient
       AutoSize = True
@@ -48,229 +48,231 @@ object Form1: TForm1
       Left = 4
       Height = 37
       Top = 374
-      Width = 342
+      Width = 572
       Position = 0
       Align = alBottom
       OnMouseUp = TrackBar1MouseUp
       TabOrder = 0
     end
   end
-  object Panel2: TPanel
-    AnchorSideLeft.Control = Splitter1
-    Left = 350
+  object Panel4: TPanel
+    Left = 580
     Height = 415
     Top = 0
-    Width = 282
+    Width = 392
     Align = alRight
-    Anchors = [akTop, akLeft, akRight, akBottom]
     ClientHeight = 415
-    ClientWidth = 282
+    ClientWidth = 392
     TabOrder = 2
-    object ListBox1: TListBox
-      Left = 8
-      Height = 224
-      Top = 120
-      Width = 264
-      Anchors = [akTop, akLeft, akRight, akBottom]
-      ItemHeight = 0
-      MultiSelect = True
-      OnDblClick = ListBox1DblClick
-      ParentShowHint = False
-      ShowHint = True
+    object Panel3: TPanel
+      Left = 1
+      Height = 413
+      Top = 1
+      Width = 95
+      Align = alLeft
+      ClientHeight = 413
+      ClientWidth = 95
       TabOrder = 0
-      TopIndex = -1
+      UseDockManager = False
+      object btnToggle: TSpeedButton
+        Left = 8
+        Height = 36
+        Hint = 'Toggle panel (F4)'
+        Top = 13
+        Width = 36
+        Images = ImageList1
+        ImageIndex = 0
+        ImageWidth = 25
+        OnClick = btnToggleClick
+        ShowHint = True
+        ParentShowHint = False
+      end
+      object btnFirst: TSpeedButton
+        Left = 8
+        Height = 36
+        Hint = 'First (Home)'
+        Top = 59
+        Width = 36
+        Images = ImageList1
+        ImageIndex = 2
+        OnClick = btnFirstClick
+        ShowHint = True
+        ParentShowHint = False
+      end
+      object btnPrev: TSpeedButton
+        Left = 8
+        Height = 36
+        Hint = 'Previous (Left arrow)'
+        Top = 96
+        Width = 36
+        Images = ImageList1
+        ImageIndex = 3
+        OnClick = btnPrevClick
+        ShowHint = True
+        ParentShowHint = False
+      end
+      object btnPlayStop: TSpeedButton
+        Left = 8
+        Height = 36
+        Hint = 'Play/Stop (F5)'
+        Top = 136
+        Width = 36
+        Images = ImageList1
+        ImageIndex = 4
+        OnClick = btnPlayStopClick
+        ShowHint = True
+        ParentShowHint = False
+      end
+      object btnNext: TSpeedButton
+        Left = 44
+        Height = 36
+        Hint = 'Next (Right arrow)'
+        Top = 96
+        Width = 36
+        Images = ImageList1
+        ImageIndex = 6
+        OnClick = btnNextClick
+        ShowHint = True
+        ParentShowHint = False
+      end
+      object btnLast: TSpeedButton
+        Left = 44
+        Height = 36
+        Hint = 'Last (End)'
+        Top = 59
+        Width = 36
+        Images = ImageList1
+        ImageIndex = 7
+        OnClick = btnLastClick
+        ShowHint = True
+        ParentShowHint = False
+      end
+      object SpinEdit1: TSpinEdit
+        Left = 3
+        Height = 28
+        Hint = 'Play speed in milliseconds'
+        Top = 176
+        Width = 77
+        Increment = 100
+        MaxValue = 10000
+        MinValue = 100
+        OnChange = SpinEdit1Change
+        OnEnter = SpinEdit1Enter
+        OnExit = SpinEdit1Exit
+        ParentShowHint = False
+        ShowHint = True
+        TabOrder = 0
+        Value = 1000
+      end
     end
-    object btnRemove: TButton
-      Left = 188
-      Height = 25
-      Hint = 'Delete selected item from the list.'
-      Top = 352
-      Width = 75
-      Anchors = [akRight, akBottom]
-      Caption = '&Remove'
-      OnClick = btnRemoveClick
-      ParentShowHint = False
-      ShowHint = True
+    object Panel2: TPanel
+      Left = 109
+      Height = 413
+      Top = 1
+      Width = 282
+      Align = alRight
+      ClientHeight = 413
+      ClientWidth = 282
       TabOrder = 1
+      UseDockManager = False
+      object ListBox1: TListBox
+        Left = 8
+        Height = 222
+        Top = 120
+        Width = 264
+        Anchors = [akTop, akLeft, akRight, akBottom]
+        ItemHeight = 0
+        MultiSelect = True
+        OnDblClick = ListBox1DblClick
+        ParentShowHint = False
+        ShowHint = True
+        TabOrder = 0
+        TopIndex = -1
+      end
+      object btnRemove: TButton
+        Left = 188
+        Height = 25
+        Hint = 'Delete selected item from the list.'
+        Top = 350
+        Width = 75
+        Anchors = [akRight, akBottom]
+        Caption = '&Remove'
+        OnClick = btnRemoveClick
+        ParentShowHint = False
+        ShowHint = True
+        TabOrder = 1
+      end
+      object editTitle: TLabeledEdit
+        Left = 16
+        Height = 28
+        Top = 24
+        Width = 247
+        EditLabel.Height = 16
+        EditLabel.Width = 247
+        EditLabel.Caption = 'Title'
+        TabOrder = 2
+        OnEnter = editTitleEnter
+        OnExit = editTitleExit
+      end
+      object editTag: TLabeledEdit
+        Left = 20
+        Height = 28
+        Top = 80
+        Width = 132
+        EditLabel.Height = 16
+        EditLabel.Width = 132
+        EditLabel.Caption = 'Tag'
+        TabOrder = 3
+        OnEnter = editTagEnter
+        OnExit = editTagExit
+      end
+      object btnApply: TButton
+        Left = 168
+        Height = 25
+        Hint = 'Apply tag to selected item in list.'
+        Top = 82
+        Width = 75
+        Caption = 'Apply'
+        OnClick = btnApplyClick
+        ParentShowHint = False
+        ShowHint = True
+        TabOrder = 4
+      end
+      object chkAutoTag: TCheckBox
+        Left = 168
+        Height = 23
+        Hint = 'Apply Tag to images added to the list.'
+        Top = 60
+        Width = 54
+        Caption = 'auto'
+        ParentShowHint = False
+        ShowHint = True
+        TabOrder = 5
+      end
+      object btnAdd: TButton
+        Left = 20
+        Height = 25
+        Hint = 'Add the current image.'
+        Top = 350
+        Width = 75
+        Anchors = [akRight, akBottom]
+        Caption = '&Add'
+        OnClick = btnAddClick
+        ParentShowHint = False
+        ShowHint = True
+        TabOrder = 6
+      end
+      object btnShow: TButton
+        Left = 104
+        Height = 25
+        Top = 350
+        Width = 75
+        Anchors = [akRight, akBottom]
+        Caption = 'Sho&w'
+        OnClick = btnShowClick
+        TabOrder = 7
+      end
     end
-    object editTitle: TLabeledEdit
-      Left = 16
-      Height = 28
-      Top = 24
-      Width = 247
-      EditLabel.Height = 16
-      EditLabel.Width = 247
-      EditLabel.Caption = 'Title'
-      TabOrder = 2
-      OnChange = editTitleChange
-      OnEnter = editTitleEnter
-      OnExit = editTitleExit
-    end
-    object editTag: TLabeledEdit
-      Left = 20
-      Height = 28
-      Top = 80
-      Width = 132
-      EditLabel.Height = 16
-      EditLabel.Width = 132
-      EditLabel.Caption = 'Tag'
-      TabOrder = 3
-      OnEnter = editTagEnter
-      OnExit = editTagExit
-    end
-    object btnApply: TButton
-      Left = 168
-      Height = 25
-      Hint = 'Apply tag to selected item in list.'
-      Top = 82
-      Width = 75
-      Caption = 'Apply'
-      OnClick = btnApplyClick
-      ParentShowHint = False
-      ShowHint = True
-      TabOrder = 4
-    end
-    object chkAutoTag: TCheckBox
-      Left = 168
-      Height = 23
-      Hint = 'Apply Tag to images added to the list.'
-      Top = 60
-      Width = 54
-      Caption = 'auto'
-      ParentShowHint = False
-      ShowHint = True
-      TabOrder = 5
-    end
-    object btnAdd: TButton
-      Left = 20
-      Height = 25
-      Hint = 'Add the current image.'
-      Top = 352
-      Width = 75
-      Anchors = [akRight, akBottom]
-      Caption = '&Add'
-      OnClick = btnAddClick
-      ParentShowHint = False
-      ShowHint = True
-      TabOrder = 6
-    end
-    object btnShow: TButton
-      Left = 104
-      Height = 25
-      Top = 352
-      Width = 75
-      Anchors = [akRight, akBottom]
-      Caption = 'Sho&w'
-      OnClick = btnShowClick
-      TabOrder = 7
-    end
-  end
-  object Panel3: TPanel
-    Left = 632
-    Height = 415
-    Top = 0
-    Width = 86
-    Align = alRight
-    ClientHeight = 415
-    ClientWidth = 86
-    TabOrder = 3
-    object btnToggle: TSpeedButton
-      Left = 8
-      Height = 36
-      Hint = 'Toggle panel (F4)'
-      Top = 13
-      Width = 36
-      Images = ImageList1
-      ImageIndex = 0
-      ImageWidth = 25
-      OnClick = btnToggleClick
-      ShowHint = True
-      ParentShowHint = False
-    end
-    object btnFirst: TSpeedButton
-      Left = 8
-      Height = 36
-      Hint = 'First (Home)'
-      Top = 59
-      Width = 36
-      Images = ImageList1
-      ImageIndex = 2
-      OnClick = btnFirstClick
-      ShowHint = True
-      ParentShowHint = False
-    end
-    object btnPrev: TSpeedButton
-      Left = 8
-      Height = 36
-      Hint = 'Previous (Left arrow)'
-      Top = 96
-      Width = 36
-      Images = ImageList1
-      ImageIndex = 3
-      OnClick = btnPrevClick
-      ShowHint = True
-      ParentShowHint = False
-    end
-    object btnPlayStop: TSpeedButton
-      Left = 8
-      Height = 36
-      Hint = 'Play/Stop (F5)'
-      Top = 136
-      Width = 36
-      Images = ImageList1
-      ImageIndex = 4
-      OnClick = btnPlayStopClick
-      ShowHint = True
-      ParentShowHint = False
-    end
-    object btnNext: TSpeedButton
-      Left = 44
-      Height = 36
-      Hint = 'Next (Right arrow)'
-      Top = 96
-      Width = 36
-      Images = ImageList1
-      ImageIndex = 6
-      OnClick = btnNextClick
-      ShowHint = True
-      ParentShowHint = False
-    end
-    object btnLast: TSpeedButton
-      Left = 44
-      Height = 36
-      Hint = 'Last (End)'
-      Top = 59
-      Width = 36
-      Images = ImageList1
-      ImageIndex = 7
-      OnClick = btnLastClick
-      ShowHint = True
-      ParentShowHint = False
-    end
-    object SpinEdit1: TSpinEdit
-      Left = 3
-      Height = 28
-      Hint = 'Play speed in milliseconds'
-      Top = 176
-      Width = 77
-      Increment = 100
-      MaxValue = 10000
-      MinValue = 100
-      OnChange = SpinEdit1Change
-      OnEnter = SpinEdit1Enter
-      OnExit = SpinEdit1Exit
-      ParentShowHint = False
-      ShowHint = True
-      TabOrder = 0
-      Value = 1000
-    end
-  end
-  object Splitter1: TSplitter
-    Left = 350
-    Height = 439
-    Top = 16
-    Width = 5
-    Align = alNone
   end
   object MainMenu1: TMainMenu
     Left = 63
