@@ -24,6 +24,7 @@ type
     editTag: TLabeledEdit;
     ListBox1: TListBox;
     MainMenu1: TMainMenu;
+    mnuLoad: TMenuItem;
     mnuOpen: TMenuItem;
     mnuSave: TMenuItem;
     mnuFile: TMenuItem;
@@ -63,6 +64,7 @@ type
     procedure FormShow(Sender: TObject);
     procedure Image1DblClick(Sender: TObject);
     procedure ListBox1DblClick(Sender: TObject);
+    procedure mnuLoadClick(Sender: TObject);
     procedure mnuExitClick(Sender: TObject);
     procedure mnuOpenClick(Sender: TObject);
     procedure mnuSaveClick(Sender: TObject);
@@ -199,6 +201,7 @@ end;
 
 procedure TForm1.mnuOpenClick(Sender: TObject);
 begin
+  // TODO: OpenDialog1.Filter := 'Image files|*.JPG;*.PNG;*.JPEG;*.BMP;*.GIF';
   if OpenDialog1.Execute then
     LoadImagesList(OpenDialog1.FileName);
 end;
@@ -566,6 +569,64 @@ end;
 procedure TForm1.ListBox1DblClick(Sender: TObject);
 begin
   ShowSelectedImage;
+end;
+
+procedure TForm1.mnuLoadClick(Sender: TObject);
+var
+  tf: TextFile;
+  fn: String;
+  s: String;
+  title: String;
+  path: String;
+  paths: TStringList;
+  tags: TStringList;
+  i: Integer;
+  j: Integer;
+  info: TImageInfo;
+begin
+  // TODO: This does not work> OpenDialog1.Filter := 'Text files (*.txt)|*.TXT';
+  if OpenDialog1.Execute then
+    begin
+      fn := OpenDialog1.FileName;
+      paths := TStringList.Create;
+      tags := TStringList.Create;
+      try
+        AssignFile(tf, fn);
+        try
+          Reset(tf);
+          while not EOF(tf) do
+          begin
+            ReadLn(tf, s);
+            if (0 < Length(Trim(s))) and (LeftStr(s, 1) <> '#') then
+              paths.Add(s)
+            else if LeftStr(s, 9) = '# Title: ' then
+              title := RightStr(s, Length(s) - 9)
+            else if LeftStr(s, 7) = '# Tag: ' then
+              tags.Add(RightStr(s, Length(s) - 7));
+          end;
+        finally
+          CloseFile(tf);
+        end;
+      except
+        on E: EInOutError do
+          StatusBar1.SimpleText := 'ERROR: ' + E.Message;
+      end;
+      if 0 < paths.Count then
+      begin
+        ImagesList.Load(paths[0]);
+        ListBox1.Clear;
+        for i := 0 to paths.Count -1 do
+        begin
+          info := TImageInfo.Create(paths[i], '');
+          ListBox1.Items.AddObject(info.GetFileName, info);
+        end;
+        for j := 0 to tags.Count -1 do
+        begin
+          // TODO: Set tags.
+          StatusBar1.SimpleText := tags[j];
+        end;
+      end;
+    end;
 end;
 
 end.

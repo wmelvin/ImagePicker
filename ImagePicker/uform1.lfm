@@ -280,11 +280,15 @@ object Form1: TForm1
     object mnuFile: TMenuItem
       Caption = '&File'
       object mnuOpen: TMenuItem
-        Caption = '&Open'
+        Caption = '&Open ...'
         OnClick = mnuOpenClick
       end
+      object mnuLoad: TMenuItem
+        Caption = '&Load ...'
+        OnClick = mnuLoadClick
+      end
       object mnuSave: TMenuItem
-        Caption = '&Save'
+        Caption = '&Save ...'
         OnClick = mnuSaveClick
       end
       object mnuExit: TMenuItem
@@ -356,6 +360,7 @@ object Form1: TForm1
     }
   end
   object OpenDialog1: TOpenDialog
+    Options = [ofFileMustExist, ofEnableSizing, ofViewDetail]
     Left = 208
     Top = 304
   end
