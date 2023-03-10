@@ -107,10 +107,13 @@ object Form1: TForm1
     object btnApply: TButton
       Left = 168
       Height = 25
+      Hint = 'Apply tag to selected item in list.'
       Top = 82
       Width = 75
       Caption = 'Apply'
       OnClick = btnApplyClick
+      ParentShowHint = False
+      ShowHint = True
       TabOrder = 4
     end
     object chkAutoTag: TCheckBox
@@ -149,7 +152,7 @@ object Form1: TForm1
     object btnToggle: TSpeedButton
       Left = 8
       Height = 36
-      Hint = 'Toggle panel'
+      Hint = 'Toggle panel (F4)'
       Top = 13
       Width = 36
       Images = ImageList1
@@ -162,7 +165,7 @@ object Form1: TForm1
     object btnFirst: TSpeedButton
       Left = 8
       Height = 36
-      Hint = 'First'
+      Hint = 'First (Home)'
       Top = 59
       Width = 36
       Images = ImageList1
@@ -174,7 +177,7 @@ object Form1: TForm1
     object btnPrev: TSpeedButton
       Left = 8
       Height = 36
-      Hint = 'Previous'
+      Hint = 'Previous (Left arrow)'
       Top = 96
       Width = 36
       Images = ImageList1
@@ -186,7 +189,7 @@ object Form1: TForm1
     object btnPlayStop: TSpeedButton
       Left = 8
       Height = 36
-      Hint = 'Play/Stop'
+      Hint = 'Play/Stop (F5)'
       Top = 136
       Width = 36
       Images = ImageList1
@@ -198,7 +201,7 @@ object Form1: TForm1
     object btnNext: TSpeedButton
       Left = 44
       Height = 36
-      Hint = 'Next'
+      Hint = 'Next (Right arrow)'
       Top = 96
       Width = 36
       Images = ImageList1
@@ -210,7 +213,7 @@ object Form1: TForm1
     object btnLast: TSpeedButton
       Left = 44
       Height = 36
-      Hint = 'Last'
+      Hint = 'Last (End)'
       Top = 59
       Width = 36
       Images = ImageList1
@@ -231,6 +234,8 @@ object Form1: TForm1
       OnChange = SpinEdit1Change
       OnEnter = SpinEdit1Enter
       OnExit = SpinEdit1Exit
+      ParentShowHint = False
+      ShowHint = True
       TabOrder = 0
       Value = 1000
     end

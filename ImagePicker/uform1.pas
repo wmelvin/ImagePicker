@@ -75,6 +75,7 @@ type
     procedure ImageNext;
     procedure ImageLast;
     procedure PlayStop;
+    procedure TogglePanel2;
     procedure AddCurrentImage;
     procedure SaveList(FileName: String);
   public
@@ -92,7 +93,7 @@ uses
   uAppFuncs, uImageInfo, uImagesList, LCLType;
 
 const
-  P2_DEFAULT_WIDTH = 250;
+  P2_DEFAULT_WIDTH = 282;
   MIN_PLAY_MS = 100;
 
 var
@@ -264,7 +265,7 @@ begin
   LoadImage;
 end;
 
-procedure TForm1.btnToggleClick(Sender: TObject);
+procedure TForm1.TogglePanel2;
 begin
   if Panel3.Left - Splitter1.Left < 5 then
     begin
@@ -276,6 +277,11 @@ begin
       Splitter1.Left := Panel3.Left - 2;
       btnToggle.ImageIndex := 1;
     end;
+end;
+
+procedure TForm1.btnToggleClick(Sender: TObject);
+begin
+  TogglePanel2;
 end;
 
 procedure TForm1.btnDeleteClick(Sender: TObject);
@@ -401,7 +407,17 @@ begin
         Key := 0;
       end;
 
-    VK_F5: PlayStop;
+    VK_F4:
+      begin
+        TogglePanel2;
+        Key := 0;
+      end;
+
+    VK_F5:
+      begin
+        PlayStop;
+        Key := 0;
+      end;
   end;
 
 end;
