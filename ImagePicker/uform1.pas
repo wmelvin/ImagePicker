@@ -16,6 +16,7 @@ type
     btnDelete: TButton;
     btnApply: TButton;
     btnAdd: TButton;
+    btnShow: TButton;
     chkAutoTag: TCheckBox;
     Image1: TImage;
     ImageList1: TImageList;
@@ -49,6 +50,7 @@ type
     procedure btnNextClick(Sender: TObject);
     procedure btnPlayStopClick(Sender: TObject);
     procedure btnPrevClick(Sender: TObject);
+    procedure btnShowClick(Sender: TObject);
     procedure btnToggleClick(Sender: TObject);
     procedure btnDeleteClick(Sender: TObject);
     procedure editTagEnter(Sender: TObject);
@@ -60,6 +62,7 @@ type
     procedure FormKeyDown(Sender: TObject; var Key: Word; Shift: TShiftState);
     procedure FormShow(Sender: TObject);
     procedure Image1DblClick(Sender: TObject);
+    procedure ListBox1DblClick(Sender: TObject);
     procedure mnuExitClick(Sender: TObject);
     procedure mnuOpenClick(Sender: TObject);
     procedure mnuSaveClick(Sender: TObject);
@@ -77,6 +80,7 @@ type
     procedure PlayStop;
     procedure TogglePanel2;
     procedure AddCurrentImage;
+    procedure ShowSelectedImage;
     procedure SaveList(FileName: String);
   public
 
@@ -486,6 +490,36 @@ end;
 procedure TForm1.Image1DblClick(Sender: TObject);
 begin
   AddCurrentImage;
+end;
+
+procedure TForm1.ShowSelectedImage;
+var
+  i: Integer;
+  fn: String;
+begin
+  fn := '';
+  // Get the full file name of the first selected item.
+  if 0 < ListBox1.SelCount then
+    for i := 0 to ListBox1.Items.Count - 1 do
+      if ListBox1.Selected[i] then
+        begin
+          fn := TImageInfo(ListBox1.Items.Objects[i]).FullName;
+          break;
+        end;
+  // If there is a file name, show the image.
+  if 0 < Length(fn) then
+     if ImagesList.SetCurrentImage(fn) then
+        LoadImage;
+end;
+
+procedure TForm1.btnShowClick(Sender: TObject);
+begin
+  ShowSelectedImage;
+end;
+
+procedure TForm1.ListBox1DblClick(Sender: TObject);
+begin
+  ShowSelectedImage;
 end;
 
 end.

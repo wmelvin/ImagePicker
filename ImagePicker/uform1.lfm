@@ -3,6 +3,7 @@ object Form1: TForm1
   Height = 457
   Top = 140
   Width = 718
+  ActiveControl = Panel1
   Caption = 'Form1'
   ClientHeight = 433
   ClientWidth = 718
@@ -62,6 +63,7 @@ object Form1: TForm1
       Anchors = [akTop, akLeft, akRight, akBottom]
       ItemHeight = 0
       MultiSelect = True
+      OnDblClick = ListBox1DblClick
       ParentShowHint = False
       ShowHint = True
       TabOrder = 0
@@ -73,7 +75,7 @@ object Form1: TForm1
       Hint = 'Delete selected item from the list.'
       Top = 352
       Width = 75
-      Caption = 'Delete'
+      Caption = '&Delete'
       OnClick = btnDeleteClick
       ParentShowHint = False
       ShowHint = True
@@ -133,11 +135,20 @@ object Form1: TForm1
       Hint = 'Add the current image.'
       Top = 352
       Width = 75
-      Caption = 'Add'
+      Caption = '&Add'
       OnClick = btnAddClick
       ParentShowHint = False
       ShowHint = True
       TabOrder = 6
+    end
+    object btnShow: TButton
+      Left = 104
+      Height = 25
+      Top = 352
+      Width = 75
+      Caption = 'Sho&w'
+      OnClick = btnShowClick
+      TabOrder = 7
     end
   end
   object Panel3: TPanel
