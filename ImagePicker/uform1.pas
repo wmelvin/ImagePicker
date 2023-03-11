@@ -61,7 +61,6 @@ type
     procedure editTitleExit(Sender: TObject);
     procedure FormCreate(Sender: TObject);
     procedure FormKeyDown(Sender: TObject; var Key: Word; Shift: TShiftState);
-    procedure FormShow(Sender: TObject);
     procedure Image1DblClick(Sender: TObject);
     procedure ListBox1DblClick(Sender: TObject);
     procedure mnuLoadClick(Sender: TObject);
@@ -76,6 +75,7 @@ type
       Shift: TShiftState; X, Y: Integer);
   private
     InEdit: Boolean;
+    procedure GetArgs;
     procedure LoadImage(const ATag: String = '');
     procedure ImageFirst;
     procedure ImagePrev;
@@ -87,6 +87,7 @@ type
     procedure ShowSelectedImage;
     procedure SaveList(FileName: String);
     procedure LoadImagesList(FileName: String);
+    procedure LoadFromSavedFile;
   public
 
   end;
@@ -103,8 +104,8 @@ uses
 
 const
   APP_NAME = 'ImagePicker';
-  APP_VERSION = '230311.1';
-  APP_TITLE = APP_NAME + '  (' + APP_VERSION + ')';
+  APP_VERSION = '230311.2';
+  APP_TITLE = APP_NAME + ' (' + APP_VERSION + ')';
   P2_DEFAULT_WIDTH = 282;
   MIN_PLAY_MS = 100;
 
@@ -220,7 +221,10 @@ begin
   try
     rewrite(tf);
 
-    // Write title to first line.
+    writeln(tf, '# Created ' + FormatDateTime('yyyy-mm-dd_hh:nn:ss', Now)
+      + ' by ' + APP_TITLE);
+
+    // Write title.
     title := Trim(editTitle.Text);
     writeln(tf, '# Title: ' + title);
     writeln(tf, '');
@@ -443,6 +447,7 @@ begin
   ImagesList := TImagesList.Create;
   Panel1.Caption := 'No images.';
   StatusBar1.SimpleText := 'No images.';
+  GetArgs;
 end;
 
 procedure TForm1.FormKeyDown(Sender: TObject; var Key: Word; Shift: TShiftState
@@ -488,7 +493,7 @@ begin
 
 end;
 
-procedure TForm1.FormShow(Sender: TObject);
+procedure TForm1.GetArgs;
 var
   params: TStringList;
   s: String;
@@ -571,7 +576,7 @@ begin
   ShowSelectedImage;
 end;
 
-procedure TForm1.mnuLoadClick(Sender: TObject);
+procedure TForm1.LoadFromSavedFile;
 var
   tf: TextFile;
   fn: String;
@@ -636,7 +641,9 @@ begin
 
       if 0 < paths_list.Count then
       begin
-        ImagesList.Load(paths_list[0]);
+        // ImagesList.Load(paths_list[0]);
+        LoadImagesList(paths_list[0]);
+
         editTitle.Text := title;
         ListBox1.Clear;
         for i := 0 to paths_list.Count -1 do
@@ -650,6 +657,11 @@ begin
         end;
       end;
     end;
+end;
+
+procedure TForm1.mnuLoadClick(Sender: TObject);
+begin
+  LoadFromSavedFile;
 end;
 
 end.
