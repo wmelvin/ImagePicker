@@ -99,11 +99,11 @@ implementation
 {$R *.lfm}
 
 uses
-  uAppFuncs, uImageInfo, uImagesList, LCLType;
+  uAppFuncs, uImageInfo, uImagesList, LCLType, StrUtils;
 
 const
   APP_NAME = 'ImagePicker';
-  APP_VERSION = '230310.1';
+  APP_VERSION = '230311.1';
   APP_TITLE = APP_NAME + '  (' + APP_VERSION + ')';
   P2_DEFAULT_WIDTH = 282;
   MIN_PLAY_MS = 100;
@@ -577,19 +577,40 @@ var
   fn: String;
   s: String;
   title: String;
-  path: String;
-  paths: TStringList;
-  tags: TStringList;
+  paths_list: TStringList;
+  tags_list: TStringList;
   i: Integer;
-  j: Integer;
   info: TImageInfo;
+  tag_nv: String;
+  tag_val: String;
+
+  {local} function ParsedTag(const TagStr: String; VAR TagNameValue: String): Boolean;
+  var
+    fn: String;
+    tg: String;
+  begin
+    ParsedTag := False;
+    if not (LeftStr(TagStr, 6) = '# Tag:') then
+      Exit;
+    fn := Trim(RightStr(s, Length(s) - 6));
+    tg := Trim(Copy2SymbDel(fn, ','));
+    fn := Trim(fn);
+    if (0 < Length(fn)) and (0 < Length(tg)) then
+      begin
+        TagNameValue := fn + '=' + tg;
+        ParsedTag := True;
+      end;
+  end;
+
 begin
   // TODO: This does not work> OpenDialog1.Filter := 'Text files (*.txt)|*.TXT';
   if OpenDialog1.Execute then
     begin
       fn := OpenDialog1.FileName;
-      paths := TStringList.Create;
-      tags := TStringList.Create;
+      paths_list := TStringList.Create;
+      tags_list := TStringList.Create;
+      title := '';
+      tag_nv := '';
       try
         AssignFile(tf, fn);
         try
@@ -597,12 +618,13 @@ begin
           while not EOF(tf) do
           begin
             ReadLn(tf, s);
-            if (0 < Length(Trim(s))) and (LeftStr(s, 1) <> '#') then
-              paths.Add(s)
-            else if LeftStr(s, 9) = '# Title: ' then
-              title := RightStr(s, Length(s) - 9)
-            else if LeftStr(s, 7) = '# Tag: ' then
-              tags.Add(RightStr(s, Length(s) - 7));
+            s := Trim(s);
+            if (0 < Length(s)) and (LeftStr(s, 1) <> '#') then
+              paths_list.Add(TrimSet(s, ['"']))
+            else if ParsedTag(s, tag_nv) then
+              tags_list.Add(tag_nv)
+            else if LeftStr(s, 8) = '# Title:' then
+              title := Trim(RightStr(s, Length(s) - 8));
           end;
         finally
           CloseFile(tf);
@@ -611,19 +633,20 @@ begin
         on E: EInOutError do
           StatusBar1.SimpleText := 'ERROR: ' + E.Message;
       end;
-      if 0 < paths.Count then
+
+      if 0 < paths_list.Count then
       begin
-        ImagesList.Load(paths[0]);
+        ImagesList.Load(paths_list[0]);
+        editTitle.Text := title;
         ListBox1.Clear;
-        for i := 0 to paths.Count -1 do
+        for i := 0 to paths_list.Count -1 do
         begin
-          info := TImageInfo.Create(paths[i], '');
+          info := TImageInfo.Create(paths_list[i], '');
+          // Names and values in tags_list are in double quotes.
+          tag_val := tags_list.Values['"' + info.GetFileName + '"'];
+          if (0 < Length(tag_val)) then
+            info.Tag := TrimSet(tag_val, ['"']);
           ListBox1.Items.AddObject(info.GetFileName, info);
-        end;
-        for j := 0 to tags.Count -1 do
-        begin
-          // TODO: Set tags.
-          StatusBar1.SimpleText := tags[j];
         end;
       end;
     end;

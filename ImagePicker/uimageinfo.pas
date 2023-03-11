@@ -33,8 +33,13 @@ begin
 end;
 
 procedure TImageInfo.SetTag(ATag: String);
+var
+  s: String;
 begin
-  FTag := StringReplace(Trim(ATag), ' ', '_', [rfReplaceAll]);
+  // Tag must not have spaces or commas.
+  s := StringReplace(Trim(ATag), ' ', '_', [rfReplaceAll]);
+  s := StringReplace(s, ',', '_', [rfReplaceAll]);
+  FTag := s;
 end;
 
 function TImageInfo.GetFileName: String;
