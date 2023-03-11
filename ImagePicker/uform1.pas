@@ -104,7 +104,7 @@ uses
 
 const
   APP_NAME = 'ImagePicker';
-  APP_VERSION = '230311.2';
+  APP_VERSION = '230311.3';
   APP_TITLE = APP_NAME + ' (' + APP_VERSION + ')';
   P2_DEFAULT_WIDTH = 282;
   MIN_PLAY_MS = 100;
@@ -213,7 +213,8 @@ var
   i: Integer;
   item: TImageInfo;
   n: Integer;
-  pad: Integer;
+  pad_tagged: Integer;
+  pad_all: Integer;
   title: String;
 begin
   StatusBar1.SimpleText := 'Save as ' + FileName;
@@ -238,19 +239,20 @@ begin
     end;
 
     // Get length of longest file name in items with a tag.
-    pad := 0;
+    pad_tagged := 0;
+    pad_all := 0;
     for i := 0 to ListBox1.Items.Count - 1 do
     begin
       item := TImageInfo(ListBox1.Items.Objects[i]);
+      n := Length(item.GetFileName);
+      if pad_all < n then
+        pad_all := n;
       if item.HasTag then
-        begin
-          n := Length(item.GetFileName);
-          if pad < n then
-            pad := n;
-        end;
+        if pad_tagged < n then
+          pad_tagged := n;
     end;
 
-    if 0 < pad then
+    if 0 < pad_tagged then
       // There are one or more items with a tag.
       begin
         writeln(tf, '');
@@ -267,14 +269,28 @@ begin
 
         writeln(tf, '');
         writeln(tf, '');
-        writeln(tf, '## -- To move (rename) tagged image files:');
+        writeln(tf, '## -- Move/rename tagged files (original):');
         for i := 0 to ListBox1.Items.Count - 1 do
         begin
           item := TImageInfo(ListBox1.Items.Objects[i]);
           if item.HasTag then
-            writeln(tf, '# ' + item.AsMvCmd(pad));
+            writeln(tf, '# ' + item.AsMvCmd(pad_tagged));
         end;
+
       end;
+
+    if Length(title) = 0 then
+      // Set default title for use by AsMvCmd.
+      title := 'image';
+
+    writeln(tf, '');
+    writeln(tf, '');
+    writeln(tf, '## -- Move/rename all files (new name):');
+    for i := 0 to ListBox1.Items.Count - 1 do
+    begin
+      item := TImageInfo(ListBox1.Items.Objects[i]);
+      writeln(tf, '# ' + item.AsMvCmd(pad_all, title, i));
+    end;
 
     CloseFile(tf);
   except
