@@ -295,6 +295,13 @@ object Form1: TForm1
         OnClick = mnuExitClick
       end
     end
+    object mnuTools: TMenuItem
+      Caption = '&Tools'
+      object mnuOptions: TMenuItem
+        Caption = 'Options ...'
+        OnClick = mnuOptionsClick
+      end
+    end
   end
   object ImageList1: TImageList
     Height = 32

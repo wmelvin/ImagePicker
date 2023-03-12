@@ -24,6 +24,8 @@ type
     editTag: TLabeledEdit;
     ListBox1: TListBox;
     MainMenu1: TMainMenu;
+    mnuTools: TMenuItem;
+    mnuOptions: TMenuItem;
     mnuLoad: TMenuItem;
     mnuOpen: TMenuItem;
     mnuSave: TMenuItem;
@@ -66,6 +68,7 @@ type
     procedure mnuLoadClick(Sender: TObject);
     procedure mnuExitClick(Sender: TObject);
     procedure mnuOpenClick(Sender: TObject);
+    procedure mnuOptionsClick(Sender: TObject);
     procedure mnuSaveClick(Sender: TObject);
     procedure SpinEdit1Change(Sender: TObject);
     procedure SpinEdit1Enter(Sender: TObject);
@@ -205,6 +208,16 @@ begin
   // TODO: OpenDialog1.Filter := 'Image files|*.JPG;*.PNG;*.JPEG;*.BMP;*.GIF';
   if OpenDialog1.Execute then
     LoadImagesList(OpenDialog1.FileName);
+end;
+
+procedure TForm1.mnuOptionsClick(Sender: TObject);
+var
+  s: String;
+begin
+  s := AsPath(GetAppConfigDir(False)) + 'ImagePicker.opt';
+  MessageDlg('', s, mtInformation, [mbOk],0);
+  // TODO: Use the file to store options, such as default and last directory
+  // for open and save dialogs. Load options on startup.
 end;
 
 procedure TForm1.SaveList(FileName: String);
