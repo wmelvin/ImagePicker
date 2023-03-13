@@ -214,7 +214,8 @@ end;
 
 procedure TForm1.mnuOpenClick(Sender: TObject);
 begin
-  // TODO: OpenDialog1.Filter := 'Image files|*.JPG;*.PNG;*.JPEG;*.BMP;*.GIF';
+  OpenDialog1.Filter := 'Image files|*.jpg;*.png;*.jpeg;*.bmp;*.gif;'
+    + '*.JPG;*.PNG;*.JPEG;*.BMP;*.GIF';
   if OpenDialog1.Execute then
     LoadImagesList(OpenDialog1.FileName);
 end;
@@ -564,7 +565,6 @@ begin
           Key := 0;
         end;
     end
-  // else if ssCtrl in Shift then
   else if Shift = [ssCtrl] then
     case Key of
       VK_UP: if not InEdit then
@@ -681,6 +681,8 @@ var
   info: TImageInfo;
   tag_nv: String;
   tag_val: String;
+  first_line: Boolean;
+  ok: Boolean;
 
   {local} function ParsedTag(const TagStr: String; VAR TagNameValue: String): Boolean;
   var
@@ -701,7 +703,7 @@ var
   end;
 
 begin
-  // TODO: This does not work> OpenDialog1.Filter := 'Text files (*.txt)|*.TXT';
+  OpenDialog1.Filter := 'Text files (*.txt)|*.txt;*.TXT';
   if OpenDialog1.Execute then
     begin
       fn := OpenDialog1.FileName;
@@ -713,10 +715,29 @@ begin
         AssignFile(tf, fn);
         try
           Reset(tf);
-          while not EOF(tf) do
+          first_line := True;
+          ok := True;
+          while ok and (not EOF(tf)) do
           begin
             ReadLn(tf, s);
+
+            if first_line then
+              begin
+                first_line := False;
+                if not ((LeftStr(s, 1) = '#')
+                and (0 < Pos('ImagePicker', s))) then
+                  begin
+                    MessageDlg(
+                      'Cannot Load',
+                      'File does not match ImagePicker format.',
+                      mtWarning, [mbClose],0);
+                    ok := False;
+                    continue;
+                  end;
+              end;
+
             s := Trim(s);
+
             if (0 < Length(s)) and (LeftStr(s, 1) <> '#') then
               paths_list.Add(TrimSet(s, ['"']))
             else if ParsedTag(s, tag_nv) then
@@ -734,7 +755,6 @@ begin
 
       if 0 < paths_list.Count then
       begin
-        // ImagesList.Load(paths_list[0]);
         LoadImagesList(paths_list[0]);
 
         editTitle.Text := title;

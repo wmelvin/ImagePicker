@@ -69,7 +69,6 @@ begin
     t := '';
 
   if 0 <= Index then
-    // ns := '-' + IntToStr(Index + 1)  // TODO: zero-pad
     ns := '-' + format('%.3d', [Index + 1])
   else
     ns := '';

@@ -149,6 +149,8 @@ var
   isDir: Boolean;
 begin
   FFileList.Clear;
+  FFileList.Sorted := True;
+  FFileList.Duplicates := dupIgnore;
   FListIndex := -1;
 
   isDir := FileGetAttr(FileName) AND faDirectory = faDirectory;

@@ -22,11 +22,13 @@ begin
 end;
 
 function ForFileName(const s: String): String;
-// Prepare a string for use in a file name.
-// Replaces characters that do not belong* in a file name with underscores.
-// The string is trimmed of leading and trailing whitespace first.
-// * This is opinionated in that spaces are replaced, though allowed by
-//   modern file systems.
+{
+  Prepare a string for use in a file name.
+  Replaces characters that do not belong* in a file name with underscores.
+  The string is trimmed of leading and trailing whitespace first.
+  * This is opinionated in that spaces are replaced, though allowed by
+    modern file systems.
+}
 var
   t: String;
 begin

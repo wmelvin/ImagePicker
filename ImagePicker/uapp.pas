@@ -8,7 +8,7 @@ interface
 
 const
   APP_NAME = 'ImagePicker';
-  APP_VERSION = '230313.1';
+  APP_VERSION = '230313.2';
   APP_TITLE = APP_NAME + ' (' + APP_VERSION + ')';
 
 implementation
