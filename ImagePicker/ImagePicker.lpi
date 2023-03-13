@@ -10,7 +10,7 @@
       <UseXPManifest Value="True"/>
       <XPManifest>
         <DpiAware Value="True"/>
-        <TextName Value="Bogusoft.Fewtilities.ImagePicker"/>
+        <TextName Value="Bogusoft.Futilities.ImagePicker"/>
         <TextDesc Value="Pick images and write the list to a text file."/>
       </XPManifest>
       <Icon Value="0"/>

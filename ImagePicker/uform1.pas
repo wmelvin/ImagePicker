@@ -395,18 +395,20 @@ procedure TForm1.btnRemoveClick(Sender: TObject);
 var
   i: Integer;
 begin
-  if not MessageDlg('Confirm', 'Remove selected item(s) from list?',
+  if ListBox1.SelCount = 0 then
+    Exit;
+
+  if not MessageDlg('Confirm', 'Remove selected item from the list?',
     mtConfirmation, [mbYes, mbNo],0
   ) = mrYes then
     Exit;
 
-  if 0 < ListBox1.SelCount then
-    for i := ListBox1.Items.Count - 1 downto 0 do
-      if ListBox1.Selected[i] then
-        begin
-          ListBox1.Items.Objects[i].Free;  // TImageInfo object
-          ListBox1.Items.Delete(i);
-        end;
+  for i := ListBox1.Items.Count - 1 downto 0 do
+    if ListBox1.Selected[i] then
+      begin
+        ListBox1.Items.Objects[i].Free;  // TImageInfo object
+        ListBox1.Items.Delete(i);
+      end;
 end;
 
 procedure TForm1.btnUpClick(Sender: TObject);
@@ -506,44 +508,77 @@ end;
 procedure TForm1.FormKeyDown(Sender: TObject; var Key: Word; Shift: TShiftState
   );
 begin
-  case Key of
-    VK_HOME: if not InEdit then
-      begin
-        ImageFirst;
-        Key := 0;
-      end;
+  if Shift = [] then
+    case Key of
+      VK_HOME: if not InEdit then
+        begin
+          ImageFirst;
+          Key := 0;
+        end;
 
-    VK_LEFT: if not InEdit then
-      begin
-        ImagePrev;
-        Key := 0;
-      end;
+      VK_LEFT: if not InEdit then
+        begin
+          ImagePrev;
+          Key := 0;
+        end;
 
-    VK_RIGHT: if not InEdit then
-      begin
-        ImageNext;
-        Key := 0;
-      end;
+      VK_RIGHT: if not InEdit then
+        begin
+          ImageNext;
+          Key := 0;
+        end;
 
-    VK_END: if not InEdit then
-      begin
-        ImageLast;
-        Key := 0;
-      end;
+      VK_END: if not InEdit then
+        begin
+          ImageLast;
+          Key := 0;
+        end;
 
-    VK_F4:
-      begin
-        TogglePanel2;
-        Key := 0;
-      end;
+      VK_F4:
+        begin
+          TogglePanel2;
+          Key := 0;
+        end;
 
-    VK_F5:
-      begin
-        PlayStop;
-        Key := 0;
-      end;
-  end;
+      VK_F5:
+        begin
+          PlayStop;
+          Key := 0;
+        end;
 
+      VK_F6:
+        begin
+          SelectShowPrev;
+          Key := 0;
+        end;
+
+      VK_F7:
+        begin
+          ShowSelectedImage;
+          Key := 0;
+        end;
+
+      VK_F8:
+        begin
+          SelectShowNext;
+          Key := 0;
+        end;
+    end
+  // else if ssCtrl in Shift then
+  else if Shift = [ssCtrl] then
+    case Key of
+      VK_UP: if not InEdit then
+        begin
+          MoveSelectedUp;
+          Key := 0;
+        end;
+
+      VK_DOWN: if not InEdit then
+        begin
+          MoveSelectedDown;
+          Key := 0;
+        end;
+    end;
 end;
 
 procedure TForm1.GetArgs;
@@ -727,29 +762,67 @@ var
   i: Integer;
 begin
   if 0 < ListBox1.SelCount then
+  begin
     for i := 0 to ListBox1.Items.Count - 2 do
       if ListBox1.Selected[i] then
         begin
           ListBox1.Selected[i] := False;
-          ListBox1.Selected[i+1] := True;
+          ListBox1.Selected[i + 1] := True;
           break;
         end;
-  ShowSelectedImage;
+    ShowSelectedImage;
+  end;
 end;
 
 procedure TForm1.SelectShowPrev;
+var
+  i: Integer;
 begin
-  // TODO:
+  if 0 < ListBox1.SelCount then
+  begin
+    for i := 1 to ListBox1.Items.Count - 1 do
+      if ListBox1.Selected[i] then
+        begin
+          ListBox1.Selected[i] := False;
+          ListBox1.Selected[i - 1] := True;
+          break;
+        end;
+    ShowSelectedImage;
+  end;
 end;
 
 procedure TForm1.MoveSelectedUp;
+var
+  i: Integer;
 begin
-  // TODO:
+  if 0 < ListBox1.SelCount then
+  begin
+    for i := 1 to ListBox1.Items.Count - 1 do
+      if ListBox1.Selected[i] then
+        begin
+          ListBox1.Items.Exchange(i, i - 1);
+          ListBox1.Selected[i] := False;
+          ListBox1.Selected[i - 1] := True;
+          break;
+        end;
+  end;
 end;
 
 procedure TForm1.MoveSelectedDown;
+var
+  i: Integer;
 begin
-  // TODO:
+  if 0 < ListBox1.SelCount then
+  begin
+    for i := 0 to ListBox1.Items.Count - 2 do
+      if ListBox1.Selected[i] then
+        begin
+          ListBox1.Items.Exchange(i, i + 1);
+          ListBox1.Selected[i] := False;
+          ListBox1.Selected[i + 1] := True;
+          break;
+        end;
+  end;
 end;
 
 end.

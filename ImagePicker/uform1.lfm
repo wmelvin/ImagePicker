@@ -1,7 +1,7 @@
 object Form1: TForm1
-  Left = 347
+  Left = 403
   Height = 457
-  Top = 167
+  Top = 166
   Width = 972
   ActiveControl = Panel1
   Caption = 'Form1'
@@ -176,29 +176,29 @@ object Form1: TForm1
       UseDockManager = False
       object ListBox1: TListBox
         Left = 8
-        Height = 208
-        Top = 120
+        Height = 232
+        Top = 112
         Width = 264
         Anchors = [akTop, akLeft, akRight, akBottom]
         ItemHeight = 0
         OnDblClick = ListBox1DblClick
         ParentShowHint = False
         ShowHint = True
-        TabOrder = 0
+        TabOrder = 4
         TopIndex = -1
       end
       object btnRemove: TButton
         Left = 16
         Height = 25
         Hint = 'Delete selected item from the list.'
-        Top = 376
-        Width = 75
+        Top = 384
+        Width = 56
         Anchors = [akRight, akBottom]
         Caption = '&Remove'
         OnClick = btnRemoveClick
         ParentShowHint = False
         ShowHint = True
-        TabOrder = 1
+        TabOrder = 11
       end
       object editTitle: TLabeledEdit
         Left = 16
@@ -209,7 +209,7 @@ object Form1: TForm1
         EditLabel.Width = 247
         EditLabel.Caption = 'Title'
         EditLabel.ParentColor = False
-        TabOrder = 2
+        TabOrder = 0
         OnEnter = editTitleEnter
         OnExit = editTitleExit
       end
@@ -217,100 +217,115 @@ object Form1: TForm1
         Left = 20
         Height = 26
         Top = 80
-        Width = 132
+        Width = 180
         EditLabel.Height = 17
-        EditLabel.Width = 132
+        EditLabel.Width = 180
         EditLabel.Caption = 'Tag'
         EditLabel.ParentColor = False
-        TabOrder = 3
+        TabOrder = 1
         OnEnter = editTagEnter
         OnExit = editTagExit
       end
       object btnApply: TButton
-        Left = 168
+        Left = 207
         Height = 25
         Hint = 'Apply tag to selected item in list.'
-        Top = 82
-        Width = 75
+        Top = 81
+        Width = 56
         Caption = 'Apply'
         OnClick = btnApplyClick
         ParentShowHint = False
         ShowHint = True
-        TabOrder = 4
+        TabOrder = 2
       end
       object chkAutoTag: TCheckBox
-        Left = 168
+        Left = 207
         Height = 21
         Hint = 'Apply Tag to images added to the list.'
-        Top = 60
+        Top = 59
         Width = 48
         Caption = 'auto'
         ParentShowHint = False
         ShowHint = True
-        TabOrder = 5
+        TabOrder = 3
       end
       object btnAdd: TButton
         Left = 16
         Height = 25
         Hint = 'Add the current image.'
-        Top = 344
-        Width = 75
+        Top = 352
+        Width = 56
         Anchors = [akRight, akBottom]
         Caption = '&Add'
         OnClick = btnAddClick
         ParentShowHint = False
         ShowHint = True
-        TabOrder = 6
+        TabOrder = 5
       end
       object btnShow: TButton
-        Left = 136
+        Left = 120
         Height = 25
-        Top = 344
+        Hint = 'Show selected (F7)'
+        Top = 352
         Width = 40
         Anchors = [akRight, akBottom]
         Caption = 'Sho&w'
         OnClick = btnShowClick
+        ParentShowHint = False
+        ShowHint = True
         TabOrder = 7
       end
       object btnShowNext: TButton
-        Left = 176
+        Left = 160
         Height = 25
-        Top = 344
+        Hint = 'Show next (F8)'
+        Top = 352
         Width = 24
         Anchors = [akRight, akBottom]
         Caption = '>'
         OnClick = btnShowNextClick
+        ParentShowHint = False
+        ShowHint = True
         TabOrder = 8
       end
       object btnShowPrev: TButton
-        Left = 112
+        Left = 96
         Height = 25
-        Top = 344
+        Hint = 'Show previous (F6)'
+        Top = 352
         Width = 24
         Anchors = [akRight, akBottom]
         Caption = '<'
         OnClick = btnShowPrevClick
-        TabOrder = 9
+        ParentShowHint = False
+        ShowHint = True
+        TabOrder = 6
       end
       object btnDown: TButton
-        Left = 216
+        Left = 207
         Height = 25
-        Top = 376
-        Width = 51
+        Hint = 'Move Down (Ctrl+DownArrow)'
+        Top = 384
+        Width = 56
         Anchors = [akRight, akBottom]
         Caption = 'Down'
         OnClick = btnDownClick
+        ParentShowHint = False
+        ShowHint = True
         TabOrder = 10
       end
       object btnUp: TButton
-        Left = 216
+        Left = 207
         Height = 25
-        Top = 344
-        Width = 51
+        Hint = 'Move Up Move Down (Ctrl+UpArrow)'
+        Top = 352
+        Width = 56
         Anchors = [akRight, akBottom]
         Caption = 'Up'
         OnClick = btnUpClick
-        TabOrder = 11
+        ParentShowHint = False
+        ShowHint = True
+        TabOrder = 9
       end
     end
   end
