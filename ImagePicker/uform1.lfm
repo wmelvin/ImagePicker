@@ -5,30 +5,30 @@ object Form1: TForm1
   Width = 972
   ActiveControl = Panel1
   Caption = 'Form1'
-  ClientHeight = 433
+  ClientHeight = 436
   ClientWidth = 972
   KeyPreview = True
   Menu = MainMenu1
   OnCreate = FormCreate
   OnKeyDown = FormKeyDown
-  LCLVersion = '2.2.0.4'
+  LCLVersion = '2.2.6.0'
   object StatusBar1: TStatusBar
     Left = 0
-    Height = 18
-    Top = 415
+    Height = 20
+    Top = 416
     Width = 972
     Panels = <>
   end
   object Panel1: TPanel
     Left = 0
-    Height = 415
+    Height = 416
     Top = 0
     Width = 580
     Align = alClient
     BevelInner = bvLowered
     BorderWidth = 2
     Caption = 'No image.'
-    ClientHeight = 415
+    ClientHeight = 416
     ClientWidth = 580
     TabOrder = 1
     object Image1: TImage
@@ -45,7 +45,7 @@ object Form1: TForm1
     end
     object TrackBar1: TTrackBar
       Left = 4
-      Height = 37
+      Height = 38
       Top = 374
       Width = 572
       Position = 0
@@ -56,20 +56,20 @@ object Form1: TForm1
   end
   object Panel4: TPanel
     Left = 580
-    Height = 415
+    Height = 416
     Top = 0
     Width = 392
     Align = alRight
-    ClientHeight = 415
+    ClientHeight = 416
     ClientWidth = 392
     TabOrder = 2
     object Panel3: TPanel
       Left = 1
-      Height = 413
+      Height = 414
       Top = 1
       Width = 95
       Align = alLeft
-      ClientHeight = 413
+      ClientHeight = 414
       ClientWidth = 95
       TabOrder = 0
       UseDockManager = False
@@ -148,7 +148,7 @@ object Form1: TForm1
       end
       object SpinEdit1: TSpinEdit
         Left = 3
-        Height = 28
+        Height = 26
         Hint = 'Play speed in milliseconds'
         Top = 176
         Width = 77
@@ -166,17 +166,17 @@ object Form1: TForm1
     end
     object Panel2: TPanel
       Left = 109
-      Height = 413
+      Height = 414
       Top = 1
       Width = 282
       Align = alRight
-      ClientHeight = 413
+      ClientHeight = 414
       ClientWidth = 282
       TabOrder = 1
       UseDockManager = False
       object ListBox1: TListBox
         Left = 8
-        Height = 222
+        Height = 223
         Top = 120
         Width = 264
         Anchors = [akTop, akLeft, akRight, akBottom]
@@ -192,7 +192,7 @@ object Form1: TForm1
         Left = 188
         Height = 25
         Hint = 'Delete selected item from the list.'
-        Top = 350
+        Top = 351
         Width = 75
         Anchors = [akRight, akBottom]
         Caption = '&Remove'
@@ -203,24 +203,26 @@ object Form1: TForm1
       end
       object editTitle: TLabeledEdit
         Left = 16
-        Height = 28
+        Height = 26
         Top = 24
         Width = 247
-        EditLabel.Height = 16
+        EditLabel.Height = 17
         EditLabel.Width = 247
         EditLabel.Caption = 'Title'
+        EditLabel.ParentColor = False
         TabOrder = 2
         OnEnter = editTitleEnter
         OnExit = editTitleExit
       end
       object editTag: TLabeledEdit
         Left = 20
-        Height = 28
+        Height = 26
         Top = 80
         Width = 132
-        EditLabel.Height = 16
+        EditLabel.Height = 17
         EditLabel.Width = 132
         EditLabel.Caption = 'Tag'
+        EditLabel.ParentColor = False
         TabOrder = 3
         OnEnter = editTagEnter
         OnExit = editTagExit
@@ -239,10 +241,10 @@ object Form1: TForm1
       end
       object chkAutoTag: TCheckBox
         Left = 168
-        Height = 23
+        Height = 21
         Hint = 'Apply Tag to images added to the list.'
         Top = 60
-        Width = 54
+        Width = 48
         Caption = 'auto'
         ParentShowHint = False
         ShowHint = True
@@ -252,7 +254,7 @@ object Form1: TForm1
         Left = 20
         Height = 25
         Hint = 'Add the current image.'
-        Top = 350
+        Top = 351
         Width = 75
         Anchors = [akRight, akBottom]
         Caption = '&Add'
@@ -264,7 +266,7 @@ object Form1: TForm1
       object btnShow: TButton
         Left = 104
         Height = 25
-        Top = 350
+        Top = 351
         Width = 75
         Anchors = [akRight, akBottom]
         Caption = 'Sho&w'

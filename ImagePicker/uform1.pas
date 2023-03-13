@@ -103,12 +103,14 @@ implementation
 {$R *.lfm}
 
 uses
-  uAppFuncs, uImageInfo, uImagesList, LCLType, StrUtils;
+  uApp, uAppFuncs, uImageInfo, uImagesList, LCLType, StrUtils;
 
 const
+  (*
   APP_NAME = 'ImagePicker';
   APP_VERSION = '230312.1';
   APP_TITLE = APP_NAME + ' (' + APP_VERSION + ')';
+  *)
   P2_DEFAULT_WIDTH = 282;
   MIN_PLAY_MS = 100;
 
