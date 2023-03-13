@@ -1,7 +1,7 @@
 object Form1: TForm1
-  Left = 471
+  Left = 347
   Height = 457
-  Top = 140
+  Top = 167
   Width = 972
   ActiveControl = Panel1
   Caption = 'Form1'
@@ -176,12 +176,11 @@ object Form1: TForm1
       UseDockManager = False
       object ListBox1: TListBox
         Left = 8
-        Height = 223
+        Height = 208
         Top = 120
         Width = 264
         Anchors = [akTop, akLeft, akRight, akBottom]
         ItemHeight = 0
-        MultiSelect = True
         OnDblClick = ListBox1DblClick
         ParentShowHint = False
         ShowHint = True
@@ -189,10 +188,10 @@ object Form1: TForm1
         TopIndex = -1
       end
       object btnRemove: TButton
-        Left = 188
+        Left = 16
         Height = 25
         Hint = 'Delete selected item from the list.'
-        Top = 351
+        Top = 376
         Width = 75
         Anchors = [akRight, akBottom]
         Caption = '&Remove'
@@ -251,10 +250,10 @@ object Form1: TForm1
         TabOrder = 5
       end
       object btnAdd: TButton
-        Left = 20
+        Left = 16
         Height = 25
         Hint = 'Add the current image.'
-        Top = 351
+        Top = 344
         Width = 75
         Anchors = [akRight, akBottom]
         Caption = '&Add'
@@ -264,14 +263,54 @@ object Form1: TForm1
         TabOrder = 6
       end
       object btnShow: TButton
-        Left = 104
+        Left = 136
         Height = 25
-        Top = 351
-        Width = 75
+        Top = 344
+        Width = 40
         Anchors = [akRight, akBottom]
         Caption = 'Sho&w'
         OnClick = btnShowClick
         TabOrder = 7
+      end
+      object btnShowNext: TButton
+        Left = 176
+        Height = 25
+        Top = 344
+        Width = 24
+        Anchors = [akRight, akBottom]
+        Caption = '>'
+        OnClick = btnShowNextClick
+        TabOrder = 8
+      end
+      object btnShowPrev: TButton
+        Left = 112
+        Height = 25
+        Top = 344
+        Width = 24
+        Anchors = [akRight, akBottom]
+        Caption = '<'
+        OnClick = btnShowPrevClick
+        TabOrder = 9
+      end
+      object btnDown: TButton
+        Left = 216
+        Height = 25
+        Top = 376
+        Width = 51
+        Anchors = [akRight, akBottom]
+        Caption = 'Down'
+        OnClick = btnDownClick
+        TabOrder = 10
+      end
+      object btnUp: TButton
+        Left = 216
+        Height = 25
+        Top = 344
+        Width = 51
+        Anchors = [akRight, akBottom]
+        Caption = 'Up'
+        OnClick = btnUpClick
+        TabOrder = 11
       end
     end
   end

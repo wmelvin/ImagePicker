@@ -17,6 +17,10 @@ type
     btnApply: TButton;
     btnAdd: TButton;
     btnShow: TButton;
+    btnShowNext: TButton;
+    btnShowPrev: TButton;
+    btnDown: TButton;
+    btnUp: TButton;
     chkAutoTag: TCheckBox;
     Image1: TImage;
     ImageList1: TImageList;
@@ -48,6 +52,8 @@ type
     Timer1: TTimer;
     TrackBar1: TTrackBar;
     procedure btnAddClick(Sender: TObject);
+    procedure btnDownClick(Sender: TObject);
+    procedure btnShowNextClick(Sender: TObject);
     procedure btnApplyClick(Sender: TObject);
     procedure btnFirstClick(Sender: TObject);
     procedure btnLastClick(Sender: TObject);
@@ -55,8 +61,10 @@ type
     procedure btnPlayStopClick(Sender: TObject);
     procedure btnPrevClick(Sender: TObject);
     procedure btnShowClick(Sender: TObject);
+    procedure btnShowPrevClick(Sender: TObject);
     procedure btnToggleClick(Sender: TObject);
     procedure btnRemoveClick(Sender: TObject);
+    procedure btnUpClick(Sender: TObject);
     procedure editTagEnter(Sender: TObject);
     procedure editTagExit(Sender: TObject);
     procedure editTitleEnter(Sender: TObject);
@@ -88,6 +96,10 @@ type
     procedure TogglePanel2;
     procedure AddCurrentImage;
     procedure ShowSelectedImage;
+    procedure SelectShowNext;
+    procedure SelectShowPrev;
+    procedure MoveSelectedUp;
+    procedure MoveSelectedDown;
     procedure SaveList(FileName: String);
     procedure LoadImagesList(FileName: String);
     procedure LoadFromSavedFile;
@@ -106,11 +118,6 @@ uses
   uApp, uAppFuncs, uImageInfo, uImagesList, LCLType, StrUtils;
 
 const
-  (*
-  APP_NAME = 'ImagePicker';
-  APP_VERSION = '230312.1';
-  APP_TITLE = APP_NAME + ' (' + APP_VERSION + ')';
-  *)
   P2_DEFAULT_WIDTH = 282;
   MIN_PLAY_MS = 100;
 
@@ -402,6 +409,11 @@ begin
         end;
 end;
 
+procedure TForm1.btnUpClick(Sender: TObject);
+begin
+  MoveSelectedUp;
+end;
+
 procedure TForm1.editTagEnter(Sender: TObject);
 begin
   InEdit := True;
@@ -449,6 +461,16 @@ end;
 procedure TForm1.btnAddClick(Sender: TObject);
 begin
   AddCurrentImage;
+end;
+
+procedure TForm1.btnDownClick(Sender: TObject);
+begin
+  MoveSelectedDown;
+end;
+
+procedure TForm1.btnShowNextClick(Sender: TObject);
+begin
+  SelectShowNext;
 end;
 
 procedure TForm1.btnLastClick(Sender: TObject);
@@ -602,6 +624,11 @@ begin
   ShowSelectedImage;
 end;
 
+procedure TForm1.btnShowPrevClick(Sender: TObject);
+begin
+  SelectShowPrev;
+end;
+
 procedure TForm1.ListBox1DblClick(Sender: TObject);
 begin
   ShowSelectedImage;
@@ -693,6 +720,36 @@ end;
 procedure TForm1.mnuLoadClick(Sender: TObject);
 begin
   LoadFromSavedFile;
+end;
+
+procedure TForm1.SelectShowNext;
+var
+  i: Integer;
+begin
+  if 0 < ListBox1.SelCount then
+    for i := 0 to ListBox1.Items.Count - 2 do
+      if ListBox1.Selected[i] then
+        begin
+          ListBox1.Selected[i] := False;
+          ListBox1.Selected[i+1] := True;
+          break;
+        end;
+  ShowSelectedImage;
+end;
+
+procedure TForm1.SelectShowPrev;
+begin
+  // TODO:
+end;
+
+procedure TForm1.MoveSelectedUp;
+begin
+  // TODO:
+end;
+
+procedure TForm1.MoveSelectedDown;
+begin
+  // TODO:
 end;
 
 end.
