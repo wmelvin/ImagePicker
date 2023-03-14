@@ -376,13 +376,21 @@ procedure TForm1.TogglePanel2;
 begin
   if Panel2.Width < P2_DEFAULT_WIDTH then
     begin
+      // Expand.
       Panel2.Width := P2_DEFAULT_WIDTH;
       btnToggle.ImageIndex := 0;
+      editTitle.Enabled := True;
+      editTag.Enabled := True;
     end
   else
     begin
+      // Collapse.
       Panel2.Width := 4;
       btnToggle.ImageIndex := 1;
+      editTitle.Enabled := False;
+      editTag.Enabled := False;
+      ListBox1.ClearSelection;
+      ListBox1.SetFocus;
     end;
   Panel4.Width := Panel2.Width + Panel3.Width + 4;
 end;
@@ -567,15 +575,27 @@ begin
     end
   else if Shift = [ssCtrl] then
     case Key of
-      VK_UP: if not InEdit then
+      VK_UP:
         begin
           MoveSelectedUp;
           Key := 0;
         end;
 
-      VK_DOWN: if not InEdit then
+      VK_DOWN:
         begin
           MoveSelectedDown;
+          Key := 0;
+        end;
+
+      VK_LEFT:
+        begin
+          ImagePrev;
+          Key := 0;
+        end;
+
+      VK_RIGHT:
+        begin
+          ImageNext;
           Key := 0;
         end;
     end;
