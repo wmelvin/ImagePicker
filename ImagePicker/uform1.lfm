@@ -1,11 +1,11 @@
 object Form1: TForm1
   Left = 403
-  Height = 457
+  Height = 483
   Top = 166
   Width = 972
   ActiveControl = Panel1
   Caption = 'Form1'
-  ClientHeight = 436
+  ClientHeight = 462
   ClientWidth = 972
   KeyPreview = True
   Menu = MainMenu1
@@ -15,27 +15,27 @@ object Form1: TForm1
   object StatusBar1: TStatusBar
     Left = 0
     Height = 20
-    Top = 416
+    Top = 442
     Width = 972
     Panels = <>
   end
   object Panel1: TPanel
     Left = 0
-    Height = 416
+    Height = 442
     Top = 0
-    Width = 580
+    Width = 612
     Align = alClient
     BevelInner = bvLowered
     BorderWidth = 2
     Caption = 'No image.'
-    ClientHeight = 416
-    ClientWidth = 580
+    ClientHeight = 442
+    ClientWidth = 612
     TabOrder = 1
     object Image1: TImage
       Left = 4
-      Height = 370
+      Height = 396
       Top = 4
-      Width = 572
+      Width = 604
       AntialiasingMode = amOn
       Align = alClient
       AutoSize = True
@@ -46,8 +46,8 @@ object Form1: TForm1
     object TrackBar1: TTrackBar
       Left = 4
       Height = 38
-      Top = 374
-      Width = 572
+      Top = 400
+      Width = 604
       Position = 0
       Align = alBottom
       OnMouseUp = TrackBar1MouseUp
@@ -55,22 +55,22 @@ object Form1: TForm1
     end
   end
   object Panel4: TPanel
-    Left = 580
-    Height = 416
+    Left = 612
+    Height = 442
     Top = 0
-    Width = 392
+    Width = 360
     Align = alRight
-    ClientHeight = 416
-    ClientWidth = 392
+    ClientHeight = 442
+    ClientWidth = 360
     TabOrder = 2
     object Panel3: TPanel
       Left = 1
-      Height = 414
+      Height = 440
       Top = 1
-      Width = 95
+      Width = 55
       Align = alLeft
-      ClientHeight = 414
-      ClientWidth = 95
+      ClientHeight = 440
+      ClientWidth = 55
       TabOrder = 0
       UseDockManager = False
       object btnToggle: TSpeedButton
@@ -90,7 +90,7 @@ object Form1: TForm1
         Left = 8
         Height = 36
         Hint = 'First (Home)'
-        Top = 59
+        Top = 72
         Width = 36
         Images = ImageList1
         ImageIndex = 2
@@ -102,7 +102,7 @@ object Form1: TForm1
         Left = 8
         Height = 36
         Hint = 'Previous (Left arrow)'
-        Top = 96
+        Top = 112
         Width = 36
         Images = ImageList1
         ImageIndex = 3
@@ -114,7 +114,7 @@ object Form1: TForm1
         Left = 8
         Height = 36
         Hint = 'Play/Stop (F5)'
-        Top = 136
+        Top = 248
         Width = 36
         Images = ImageList1
         ImageIndex = 4
@@ -123,10 +123,10 @@ object Form1: TForm1
         ParentShowHint = False
       end
       object btnNext: TSpeedButton
-        Left = 44
+        Left = 8
         Height = 36
         Hint = 'Next (Right arrow)'
-        Top = 96
+        Top = 152
         Width = 36
         Images = ImageList1
         ImageIndex = 6
@@ -135,10 +135,10 @@ object Form1: TForm1
         ParentShowHint = False
       end
       object btnLast: TSpeedButton
-        Left = 44
+        Left = 8
         Height = 36
         Hint = 'Last (End)'
-        Top = 59
+        Top = 192
         Width = 36
         Images = ImageList1
         ImageIndex = 7
@@ -146,39 +146,22 @@ object Form1: TForm1
         ShowHint = True
         ParentShowHint = False
       end
-      object SpinEdit1: TSpinEdit
-        Left = 3
-        Height = 26
-        Hint = 'Play speed in milliseconds'
-        Top = 176
-        Width = 77
-        Increment = 100
-        MaxValue = 10000
-        MinValue = 100
-        OnChange = SpinEdit1Change
-        OnEnter = SpinEdit1Enter
-        OnExit = SpinEdit1Exit
-        ParentShowHint = False
-        ShowHint = True
-        TabOrder = 0
-        Value = 1000
-      end
     end
     object Panel2: TPanel
-      Left = 109
-      Height = 414
+      Left = 59
+      Height = 440
       Top = 1
-      Width = 282
+      Width = 300
       Align = alRight
-      ClientHeight = 414
-      ClientWidth = 282
+      ClientHeight = 440
+      ClientWidth = 300
       TabOrder = 1
       UseDockManager = False
       object ListBox1: TListBox
         Left = 8
-        Height = 232
-        Top = 112
-        Width = 264
+        Height = 218
+        Top = 152
+        Width = 282
         Anchors = [akTop, akLeft, akRight, akBottom]
         ItemHeight = 0
         OnDblClick = ListBox1DblClick
@@ -188,10 +171,10 @@ object Form1: TForm1
         TopIndex = -1
       end
       object btnRemove: TButton
-        Left = 16
+        Left = 24
         Height = 25
         Hint = 'Delete selected item from the list.'
-        Top = 384
+        Top = 410
         Width = 56
         Anchors = [akRight, akBottom]
         Caption = '&Remove'
@@ -201,12 +184,12 @@ object Form1: TForm1
         TabOrder = 11
       end
       object editTitle: TLabeledEdit
-        Left = 16
+        Left = 8
         Height = 26
         Top = 24
-        Width = 247
+        Width = 282
         EditLabel.Height = 17
-        EditLabel.Width = 247
+        EditLabel.Width = 282
         EditLabel.Caption = 'Title'
         EditLabel.ParentColor = False
         TabOrder = 0
@@ -216,7 +199,7 @@ object Form1: TForm1
       object editTag: TLabeledEdit
         Left = 20
         Height = 26
-        Top = 80
+        Top = 117
         Width = 180
         EditLabel.Height = 17
         EditLabel.Width = 180
@@ -230,7 +213,7 @@ object Form1: TForm1
         Left = 207
         Height = 25
         Hint = 'Apply tag to selected item in list.'
-        Top = 81
+        Top = 118
         Width = 56
         Caption = 'Apply'
         OnClick = btnApplyClick
@@ -242,7 +225,7 @@ object Form1: TForm1
         Left = 207
         Height = 21
         Hint = 'Apply Tag to images added to the list.'
-        Top = 59
+        Top = 96
         Width = 48
         Caption = 'auto'
         ParentShowHint = False
@@ -250,10 +233,10 @@ object Form1: TForm1
         TabOrder = 3
       end
       object btnAdd: TButton
-        Left = 16
+        Left = 24
         Height = 25
         Hint = 'Add the current image.'
-        Top = 352
+        Top = 378
         Width = 56
         Anchors = [akRight, akBottom]
         Caption = '&Add'
@@ -263,10 +246,10 @@ object Form1: TForm1
         TabOrder = 5
       end
       object btnShow: TButton
-        Left = 120
+        Left = 128
         Height = 25
         Hint = 'Show selected (F7)'
-        Top = 352
+        Top = 378
         Width = 40
         Anchors = [akRight, akBottom]
         Caption = 'Sho&w'
@@ -276,10 +259,10 @@ object Form1: TForm1
         TabOrder = 7
       end
       object btnShowNext: TButton
-        Left = 160
+        Left = 168
         Height = 25
         Hint = 'Show next (F8)'
-        Top = 352
+        Top = 378
         Width = 24
         Anchors = [akRight, akBottom]
         Caption = '>'
@@ -289,10 +272,10 @@ object Form1: TForm1
         TabOrder = 8
       end
       object btnShowPrev: TButton
-        Left = 96
+        Left = 104
         Height = 25
         Hint = 'Show previous (F6)'
-        Top = 352
+        Top = 378
         Width = 24
         Anchors = [akRight, akBottom]
         Caption = '<'
@@ -302,10 +285,10 @@ object Form1: TForm1
         TabOrder = 6
       end
       object btnDown: TButton
-        Left = 207
+        Left = 215
         Height = 25
         Hint = 'Move Down (Ctrl+DownArrow)'
-        Top = 384
+        Top = 410
         Width = 56
         Anchors = [akRight, akBottom]
         Caption = 'Down'
@@ -315,10 +298,10 @@ object Form1: TForm1
         TabOrder = 10
       end
       object btnUp: TButton
-        Left = 207
+        Left = 215
         Height = 25
         Hint = 'Move Up Move Down (Ctrl+UpArrow)'
-        Top = 352
+        Top = 378
         Width = 56
         Anchors = [akRight, akBottom]
         Caption = 'Up'
@@ -326,6 +309,31 @@ object Form1: TForm1
         ParentShowHint = False
         ShowHint = True
         TabOrder = 9
+      end
+      object SpinEdit1: TSpinEdit
+        Left = 88
+        Height = 26
+        Hint = 'Play speed in milliseconds'
+        Top = 63
+        Width = 77
+        Increment = 100
+        MaxValue = 10000
+        MinValue = 100
+        OnChange = SpinEdit1Change
+        OnEnter = SpinEdit1Enter
+        OnExit = SpinEdit1Exit
+        ParentShowHint = False
+        ShowHint = True
+        TabOrder = 12
+        Value = 1000
+      end
+      object Label1: TLabel
+        Left = 20
+        Height = 17
+        Top = 64
+        Width = 66
+        Caption = 'Speed (ms):'
+        ParentColor = False
       end
     end
   end

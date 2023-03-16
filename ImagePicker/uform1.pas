@@ -26,6 +26,7 @@ type
     ImageList1: TImageList;
     editTitle: TLabeledEdit;
     editTag: TLabeledEdit;
+    Label1: TLabel;
     ListBox1: TListBox;
     MainMenu1: TMainMenu;
     mnuTools: TMenuItem;
@@ -118,7 +119,7 @@ uses
   uApp, uAppFuncs, uImageInfo, uImagesList, LCLType, StrUtils;
 
 const
-  P2_DEFAULT_WIDTH = 282;
+  P2_DEFAULT_WIDTH = 300;
   MIN_PLAY_MS = 100;
 
 var
