@@ -72,6 +72,7 @@ type
     procedure editTitleExit(Sender: TObject);
     procedure FormCreate(Sender: TObject);
     procedure FormKeyDown(Sender: TObject; var Key: Word; Shift: TShiftState);
+    procedure Image1Click(Sender: TObject);
     procedure Image1DblClick(Sender: TObject);
     procedure ListBox1DblClick(Sender: TObject);
     procedure mnuLoadClick(Sender: TObject);
@@ -600,6 +601,12 @@ begin
           Key := 0;
         end;
     end;
+end;
+
+procedure TForm1.Image1Click(Sender: TObject);
+begin
+  // Show full path to image in status bar.
+  StatusBar1.SimpleText := ImagesList.CurrentImage;
 end;
 
 procedure TForm1.GetArgs;
