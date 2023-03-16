@@ -249,7 +249,7 @@ object Form1: TForm1
       object btnShow: TButton
         Left = 128
         Height = 25
-        Hint = 'Show selected (F7)'
+        Hint = 'Show selected (F6)'
         Top = 378
         Width = 40
         Anchors = [akRight, akBottom]
@@ -275,7 +275,7 @@ object Form1: TForm1
       object btnShowPrev: TButton
         Left = 104
         Height = 25
-        Hint = 'Show previous (F6)'
+        Hint = 'Show previous (F7)'
         Top = 378
         Width = 24
         Anchors = [akRight, akBottom]

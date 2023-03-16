@@ -565,13 +565,13 @@ begin
 
       VK_F6:
         begin
-          SelectShowPrev;
+          ShowSelectedImage;
           Key := 0;
         end;
 
       VK_F7:
         begin
-          ShowSelectedImage;
+          SelectShowPrev;
           Key := 0;
         end;
 

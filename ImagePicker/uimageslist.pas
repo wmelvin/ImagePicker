@@ -151,6 +151,7 @@ begin
   FFileList.Clear;
   FFileList.Sorted := True;
   FFileList.Duplicates := dupIgnore;
+  FFileList.CaseSensitive := False;
   FListIndex := -1;
 
   isDir := FileGetAttr(FileName) AND faDirectory = faDirectory;
