@@ -783,7 +783,8 @@ begin
 
       if 0 < paths_list.Count then
       begin
-        LoadImagesList(paths_list[0]);
+        // LoadImagesList(paths_list[0]);
+        LoadImagesList(paths_list[paths_list.Count - 1]);
 
         editTitle.Text := title;
         ListBox1.Clear;
