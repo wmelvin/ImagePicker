@@ -557,6 +557,12 @@ begin
           Key := 0;
         end;
 
+      VK_SPACE: if not InEdit then
+        begin
+          PlayStop;
+          Key := 0;
+        end;
+
       VK_F6:
         begin
           SelectShowPrev;
@@ -783,7 +789,6 @@ begin
 
       if 0 < paths_list.Count then
       begin
-        // LoadImagesList(paths_list[0]);
         LoadImagesList(paths_list[paths_list.Count - 1]);
 
         editTitle.Text := title;
