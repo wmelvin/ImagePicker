@@ -70,6 +70,7 @@ type
     procedure editTagExit(Sender: TObject);
     procedure editTitleEnter(Sender: TObject);
     procedure editTitleExit(Sender: TObject);
+    procedure FormClose(Sender: TObject; var CloseAction: TCloseAction);
     procedure FormCreate(Sender: TObject);
     procedure FormKeyDown(Sender: TObject; var Key: Word; Shift: TShiftState);
     procedure Image1Click(Sender: TObject);
@@ -117,13 +118,20 @@ implementation
 {$R *.lfm}
 
 uses
-  uApp, uAppFuncs, uImageInfo, uImagesList, LCLType, StrUtils;
+  uApp,
+  uAppFuncs,
+  uAppOptions,
+  uImageInfo,
+  uImagesList,
+  LCLType,
+  StrUtils;
 
 const
   P2_DEFAULT_WIDTH = 300;
   MIN_PLAY_MS = 100;
 
 var
+  AppOptions: TAppOptions;
   ImagesList: TImagesList;
 
 { TForm1 }
@@ -226,8 +234,11 @@ procedure TForm1.mnuOptionsClick(Sender: TObject);
 var
   s: String;
 begin
-  s := AsPath(GetAppConfigDir(False)) + 'ImagePicker.opt';
+  // s := AsPath(GetAppConfigDir(False)) + 'ImagePicker.opt';
+  s := AppOptions.OptFileName;
+
   MessageDlg('', s, mtInformation, [mbOk],0);
+
   // TODO: Use the file to store options, such as default and last directory
   // for open and save dialogs. Load options on startup.
 end;
@@ -447,6 +458,11 @@ begin
   InEdit := False;
 end;
 
+procedure TForm1.FormClose(Sender: TObject; var CloseAction: TCloseAction);
+begin
+  AppOptions.Save;
+end;
+
 procedure TForm1.btnFirstClick(Sender: TObject);
 begin
   ImageFirst;
@@ -511,6 +527,8 @@ begin
   Form1.Caption := APP_TITLE;
   InEdit := False;
   ImagesList := TImagesList.Create;
+  AppOptions := TAppOptions.Create;
+  AppOptions.Load;
   Panel1.Caption := 'No images.';
   StatusBar1.SimpleText := 'No images.';
   GetArgs;

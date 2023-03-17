@@ -9,6 +9,7 @@ object Form1: TForm1
   ClientWidth = 972
   KeyPreview = True
   Menu = MainMenu1
+  OnClose = FormClose
   OnCreate = FormCreate
   OnKeyDown = FormKeyDown
   LCLVersion = '2.2.6.0'
