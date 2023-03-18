@@ -943,6 +943,8 @@ var
   stem: String;
   seq: String;
   t: String;
+  do_replace: Boolean = False;
+  mr: Integer;
 begin
   if ListBox1.Count = 0 then
     begin
@@ -987,7 +989,22 @@ begin
 
       dst := AsPath(dst_dir) + dst;
 
-      ok := CopyFile(src, dst);
+      if FileExists(dst) and (not do_replace) then
+        begin
+          mr := MessageDlg(
+            'Replace existing file?',
+            dst + ' already exists. Replace?',
+            mtConfirmation, [mbYes, mbYesToAll, mbNo, mbCancel],
+            0);
+          if mr = mrYesToAll then
+            do_replace := True
+          else if mr = mrNo then
+            continue
+          else if mr = mrCancel then
+            Exit;
+        end;
+
+      ok := CopyFile(src, dst, True);
       if not ok then
         begin
           MessageDlg('ERROR', 'Copy failed: ' + dst, mtError, [mbOk],0);
