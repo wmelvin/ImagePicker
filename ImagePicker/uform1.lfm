@@ -367,6 +367,10 @@ object Form1: TForm1
         Caption = 'Options ...'
         OnClick = mnuOptionsClick
       end
+      object mnuCopy: TMenuItem
+        Caption = 'Copy files ...'
+        OnClick = mnuCopyClick
+      end
     end
   end
   object ImageList1: TImageList

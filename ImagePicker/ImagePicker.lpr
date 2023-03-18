@@ -21,7 +21,7 @@ begin
   Application.Scaled:=True;
   Application.Initialize;
   Application.CreateForm(TForm1, Form1);
-  Application.CreateForm(TForm2, Form2);
+  Application.CreateForm(TCopyFilesDlg, CopyFilesDlg);
   Application.Run;
 end.
 

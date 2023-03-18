@@ -29,6 +29,7 @@ type
     Label1: TLabel;
     ListBox1: TListBox;
     MainMenu1: TMainMenu;
+    mnuCopy: TMenuItem;
     mnuTools: TMenuItem;
     mnuOptions: TMenuItem;
     mnuLoad: TMenuItem;
@@ -76,6 +77,7 @@ type
     procedure Image1Click(Sender: TObject);
     procedure Image1DblClick(Sender: TObject);
     procedure ListBox1DblClick(Sender: TObject);
+    procedure mnuCopyClick(Sender: TObject);
     procedure mnuLoadClick(Sender: TObject);
     procedure mnuExitClick(Sender: TObject);
     procedure mnuOpenClick(Sender: TObject);
@@ -121,6 +123,7 @@ uses
   uApp,
   uAppFuncs,
   uAppOptions,
+  uCopyFilesDlg,
   uImageInfo,
   uImagesList,
   LCLType,
@@ -738,6 +741,16 @@ end;
 procedure TForm1.ListBox1DblClick(Sender: TObject);
 begin
   ShowSelectedImage;
+end;
+
+procedure TForm1.mnuCopyClick(Sender: TObject);
+var
+  mr: TModalResult;
+begin
+  mr := CopyFilesDlg.ShowModal;
+  if mr = mrOk then
+    // TODO: Actually copy files...
+    StatusBar1.SimpleText := 'OK';
 end;
 
 procedure TForm1.LoadFromSavedFile;

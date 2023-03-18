@@ -1,8 +1,72 @@
-object Form2: TForm2
-  Left = 343
-  Height = 240
-  Top = 142
-  Width = 320
-  Caption = 'Form2'
+object CopyFilesDlg: TCopyFilesDlg
+  Left = 500
+  Height = 266
+  Top = 246
+  Width = 776
+  BorderStyle = bsDialog
+  Caption = 'Copy Files'
+  ClientHeight = 266
+  ClientWidth = 776
   LCLVersion = '2.2.6.0'
+  object btnOK: TButton
+    Left = 24
+    Height = 25
+    Top = 198
+    Width = 75
+    Caption = '&OK'
+    ModalResult = 1
+    TabOrder = 0
+  end
+  object btnCancel: TButton
+    Left = 112
+    Height = 25
+    Top = 198
+    Width = 75
+    Cancel = True
+    Caption = '&Cancel'
+    ModalResult = 2
+    TabOrder = 1
+  end
+  object editFolder: TLabeledEdit
+    Left = 24
+    Height = 26
+    Top = 37
+    Width = 600
+    EditLabel.Height = 17
+    EditLabel.Width = 600
+    EditLabel.Caption = 'Save in Folder'
+    EditLabel.ParentColor = False
+    TabOrder = 2
+    TextHint = '(Folder)'
+  end
+  object btnBrowse: TSpeedButton
+    Left = 632
+    Height = 22
+    Hint = 'Browse to select folder.'
+    Top = 41
+    Width = 23
+    Caption = '...'
+    ShowHint = True
+    ParentShowHint = False
+  end
+  object chkNewNames: TCheckBox
+    Left = 24
+    Height = 21
+    Top = 96
+    Width = 335
+    Caption = 'Give files new names based on Title, sequence, and Tag.'
+    Checked = True
+    State = cbChecked
+    TabOrder = 3
+  end
+  object chkSubDir: TCheckBox
+    Left = 24
+    Height = 21
+    Top = 140
+    Width = 500
+    Caption = 'Copy files to a new sub-folder of ''Save in Folder'' named per the current date and time.'
+    Checked = True
+    State = cbChecked
+    TabOrder = 4
+  end
 end

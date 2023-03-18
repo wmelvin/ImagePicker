@@ -5,10 +5,20 @@ unit uCopyFilesDlg;
 interface
 
 uses
-  Classes, SysUtils, Forms, Controls, Graphics, Dialogs;
+  Classes, SysUtils, Forms, Controls, Graphics, Dialogs, StdCtrls, ExtCtrls,
+  Buttons;
 
 type
-  TForm2 = class(TForm)
+
+  { TCopyFilesDlg }
+
+  TCopyFilesDlg = class(TForm)
+    btnOK: TButton;
+    btnCancel: TButton;
+    chkNewNames: TCheckBox;
+    chkSubDir: TCheckBox;
+    editFolder: TLabeledEdit;
+    btnBrowse: TSpeedButton;
   private
 
   public
@@ -16,7 +26,7 @@ type
   end;
 
 var
-  Form2: TForm2;
+  CopyFilesDlg: TCopyFilesDlg;
 
 implementation
 

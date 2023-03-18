@@ -71,7 +71,8 @@
       <Unit>
         <Filename Value="ucopyfilesdlg.pas"/>
         <IsPartOfProject Value="True"/>
-        <ComponentName Value="Form2"/>
+        <ComponentName Value="CopyFilesDlg"/>
+        <HasResources Value="True"/>
         <ResourceBaseClass Value="Form"/>
         <UnitName Value="uCopyFilesDlg"/>
       </Unit>
