@@ -94,8 +94,6 @@ begin
 end;
 
 function TImagesList.SetCurrentIndex(Index: Integer): Boolean;
-var
-  i: Integer;
 begin
   SetCurrentIndex := False;
   if FFileList.Count = 0 then Exit;

@@ -108,6 +108,7 @@ type
     procedure SaveList(FileName: String);
     procedure LoadImagesList(FileName: String);
     procedure LoadFromSavedFile;
+    procedure CopyFilesInList(DestDir: String; DoNewNames: Boolean; DoSubDir: Boolean);
   public
 
   end;
@@ -126,6 +127,7 @@ uses
   uCopyFilesDlg,
   uImageInfo,
   uImagesList,
+  FileUtil,
   LCLType,
   StrUtils;
 
@@ -749,8 +751,8 @@ var
 begin
   mr := CopyFilesDlg.ShowModal;
   if mr = mrOk then
-    // TODO: Actually copy files...
-    StatusBar1.SimpleText := 'OK';
+    with CopyFilesDlg do
+        CopyFilesInList(editFolder.Text, chkNewNames.Checked, chkSubDir.Checked);
 end;
 
 procedure TForm1.LoadFromSavedFile;
@@ -927,6 +929,71 @@ begin
           break;
         end;
   end;
+end;
+
+procedure TForm1.CopyFilesInList(DestDir: String; DoNewNames: Boolean; DoSubDir: Boolean);
+var
+  ok: Boolean;
+  i: Integer;
+  item: TImageInfo;
+  dst_dir: String;
+  dst: String;
+  src: String;
+  ext: String;
+  stem: String;
+  seq: String;
+  t: String;
+begin
+  if ListBox1.Count = 0 then
+    begin
+      MessageDlg('Nothing to do', 'No images in list.', mtInformation, [mbOk],0);
+      Exit;
+    end;
+
+  if not DirectoryExists(DestDir) then
+    begin
+      MessageDlg('ERROR', 'Folder not found: ' + DestDir, mtError, [mbOk],0);
+      Exit;
+    end;
+
+  dst_dir := DestDir;
+  if DoSubDir then
+    begin
+      dst_dir := AsPath(dst_dir) + FormatDateTime('yyyymmdd_hhnnss', Now);
+      MkDir(dst_dir);
+    end;
+
+  for i := 0 to ListBox1.Items.Count - 1 do
+    begin
+      item := TImageInfo(ListBox1.Items.Objects[i]);
+      src := item.FullName;
+      stem := ChangeFileExt(item.GetFileName, '');
+      ext := ExtractFileExt(item.GetFileName);
+      if item.HasTag then
+        t := '-' + item.Tag
+      else
+        t := '';
+
+      if DoNewNames then
+        begin
+          seq := '-' + format('%.3d', [i + 1]);
+          if 0 < Length(editTitle.Text) then
+            dst := ForFileName(editTitle.Text) + seq + t + ext
+          else
+            dst := stem + t + ext;
+        end
+      else
+        dst := stem + t + ext;
+
+      dst := AsPath(dst_dir) + dst;
+
+      ok := CopyFile(src, dst);
+      if not ok then
+        begin
+          MessageDlg('ERROR', 'Copy failed: ' + dst, mtError, [mbOk],0);
+          Exit;
+        end;
+    end;
 end;
 
 end.
