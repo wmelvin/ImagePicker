@@ -19,6 +19,8 @@ type
     chkSubDir: TCheckBox;
     editFolder: TLabeledEdit;
     btnBrowse: TSpeedButton;
+    dlgSelectDir: TSelectDirectoryDialog;
+    procedure btnBrowseClick(Sender: TObject);
   private
 
   public
@@ -31,6 +33,14 @@ var
 implementation
 
 {$R *.lfm}
+
+{ TCopyFilesDlg }
+
+procedure TCopyFilesDlg.btnBrowseClick(Sender: TObject);
+begin
+  if dlgSelectDir.Execute then
+    editFolder.Text := dlgSelectDir.FileName;
+end;
 
 end.
 

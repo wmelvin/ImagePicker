@@ -2,11 +2,11 @@ object CopyFilesDlg: TCopyFilesDlg
   Left = 500
   Height = 266
   Top = 246
-  Width = 776
+  Width = 673
   BorderStyle = bsDialog
   Caption = 'Copy Files'
   ClientHeight = 266
-  ClientWidth = 776
+  ClientWidth = 673
   LCLVersion = '2.2.6.0'
   object btnOK: TButton
     Left = 24
@@ -18,7 +18,7 @@ object CopyFilesDlg: TCopyFilesDlg
     TabOrder = 0
   end
   object btnCancel: TButton
-    Left = 112
+    Left = 120
     Height = 25
     Top = 198
     Width = 75
@@ -34,18 +34,19 @@ object CopyFilesDlg: TCopyFilesDlg
     Width = 600
     EditLabel.Height = 17
     EditLabel.Width = 600
-    EditLabel.Caption = 'Save in Folder'
+    EditLabel.Caption = 'Copy to Folder'
     EditLabel.ParentColor = False
     TabOrder = 2
     TextHint = '(Folder)'
   end
   object btnBrowse: TSpeedButton
-    Left = 632
-    Height = 22
+    Left = 624
+    Height = 26
     Hint = 'Browse to select folder.'
-    Top = 41
-    Width = 23
+    Top = 37
+    Width = 26
     Caption = '...'
+    OnClick = btnBrowseClick
     ShowHint = True
     ParentShowHint = False
   end
@@ -63,10 +64,14 @@ object CopyFilesDlg: TCopyFilesDlg
     Left = 24
     Height = 21
     Top = 140
-    Width = 500
-    Caption = 'Copy files to a new sub-folder of ''Save in Folder'' named per the current date and time.'
+    Width = 399
+    Caption = 'Copy files to a new sub-folder named per the current date and time.'
     Checked = True
     State = cbChecked
     TabOrder = 4
+  end
+  object dlgSelectDir: TSelectDirectoryDialog
+    Left = 544
+    Top = 64
   end
 end
