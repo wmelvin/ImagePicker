@@ -7,6 +7,7 @@ object CopyFilesDlg: TCopyFilesDlg
   Caption = 'Copy Files'
   ClientHeight = 266
   ClientWidth = 673
+  OnShow = FormShow
   LCLVersion = '2.2.6.0'
   object btnOK: TButton
     Left = 24

@@ -16,15 +16,21 @@ type
       procedure SetLastOpenDir(DirName: String);
       function GetLastSaveDir: String;
       procedure SetLastSaveDir(DirName: String);
+      function GetLastCopyDir: String;
+      procedure SetLastCopyDir(DirName: String);
     public
       constructor Create;
       function OptFileName: String;
-      procedure Load;
-      procedure Save;
+      procedure LoadOptions;
+      procedure SaveOptions;
     published
       property LastOpenDir: String read GetLastOpenDir write SetLastOpenDir;
       property LastSaveDir: String read GetLastSaveDir write SetLastSaveDir;
+      property LastCopyDir: String read GetLastCopyDir write SetLastCopyDir;
   end;
+
+var
+  AppOptions: TAppOptions;
 
 implementation
 
@@ -42,7 +48,7 @@ begin
   OptFileName := AsPath(GetAppConfigDir(False)) + 'ImagePicker.opt';
 end;
 
-procedure TAppOptions.Load;
+procedure TAppOptions.LoadOptions;
 begin
   if FileExists(OptFileName) then
   begin
@@ -50,7 +56,7 @@ begin
   end;
 end;
 
-procedure TAppOptions.Save;
+procedure TAppOptions.SaveOptions;
 var
   fn: String;
   dn: String;
@@ -85,6 +91,17 @@ procedure TAppOptions.SetLastSaveDir(DirName: String);
 begin
   FChanged := True;
   FOptList.Values['LastSaveDir'] := DirName;
+end;
+
+function TAppOptions.GetLastCopyDir: String;
+begin
+  GetLastCopyDir := FOptList.Values['LastCopyDir'];
+end;
+
+procedure TAppOptions.SetLastCopyDir(DirName: String);
+begin
+  FChanged := True;
+  FOptList.Values['LastCopyDir'] := DirName;
 end;
 
 end.

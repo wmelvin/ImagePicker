@@ -136,7 +136,6 @@ const
   MIN_PLAY_MS = 100;
 
 var
-  AppOptions: TAppOptions;
   ImagesList: TImagesList;
 
 { TForm1 }
@@ -242,7 +241,7 @@ begin
     begin
       LoadImagesList(OpenDialog1.FileName);
       AppOptions.LastOpenDir := ExtractFileDir(OpenDialog1.FileName);
-      AppOptions.Save;
+      AppOptions.SaveOptions;
     end;
 end;
 
@@ -373,7 +372,7 @@ begin
     begin
       SaveList(SaveDialog1.FileName);
       AppOptions.LastSaveDir := ExtractFileDir(SaveDialog1.FileName);
-      AppOptions.Save;
+      AppOptions.SaveOptions;
     end;
 end;
 
@@ -484,7 +483,7 @@ end;
 
 procedure TForm1.FormClose(Sender: TObject; var CloseAction: TCloseAction);
 begin
-  AppOptions.Save;
+  AppOptions.SaveOptions;
 end;
 
 procedure TForm1.btnFirstClick(Sender: TObject);
@@ -552,7 +551,7 @@ begin
   InEdit := False;
   ImagesList := TImagesList.Create;
   AppOptions := TAppOptions.Create;
-  AppOptions.Load;
+  AppOptions.LoadOptions;
   Panel1.Caption := 'No images.';
   StatusBar1.SimpleText := 'No images.';
   GetArgs;
@@ -946,15 +945,17 @@ var
   do_replace: Boolean = False;
   mr: Integer;
 begin
-  if ListBox1.Count = 0 then
-    begin
-      MessageDlg('Nothing to do', 'No images in list.', mtInformation, [mbOk],0);
-      Exit;
-    end;
-
   if not DirectoryExists(DestDir) then
     begin
       MessageDlg('ERROR', 'Folder not found: ' + DestDir, mtError, [mbOk],0);
+      Exit;
+    end;
+
+  AppOptions.LastCopyDir := DestDir;
+
+  if ListBox1.Count = 0 then
+    begin
+      MessageDlg('Nothing to do', 'No images in list.', mtInformation, [mbOk],0);
       Exit;
     end;
 
