@@ -68,6 +68,13 @@
         <IsPartOfProject Value="True"/>
         <UnitName Value="uAppOptions"/>
       </Unit>
+      <Unit>
+        <Filename Value="ucopyfilesdlg.pas"/>
+        <IsPartOfProject Value="True"/>
+        <ComponentName Value="Form2"/>
+        <ResourceBaseClass Value="Form"/>
+        <UnitName Value="uCopyFilesDlg"/>
+      </Unit>
     </Units>
   </ProjectOptions>
   <CompilerOptions>
