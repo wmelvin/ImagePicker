@@ -352,22 +352,24 @@ end;
 
 procedure TForm1.mnuSaveClick(Sender: TObject);
 var
-  fn: String;
+  dirname: String;
+  filename: String;
   title: String;
+  dt: String;
 begin
   title := StringReplace(editTitle.Text, ' ', '_', [rfReplaceAll]);
   if 0 < Length(title) then
     title := title + '-';
 
-  fn := AppOptions.LastSaveDir;
-  if (Length(fn) = 0) or (not DirectoryExists(fn)) then
-    fn := GetCurrentDir;
+  dirname := AppOptions.LastSaveDir;
+  if (Length(dirname) = 0) or (not DirectoryExists(dirname)) then
+    dirname := GetCurrentDir;
 
-  fn := AsPath(fn) + 'ImageList-' + title
-    + FormatDateTime('yyyymmdd_hhnnss', Now) + '.txt';
+  dt := FormatDateTime('yyyymmdd_hhnnss', Now);
+  filename := 'ImageList-' + title + dt + '.txt';
 
-  SaveDialog1.FileName := fn;
-
+  SaveDialog1.InitialDir:= dirname;
+  SaveDialog1.FileName := filename;
   if SaveDialog1.Execute then
     begin
       SaveList(SaveDialog1.FileName);
