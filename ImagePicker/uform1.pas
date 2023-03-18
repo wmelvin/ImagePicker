@@ -223,11 +223,22 @@ begin
 end;
 
 procedure TForm1.mnuOpenClick(Sender: TObject);
+var
+  dirname: String;
 begin
+  dirname := AppOptions.LastOpenDir;
+  if (0 < Length(dirname)) and DirectoryExists(dirname) then
+    OpenDialog1.InitialDir := dirname;
+
   OpenDialog1.Filter := 'Image files|*.jpg;*.png;*.jpeg;*.bmp;*.gif;'
     + '*.JPG;*.PNG;*.JPEG;*.BMP;*.GIF';
+
   if OpenDialog1.Execute then
-    LoadImagesList(OpenDialog1.FileName);
+    begin
+      LoadImagesList(OpenDialog1.FileName);
+      AppOptions.LastOpenDir := ExtractFileDir(OpenDialog1.FileName);
+      AppOptions.Save;
+    end;
 end;
 
 procedure TForm1.mnuOptionsClick(Sender: TObject);
@@ -344,13 +355,21 @@ begin
   if 0 < Length(title) then
     title := title + '-';
 
-  fn := AsPath(GetCurrentDir) + 'ImageList-' + title
+  fn := AppOptions.LastSaveDir;
+  if (Length(fn) = 0) or (not DirectoryExists(fn)) then
+    fn := GetCurrentDir;
+
+  fn := AsPath(fn) + 'ImageList-' + title
     + FormatDateTime('yyyymmdd_hhnnss', Now) + '.txt';
 
   SaveDialog1.FileName := fn;
 
   if SaveDialog1.Execute then
-    SaveList(SaveDialog1.FileName);
+    begin
+      SaveList(SaveDialog1.FileName);
+      AppOptions.LastSaveDir := ExtractFileDir(SaveDialog1.FileName);
+      AppOptions.Save;
+    end;
 end;
 
 procedure TForm1.SpinEdit1Change(Sender: TObject);
