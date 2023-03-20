@@ -109,6 +109,7 @@ type
     procedure LoadImagesList(FileName: String);
     procedure LoadFromSavedFile;
     procedure CopyFilesInList(DestDir: String; DoNewNames: Boolean; DoSubDir: Boolean);
+    procedure SaveAppOptions;
   public
 
   end;
@@ -242,26 +243,29 @@ begin
     begin
       LoadImagesList(OpenDialog1.FileName);
       AppOptions.LastOpenDir := ExtractFileDir(OpenDialog1.FileName);
-      AppOptions.SaveOptions;
+      SaveAppOptions;
     end;
 end;
 
 procedure TForm1.mnuOptionsClick(Sender: TObject);
 var
-  fn: String;
+  filename: String;
   mr: Integer;
 begin
-  fn := AppOptions.OptFileName;
-  mr := MessageDlg(
-    'Open with Associated Application?',
-    fn, mtConfirmation, [mbYes, mbNo], 0);
-  if mr = mrYes then
-    // Open the document (text file) using default associated application.
-    OpenDocument(fn);
+  filename := AppOptions.OptFileName;
 
-  // TODO: (maybe) Create a form for editing application options. For this
-  // application, that may not be necessary. For a commercial product,
-  // you'd want a form with input validation.
+  mr := MessageDlg(
+    'Open Folder?',
+    'Open the folder containing' + #13#10 + filename,
+    mtConfirmation, [mbYes, mbNo], 0);
+
+  if mr = mrYes then
+    // Open the folder using the default associated application.
+    OpenDocument(ExtractFileDir(filename));
+
+  { TODO: (maybe) Create a form for editing application options. For this
+    application, that may not be necessary. For a commercial product,
+    you'd want a form with input validation. }
 end;
 
 procedure TForm1.SaveList(FileName: String);
@@ -380,7 +384,7 @@ begin
     begin
       SaveList(SaveDialog1.FileName);
       AppOptions.LastSaveDir := ExtractFileDir(SaveDialog1.FileName);
-      AppOptions.SaveOptions;
+      SaveAppOptions;
     end;
 end;
 
@@ -971,7 +975,7 @@ begin
   if DoSubDir then
     begin
       dst_dir := AsPath(dst_dir) + FormatDateTime('yyyymmdd_hhnnss', Now);
-      MkDir(dst_dir);
+      CreateDir(dst_dir);
     end;
 
   for i := 0 to ListBox1.Items.Count - 1 do
@@ -1020,6 +1024,12 @@ begin
           Exit;
         end;
     end;
+end;
+
+procedure TForm1.SaveAppOptions;
+begin
+  if not AppOptions.SaveOptions then
+    MessageDlg('ERROR', AppOptions.LastError, mtError, [mbOk], 0);
 end;
 
 end.

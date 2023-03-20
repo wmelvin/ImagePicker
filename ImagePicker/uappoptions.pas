@@ -12,6 +12,7 @@ type
     private
       FOptList: TStringList;
       FChanged: Boolean;
+      FLastError: String;
       function GetLastOpenDir: String;
       procedure SetLastOpenDir(DirName: String);
       function GetLastSaveDir: String;
@@ -22,11 +23,12 @@ type
       constructor Create;
       function OptFileName: String;
       procedure LoadOptions;
-      procedure SaveOptions;
+      function SaveOptions: Boolean;
     published
       property LastOpenDir: String read GetLastOpenDir write SetLastOpenDir;
       property LastSaveDir: String read GetLastSaveDir write SetLastSaveDir;
       property LastCopyDir: String read GetLastCopyDir write SetLastCopyDir;
+      property LastError: String read FLastError;
   end;
 
 var
@@ -41,6 +43,7 @@ constructor TAppOptions.Create;
 begin
   FOptList := TStringList.Create;
   FChanged := False;
+  FLastError := '';
 end;
 
 function TAppOptions.OptFileName: String;
@@ -56,18 +59,26 @@ begin
   end;
 end;
 
-procedure TAppOptions.SaveOptions;
+function TAppOptions.SaveOptions: Boolean;
 var
-  fn: String;
-  dn: String;
+  filename: String;
+  dirname: String;
 begin
+  SaveOptions := True;
   if not FChanged then
     Exit;
-  fn := OptFileName;
-  dn := ExtractFileDir(fn);
-  if not DirectoryExists(dn) then
-     MkDir(dn);
-  FOptList.SaveToFile(fn);
+  filename := OptFileName;
+  dirname := ExtractFileDir(filename);
+
+  if not DirectoryExists(dirname) then
+    if not ForceDirectories(dirname) then
+      begin
+        FLastError := 'Cannot create directory "' + dirname + '"';
+        SaveOptions := False;
+        Exit;
+      end;
+
+  FOptList.SaveToFile(filename);
   FChanged := False;
 end;
 
