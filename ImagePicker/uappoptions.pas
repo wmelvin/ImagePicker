@@ -45,7 +45,7 @@ end;
 
 function TAppOptions.OptFileName: String;
 begin
-  OptFileName := AsPath(GetAppConfigDir(False)) + 'ImagePicker.opt';
+  OptFileName := AsPath(GetAppConfigDir(False)) + 'ImagePicker-Options.txt';
 end;
 
 procedure TAppOptions.LoadOptions;
