@@ -128,6 +128,7 @@ uses
   uImageInfo,
   uImagesList,
   FileUtil,
+  LCLIntf,
   LCLType,
   StrUtils;
 
@@ -247,15 +248,20 @@ end;
 
 procedure TForm1.mnuOptionsClick(Sender: TObject);
 var
-  s: String;
+  fn: String;
+  mr: Integer;
 begin
-  // s := AsPath(GetAppConfigDir(False)) + 'ImagePicker.opt';
-  s := AppOptions.OptFileName;
+  fn := AppOptions.OptFileName;
+  mr := MessageDlg(
+    'Open with Associated Application?',
+    fn, mtConfirmation, [mbYes, mbNo], 0);
+  if mr = mrYes then
+    // Open the document (text file) using default associated application.
+    OpenDocument(fn);
 
-  MessageDlg('', s, mtInformation, [mbOk],0);
-
-  // TODO: Use the file to store options, such as default and last directory
-  // for open and save dialogs. Load options on startup.
+  // TODO: (maybe) Create a form for editing application options. For this
+  // application, that may not be necessary. For a commercial product,
+  // you'd want a form with input validation.
 end;
 
 procedure TForm1.SaveList(FileName: String);
