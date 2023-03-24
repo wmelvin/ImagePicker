@@ -21,9 +21,8 @@ type
       function CurrentImage: String;
       procedure GoFirst;
       procedure GoPrevious;
-      procedure GoNext;
+      function GoNext: Boolean;
       procedure GoLast;
-      procedure PlayNext;
       procedure Load(FileName: String);
       function SetCurrentImage(FileName: String): Boolean;
       function SetCurrentIndex(Index: Integer): Boolean;
@@ -117,26 +116,23 @@ begin
       FListIndex := 0;
 end;
 
-procedure TImagesList.GoNext;
+function TImagesList.GoNext: Boolean;
 begin
+  GoNext := True;
   inc(FListIndex);
   if FListIndex >= FFileList.Count then
     if FDoLoop then
       FListIndex := 0
     else
-      FListIndex := FFileList.Count - 1;
+      begin
+        FListIndex := FFileList.Count - 1;
+        GoNext := False;
+      end;
 end;
 
 procedure TImagesList.GoLast;
 begin
   FListIndex := FFileList.Count - 1;
-end;
-
-procedure TImagesList.PlayNext;
-begin
-  inc(FListIndex);
-  if FListIndex >= FFileList.Count then
-     FListIndex := 0;  // Always loop
 end;
 
 procedure TImagesList.Load(FileName: String);

@@ -337,6 +337,15 @@ object Form1: TForm1
         Caption = 'Speed (ms):'
         ParentColor = False
       end
+      object chkLoop: TCheckBox
+        Left = 178
+        Height = 21
+        Top = 64
+        Width = 50
+        Caption = 'Loop'
+        OnChange = chkLoopChange
+        TabOrder = 13
+      end
     end
   end
   object MainMenu1: TMainMenu

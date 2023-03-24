@@ -21,6 +21,7 @@ type
     btnShowPrev: TButton;
     btnDown: TButton;
     btnUp: TButton;
+    chkLoop: TCheckBox;
     chkAutoTag: TCheckBox;
     Image1: TImage;
     ImageList1: TImageList;
@@ -67,6 +68,7 @@ type
     procedure btnToggleClick(Sender: TObject);
     procedure btnRemoveClick(Sender: TObject);
     procedure btnUpClick(Sender: TObject);
+    procedure chkLoopChange(Sender: TObject);
     procedure editTagEnter(Sender: TObject);
     procedure editTagExit(Sender: TObject);
     procedure editTitleEnter(Sender: TObject);
@@ -179,7 +181,9 @@ end;
 
 procedure TForm1.ImageNext;
 begin
-  ImagesList.GoNext;
+  if not ImagesList.GoNext then
+    if Timer1.Enabled then
+      PlayStop;
   LoadImage;
 end;
 
@@ -406,8 +410,7 @@ end;
 
 procedure TForm1.Timer1Timer(Sender: TObject);
 begin
-  ImagesList.PlayNext;
-  LoadImage;
+  ImageNext;
 end;
 
 procedure TForm1.TrackBar1MouseUp(Sender: TObject; Button: TMouseButton;
@@ -471,6 +474,11 @@ end;
 procedure TForm1.btnUpClick(Sender: TObject);
 begin
   MoveSelectedUp;
+end;
+
+procedure TForm1.chkLoopChange(Sender: TObject);
+begin
+  ImagesList.DoLoop := chkLoop.Checked;
 end;
 
 procedure TForm1.editTagEnter(Sender: TObject);
@@ -564,6 +572,7 @@ begin
   ImagesList := TImagesList.Create;
   AppOptions := TAppOptions.Create;
   AppOptions.LoadOptions;
+  ImagesList.DoLoop := chkLoop.Checked;
   Panel1.Caption := 'No images.';
   StatusBar1.SimpleText := 'No images.';
   GetArgs;
