@@ -19,6 +19,10 @@ type
       procedure SetLastSaveDir(DirName: String);
       function GetLastCopyDir: String;
       procedure SetLastCopyDir(DirName: String);
+      function GetDoLoop: Boolean;
+      procedure SetDoLoop(DoLoop: Boolean);
+      function GetSpeedMs: Integer;
+      procedure SetSpeedMs(SpeedMs: Integer);
     public
       constructor Create;
       function OptFileName: String;
@@ -28,6 +32,8 @@ type
       property LastOpenDir: String read GetLastOpenDir write SetLastOpenDir;
       property LastSaveDir: String read GetLastSaveDir write SetLastSaveDir;
       property LastCopyDir: String read GetLastCopyDir write SetLastCopyDir;
+      property DoLoop: Boolean read GetDoLoop write SetDoLoop;
+      property SpeedMs: Integer read GetSpeedMs write SetSpeedMs;
       property LastError: String read FLastError;
   end;
 
@@ -37,7 +43,7 @@ var
 implementation
 
 uses
-  uAppFuncs;
+  uApp, uAppFuncs;
 
 constructor TAppOptions.Create;
 begin
@@ -113,6 +119,41 @@ procedure TAppOptions.SetLastCopyDir(DirName: String);
 begin
   FChanged := True;
   FOptList.Values['LastCopyDir'] := DirName;
+end;
+
+function TAppOptions.GetDoLoop: Boolean;
+var
+  s: String;
+begin
+  s := FOptList.Values['DoLoop'];
+  GetDoLoop := (s = 'True');
+end;
+
+procedure TAppOptions.SetDoLoop(DoLoop: Boolean);
+begin
+  FChanged := True;
+  if DoLoop then
+    FOptList.Values['DoLoop'] := 'True'
+  else
+    FOptList.Values['DoLoop'] := 'False';
+end;
+
+function TAppOptions.GetSpeedMs: Integer;
+var
+  s: String;
+  i: Integer;
+begin
+  s := FOptList.Values['SpeedMs'];
+  i := StrToIntDef(s, DEFAULT_PLAY_MS);
+  if (i < MIN_PLAY_MS) or (MAX_PLAY_MS < i) then
+    i := DEFAULT_PLAY_MS;
+  GetSpeedMs := i;
+end;
+
+procedure TAppOptions.SetSpeedMs(SpeedMs: Integer);
+begin
+  FChanged := True;
+  FOptList.Values['SpeedMs'] := IntToStr(SpeedMs);
 end;
 
 end.

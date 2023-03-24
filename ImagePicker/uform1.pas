@@ -137,7 +137,6 @@ uses
 
 const
   P2_DEFAULT_WIDTH = 300;
-  MIN_PLAY_MS = 100;
 
 var
   ImagesList: TImagesList;
@@ -394,7 +393,15 @@ end;
 
 procedure TForm1.SpinEdit1Change(Sender: TObject);
 begin
-  if SpinEdit1.Value < MIN_PLAY_MS then SpinEdit1.Value := MIN_PLAY_MS;
+  if SpinEdit1.Value < MIN_PLAY_MS then
+    SpinEdit1.Value := MIN_PLAY_MS
+  else if MAX_PLAY_MS < SpinEdit1.Value then
+    SpinEdit1.Value := MAX_PLAY_MS;
+
+  AppOptions.SpeedMs := SpinEdit1.Value;
+  // To not slow things down, do not SaveAppOptions now.
+  // Setting will be saved on form close.
+
   Timer1.Interval := SpinEdit1.Value;
 end;
 
@@ -479,6 +486,8 @@ end;
 procedure TForm1.chkLoopChange(Sender: TObject);
 begin
   ImagesList.DoLoop := chkLoop.Checked;
+  AppOptions.DoLoop := chkLoop.Checked;
+  SaveAppOptions;
 end;
 
 procedure TForm1.editTagEnter(Sender: TObject);
@@ -572,7 +581,9 @@ begin
   ImagesList := TImagesList.Create;
   AppOptions := TAppOptions.Create;
   AppOptions.LoadOptions;
+  chkLoop.Checked := AppOptions.DoLoop;
   ImagesList.DoLoop := chkLoop.Checked;
+  SpinEdit1.Value := AppOptions.SpeedMs;
   Panel1.Caption := 'No images.';
   StatusBar1.SimpleText := 'No images.';
   GetArgs;
