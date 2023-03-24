@@ -169,7 +169,7 @@ object Form1: TForm1
         OnDblClick = ListBox1DblClick
         ParentShowHint = False
         ShowHint = True
-        TabOrder = 5
+        TabOrder = 6
         TopIndex = -1
       end
       object btnRemove: TButton
@@ -183,7 +183,7 @@ object Form1: TForm1
         OnClick = btnRemoveClick
         ParentShowHint = False
         ShowHint = True
-        TabOrder = 12
+        TabOrder = 13
       end
       object editTitle: TLabeledEdit
         Left = 8
@@ -207,7 +207,7 @@ object Form1: TForm1
         EditLabel.Width = 180
         EditLabel.Caption = 'Tag'
         EditLabel.ParentColor = False
-        TabOrder = 2
+        TabOrder = 3
         OnEnter = editTagEnter
         OnExit = editTagExit
       end
@@ -221,7 +221,7 @@ object Form1: TForm1
         OnClick = btnApplyClick
         ParentShowHint = False
         ShowHint = True
-        TabOrder = 3
+        TabOrder = 4
       end
       object chkAutoTag: TCheckBox
         Left = 207
@@ -232,7 +232,7 @@ object Form1: TForm1
         Caption = 'auto'
         ParentShowHint = False
         ShowHint = True
-        TabOrder = 4
+        TabOrder = 5
       end
       object btnAdd: TButton
         Left = 24
@@ -245,7 +245,7 @@ object Form1: TForm1
         OnClick = btnAddClick
         ParentShowHint = False
         ShowHint = True
-        TabOrder = 6
+        TabOrder = 7
       end
       object btnShow: TButton
         Left = 128
@@ -258,7 +258,7 @@ object Form1: TForm1
         OnClick = btnShowClick
         ParentShowHint = False
         ShowHint = True
-        TabOrder = 8
+        TabOrder = 9
       end
       object btnShowNext: TButton
         Left = 168
@@ -271,7 +271,7 @@ object Form1: TForm1
         OnClick = btnShowNextClick
         ParentShowHint = False
         ShowHint = True
-        TabOrder = 9
+        TabOrder = 10
       end
       object btnShowPrev: TButton
         Left = 104
@@ -284,7 +284,7 @@ object Form1: TForm1
         OnClick = btnShowPrevClick
         ParentShowHint = False
         ShowHint = True
-        TabOrder = 7
+        TabOrder = 8
       end
       object btnDown: TButton
         Left = 215
@@ -297,7 +297,7 @@ object Form1: TForm1
         OnClick = btnDownClick
         ParentShowHint = False
         ShowHint = True
-        TabOrder = 11
+        TabOrder = 12
       end
       object btnUp: TButton
         Left = 215
@@ -310,7 +310,7 @@ object Form1: TForm1
         OnClick = btnUpClick
         ParentShowHint = False
         ShowHint = True
-        TabOrder = 10
+        TabOrder = 11
       end
       object SpinEdit1: TSpinEdit
         Left = 88
@@ -344,7 +344,7 @@ object Form1: TForm1
         Width = 50
         Caption = 'Loop'
         OnChange = chkLoopChange
-        TabOrder = 13
+        TabOrder = 2
       end
     end
   end
