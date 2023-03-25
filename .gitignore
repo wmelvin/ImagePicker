@@ -37,8 +37,8 @@ lib/
 # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 # App-specific additions:
 
-# Default icon file.
-*.ico
+# # Default icon file.
+# *.ico
 
 # Compiled executables.
 ImagePicker/ImagePicker
