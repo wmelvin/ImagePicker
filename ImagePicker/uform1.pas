@@ -422,6 +422,11 @@ end;
 
 procedure TForm1.TrackBar1MouseUp(Sender: TObject; Button: TMouseButton;
   Shift: TShiftState; X, Y: Integer);
+{  Note: Using MouseUp instead of OnChange because OnChange fires for
+   every position change when dragging the marker, and would load the
+   image at each step, making it very slow to drag to a new position
+   in a large set of images.
+}
 var
   p: Integer;
 begin
