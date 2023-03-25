@@ -42,6 +42,7 @@ lib/
 
 # Compiled executables.
 ImagePicker/ImagePicker
+ImagePicker/ImagePicker.exe
 
 # Output files.
 ztest-*.txt
