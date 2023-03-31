@@ -8,12 +8,16 @@ uses
   Classes, SysUtils;
 
 type
+  TRecurseSetting = (none, yes, no);
+
   TImagesList = class
     private
       FFileList: TStringList;
       FListIndex: Integer;
       FDoLoop: Boolean;
+      FSubDirs: TRecurseSetting;
       function GetCount: Integer;
+      procedure ScanDirectory(const DirName: String);
     public
       constructor Create;
       function IncludeFile(FileName: String): Boolean;
@@ -35,7 +39,7 @@ type
 implementation
 
 uses
-  uAppFuncs;
+  uAppFuncs, Controls, Dialogs;
 
 constructor TImagesList.Create;
 begin
@@ -138,10 +142,9 @@ end;
 procedure TImagesList.Load(FileName: String);
 var
   dirpath: String;
-  fspec: String;
-  sr: TSearchRec;
   isDir: Boolean;
 begin
+  FSubDirs := none;
   FFileList.Clear;
   FFileList.Sorted := True;
   FFileList.Duplicates := dupIgnore;
@@ -155,19 +158,45 @@ begin
   else
     dirpath := ExtractFileDir(FileName);
 
-  dirpath := AsPath(dirpath);
+  ScanDirectory(dirpath);
+
+  // FFileList.SaveToFile('DEBUG-FileList.txt');
+end;
+
+procedure TImagesList.ScanDirectory(const DirName: String);
+var
+  dirpath: String;
+  fspec: String;
+  sr: TSearchRec;
+begin
+  dirpath := AsPath(DirName);
   fSpec := dirpath + '*';
   if FindFirst(fspec, faAnyfile, sr) = 0 then
   repeat
     if (sr.Name <> '.') and (sr.Name <> '..') then
     begin
-      if not (sr.Attr AND faDirectory = faDirectory) then
+      if sr.Attr AND faDirectory = faDirectory then
+        begin
+          if FSubDirs = none then
+            if MessageDlg(
+              'Sub-folders Found',
+              'Also scan sub-folders for image files?',
+              mtConfirmation, [mbYes, mbNo], 0
+            ) = mrYes then
+              FSubDirs := yes
+            else
+              FSubDirs := no;
+          if FSubDirs = yes then
+            ScanDirectory(dirpath + sr.Name)
+        end
+      else
         if IncludeFile(sr.Name) then
           FFileList.Append(dirpath + sr.Name);
     end;
   until FindNext(sr) <> 0;
   FindClose(sr);
 end;
+
 
 end.
 

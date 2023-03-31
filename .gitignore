@@ -47,3 +47,6 @@ ImagePicker/ImagePicker.exe
 # Output files.
 ztest-*.txt
 ImageList-*.txt
+
+# Debugging output files.
+DEBUG*.txt

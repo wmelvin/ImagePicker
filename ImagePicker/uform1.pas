@@ -73,6 +73,7 @@ type
     procedure editTagExit(Sender: TObject);
     procedure editTitleEnter(Sender: TObject);
     procedure editTitleExit(Sender: TObject);
+    procedure FormActivate(Sender: TObject);
     procedure FormClose(Sender: TObject; var CloseAction: TCloseAction);
     procedure FormCreate(Sender: TObject);
     procedure FormKeyDown(Sender: TObject; var Key: Word; Shift: TShiftState);
@@ -515,6 +516,11 @@ begin
   InEdit := False;
 end;
 
+procedure TForm1.FormActivate(Sender: TObject);
+begin
+  GetArgs;
+end;
+
 procedure TForm1.FormClose(Sender: TObject; var CloseAction: TCloseAction);
 begin
   AppOptions.SaveOptions;
@@ -591,7 +597,6 @@ begin
   SpinEdit1.Value := AppOptions.SpeedMs;
   Panel1.Caption := 'No images.';
   StatusBar1.SimpleText := 'No images.';
-  GetArgs;
 end;
 
 procedure TForm1.FormKeyDown(Sender: TObject; var Key: Word; Shift: TShiftState

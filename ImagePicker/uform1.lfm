@@ -9,6 +9,7 @@ object Form1: TForm1
   ClientWidth = 972
   KeyPreview = True
   Menu = MainMenu1
+  OnActivate = FormActivate
   OnClose = FormClose
   OnCreate = FormCreate
   OnKeyDown = FormKeyDown
