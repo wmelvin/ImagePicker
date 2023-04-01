@@ -30,6 +30,7 @@ type
     Label1: TLabel;
     ListBox1: TListBox;
     MainMenu1: TMainMenu;
+    mnuOpenDir: TMenuItem;
     mnuCopy: TMenuItem;
     mnuTools: TMenuItem;
     mnuOptions: TMenuItem;
@@ -48,6 +49,10 @@ type
     btnPlayStop: TSpeedButton;
     btnNext: TSpeedButton;
     btnLast: TSpeedButton;
+    OpenDirDialog: TSelectDirectoryDialog;
+    Separator1: TMenuItem;
+    Separator2: TMenuItem;
+    Separator3: TMenuItem;
     SpinEdit1: TSpinEdit;
     StatusBar1: TStatusBar;
     OpenDialog1: TOpenDialog;
@@ -84,6 +89,7 @@ type
     procedure mnuLoadClick(Sender: TObject);
     procedure mnuExitClick(Sender: TObject);
     procedure mnuOpenClick(Sender: TObject);
+    procedure mnuOpenDirClick(Sender: TObject);
     procedure mnuOptionsClick(Sender: TObject);
     procedure mnuSaveClick(Sender: TObject);
     procedure SpinEdit1Change(Sender: TObject);
@@ -246,6 +252,22 @@ begin
   if OpenDialog1.Execute then
     begin
       LoadImagesList(OpenDialog1.FileName);
+      AppOptions.LastOpenDir := ExtractFileDir(OpenDialog1.FileName);
+      SaveAppOptions;
+    end;
+end;
+
+procedure TForm1.mnuOpenDirClick(Sender: TObject);
+var
+  dirname: String;
+begin
+  dirname := AppOptions.LastOpenDir;
+  if (0 < Length(dirname)) and DirectoryExists(dirname) then
+    OpenDirDialog.InitialDir := dirname;
+
+  if OpenDirDialog.Execute then
+    begin
+      LoadImagesList(OpenDirDialog.FileName);
       AppOptions.LastOpenDir := ExtractFileDir(OpenDialog1.FileName);
       SaveAppOptions;
     end;
