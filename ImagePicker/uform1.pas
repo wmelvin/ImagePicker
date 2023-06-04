@@ -21,6 +21,7 @@ type
     btnShowPrev: TButton;
     btnDown: TButton;
     btnUp: TButton;
+    btnCopy: TButton;
     chkLoop: TCheckBox;
     chkAutoTag: TCheckBox;
     Image1: TImage;
@@ -60,6 +61,7 @@ type
     Timer1: TTimer;
     TrackBar1: TTrackBar;
     procedure btnAddClick(Sender: TObject);
+    procedure btnCopyClick(Sender: TObject);
     procedure btnDownClick(Sender: TObject);
     procedure btnShowNextClick(Sender: TObject);
     procedure btnApplyClick(Sender: TObject);
@@ -134,6 +136,7 @@ uses
   uApp,
   uAppFuncs,
   uAppOptions,
+  uClipboard,
   uCopyFilesDlg,
   uImageInfo,
   uImagesList,
@@ -575,6 +578,27 @@ end;
 procedure TForm1.btnAddClick(Sender: TObject);
 begin
   AddCurrentImage;
+end;
+
+procedure TForm1.btnCopyClick(Sender: TObject);
+var
+  i: Integer;
+  item: TImageInfo;
+  s: string;
+begin
+  s := '';
+  for i := 0 to ListBox1.Items.Count - 1 do
+  begin
+    item := TImageInfo(ListBox1.Items.Objects[i]);
+    s := s + '"' + item.FullName + '"' + #13#10;
+  end;
+  if 0 = Length(s) then
+    StatusBar1.SimpleText := 'Nothing to copy.'
+  else
+    begin
+      TextToClipboard(s);
+      StatusBar1.SimpleText := 'File paths copied to clipboard.'
+    end;
 end;
 
 procedure TForm1.btnDownClick(Sender: TObject);

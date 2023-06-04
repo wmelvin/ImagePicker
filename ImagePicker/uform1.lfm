@@ -1,11 +1,11 @@
 object Form1: TForm1
-  Left = 403
+  Left = 514
   Height = 483
   Top = 166
   Width = 972
   ActiveControl = Panel1
   Caption = 'Form1'
-  ClientHeight = 462
+  ClientHeight = 459
   ClientWidth = 972
   KeyPreview = True
   Menu = MainMenu1
@@ -16,26 +16,26 @@ object Form1: TForm1
   LCLVersion = '2.2.6.0'
   object StatusBar1: TStatusBar
     Left = 0
-    Height = 20
-    Top = 442
+    Height = 18
+    Top = 441
     Width = 972
     Panels = <>
   end
   object Panel1: TPanel
     Left = 0
-    Height = 442
+    Height = 441
     Top = 0
     Width = 612
     Align = alClient
     BevelInner = bvLowered
     BorderWidth = 2
     Caption = 'No image.'
-    ClientHeight = 442
+    ClientHeight = 441
     ClientWidth = 612
     TabOrder = 1
     object Image1: TImage
       Left = 4
-      Height = 396
+      Height = 395
       Top = 4
       Width = 604
       AntialiasingMode = amOn
@@ -49,7 +49,7 @@ object Form1: TForm1
     object TrackBar1: TTrackBar
       Left = 4
       Height = 38
-      Top = 400
+      Top = 399
       Width = 604
       Position = 0
       Align = alBottom
@@ -59,20 +59,20 @@ object Form1: TForm1
   end
   object Panel4: TPanel
     Left = 612
-    Height = 442
+    Height = 441
     Top = 0
     Width = 360
     Align = alRight
-    ClientHeight = 442
+    ClientHeight = 441
     ClientWidth = 360
     TabOrder = 2
     object Panel3: TPanel
       Left = 1
-      Height = 440
+      Height = 439
       Top = 1
       Width = 55
       Align = alLeft
-      ClientHeight = 440
+      ClientHeight = 439
       ClientWidth = 55
       TabOrder = 0
       UseDockManager = False
@@ -152,17 +152,17 @@ object Form1: TForm1
     end
     object Panel2: TPanel
       Left = 59
-      Height = 440
+      Height = 439
       Top = 1
       Width = 300
       Align = alRight
-      ClientHeight = 440
+      ClientHeight = 439
       ClientWidth = 300
       TabOrder = 1
       UseDockManager = False
       object ListBox1: TListBox
         Left = 8
-        Height = 218
+        Height = 217
         Top = 152
         Width = 282
         Anchors = [akTop, akLeft, akRight, akBottom]
@@ -177,21 +177,21 @@ object Form1: TForm1
         Left = 24
         Height = 25
         Hint = 'Delete selected item from the list.'
-        Top = 410
+        Top = 409
         Width = 56
         Anchors = [akRight, akBottom]
         Caption = '&Remove'
         OnClick = btnRemoveClick
         ParentShowHint = False
         ShowHint = True
-        TabOrder = 13
+        TabOrder = 14
       end
       object editTitle: TLabeledEdit
         Left = 8
-        Height = 26
+        Height = 28
         Top = 24
         Width = 282
-        EditLabel.Height = 17
+        EditLabel.Height = 16
         EditLabel.Width = 282
         EditLabel.Caption = 'Title'
         EditLabel.ParentColor = False
@@ -201,10 +201,10 @@ object Form1: TForm1
       end
       object editTag: TLabeledEdit
         Left = 20
-        Height = 26
+        Height = 28
         Top = 117
         Width = 180
-        EditLabel.Height = 17
+        EditLabel.Height = 16
         EditLabel.Width = 180
         EditLabel.Caption = 'Tag'
         EditLabel.ParentColor = False
@@ -226,10 +226,10 @@ object Form1: TForm1
       end
       object chkAutoTag: TCheckBox
         Left = 207
-        Height = 21
+        Height = 23
         Hint = 'Apply Tag to images added to the list.'
         Top = 96
-        Width = 48
+        Width = 54
         Caption = 'auto'
         ParentShowHint = False
         ShowHint = True
@@ -239,7 +239,7 @@ object Form1: TForm1
         Left = 24
         Height = 25
         Hint = 'Add the current image.'
-        Top = 378
+        Top = 377
         Width = 56
         Anchors = [akRight, akBottom]
         Caption = '&Add'
@@ -252,7 +252,7 @@ object Form1: TForm1
         Left = 128
         Height = 25
         Hint = 'Show selected (F6)'
-        Top = 378
+        Top = 377
         Width = 40
         Anchors = [akRight, akBottom]
         Caption = 'Sho&w'
@@ -265,7 +265,7 @@ object Form1: TForm1
         Left = 168
         Height = 25
         Hint = 'Show next (F8)'
-        Top = 378
+        Top = 377
         Width = 24
         Anchors = [akRight, akBottom]
         Caption = '>'
@@ -278,7 +278,7 @@ object Form1: TForm1
         Left = 104
         Height = 25
         Hint = 'Show previous (F7)'
-        Top = 378
+        Top = 377
         Width = 24
         Anchors = [akRight, akBottom]
         Caption = '<'
@@ -291,7 +291,7 @@ object Form1: TForm1
         Left = 215
         Height = 25
         Hint = 'Move Down (Ctrl+DownArrow)'
-        Top = 410
+        Top = 409
         Width = 56
         Anchors = [akRight, akBottom]
         Caption = 'Down'
@@ -304,7 +304,7 @@ object Form1: TForm1
         Left = 215
         Height = 25
         Hint = 'Move Up Move Down (Ctrl+UpArrow)'
-        Top = 378
+        Top = 377
         Width = 56
         Anchors = [akRight, akBottom]
         Caption = 'Up'
@@ -315,7 +315,7 @@ object Form1: TForm1
       end
       object SpinEdit1: TSpinEdit
         Left = 88
-        Height = 26
+        Height = 28
         Hint = 'Play speed in milliseconds'
         Top = 63
         Width = 77
@@ -332,20 +332,32 @@ object Form1: TForm1
       end
       object Label1: TLabel
         Left = 20
-        Height = 17
+        Height = 16
         Top = 64
-        Width = 66
+        Width = 68
         Caption = 'Speed (ms):'
         ParentColor = False
       end
       object chkLoop: TCheckBox
         Left = 178
-        Height = 21
+        Height = 23
         Top = 64
-        Width = 50
+        Width = 57
         Caption = 'Loop'
         OnChange = chkLoopChange
         TabOrder = 2
+      end
+      object btnCopy: TButton
+        Left = 120
+        Height = 25
+        Hint = 'Copy file paths to the clipboard.'
+        Top = 408
+        Width = 56
+        Caption = 'Copy'
+        OnClick = btnCopyClick
+        ParentShowHint = False
+        ShowHint = True
+        TabOrder = 13
       end
     end
   end

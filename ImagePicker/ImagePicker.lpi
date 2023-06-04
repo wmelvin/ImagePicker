@@ -76,6 +76,11 @@
         <ResourceBaseClass Value="Form"/>
         <UnitName Value="uCopyFilesDlg"/>
       </Unit>
+      <Unit>
+        <Filename Value="uclipboard.pas"/>
+        <IsPartOfProject Value="True"/>
+        <UnitName Value="uClipboard"/>
+      </Unit>
     </Units>
   </ProjectOptions>
   <CompilerOptions>

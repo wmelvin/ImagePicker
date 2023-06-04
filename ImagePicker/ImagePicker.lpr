@@ -11,7 +11,7 @@ uses
   {$ENDIF}
   Interfaces, // this includes the LCL widgetset
   Forms, uForm1, uImagesList, uAppFuncs, uImageInfo, uApp, uAppOptions, 
-uCopyFilesDlg
+uCopyFilesDlg, uClipboard
   { you can add units after this };
 
 {$R *.res}
