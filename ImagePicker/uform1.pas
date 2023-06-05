@@ -121,6 +121,7 @@ type
     procedure LoadFromSavedFile;
     procedure CopyFilesInList(DestDir: String; DoNewNames: Boolean; DoSubDir: Boolean);
     procedure SaveAppOptions;
+    procedure AskToClearPicks;
   public
 
   end;
@@ -254,6 +255,7 @@ begin
 
   if OpenDialog1.Execute then
     begin
+      AskToClearPicks;
       LoadImagesList(OpenDialog1.FileName);
       AppOptions.LastOpenDir := ExtractFileDir(OpenDialog1.FileName);
       SaveAppOptions;
@@ -270,6 +272,7 @@ begin
 
   if OpenDirDialog.Execute then
     begin
+      AskToClearPicks;
       LoadImagesList(OpenDirDialog.FileName);
       AppOptions.LastOpenDir := ExtractFileDir(OpenDialog1.FileName);
       SaveAppOptions;
@@ -1106,6 +1109,18 @@ procedure TForm1.SaveAppOptions;
 begin
   if not AppOptions.SaveOptions then
     MessageDlg('ERROR', AppOptions.LastError, mtError, [mbOk], 0);
+end;
+
+procedure TForm1.AskToClearPicks;
+begin
+  If Picks.Items.Count = 0 then
+    Exit;
+  if mrNo = MessageDlg(
+    'Keep current picks?',
+    'Choose [No] to clear the list of picked images.',
+    mtConfirmation, [mbYes, mbNo], 0)
+  then
+    Picks.Items.Clear;
 end;
 
 end.
