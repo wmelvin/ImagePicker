@@ -160,14 +160,14 @@ object Form1: TForm1
       ClientWidth = 300
       TabOrder = 1
       UseDockManager = False
-      object ListBox1: TListBox
+      object Picks: TListBox
         Left = 8
         Height = 217
         Top = 152
         Width = 282
         Anchors = [akTop, akLeft, akRight, akBottom]
         ItemHeight = 0
-        OnDblClick = ListBox1DblClick
+        OnDblClick = PicksDblClick
         ParentShowHint = False
         ShowHint = True
         TabOrder = 6

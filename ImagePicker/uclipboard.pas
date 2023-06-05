@@ -6,9 +6,6 @@ interface
 
 procedure TextToClipboard(const Text: string);
 
-//uses
-//  Classes, SysUtils;
-
 implementation
 
 {$IFDEF LINUX}

@@ -29,7 +29,7 @@ type
     editTitle: TLabeledEdit;
     editTag: TLabeledEdit;
     Label1: TLabel;
-    ListBox1: TListBox;
+    Picks: TListBox;
     MainMenu1: TMainMenu;
     mnuOpenDir: TMenuItem;
     mnuCopy: TMenuItem;
@@ -86,7 +86,7 @@ type
     procedure FormKeyDown(Sender: TObject; var Key: Word; Shift: TShiftState);
     procedure Image1Click(Sender: TObject);
     procedure Image1DblClick(Sender: TObject);
-    procedure ListBox1DblClick(Sender: TObject);
+    procedure PicksDblClick(Sender: TObject);
     procedure mnuCopyClick(Sender: TObject);
     procedure mnuLoadClick(Sender: TObject);
     procedure mnuExitClick(Sender: TObject);
@@ -322,18 +322,18 @@ begin
     writeln(tf, '');
 
     // Write file paths.
-    for i := 0 to ListBox1.Items.Count - 1 do
+    for i := 0 to Picks.Items.Count - 1 do
     begin
-      item := TImageInfo(ListBox1.Items.Objects[i]);
+      item := TImageInfo(Picks.Items.Objects[i]);
       writeln(tf, '"' + item.FullName + '"');
     end;
 
     // Get length of longest file name in items with a tag.
     pad_tagged := 0;
     pad_all := 0;
-    for i := 0 to ListBox1.Items.Count - 1 do
+    for i := 0 to Picks.Items.Count - 1 do
     begin
-      item := TImageInfo(ListBox1.Items.Objects[i]);
+      item := TImageInfo(Picks.Items.Objects[i]);
       n := Length(item.GetFileName);
       if pad_all < n then
         pad_all := n;
@@ -348,9 +348,9 @@ begin
         writeln(tf, '');
         writeln(tf, '');
         writeln(tf, '## -- Tagged Images:');
-        for i := 0 to ListBox1.Items.Count - 1 do
+        for i := 0 to Picks.Items.Count - 1 do
         begin
-          item := TImageInfo(ListBox1.Items.Objects[i]);
+          item := TImageInfo(Picks.Items.Objects[i]);
           if item.HasTag then
             writeln(tf,
               '# Tag: "' + item.Tag + '", "' + item.GetFileName + '"'
@@ -360,9 +360,9 @@ begin
         writeln(tf, '');
         writeln(tf, '');
         writeln(tf, '## -- Move/rename tagged files (original):');
-        for i := 0 to ListBox1.Items.Count - 1 do
+        for i := 0 to Picks.Items.Count - 1 do
         begin
-          item := TImageInfo(ListBox1.Items.Objects[i]);
+          item := TImageInfo(Picks.Items.Objects[i]);
           if item.HasTag then
             writeln(tf, '# ' + item.AsMvCmd(pad_tagged));
         end;
@@ -376,9 +376,9 @@ begin
     writeln(tf, '');
     writeln(tf, '');
     writeln(tf, '## -- Move/rename all files (new name):');
-    for i := 0 to ListBox1.Items.Count - 1 do
+    for i := 0 to Picks.Items.Count - 1 do
     begin
-      item := TImageInfo(ListBox1.Items.Objects[i]);
+      item := TImageInfo(Picks.Items.Objects[i]);
       writeln(tf, '# ' + item.AsMvCmd(pad_all, title, i));
     end;
 
@@ -478,8 +478,8 @@ begin
       btnToggle.ImageIndex := 1;
       editTitle.Enabled := False;
       editTag.Enabled := False;
-      ListBox1.ClearSelection;
-      ListBox1.SetFocus;
+      Picks.ClearSelection;
+      Picks.SetFocus;
     end;
   Panel4.Width := Panel2.Width + Panel3.Width + 4;
 end;
@@ -493,7 +493,7 @@ procedure TForm1.btnRemoveClick(Sender: TObject);
 var
   i: Integer;
 begin
-  if ListBox1.SelCount = 0 then
+  if Picks.SelCount = 0 then
     Exit;
 
   if not MessageDlg('Confirm', 'Remove selected item from the list?',
@@ -501,11 +501,11 @@ begin
   ) = mrYes then
     Exit;
 
-  for i := ListBox1.Items.Count - 1 downto 0 do
-    if ListBox1.Selected[i] then
+  for i := Picks.Items.Count - 1 downto 0 do
+    if Picks.Selected[i] then
       begin
-        ListBox1.Items.Objects[i].Free;  // TImageInfo object
-        ListBox1.Items.Delete(i);
+        Picks.Items.Objects[i].Free;  // TImageInfo object
+        Picks.Items.Delete(i);
       end;
 end;
 
@@ -561,16 +561,16 @@ var
   i: Integer;
   item: TImageInfo;
 begin
-  if ListBox1.SelCount = 0 then
+  if Picks.SelCount = 0 then
     begin
       StatusBar1.SimpleText := 'No items selected in list of images.';
       Exit;
     end;
 
-  for i := ListBox1.Items.Count - 1 downto 0 do
-    if ListBox1.Selected[i] then
+  for i := Picks.Items.Count - 1 downto 0 do
+    if Picks.Selected[i] then
       begin
-        item := TImageInfo(ListBox1.Items.Objects[i]);
+        item := TImageInfo(Picks.Items.Objects[i]);
         item.Tag := editTag.Text;
       end;
 end;
@@ -587,9 +587,9 @@ var
   s: string;
 begin
   s := '';
-  for i := 0 to ListBox1.Items.Count - 1 do
+  for i := 0 to Picks.Items.Count - 1 do
   begin
-    item := TImageInfo(ListBox1.Items.Objects[i]);
+    item := TImageInfo(Picks.Items.Objects[i]);
     s := s + '"' + item.FullName + '"' + #13#10;
   end;
   if 0 = Length(s) then
@@ -773,7 +773,7 @@ begin
   s := ImagesList.CurrentImage;
   if 0 < Length(s) then
   begin
-    dup := ListBox1.Items.IndexOf(ExtractFileName(s));
+    dup := Picks.Items.IndexOf(ExtractFileName(s));
     if dup = -1 then
     begin
       if chkAutoTag.Checked then
@@ -781,7 +781,7 @@ begin
       else
         t := '';
       info := TImageInfo.Create(s, t);
-      ListBox1.Items.AddObject(info.GetFileName, info);
+      Picks.Items.AddObject(info.GetFileName, info);
     end;
   end;
 end;
@@ -799,12 +799,12 @@ var
 begin
   fn := '';
   // Get the full file name of the first selected item.
-  if 0 < ListBox1.SelCount then
-    for i := 0 to ListBox1.Items.Count - 1 do
-      if ListBox1.Selected[i] then
+  if 0 < Picks.SelCount then
+    for i := 0 to Picks.Items.Count - 1 do
+      if Picks.Selected[i] then
         begin
-          // fn := TImageInfo(ListBox1.Items.Objects[i]).FullName;
-          with TImageInfo(ListBox1.Items.Objects[i]) do
+          // fn := TImageInfo(Picks.Items.Objects[i]).FullName;
+          with TImageInfo(Picks.Items.Objects[i]) do
           begin
             fn := FullName;
             t := Tag;
@@ -827,7 +827,7 @@ begin
   SelectShowPrev;
 end;
 
-procedure TForm1.ListBox1DblClick(Sender: TObject);
+procedure TForm1.PicksDblClick(Sender: TObject);
 begin
   ShowSelectedImage;
 end;
@@ -931,7 +931,7 @@ begin
         LoadImagesList(paths_list[paths_list.Count - 1]);
 
         editTitle.Text := title;
-        ListBox1.Clear;
+        Picks.Clear;
         for i := 0 to paths_list.Count -1 do
         begin
           info := TImageInfo.Create(paths_list[i], '');
@@ -939,7 +939,7 @@ begin
           tag_val := tags_list.Values['"' + info.GetFileName + '"'];
           if (0 < Length(tag_val)) then
             info.Tag := TrimSet(tag_val, ['"']);
-          ListBox1.Items.AddObject(info.GetFileName, info);
+          Picks.Items.AddObject(info.GetFileName, info);
         end;
       end;
     end;
@@ -954,13 +954,13 @@ procedure TForm1.SelectShowNext;
 var
   i: Integer;
 begin
-  if 0 < ListBox1.SelCount then
+  if 0 < Picks.SelCount then
   begin
-    for i := 0 to ListBox1.Items.Count - 2 do
-      if ListBox1.Selected[i] then
+    for i := 0 to Picks.Items.Count - 2 do
+      if Picks.Selected[i] then
         begin
-          ListBox1.Selected[i] := False;
-          ListBox1.Selected[i + 1] := True;
+          Picks.Selected[i] := False;
+          Picks.Selected[i + 1] := True;
           break;
         end;
     ShowSelectedImage;
@@ -971,13 +971,13 @@ procedure TForm1.SelectShowPrev;
 var
   i: Integer;
 begin
-  if 0 < ListBox1.SelCount then
+  if 0 < Picks.SelCount then
   begin
-    for i := 1 to ListBox1.Items.Count - 1 do
-      if ListBox1.Selected[i] then
+    for i := 1 to Picks.Items.Count - 1 do
+      if Picks.Selected[i] then
         begin
-          ListBox1.Selected[i] := False;
-          ListBox1.Selected[i - 1] := True;
+          Picks.Selected[i] := False;
+          Picks.Selected[i - 1] := True;
           break;
         end;
     ShowSelectedImage;
@@ -988,14 +988,14 @@ procedure TForm1.MoveSelectedUp;
 var
   i: Integer;
 begin
-  if 0 < ListBox1.SelCount then
+  if 0 < Picks.SelCount then
   begin
-    for i := 1 to ListBox1.Items.Count - 1 do
-      if ListBox1.Selected[i] then
+    for i := 1 to Picks.Items.Count - 1 do
+      if Picks.Selected[i] then
         begin
-          ListBox1.Items.Exchange(i, i - 1);
-          ListBox1.Selected[i] := False;
-          ListBox1.Selected[i - 1] := True;
+          Picks.Items.Exchange(i, i - 1);
+          Picks.Selected[i] := False;
+          Picks.Selected[i - 1] := True;
           break;
         end;
   end;
@@ -1005,14 +1005,14 @@ procedure TForm1.MoveSelectedDown;
 var
   i: Integer;
 begin
-  if 0 < ListBox1.SelCount then
+  if 0 < Picks.SelCount then
   begin
-    for i := 0 to ListBox1.Items.Count - 2 do
-      if ListBox1.Selected[i] then
+    for i := 0 to Picks.Items.Count - 2 do
+      if Picks.Selected[i] then
         begin
-          ListBox1.Items.Exchange(i, i + 1);
-          ListBox1.Selected[i] := False;
-          ListBox1.Selected[i + 1] := True;
+          Picks.Items.Exchange(i, i + 1);
+          Picks.Selected[i] := False;
+          Picks.Selected[i + 1] := True;
           break;
         end;
   end;
@@ -1041,7 +1041,7 @@ begin
 
   AppOptions.LastCopyDir := DestDir;
 
-  if ListBox1.Count = 0 then
+  if Picks.Count = 0 then
     begin
       MessageDlg('Nothing to do', 'No images in list.', mtInformation, [mbOk],0);
       Exit;
@@ -1054,9 +1054,9 @@ begin
       CreateDir(dst_dir);
     end;
 
-  for i := 0 to ListBox1.Items.Count - 1 do
+  for i := 0 to Picks.Items.Count - 1 do
     begin
-      item := TImageInfo(ListBox1.Items.Objects[i]);
+      item := TImageInfo(Picks.Items.Objects[i]);
       src := item.FullName;
       stem := ChangeFileExt(item.GetFileName, '');
       ext := ExtractFileExt(item.GetFileName);
