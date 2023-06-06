@@ -806,7 +806,6 @@ begin
     for i := 0 to Picks.Items.Count - 1 do
       if Picks.Selected[i] then
         begin
-          // fn := TImageInfo(Picks.Items.Objects[i]).FullName;
           with TImageInfo(Picks.Items.Objects[i]) do
           begin
             fn := FullName;
