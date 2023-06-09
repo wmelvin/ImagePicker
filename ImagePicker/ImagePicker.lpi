@@ -81,6 +81,11 @@
         <IsPartOfProject Value="True"/>
         <UnitName Value="uClipboard"/>
       </Unit>
+      <Unit>
+        <Filename Value="upicksfile.pas"/>
+        <IsPartOfProject Value="True"/>
+        <UnitName Value="uPicksFile"/>
+      </Unit>
     </Units>
   </ProjectOptions>
   <CompilerOptions>
