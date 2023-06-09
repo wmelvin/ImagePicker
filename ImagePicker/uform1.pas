@@ -25,7 +25,7 @@ type
     chkLoop: TCheckBox;
     chkAutoTag: TCheckBox;
     Image1: TImage;
-    ImageList1: TImageList;
+    Glyphs: TImageList;
     editTitle: TLabeledEdit;
     editTag: TLabeledEdit;
     Label1: TLabel;

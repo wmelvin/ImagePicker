@@ -82,7 +82,7 @@ object Form1: TForm1
         Hint = 'Toggle panel (F4)'
         Top = 13
         Width = 36
-        Images = ImageList1
+        Images = Glyphs
         ImageIndex = 0
         ImageWidth = 25
         OnClick = btnToggleClick
@@ -95,7 +95,7 @@ object Form1: TForm1
         Hint = 'First (Home)'
         Top = 72
         Width = 36
-        Images = ImageList1
+        Images = Glyphs
         ImageIndex = 2
         OnClick = btnFirstClick
         ShowHint = True
@@ -107,7 +107,7 @@ object Form1: TForm1
         Hint = 'Previous (Left arrow)'
         Top = 112
         Width = 36
-        Images = ImageList1
+        Images = Glyphs
         ImageIndex = 3
         OnClick = btnPrevClick
         ShowHint = True
@@ -119,7 +119,7 @@ object Form1: TForm1
         Hint = 'Play/Stop (F5)'
         Top = 248
         Width = 36
-        Images = ImageList1
+        Images = Glyphs
         ImageIndex = 4
         OnClick = btnPlayStopClick
         ShowHint = True
@@ -131,7 +131,7 @@ object Form1: TForm1
         Hint = 'Next (Right arrow)'
         Top = 152
         Width = 36
-        Images = ImageList1
+        Images = Glyphs
         ImageIndex = 6
         OnClick = btnNextClick
         ShowHint = True
@@ -143,7 +143,7 @@ object Form1: TForm1
         Hint = 'Last (End)'
         Top = 192
         Width = 36
-        Images = ImageList1
+        Images = Glyphs
         ImageIndex = 7
         OnClick = btnLastClick
         ShowHint = True
@@ -409,11 +409,11 @@ object Form1: TForm1
       end
     end
   end
-  object ImageList1: TImageList
+  object Glyphs: TImageList
     Height = 32
     Width = 32
-    Left = 256
-    Top = 37
+    Left = 63
+    Top = 112
     Bitmap = {
       4C7A080000002000000020000000920600000000000078DAED5DBD4F1C4714DF
       3BBE240C0741B28528229081C60201067114C17C167C9571E7C8058EABC49824
