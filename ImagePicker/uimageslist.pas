@@ -27,7 +27,7 @@ type
       procedure GoPrevious;
       function GoNext: Boolean;
       procedure GoLast;
-      procedure Load(FileName: String);
+      procedure Load(FileName: String; AllowSubDirs: Boolean);
       function SetCurrentImage(FileName: String): Boolean;
       function SetCurrentIndex(Index: Integer): Boolean;
     published
@@ -139,12 +139,15 @@ begin
   FListIndex := FFileList.Count - 1;
 end;
 
-procedure TImagesList.Load(FileName: String);
+procedure TImagesList.Load(FileName: String; AllowSubDirs: Boolean);
 var
   dirpath: String;
   isDir: Boolean;
 begin
-  FSubDirs := none;
+  if AllowSubDirs then
+    FSubDirs := none
+  else
+    FSubDirs := no;
   FFileList.Clear;
   FFileList.Sorted := True;
   FFileList.Duplicates := dupIgnore;

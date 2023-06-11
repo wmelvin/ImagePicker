@@ -117,7 +117,7 @@ type
     procedure MoveSelectedUp;
     procedure MoveSelectedDown;
     procedure SavePicks(FileName: String);
-    procedure LoadImagesList(FileName: String);
+    procedure LoadImagesList(FileName: String; AllowSubDirs: Boolean);
     procedure LoadPicksFromSavedFile;
     procedure CopyFilesInList(DestDir: String; DoNewNames: Boolean; DoSubDir: Boolean);
     procedure SaveAppOptions;
@@ -223,9 +223,9 @@ begin
   Close;
 end;
 
-procedure TForm1.LoadImagesList(FileName: String);
+procedure TForm1.LoadImagesList(FileName: String; AllowSubDirs: Boolean);
 begin
-  ImagesList.Load(FileName);
+  ImagesList.Load(FileName, AllowSubDirs);
   if not ImagesList.SetCurrentImage(FileName) then
     ImagesList.GoFirst;
   if ImagesList.Count = 0 then
@@ -257,7 +257,7 @@ begin
   if OpenDialog1.Execute then
     begin
       AskToClearPicks;
-      LoadImagesList(OpenDialog1.FileName);
+      LoadImagesList(OpenDialog1.FileName, True);
       AppOptions.LastOpenDir := ExtractFileDir(OpenDialog1.FileName);
       SaveAppOptions;
     end;
@@ -274,7 +274,7 @@ begin
   if OpenDirDialog.Execute then
     begin
       AskToClearPicks;
-      LoadImagesList(OpenDirDialog.FileName);
+      LoadImagesList(OpenDirDialog.FileName, True);
       AppOptions.LastOpenDir := ExtractFileDir(OpenDialog1.FileName);
       SaveAppOptions;
     end;
@@ -673,7 +673,7 @@ begin
       // Take first argument as file or directory to load.
       begin
         s := params[0];
-        LoadImagesList(s);
+        LoadImagesList(s, True);
       end;
   finally
     FreeAndNil(params);
@@ -727,10 +727,22 @@ begin
           end;
           break;
         end;
+
   // If there is a file name, show the image.
   if 0 < Length(fn) then
      if ImagesList.SetCurrentImage(fn) then
-        LoadImage(t);
+        LoadImage(t)
+     else
+       { The selected pick is not in the current ImagesList. This is probably
+         because the list of picks was loaded from a saved file where multiple
+         source directories were used in picking the images. Try re-loading
+         the ImagesList based on the selected pick.
+       }
+       begin
+         LoadImagesList(fn, False);
+         if ImagesList.SetCurrentImage(fn) then
+            LoadImage(t);
+       end;
 end;
 
 procedure TForm1.btnShowClick(Sender: TObject);
@@ -764,7 +776,7 @@ var
 begin
   last_pick := LoadPicksFile(OpenDialog1, editTitle, Picks, StatusBar1);
   if 0 < Length(last_pick) then
-    LoadImagesList(last_pick);
+    LoadImagesList(last_pick, False);
 end;
 
 procedure TForm1.mnuLoadClick(Sender: TObject);
