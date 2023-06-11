@@ -948,7 +948,8 @@ begin
     Exit;
   if mrNo = MessageDlg(
     'Keep current picks?',
-    'Choose [No] to clear the list of picked images.',
+    'Keep the current list of picks?' + #13#10
+    + 'Choose No to clear the list of picked images.',
     mtConfirmation, [mbYes, mbNo], 0)
   then
     Picks.Items.Clear;
