@@ -149,6 +149,11 @@ uses
 
 const
   P2_DEFAULT_WIDTH = 300;
+  GLYPH_COLLAPSE = 0;
+  GLYPH_EXPAND = 1;
+  GLYPH_PLAY = 4;
+  GLYPH_STOP = 5;
+
 
 var
   ImagesList: TImagesList;
@@ -209,12 +214,12 @@ begin
   if Timer1.Enabled then
      begin
        Timer1.Enabled := False;
-       btnPlayStop.ImageIndex := 4;
+       btnPlayStop.ImageIndex := GLYPH_PLAY;
      end
   else
     begin
       Timer1.Enabled := True;
-      btnPlayStop.ImageIndex := 5;
+      btnPlayStop.ImageIndex := GLYPH_STOP;
     end;
 end;
 
@@ -384,7 +389,7 @@ begin
     begin
       // Expand.
       Panel2.Width := P2_DEFAULT_WIDTH;
-      btnToggle.ImageIndex := 0;
+      btnToggle.ImageIndex := GLYPH_COLLAPSE;
       editTitle.Enabled := True;
       editTag.Enabled := True;
     end
@@ -392,7 +397,7 @@ begin
     begin
       // Collapse.
       Panel2.Width := 4;
-      btnToggle.ImageIndex := 1;
+      btnToggle.ImageIndex := GLYPH_EXPAND;
       editTitle.Enabled := False;
       editTag.Enabled := False;
       Picks.ClearSelection;
