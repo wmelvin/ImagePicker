@@ -1,4 +1,4 @@
-unit uForm1;
+unit uMainForm;
 
 {$mode objfpc}{$H+}
 
@@ -10,9 +10,9 @@ uses
 
 type
 
-  { TForm1 }
+  { TMainForm }
 
-  TForm1 = class(TForm)
+  TMainForm = class(TForm)
     btnRemove: TButton;
     btnApply: TButton;
     btnAdd: TButton;
@@ -127,7 +127,7 @@ type
   end;
 
 var
-  Form1: TForm1;
+  MainForm: TMainForm;
 
 implementation
 
@@ -158,9 +158,9 @@ const
 var
   ImagesList: TImagesList;
 
-{ TForm1 }
+{ TMainForm }
 
-procedure TForm1.LoadImage(const ATag: String = '');
+procedure TMainForm.LoadImage(const ATag: String = '');
 var
   filename: String;
   t: String;
@@ -183,19 +183,19 @@ begin
   TrackBar1.Position := ImagesList.Index + 1;
 end;
 
-procedure TForm1.ImageFirst;
+procedure TMainForm.ImageFirst;
 begin
   ImagesList.GoFirst;
   LoadImage;
 end;
 
-procedure TForm1.ImagePrev;
+procedure TMainForm.ImagePrev;
 begin
   ImagesList.GoPrevious;
   LoadImage;
 end;
 
-procedure TForm1.ImageNext;
+procedure TMainForm.ImageNext;
 begin
   if not ImagesList.GoNext then
     if Timer1.Enabled then
@@ -203,13 +203,13 @@ begin
   LoadImage;
 end;
 
-procedure TForm1.ImageLast;
+procedure TMainForm.ImageLast;
 begin
   ImagesList.GoLast;
   LoadImage;
 end;
 
-procedure TForm1.PlayStop;
+procedure TMainForm.PlayStop;
 begin
   if Timer1.Enabled then
      begin
@@ -223,12 +223,12 @@ begin
     end;
 end;
 
-procedure TForm1.mnuExitClick(Sender: TObject);
+procedure TMainForm.mnuExitClick(Sender: TObject);
 begin
   Close;
 end;
 
-procedure TForm1.LoadImagesList(FileName: String; AllowSubDirs: Boolean);
+procedure TMainForm.LoadImagesList(FileName: String; AllowSubDirs: Boolean);
 begin
   ImagesList.Load(FileName, AllowSubDirs);
   if not ImagesList.SetCurrentImage(FileName) then
@@ -248,7 +248,7 @@ begin
     end;
 end;
 
-procedure TForm1.mnuOpenClick(Sender: TObject);
+procedure TMainForm.mnuOpenClick(Sender: TObject);
 var
   dirname: String;
 begin
@@ -268,7 +268,7 @@ begin
     end;
 end;
 
-procedure TForm1.mnuOpenDirClick(Sender: TObject);
+procedure TMainForm.mnuOpenDirClick(Sender: TObject);
 var
   dirname: String;
 begin
@@ -285,7 +285,7 @@ begin
     end;
 end;
 
-procedure TForm1.mnuOptionsClick(Sender: TObject);
+procedure TMainForm.mnuOptionsClick(Sender: TObject);
 var
   filename: String;
   mr: Integer;
@@ -306,12 +306,12 @@ begin
     you'd want a form with input validation. }
 end;
 
-procedure TForm1.SavePicks(FileName: String);
+procedure TMainForm.SavePicks(FileName: String);
 begin
   SavePicksFile(FileName, editTitle.Text, Picks, StatusBar1);
 end;
 
-procedure TForm1.mnuSaveClick(Sender: TObject);
+procedure TMainForm.mnuSaveClick(Sender: TObject);
 var
   dirname: String;
   filename: String;
@@ -339,7 +339,7 @@ begin
     end;
 end;
 
-procedure TForm1.SpinEdit1Change(Sender: TObject);
+procedure TMainForm.SpinEdit1Change(Sender: TObject);
 begin
   if SpinEdit1.Value < MIN_PLAY_MS then
     SpinEdit1.Value := MIN_PLAY_MS
@@ -353,22 +353,22 @@ begin
   Timer1.Interval := SpinEdit1.Value;
 end;
 
-procedure TForm1.SpinEdit1Enter(Sender: TObject);
+procedure TMainForm.SpinEdit1Enter(Sender: TObject);
 begin
   InEdit := True;
 end;
 
-procedure TForm1.SpinEdit1Exit(Sender: TObject);
+procedure TMainForm.SpinEdit1Exit(Sender: TObject);
 begin
   InEdit := False;
 end;
 
-procedure TForm1.Timer1Timer(Sender: TObject);
+procedure TMainForm.Timer1Timer(Sender: TObject);
 begin
   ImageNext;
 end;
 
-procedure TForm1.TrackBar1MouseUp(Sender: TObject; Button: TMouseButton;
+procedure TMainForm.TrackBar1MouseUp(Sender: TObject; Button: TMouseButton;
   Shift: TShiftState; X, Y: Integer);
 {  Note: Using MouseUp instead of OnChange because OnChange fires for
    every position change when dragging the marker, and would load the
@@ -383,7 +383,7 @@ begin
     LoadImage;
 end;
 
-procedure TForm1.TogglePanel2;
+procedure TMainForm.TogglePanel2;
 begin
   if Panel2.Width < P2_DEFAULT_WIDTH then
     begin
@@ -406,12 +406,12 @@ begin
   Panel4.Width := Panel2.Width + Panel3.Width + 4;
 end;
 
-procedure TForm1.btnToggleClick(Sender: TObject);
+procedure TMainForm.btnToggleClick(Sender: TObject);
 begin
   TogglePanel2;
 end;
 
-procedure TForm1.btnRemoveClick(Sender: TObject);
+procedure TMainForm.btnRemoveClick(Sender: TObject);
 var
   i: Integer;
 begin
@@ -431,54 +431,54 @@ begin
       end;
 end;
 
-procedure TForm1.btnUpClick(Sender: TObject);
+procedure TMainForm.btnUpClick(Sender: TObject);
 begin
   MoveSelectedUp;
 end;
 
-procedure TForm1.chkLoopChange(Sender: TObject);
+procedure TMainForm.chkLoopChange(Sender: TObject);
 begin
   ImagesList.DoLoop := chkLoop.Checked;
   AppOptions.DoLoop := chkLoop.Checked;
   SaveAppOptions;
 end;
 
-procedure TForm1.editTagEnter(Sender: TObject);
+procedure TMainForm.editTagEnter(Sender: TObject);
 begin
   InEdit := True;
 end;
 
-procedure TForm1.editTagExit(Sender: TObject);
+procedure TMainForm.editTagExit(Sender: TObject);
 begin
   InEdit := False;
 end;
 
-procedure TForm1.editTitleEnter(Sender: TObject);
+procedure TMainForm.editTitleEnter(Sender: TObject);
 begin
   InEdit := True;
 end;
 
-procedure TForm1.editTitleExit(Sender: TObject);
+procedure TMainForm.editTitleExit(Sender: TObject);
 begin
   InEdit := False;
 end;
 
-procedure TForm1.FormActivate(Sender: TObject);
+procedure TMainForm.FormActivate(Sender: TObject);
 begin
   GetArgs;
 end;
 
-procedure TForm1.FormClose(Sender: TObject; var CloseAction: TCloseAction);
+procedure TMainForm.FormClose(Sender: TObject; var CloseAction: TCloseAction);
 begin
   AppOptions.SaveOptions;
 end;
 
-procedure TForm1.btnFirstClick(Sender: TObject);
+procedure TMainForm.btnFirstClick(Sender: TObject);
 begin
   ImageFirst;
 end;
 
-procedure TForm1.btnApplyClick(Sender: TObject);
+procedure TMainForm.btnApplyClick(Sender: TObject);
 var
   i: Integer;
   item: TImageInfo;
@@ -497,12 +497,12 @@ begin
       end;
 end;
 
-procedure TForm1.btnAddClick(Sender: TObject);
+procedure TMainForm.btnAddClick(Sender: TObject);
 begin
   AddCurrentImage;
 end;
 
-procedure TForm1.btnCopyClick(Sender: TObject);
+procedure TMainForm.btnCopyClick(Sender: TObject);
 var
   i: Integer;
   item: TImageInfo;
@@ -523,39 +523,39 @@ begin
     end;
 end;
 
-procedure TForm1.btnDownClick(Sender: TObject);
+procedure TMainForm.btnDownClick(Sender: TObject);
 begin
   MoveSelectedDown;
 end;
 
-procedure TForm1.btnShowNextClick(Sender: TObject);
+procedure TMainForm.btnShowNextClick(Sender: TObject);
 begin
   SelectShowNext;
 end;
 
-procedure TForm1.btnLastClick(Sender: TObject);
+procedure TMainForm.btnLastClick(Sender: TObject);
 begin
   ImageLast;
 end;
 
-procedure TForm1.btnNextClick(Sender: TObject);
+procedure TMainForm.btnNextClick(Sender: TObject);
 begin
   ImageNext;
 end;
 
-procedure TForm1.btnPlayStopClick(Sender: TObject);
+procedure TMainForm.btnPlayStopClick(Sender: TObject);
 begin
   PlayStop;
 end;
 
-procedure TForm1.btnPrevClick(Sender: TObject);
+procedure TMainForm.btnPrevClick(Sender: TObject);
 begin
   ImagePrev;
 end;
 
-procedure TForm1.FormCreate(Sender: TObject);
+procedure TMainForm.FormCreate(Sender: TObject);
 begin
-  Form1.Caption := APP_TITLE;
+  MainForm.Caption := APP_TITLE;
   InEdit := False;
   ImagesList := TImagesList.Create;
   AppOptions := TAppOptions.Create;
@@ -567,7 +567,7 @@ begin
   StatusBar1.SimpleText := 'No images.';
 end;
 
-procedure TForm1.FormKeyDown(Sender: TObject; var Key: Word; Shift: TShiftState
+procedure TMainForm.FormKeyDown(Sender: TObject; var Key: Word; Shift: TShiftState
   );
 begin
   if Shift = [] then
@@ -660,13 +660,13 @@ begin
     end;
 end;
 
-procedure TForm1.Image1Click(Sender: TObject);
+procedure TMainForm.Image1Click(Sender: TObject);
 begin
   // Show full path to image in status bar.
   StatusBar1.SimpleText := ImagesList.CurrentImage;
 end;
 
-procedure TForm1.GetArgs;
+procedure TMainForm.GetArgs;
 var
   params: TStringList;
   s: String;
@@ -685,7 +685,7 @@ begin
   end;
 end;
 
-procedure TForm1.AddCurrentImage;
+procedure TMainForm.AddCurrentImage;
 var
   s: String;
   t: String;
@@ -708,12 +708,12 @@ begin
   end;
 end;
 
-procedure TForm1.Image1DblClick(Sender: TObject);
+procedure TMainForm.Image1DblClick(Sender: TObject);
 begin
   AddCurrentImage;
 end;
 
-procedure TForm1.ShowSelectedImage;
+procedure TMainForm.ShowSelectedImage;
 var
   i: Integer;
   fn: String;
@@ -750,22 +750,22 @@ begin
        end;
 end;
 
-procedure TForm1.btnShowClick(Sender: TObject);
+procedure TMainForm.btnShowClick(Sender: TObject);
 begin
   ShowSelectedImage;
 end;
 
-procedure TForm1.btnShowPrevClick(Sender: TObject);
+procedure TMainForm.btnShowPrevClick(Sender: TObject);
 begin
   SelectShowPrev;
 end;
 
-procedure TForm1.PicksDblClick(Sender: TObject);
+procedure TMainForm.PicksDblClick(Sender: TObject);
 begin
   ShowSelectedImage;
 end;
 
-procedure TForm1.mnuCopyClick(Sender: TObject);
+procedure TMainForm.mnuCopyClick(Sender: TObject);
 var
   mr: TModalResult;
 begin
@@ -775,7 +775,7 @@ begin
         CopyFilesInList(editFolder.Text, chkNewNames.Checked, chkSubDir.Checked);
 end;
 
-procedure TForm1.LoadPicksFromSavedFile;
+procedure TMainForm.LoadPicksFromSavedFile;
 var
   last_pick: String;
 begin
@@ -784,12 +784,12 @@ begin
     LoadImagesList(last_pick, False);
 end;
 
-procedure TForm1.mnuLoadClick(Sender: TObject);
+procedure TMainForm.mnuLoadClick(Sender: TObject);
 begin
   LoadPicksFromSavedFile;
 end;
 
-procedure TForm1.SelectShowNext;
+procedure TMainForm.SelectShowNext;
 var
   i: Integer;
 begin
@@ -806,7 +806,7 @@ begin
   end;
 end;
 
-procedure TForm1.SelectShowPrev;
+procedure TMainForm.SelectShowPrev;
 var
   i: Integer;
 begin
@@ -823,7 +823,7 @@ begin
   end;
 end;
 
-procedure TForm1.MoveSelectedUp;
+procedure TMainForm.MoveSelectedUp;
 var
   i: Integer;
 begin
@@ -840,7 +840,7 @@ begin
   end;
 end;
 
-procedure TForm1.MoveSelectedDown;
+procedure TMainForm.MoveSelectedDown;
 var
   i: Integer;
 begin
@@ -857,7 +857,7 @@ begin
   end;
 end;
 
-procedure TForm1.CopyFilesInList(DestDir: String; DoNewNames: Boolean; DoSubDir: Boolean);
+procedure TMainForm.CopyFilesInList(DestDir: String; DoNewNames: Boolean; DoSubDir: Boolean);
 var
   ok: Boolean;
   i: Integer;
@@ -941,13 +941,13 @@ begin
     end;
 end;
 
-procedure TForm1.SaveAppOptions;
+procedure TMainForm.SaveAppOptions;
 begin
   if not AppOptions.SaveOptions then
     MessageDlg('ERROR', AppOptions.LastError, mtError, [mbOk], 0);
 end;
 
-procedure TForm1.AskToClearPicks;
+procedure TMainForm.AskToClearPicks;
 begin
   If Picks.Items.Count = 0 then
     Exit;

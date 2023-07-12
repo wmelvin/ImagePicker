@@ -1,10 +1,10 @@
-object Form1: TForm1
+object MainForm: TMainForm
   Left = 514
   Height = 483
   Top = 166
   Width = 972
   ActiveControl = Panel1
-  Caption = 'Form1'
+  Caption = 'MainForm'
   ClientHeight = 459
   ClientWidth = 972
   KeyPreview = True

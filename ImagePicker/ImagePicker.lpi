@@ -36,12 +36,12 @@
         <IsPartOfProject Value="True"/>
       </Unit>
       <Unit>
-        <Filename Value="uform1.pas"/>
+        <Filename Value="umainform.pas"/>
         <IsPartOfProject Value="True"/>
-        <ComponentName Value="Form1"/>
+        <ComponentName Value="MainForm"/>
         <HasResources Value="True"/>
         <ResourceBaseClass Value="Form"/>
-        <UnitName Value="uForm1"/>
+        <UnitName Value="uMainForm"/>
       </Unit>
       <Unit>
         <Filename Value="uimageslist.pas"/>

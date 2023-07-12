@@ -10,7 +10,7 @@ uses
   athreads,
   {$ENDIF}
   Interfaces, // this includes the LCL widgetset
-  Forms, uForm1, uImagesList, uAppFuncs, uImageInfo, uApp, uAppOptions, 
+  Forms, uMainForm, uImagesList, uAppFuncs, uImageInfo, uApp, uAppOptions, 
 uCopyFilesDlg, uClipboard, uPicksFile
   { you can add units after this };
 
@@ -20,7 +20,7 @@ begin
   RequireDerivedFormResource:=True;
   Application.Scaled:=True;
   Application.Initialize;
-  Application.CreateForm(TForm1, Form1);
+  Application.CreateForm(TMainForm, MainForm);
   Application.CreateForm(TCopyFilesDlg, CopyFilesDlg);
   Application.Run;
 end.
