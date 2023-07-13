@@ -173,7 +173,7 @@ object MainForm: TMainForm
         TabOrder = 6
         TopIndex = -1
       end
-      object btnRemove: TButton
+      object btnPickRemove: TButton
         Left = 24
         Height = 25
         Hint = 'Delete selected item from the list.'
@@ -181,7 +181,7 @@ object MainForm: TMainForm
         Width = 56
         Anchors = [akRight, akBottom]
         Caption = '&Remove'
-        OnClick = btnRemoveClick
+        OnClick = btnPickRemoveClick
         ParentShowHint = False
         ShowHint = True
         TabOrder = 14
@@ -212,14 +212,14 @@ object MainForm: TMainForm
         OnEnter = editTagEnter
         OnExit = editTagExit
       end
-      object btnApply: TButton
+      object btnTagApply: TButton
         Left = 207
         Height = 25
         Hint = 'Apply tag to selected item in list.'
         Top = 118
         Width = 56
         Caption = 'Apply'
-        OnClick = btnApplyClick
+        OnClick = btnTagApplyClick
         ParentShowHint = False
         ShowHint = True
         TabOrder = 4
@@ -235,7 +235,7 @@ object MainForm: TMainForm
         ShowHint = True
         TabOrder = 5
       end
-      object btnAdd: TButton
+      object btnPickAdd: TButton
         Left = 24
         Height = 25
         Hint = 'Add the current image.'
@@ -243,12 +243,12 @@ object MainForm: TMainForm
         Width = 56
         Anchors = [akRight, akBottom]
         Caption = '&Add'
-        OnClick = btnAddClick
+        OnClick = btnPickAddClick
         ParentShowHint = False
         ShowHint = True
         TabOrder = 7
       end
-      object btnShow: TButton
+      object btnPickShow: TButton
         Left = 128
         Height = 25
         Hint = 'Show selected (F6)'
@@ -256,7 +256,7 @@ object MainForm: TMainForm
         Width = 40
         Anchors = [akRight, akBottom]
         Caption = 'Sho&w'
-        OnClick = btnShowClick
+        OnClick = btnPickShowClick
         ParentShowHint = False
         ShowHint = True
         TabOrder = 9
@@ -287,7 +287,7 @@ object MainForm: TMainForm
         ShowHint = True
         TabOrder = 8
       end
-      object btnDown: TButton
+      object btnPickDown: TButton
         Left = 215
         Height = 25
         Hint = 'Move Down (Ctrl+DownArrow)'
@@ -295,12 +295,12 @@ object MainForm: TMainForm
         Width = 56
         Anchors = [akRight, akBottom]
         Caption = 'Down'
-        OnClick = btnDownClick
+        OnClick = btnPickDownClick
         ParentShowHint = False
         ShowHint = True
         TabOrder = 12
       end
-      object btnUp: TButton
+      object btnPickUp: TButton
         Left = 215
         Height = 25
         Hint = 'Move Up Move Down (Ctrl+UpArrow)'
@@ -308,7 +308,7 @@ object MainForm: TMainForm
         Width = 56
         Anchors = [akRight, akBottom]
         Caption = 'Up'
-        OnClick = btnUpClick
+        OnClick = btnPickUpClick
         ParentShowHint = False
         ShowHint = True
         TabOrder = 11
@@ -347,7 +347,7 @@ object MainForm: TMainForm
         OnChange = chkLoopChange
         TabOrder = 2
       end
-      object btnCopy: TButton
+      object btnPicksCopy: TButton
         Left = 120
         Height = 25
         Hint = 'Copy file paths to the clipboard.'
@@ -355,7 +355,7 @@ object MainForm: TMainForm
         Width = 56
         Anchors = [akRight, akBottom]
         Caption = 'Copy'
-        OnClick = btnCopyClick
+        OnClick = btnPicksCopyClick
         ParentShowHint = False
         ShowHint = True
         TabOrder = 13

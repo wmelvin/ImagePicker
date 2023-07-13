@@ -13,15 +13,15 @@ type
   { TMainForm }
 
   TMainForm = class(TForm)
-    btnRemove: TButton;
-    btnApply: TButton;
-    btnAdd: TButton;
-    btnShow: TButton;
+    btnPickAdd: TButton;
+    btnPickDown: TButton;
+    btnPickRemove: TButton;
+    btnPicksCopy: TButton;
+    btnPickShow: TButton;
+    btnPickUp: TButton;
     btnShowNext: TButton;
     btnShowPrev: TButton;
-    btnDown: TButton;
-    btnUp: TButton;
-    btnCopy: TButton;
+    btnTagApply: TButton;
     chkLoop: TCheckBox;
     chkAutoTag: TCheckBox;
     Image1: TImage;
@@ -60,21 +60,21 @@ type
     SaveDialog1: TSaveDialog;
     Timer1: TTimer;
     TrackBar1: TTrackBar;
-    procedure btnAddClick(Sender: TObject);
-    procedure btnCopyClick(Sender: TObject);
-    procedure btnDownClick(Sender: TObject);
+    procedure btnPickAddClick(Sender: TObject);
+    procedure btnPicksCopyClick(Sender: TObject);
+    procedure btnPickDownClick(Sender: TObject);
     procedure btnShowNextClick(Sender: TObject);
-    procedure btnApplyClick(Sender: TObject);
+    procedure btnTagApplyClick(Sender: TObject);
     procedure btnFirstClick(Sender: TObject);
     procedure btnLastClick(Sender: TObject);
     procedure btnNextClick(Sender: TObject);
     procedure btnPlayStopClick(Sender: TObject);
     procedure btnPrevClick(Sender: TObject);
-    procedure btnShowClick(Sender: TObject);
+    procedure btnPickShowClick(Sender: TObject);
     procedure btnShowPrevClick(Sender: TObject);
     procedure btnToggleClick(Sender: TObject);
-    procedure btnRemoveClick(Sender: TObject);
-    procedure btnUpClick(Sender: TObject);
+    procedure btnPickRemoveClick(Sender: TObject);
+    procedure btnPickUpClick(Sender: TObject);
     procedure chkLoopChange(Sender: TObject);
     procedure editTagEnter(Sender: TObject);
     procedure editTagExit(Sender: TObject);
@@ -411,7 +411,7 @@ begin
   TogglePanel2;
 end;
 
-procedure TMainForm.btnRemoveClick(Sender: TObject);
+procedure TMainForm.btnPickRemoveClick(Sender: TObject);
 var
   i: Integer;
 begin
@@ -431,7 +431,7 @@ begin
       end;
 end;
 
-procedure TMainForm.btnUpClick(Sender: TObject);
+procedure TMainForm.btnPickUpClick(Sender: TObject);
 begin
   MoveSelectedUp;
 end;
@@ -478,7 +478,7 @@ begin
   ImageFirst;
 end;
 
-procedure TMainForm.btnApplyClick(Sender: TObject);
+procedure TMainForm.btnTagApplyClick(Sender: TObject);
 var
   i: Integer;
   item: TImageInfo;
@@ -497,12 +497,12 @@ begin
       end;
 end;
 
-procedure TMainForm.btnAddClick(Sender: TObject);
+procedure TMainForm.btnPickAddClick(Sender: TObject);
 begin
   AddCurrentImage;
 end;
 
-procedure TMainForm.btnCopyClick(Sender: TObject);
+procedure TMainForm.btnPicksCopyClick(Sender: TObject);
 var
   i: Integer;
   item: TImageInfo;
@@ -523,7 +523,7 @@ begin
     end;
 end;
 
-procedure TMainForm.btnDownClick(Sender: TObject);
+procedure TMainForm.btnPickDownClick(Sender: TObject);
 begin
   MoveSelectedDown;
 end;
@@ -750,7 +750,7 @@ begin
        end;
 end;
 
-procedure TMainForm.btnShowClick(Sender: TObject);
+procedure TMainForm.btnPickShowClick(Sender: TObject);
 begin
   ShowSelectedImage;
 end;
