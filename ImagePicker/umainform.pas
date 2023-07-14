@@ -40,10 +40,10 @@ type
     mnuFileSave: TMenuItem;
     mnuFile: TMenuItem;
     mnuFileExit: TMenuItem;
-    Panel1: TPanel;
-    Panel2: TPanel;
-    Panel3: TPanel;
-    Panel4: TPanel;
+    PanelImage: TPanel;
+    PanelPicks: TPanel;
+    PanelNav: TPanel;
+    PanelSide: TPanel;
     btnNavToggle: TSpeedButton;
     btnNavFirst: TSpeedButton;
     btnNavPrev: TSpeedButton;
@@ -176,7 +176,7 @@ begin
   StatusBar1.SimpleText := '(' + IntToStr(ImagesList.Index + 1) + ' of '
     + IntToStr(ImagesList.Count) + ') ' + ExtractFileName(filename) + t;
 
-  Panel1.Caption := '';
+  PanelImage.Caption := '';
 
   Image1.Picture.LoadFromFile(filename);
 
@@ -235,12 +235,12 @@ begin
     ImagesList.GoFirst;
   if ImagesList.Count = 0 then
     begin
-      Panel1.Caption := 'No images.';
+      PanelImage.Caption := 'No images.';
       TrackBar1.Enabled := False;
     end
   else
     begin
-      Panel1.Caption := '';
+      PanelImage.Caption := '';
       TrackBar1.Min := 1;
       TrackBar1.Max := ImagesList.Count;
       TrackBar1.Enabled := True;
@@ -385,10 +385,10 @@ end;
 
 procedure TMainForm.TogglePanel2;
 begin
-  if Panel2.Width < P2_DEFAULT_WIDTH then
+  if PanelPicks.Width < P2_DEFAULT_WIDTH then
     begin
       // Expand.
-      Panel2.Width := P2_DEFAULT_WIDTH;
+      PanelPicks.Width := P2_DEFAULT_WIDTH;
       btnNavToggle.ImageIndex := GLYPH_COLLAPSE;
       editTitle.Enabled := True;
       editTag.Enabled := True;
@@ -396,14 +396,14 @@ begin
   else
     begin
       // Collapse.
-      Panel2.Width := 4;
+      PanelPicks.Width := 4;
       btnNavToggle.ImageIndex := GLYPH_EXPAND;
       editTitle.Enabled := False;
       editTag.Enabled := False;
       Picks.ClearSelection;
       Picks.SetFocus;
     end;
-  Panel4.Width := Panel2.Width + Panel3.Width + 4;
+  PanelSide.Width := PanelPicks.Width + PanelNav.Width + 4;
 end;
 
 procedure TMainForm.btnNavToggleClick(Sender: TObject);
@@ -563,7 +563,7 @@ begin
   chkLoop.Checked := AppOptions.DoLoop;
   ImagesList.DoLoop := chkLoop.Checked;
   SpinEdit1.Value := AppOptions.SpeedMs;
-  Panel1.Caption := 'No images.';
+  PanelImage.Caption := 'No images.';
   StatusBar1.SimpleText := 'No images.';
 end;
 

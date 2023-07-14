@@ -3,7 +3,7 @@ object MainForm: TMainForm
   Height = 483
   Top = 166
   Width = 972
-  ActiveControl = Panel1
+  ActiveControl = PanelImage
   Caption = 'MainForm'
   ClientHeight = 459
   ClientWidth = 972
@@ -21,7 +21,7 @@ object MainForm: TMainForm
     Width = 972
     Panels = <>
   end
-  object Panel1: TPanel
+  object PanelImage: TPanel
     Left = 0
     Height = 441
     Top = 0
@@ -57,7 +57,7 @@ object MainForm: TMainForm
       TabOrder = 0
     end
   end
-  object Panel4: TPanel
+  object PanelSide: TPanel
     Left = 612
     Height = 441
     Top = 0
@@ -66,7 +66,7 @@ object MainForm: TMainForm
     ClientHeight = 441
     ClientWidth = 360
     TabOrder = 2
-    object Panel3: TPanel
+    object PanelNav: TPanel
       Left = 1
       Height = 439
       Top = 1
@@ -150,7 +150,7 @@ object MainForm: TMainForm
         ParentShowHint = False
       end
     end
-    object Panel2: TPanel
+    object PanelPicks: TPanel
       Left = 59
       Height = 439
       Top = 1
