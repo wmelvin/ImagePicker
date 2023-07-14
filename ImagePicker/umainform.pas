@@ -30,16 +30,16 @@ type
     editTag: TLabeledEdit;
     Label1: TLabel;
     Picks: TListBox;
-    MainMenu1: TMainMenu;
-    mnuOpenDir: TMenuItem;
-    mnuCopy: TMenuItem;
+    MainMenu: TMainMenu;
+    mnuFileOpenDir: TMenuItem;
+    mnuToolsCopy: TMenuItem;
     mnuTools: TMenuItem;
-    mnuOptions: TMenuItem;
-    mnuLoad: TMenuItem;
-    mnuOpen: TMenuItem;
-    mnuSave: TMenuItem;
+    mnuToolsOptions: TMenuItem;
+    mnuFileLoad: TMenuItem;
+    mnuFileOpen: TMenuItem;
+    mnuFileSave: TMenuItem;
     mnuFile: TMenuItem;
-    mnuExit: TMenuItem;
+    mnuFileExit: TMenuItem;
     Panel1: TPanel;
     Panel2: TPanel;
     Panel3: TPanel;
@@ -87,13 +87,13 @@ type
     procedure Image1Click(Sender: TObject);
     procedure Image1DblClick(Sender: TObject);
     procedure PicksDblClick(Sender: TObject);
-    procedure mnuCopyClick(Sender: TObject);
-    procedure mnuLoadClick(Sender: TObject);
-    procedure mnuExitClick(Sender: TObject);
-    procedure mnuOpenClick(Sender: TObject);
-    procedure mnuOpenDirClick(Sender: TObject);
-    procedure mnuOptionsClick(Sender: TObject);
-    procedure mnuSaveClick(Sender: TObject);
+    procedure mnuToolsCopyClick(Sender: TObject);
+    procedure mnuFileLoadClick(Sender: TObject);
+    procedure mnuFileExitClick(Sender: TObject);
+    procedure mnuFileOpenClick(Sender: TObject);
+    procedure mnuFileOpenDirClick(Sender: TObject);
+    procedure mnuToolsOptionsClick(Sender: TObject);
+    procedure mnuFileSaveClick(Sender: TObject);
     procedure SpinEdit1Change(Sender: TObject);
     procedure SpinEdit1Enter(Sender: TObject);
     procedure SpinEdit1Exit(Sender: TObject);
@@ -223,7 +223,7 @@ begin
     end;
 end;
 
-procedure TMainForm.mnuExitClick(Sender: TObject);
+procedure TMainForm.mnuFileExitClick(Sender: TObject);
 begin
   Close;
 end;
@@ -248,7 +248,7 @@ begin
     end;
 end;
 
-procedure TMainForm.mnuOpenClick(Sender: TObject);
+procedure TMainForm.mnuFileOpenClick(Sender: TObject);
 var
   dirname: String;
 begin
@@ -268,7 +268,7 @@ begin
     end;
 end;
 
-procedure TMainForm.mnuOpenDirClick(Sender: TObject);
+procedure TMainForm.mnuFileOpenDirClick(Sender: TObject);
 var
   dirname: String;
 begin
@@ -285,7 +285,7 @@ begin
     end;
 end;
 
-procedure TMainForm.mnuOptionsClick(Sender: TObject);
+procedure TMainForm.mnuToolsOptionsClick(Sender: TObject);
 var
   filename: String;
   mr: Integer;
@@ -311,7 +311,7 @@ begin
   SavePicksFile(FileName, editTitle.Text, Picks, StatusBar1);
 end;
 
-procedure TMainForm.mnuSaveClick(Sender: TObject);
+procedure TMainForm.mnuFileSaveClick(Sender: TObject);
 var
   dirname: String;
   filename: String;
@@ -765,7 +765,7 @@ begin
   ShowSelectedImage;
 end;
 
-procedure TMainForm.mnuCopyClick(Sender: TObject);
+procedure TMainForm.mnuToolsCopyClick(Sender: TObject);
 var
   mr: TModalResult;
 begin
@@ -784,7 +784,7 @@ begin
     LoadImagesList(last_pick, False);
 end;
 
-procedure TMainForm.mnuLoadClick(Sender: TObject);
+procedure TMainForm.mnuFileLoadClick(Sender: TObject);
 begin
   LoadPicksFromSavedFile;
 end;

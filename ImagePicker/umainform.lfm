@@ -8,7 +8,7 @@ object MainForm: TMainForm
   ClientHeight = 459
   ClientWidth = 972
   KeyPreview = True
-  Menu = MainMenu1
+  Menu = MainMenu
   OnActivate = FormActivate
   OnClose = FormClose
   OnCreate = FormCreate
@@ -362,50 +362,50 @@ object MainForm: TMainForm
       end
     end
   end
-  object MainMenu1: TMainMenu
+  object MainMenu: TMainMenu
     Left = 63
     Top = 36
     object mnuFile: TMenuItem
       Caption = '&File'
-      object mnuOpen: TMenuItem
+      object mnuFileOpen: TMenuItem
         Caption = '&Open file ...'
-        OnClick = mnuOpenClick
+        OnClick = mnuFileOpenClick
       end
-      object mnuOpenDir: TMenuItem
+      object mnuFileOpenDir: TMenuItem
         Caption = 'Open Fol&der ...'
-        OnClick = mnuOpenDirClick
+        OnClick = mnuFileOpenDirClick
       end
       object Separator1: TMenuItem
         Caption = '-'
       end
-      object mnuLoad: TMenuItem
+      object mnuFileLoad: TMenuItem
         Caption = '&Load list ...'
-        OnClick = mnuLoadClick
+        OnClick = mnuFileLoadClick
       end
-      object mnuSave: TMenuItem
+      object mnuFileSave: TMenuItem
         Caption = '&Save list ...'
-        OnClick = mnuSaveClick
+        OnClick = mnuFileSaveClick
       end
       object Separator2: TMenuItem
         Caption = '-'
       end
-      object mnuExit: TMenuItem
+      object mnuFileExit: TMenuItem
         Caption = 'e&Xit'
-        OnClick = mnuExitClick
+        OnClick = mnuFileExitClick
       end
     end
     object mnuTools: TMenuItem
       Caption = '&Tools'
-      object mnuOptions: TMenuItem
+      object mnuToolsOptions: TMenuItem
         Caption = 'Options ...'
-        OnClick = mnuOptionsClick
+        OnClick = mnuToolsOptionsClick
       end
       object Separator3: TMenuItem
         Caption = '-'
       end
-      object mnuCopy: TMenuItem
+      object mnuToolsCopy: TMenuItem
         Caption = 'Copy files ...'
-        OnClick = mnuCopyClick
+        OnClick = mnuToolsCopyClick
       end
     end
   end
