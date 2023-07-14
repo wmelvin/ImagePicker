@@ -76,7 +76,7 @@ object MainForm: TMainForm
       ClientWidth = 55
       TabOrder = 0
       UseDockManager = False
-      object btnToggle: TSpeedButton
+      object btnNavToggle: TSpeedButton
         Left = 8
         Height = 36
         Hint = 'Toggle panel (F4)'
@@ -85,11 +85,11 @@ object MainForm: TMainForm
         Images = Glyphs
         ImageIndex = 0
         ImageWidth = 25
-        OnClick = btnToggleClick
+        OnClick = btnNavToggleClick
         ShowHint = True
         ParentShowHint = False
       end
-      object btnFirst: TSpeedButton
+      object btnNavFirst: TSpeedButton
         Left = 8
         Height = 36
         Hint = 'First (Home)'
@@ -97,11 +97,11 @@ object MainForm: TMainForm
         Width = 36
         Images = Glyphs
         ImageIndex = 2
-        OnClick = btnFirstClick
+        OnClick = btnNavFirstClick
         ShowHint = True
         ParentShowHint = False
       end
-      object btnPrev: TSpeedButton
+      object btnNavPrev: TSpeedButton
         Left = 8
         Height = 36
         Hint = 'Previous (Left arrow)'
@@ -109,11 +109,11 @@ object MainForm: TMainForm
         Width = 36
         Images = Glyphs
         ImageIndex = 3
-        OnClick = btnPrevClick
+        OnClick = btnNavPrevClick
         ShowHint = True
         ParentShowHint = False
       end
-      object btnPlayStop: TSpeedButton
+      object btnNavTogglePlay: TSpeedButton
         Left = 8
         Height = 36
         Hint = 'Play/Stop (F5)'
@@ -121,11 +121,11 @@ object MainForm: TMainForm
         Width = 36
         Images = Glyphs
         ImageIndex = 4
-        OnClick = btnPlayStopClick
+        OnClick = btnNavTogglePlayClick
         ShowHint = True
         ParentShowHint = False
       end
-      object btnNext: TSpeedButton
+      object btnNavNext: TSpeedButton
         Left = 8
         Height = 36
         Hint = 'Next (Right arrow)'
@@ -133,11 +133,11 @@ object MainForm: TMainForm
         Width = 36
         Images = Glyphs
         ImageIndex = 6
-        OnClick = btnNextClick
+        OnClick = btnNavNextClick
         ShowHint = True
         ParentShowHint = False
       end
-      object btnLast: TSpeedButton
+      object btnNavLast: TSpeedButton
         Left = 8
         Height = 36
         Hint = 'Last (End)'
@@ -145,7 +145,7 @@ object MainForm: TMainForm
         Width = 36
         Images = Glyphs
         ImageIndex = 7
-        OnClick = btnLastClick
+        OnClick = btnNavLastClick
         ShowHint = True
         ParentShowHint = False
       end
@@ -261,7 +261,7 @@ object MainForm: TMainForm
         ShowHint = True
         TabOrder = 9
       end
-      object btnShowNext: TButton
+      object btnPickShowNext: TButton
         Left = 168
         Height = 25
         Hint = 'Show next (F8)'
@@ -269,12 +269,12 @@ object MainForm: TMainForm
         Width = 24
         Anchors = [akRight, akBottom]
         Caption = '>'
-        OnClick = btnShowNextClick
+        OnClick = btnPickShowNextClick
         ParentShowHint = False
         ShowHint = True
         TabOrder = 10
       end
-      object btnShowPrev: TButton
+      object btnPickShowPrev: TButton
         Left = 104
         Height = 25
         Hint = 'Show previous (F7)'
@@ -282,7 +282,7 @@ object MainForm: TMainForm
         Width = 24
         Anchors = [akRight, akBottom]
         Caption = '<'
-        OnClick = btnShowPrevClick
+        OnClick = btnPickShowPrevClick
         ParentShowHint = False
         ShowHint = True
         TabOrder = 8
@@ -347,7 +347,7 @@ object MainForm: TMainForm
         OnChange = chkLoopChange
         TabOrder = 2
       end
-      object btnPicksCopy: TButton
+      object btnPickCopyAll: TButton
         Left = 120
         Height = 25
         Hint = 'Copy file paths to the clipboard.'
@@ -355,7 +355,7 @@ object MainForm: TMainForm
         Width = 56
         Anchors = [akRight, akBottom]
         Caption = 'Copy'
-        OnClick = btnPicksCopyClick
+        OnClick = btnPickCopyAllClick
         ParentShowHint = False
         ShowHint = True
         TabOrder = 13

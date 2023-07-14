@@ -16,11 +16,11 @@ type
     btnPickAdd: TButton;
     btnPickDown: TButton;
     btnPickRemove: TButton;
-    btnPicksCopy: TButton;
+    btnPickCopyAll: TButton;
     btnPickShow: TButton;
     btnPickUp: TButton;
-    btnShowNext: TButton;
-    btnShowPrev: TButton;
+    btnPickShowNext: TButton;
+    btnPickShowPrev: TButton;
     btnTagApply: TButton;
     chkLoop: TCheckBox;
     chkAutoTag: TCheckBox;
@@ -44,12 +44,12 @@ type
     Panel2: TPanel;
     Panel3: TPanel;
     Panel4: TPanel;
-    btnToggle: TSpeedButton;
-    btnFirst: TSpeedButton;
-    btnPrev: TSpeedButton;
-    btnPlayStop: TSpeedButton;
-    btnNext: TSpeedButton;
-    btnLast: TSpeedButton;
+    btnNavToggle: TSpeedButton;
+    btnNavFirst: TSpeedButton;
+    btnNavPrev: TSpeedButton;
+    btnNavTogglePlay: TSpeedButton;
+    btnNavNext: TSpeedButton;
+    btnNavLast: TSpeedButton;
     OpenDirDialog: TSelectDirectoryDialog;
     Separator1: TMenuItem;
     Separator2: TMenuItem;
@@ -61,18 +61,18 @@ type
     Timer1: TTimer;
     TrackBar1: TTrackBar;
     procedure btnPickAddClick(Sender: TObject);
-    procedure btnPicksCopyClick(Sender: TObject);
+    procedure btnPickCopyAllClick(Sender: TObject);
     procedure btnPickDownClick(Sender: TObject);
-    procedure btnShowNextClick(Sender: TObject);
+    procedure btnPickShowNextClick(Sender: TObject);
     procedure btnTagApplyClick(Sender: TObject);
-    procedure btnFirstClick(Sender: TObject);
-    procedure btnLastClick(Sender: TObject);
-    procedure btnNextClick(Sender: TObject);
-    procedure btnPlayStopClick(Sender: TObject);
-    procedure btnPrevClick(Sender: TObject);
+    procedure btnNavFirstClick(Sender: TObject);
+    procedure btnNavLastClick(Sender: TObject);
+    procedure btnNavNextClick(Sender: TObject);
+    procedure btnNavTogglePlayClick(Sender: TObject);
+    procedure btnNavPrevClick(Sender: TObject);
     procedure btnPickShowClick(Sender: TObject);
-    procedure btnShowPrevClick(Sender: TObject);
-    procedure btnToggleClick(Sender: TObject);
+    procedure btnPickShowPrevClick(Sender: TObject);
+    procedure btnNavToggleClick(Sender: TObject);
     procedure btnPickRemoveClick(Sender: TObject);
     procedure btnPickUpClick(Sender: TObject);
     procedure chkLoopChange(Sender: TObject);
@@ -214,12 +214,12 @@ begin
   if Timer1.Enabled then
      begin
        Timer1.Enabled := False;
-       btnPlayStop.ImageIndex := GLYPH_PLAY;
+       btnNavTogglePlay.ImageIndex := GLYPH_PLAY;
      end
   else
     begin
       Timer1.Enabled := True;
-      btnPlayStop.ImageIndex := GLYPH_STOP;
+      btnNavTogglePlay.ImageIndex := GLYPH_STOP;
     end;
 end;
 
@@ -389,7 +389,7 @@ begin
     begin
       // Expand.
       Panel2.Width := P2_DEFAULT_WIDTH;
-      btnToggle.ImageIndex := GLYPH_COLLAPSE;
+      btnNavToggle.ImageIndex := GLYPH_COLLAPSE;
       editTitle.Enabled := True;
       editTag.Enabled := True;
     end
@@ -397,7 +397,7 @@ begin
     begin
       // Collapse.
       Panel2.Width := 4;
-      btnToggle.ImageIndex := GLYPH_EXPAND;
+      btnNavToggle.ImageIndex := GLYPH_EXPAND;
       editTitle.Enabled := False;
       editTag.Enabled := False;
       Picks.ClearSelection;
@@ -406,7 +406,7 @@ begin
   Panel4.Width := Panel2.Width + Panel3.Width + 4;
 end;
 
-procedure TMainForm.btnToggleClick(Sender: TObject);
+procedure TMainForm.btnNavToggleClick(Sender: TObject);
 begin
   TogglePanel2;
 end;
@@ -473,7 +473,7 @@ begin
   AppOptions.SaveOptions;
 end;
 
-procedure TMainForm.btnFirstClick(Sender: TObject);
+procedure TMainForm.btnNavFirstClick(Sender: TObject);
 begin
   ImageFirst;
 end;
@@ -502,7 +502,7 @@ begin
   AddCurrentImage;
 end;
 
-procedure TMainForm.btnPicksCopyClick(Sender: TObject);
+procedure TMainForm.btnPickCopyAllClick(Sender: TObject);
 var
   i: Integer;
   item: TImageInfo;
@@ -528,27 +528,27 @@ begin
   MoveSelectedDown;
 end;
 
-procedure TMainForm.btnShowNextClick(Sender: TObject);
+procedure TMainForm.btnPickShowNextClick(Sender: TObject);
 begin
   SelectShowNext;
 end;
 
-procedure TMainForm.btnLastClick(Sender: TObject);
+procedure TMainForm.btnNavLastClick(Sender: TObject);
 begin
   ImageLast;
 end;
 
-procedure TMainForm.btnNextClick(Sender: TObject);
+procedure TMainForm.btnNavNextClick(Sender: TObject);
 begin
   ImageNext;
 end;
 
-procedure TMainForm.btnPlayStopClick(Sender: TObject);
+procedure TMainForm.btnNavTogglePlayClick(Sender: TObject);
 begin
   PlayStop;
 end;
 
-procedure TMainForm.btnPrevClick(Sender: TObject);
+procedure TMainForm.btnNavPrevClick(Sender: TObject);
 begin
   ImagePrev;
 end;
@@ -755,7 +755,7 @@ begin
   ShowSelectedImage;
 end;
 
-procedure TMainForm.btnShowPrevClick(Sender: TObject);
+procedure TMainForm.btnPickShowPrevClick(Sender: TObject);
 begin
   SelectShowPrev;
 end;
