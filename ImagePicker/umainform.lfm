@@ -14,7 +14,7 @@ object MainForm: TMainForm
   OnCreate = FormCreate
   OnKeyDown = FormKeyDown
   LCLVersion = '2.2.6.0'
-  object StatusBar1: TStatusBar
+  object StatusBar: TStatusBar
     Left = 0
     Height = 18
     Top = 441
@@ -33,7 +33,7 @@ object MainForm: TMainForm
     ClientHeight = 441
     ClientWidth = 612
     TabOrder = 1
-    object Image1: TImage
+    object Image: TImage
       Left = 4
       Height = 395
       Top = 4
@@ -42,18 +42,18 @@ object MainForm: TMainForm
       Align = alClient
       AutoSize = True
       Center = True
-      OnClick = Image1Click
-      OnDblClick = Image1DblClick
+      OnClick = ImageClick
+      OnDblClick = ImageDblClick
       Proportional = True
     end
-    object TrackBar1: TTrackBar
+    object TrackBar: TTrackBar
       Left = 4
       Height = 38
       Top = 399
       Width = 604
       Position = 0
       Align = alBottom
-      OnMouseUp = TrackBar1MouseUp
+      OnMouseUp = TrackBarMouseUp
       TabOrder = 0
     end
   end
@@ -313,8 +313,8 @@ object MainForm: TMainForm
         ShowHint = True
         TabOrder = 11
       end
-      object SpinEdit1: TSpinEdit
-        Left = 88
+      object SpinEdit: TSpinEdit
+        Left = 96
         Height = 28
         Hint = 'Play speed in milliseconds'
         Top = 63
@@ -322,15 +322,15 @@ object MainForm: TMainForm
         Increment = 100
         MaxValue = 10000
         MinValue = 100
-        OnChange = SpinEdit1Change
-        OnEnter = SpinEdit1Enter
-        OnExit = SpinEdit1Exit
+        OnChange = SpinEditChange
+        OnEnter = SpinEditEnter
+        OnExit = SpinEditExit
         ParentShowHint = False
         ShowHint = True
         TabOrder = 1
         Value = 1000
       end
-      object Label1: TLabel
+      object SpinEditLabel: TLabel
         Left = 20
         Height = 16
         Top = 64
@@ -339,9 +339,9 @@ object MainForm: TMainForm
         ParentColor = False
       end
       object chkLoop: TCheckBox
-        Left = 178
+        Left = 184
         Height = 23
-        Top = 64
+        Top = 63
         Width = 57
         Caption = 'Loop'
         OnChange = chkLoopChange
@@ -471,20 +471,20 @@ object MainForm: TMainForm
       6482FF0190540AEF
     }
   end
-  object OpenDialog1: TOpenDialog
+  object OpenDialog: TOpenDialog
     Options = [ofFileMustExist, ofEnableSizing, ofViewDetail]
-    Left = 208
+    Left = 192
     Top = 304
   end
-  object SaveDialog1: TSaveDialog
+  object SaveDialog: TSaveDialog
     Left = 280
     Top = 304
   end
-  object Timer1: TTimer
+  object Timer: TTimer
     Enabled = False
-    OnTimer = Timer1Timer
-    Left = 144
-    Top = 304
+    OnTimer = TimerTimer
+    Left = 120
+    Top = 296
   end
   object OpenDirDialog: TSelectDirectoryDialog
     Left = 399

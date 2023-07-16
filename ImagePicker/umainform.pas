@@ -24,11 +24,11 @@ type
     btnTagApply: TButton;
     chkLoop: TCheckBox;
     chkAutoTag: TCheckBox;
-    Image1: TImage;
+    Image: TImage;
     Glyphs: TImageList;
     editTitle: TLabeledEdit;
     editTag: TLabeledEdit;
-    Label1: TLabel;
+    SpinEditLabel: TLabel;
     Picks: TListBox;
     MainMenu: TMainMenu;
     mnuFileOpenDir: TMenuItem;
@@ -54,12 +54,12 @@ type
     Separator1: TMenuItem;
     Separator2: TMenuItem;
     Separator3: TMenuItem;
-    SpinEdit1: TSpinEdit;
-    StatusBar1: TStatusBar;
-    OpenDialog1: TOpenDialog;
-    SaveDialog1: TSaveDialog;
-    Timer1: TTimer;
-    TrackBar1: TTrackBar;
+    SpinEdit: TSpinEdit;
+    StatusBar: TStatusBar;
+    OpenDialog: TOpenDialog;
+    SaveDialog: TSaveDialog;
+    Timer: TTimer;
+    TrackBar: TTrackBar;
     procedure btnPickAddClick(Sender: TObject);
     procedure btnPickCopyAllClick(Sender: TObject);
     procedure btnPickDownClick(Sender: TObject);
@@ -84,8 +84,8 @@ type
     procedure FormClose(Sender: TObject; var CloseAction: TCloseAction);
     procedure FormCreate(Sender: TObject);
     procedure FormKeyDown(Sender: TObject; var Key: Word; Shift: TShiftState);
-    procedure Image1Click(Sender: TObject);
-    procedure Image1DblClick(Sender: TObject);
+    procedure ImageClick(Sender: TObject);
+    procedure ImageDblClick(Sender: TObject);
     procedure PicksDblClick(Sender: TObject);
     procedure mnuToolsCopyClick(Sender: TObject);
     procedure mnuFileLoadClick(Sender: TObject);
@@ -94,11 +94,11 @@ type
     procedure mnuFileOpenDirClick(Sender: TObject);
     procedure mnuToolsOptionsClick(Sender: TObject);
     procedure mnuFileSaveClick(Sender: TObject);
-    procedure SpinEdit1Change(Sender: TObject);
-    procedure SpinEdit1Enter(Sender: TObject);
-    procedure SpinEdit1Exit(Sender: TObject);
-    procedure Timer1Timer(Sender: TObject);
-    procedure TrackBar1MouseUp(Sender: TObject; Button: TMouseButton;
+    procedure SpinEditChange(Sender: TObject);
+    procedure SpinEditEnter(Sender: TObject);
+    procedure SpinEditExit(Sender: TObject);
+    procedure TimerTimer(Sender: TObject);
+    procedure TrackBarMouseUp(Sender: TObject; Button: TMouseButton;
       Shift: TShiftState; X, Y: Integer);
   private
     InEdit: Boolean;
@@ -173,14 +173,14 @@ begin
   if Length(filename) = 0 then
     Exit;
 
-  StatusBar1.SimpleText := '(' + IntToStr(ImagesList.Index + 1) + ' of '
+  StatusBar.SimpleText := '(' + IntToStr(ImagesList.Index + 1) + ' of '
     + IntToStr(ImagesList.Count) + ') ' + ExtractFileName(filename) + t;
 
   PanelImage.Caption := '';
 
-  Image1.Picture.LoadFromFile(filename);
+  Image.Picture.LoadFromFile(filename);
 
-  TrackBar1.Position := ImagesList.Index + 1;
+  TrackBar.Position := ImagesList.Index + 1;
 end;
 
 procedure TMainForm.ImageFirst;
@@ -198,7 +198,7 @@ end;
 procedure TMainForm.ImageNext;
 begin
   if not ImagesList.GoNext then
-    if Timer1.Enabled then
+    if Timer.Enabled then
       PlayStop;
   LoadImage;
 end;
@@ -211,14 +211,14 @@ end;
 
 procedure TMainForm.PlayStop;
 begin
-  if Timer1.Enabled then
+  if Timer.Enabled then
      begin
-       Timer1.Enabled := False;
+       Timer.Enabled := False;
        btnNavTogglePlay.ImageIndex := GLYPH_PLAY;
      end
   else
     begin
-      Timer1.Enabled := True;
+      Timer.Enabled := True;
       btnNavTogglePlay.ImageIndex := GLYPH_STOP;
     end;
 end;
@@ -236,14 +236,14 @@ begin
   if ImagesList.Count = 0 then
     begin
       PanelImage.Caption := 'No images.';
-      TrackBar1.Enabled := False;
+      TrackBar.Enabled := False;
     end
   else
     begin
       PanelImage.Caption := '';
-      TrackBar1.Min := 1;
-      TrackBar1.Max := ImagesList.Count;
-      TrackBar1.Enabled := True;
+      TrackBar.Min := 1;
+      TrackBar.Max := ImagesList.Count;
+      TrackBar.Enabled := True;
       LoadImage;
     end;
 end;
@@ -254,16 +254,16 @@ var
 begin
   dirname := AppOptions.LastOpenDir;
   if (0 < Length(dirname)) and DirectoryExists(dirname) then
-    OpenDialog1.InitialDir := dirname;
+    OpenDialog.InitialDir := dirname;
 
-  OpenDialog1.Filter := 'Image files|*.jpg;*.png;*.jpeg;*.bmp;*.gif;'
+  OpenDialog.Filter := 'Image files|*.jpg;*.png;*.jpeg;*.bmp;*.gif;'
     + '*.JPG;*.PNG;*.JPEG;*.BMP;*.GIF';
 
-  if OpenDialog1.Execute then
+  if OpenDialog.Execute then
     begin
       AskToClearPicks;
-      LoadImagesList(OpenDialog1.FileName, True);
-      AppOptions.LastOpenDir := ExtractFileDir(OpenDialog1.FileName);
+      LoadImagesList(OpenDialog.FileName, True);
+      AppOptions.LastOpenDir := ExtractFileDir(OpenDialog.FileName);
       SaveAppOptions;
     end;
 end;
@@ -280,7 +280,7 @@ begin
     begin
       AskToClearPicks;
       LoadImagesList(OpenDirDialog.FileName, True);
-      AppOptions.LastOpenDir := ExtractFileDir(OpenDialog1.FileName);
+      AppOptions.LastOpenDir := ExtractFileDir(OpenDialog.FileName);
       SaveAppOptions;
     end;
 end;
@@ -308,7 +308,7 @@ end;
 
 procedure TMainForm.SavePicks(FileName: String);
 begin
-  SavePicksFile(FileName, editTitle.Text, Picks, StatusBar1);
+  SavePicksFile(FileName, editTitle.Text, Picks, StatusBar);
 end;
 
 procedure TMainForm.mnuFileSaveClick(Sender: TObject);
@@ -329,46 +329,46 @@ begin
   dt := FormatDateTime('yyyymmdd_hhnnss', Now);
   filename := 'ImageList-' + title + dt + '.txt';
 
-  SaveDialog1.InitialDir:= dirname;
-  SaveDialog1.FileName := filename;
-  if SaveDialog1.Execute then
+  SaveDialog.InitialDir:= dirname;
+  SaveDialog.FileName := filename;
+  if SaveDialog.Execute then
     begin
-      SavePicks(SaveDialog1.FileName);
-      AppOptions.LastSaveDir := ExtractFileDir(SaveDialog1.FileName);
+      SavePicks(SaveDialog.FileName);
+      AppOptions.LastSaveDir := ExtractFileDir(SaveDialog.FileName);
       SaveAppOptions;
     end;
 end;
 
-procedure TMainForm.SpinEdit1Change(Sender: TObject);
+procedure TMainForm.SpinEditChange(Sender: TObject);
 begin
-  if SpinEdit1.Value < MIN_PLAY_MS then
-    SpinEdit1.Value := MIN_PLAY_MS
-  else if MAX_PLAY_MS < SpinEdit1.Value then
-    SpinEdit1.Value := MAX_PLAY_MS;
+  if SpinEdit.Value < MIN_PLAY_MS then
+    SpinEdit.Value := MIN_PLAY_MS
+  else if MAX_PLAY_MS < SpinEdit.Value then
+    SpinEdit.Value := MAX_PLAY_MS;
 
-  AppOptions.SpeedMs := SpinEdit1.Value;
+  AppOptions.SpeedMs := SpinEdit.Value;
   // To not slow things down, do not SaveAppOptions now.
   // Setting will be saved on form close.
 
-  Timer1.Interval := SpinEdit1.Value;
+  Timer.Interval := SpinEdit.Value;
 end;
 
-procedure TMainForm.SpinEdit1Enter(Sender: TObject);
+procedure TMainForm.SpinEditEnter(Sender: TObject);
 begin
   InEdit := True;
 end;
 
-procedure TMainForm.SpinEdit1Exit(Sender: TObject);
+procedure TMainForm.SpinEditExit(Sender: TObject);
 begin
   InEdit := False;
 end;
 
-procedure TMainForm.Timer1Timer(Sender: TObject);
+procedure TMainForm.TimerTimer(Sender: TObject);
 begin
   ImageNext;
 end;
 
-procedure TMainForm.TrackBar1MouseUp(Sender: TObject; Button: TMouseButton;
+procedure TMainForm.TrackBarMouseUp(Sender: TObject; Button: TMouseButton;
   Shift: TShiftState; X, Y: Integer);
 {  Note: Using MouseUp instead of OnChange because OnChange fires for
    every position change when dragging the marker, and would load the
@@ -378,7 +378,7 @@ procedure TMainForm.TrackBar1MouseUp(Sender: TObject; Button: TMouseButton;
 var
   p: Integer;
 begin
-  p := TrackBar1.Position;
+  p := TrackBar.Position;
   if ImagesList.SetCurrentIndex(p - 1) then
     LoadImage;
 end;
@@ -485,7 +485,7 @@ var
 begin
   if Picks.SelCount = 0 then
     begin
-      StatusBar1.SimpleText := 'No items selected in list of images.';
+      StatusBar.SimpleText := 'No items selected in list of images.';
       Exit;
     end;
 
@@ -515,11 +515,11 @@ begin
     s := s + '"' + item.FullName + '"' + #13#10;
   end;
   if 0 = Length(s) then
-    StatusBar1.SimpleText := 'Nothing to copy.'
+    StatusBar.SimpleText := 'Nothing to copy.'
   else
     begin
       TextToClipboard(s);
-      StatusBar1.SimpleText := 'File paths copied to clipboard.'
+      StatusBar.SimpleText := 'File paths copied to clipboard.'
     end;
 end;
 
@@ -562,9 +562,9 @@ begin
   AppOptions.LoadOptions;
   chkLoop.Checked := AppOptions.DoLoop;
   ImagesList.DoLoop := chkLoop.Checked;
-  SpinEdit1.Value := AppOptions.SpeedMs;
+  SpinEdit.Value := AppOptions.SpeedMs;
   PanelImage.Caption := 'No images.';
-  StatusBar1.SimpleText := 'No images.';
+  StatusBar.SimpleText := 'No images.';
 end;
 
 procedure TMainForm.FormKeyDown(Sender: TObject; var Key: Word; Shift: TShiftState
@@ -660,10 +660,10 @@ begin
     end;
 end;
 
-procedure TMainForm.Image1Click(Sender: TObject);
+procedure TMainForm.ImageClick(Sender: TObject);
 begin
   // Show full path to image in status bar.
-  StatusBar1.SimpleText := ImagesList.CurrentImage;
+  StatusBar.SimpleText := ImagesList.CurrentImage;
 end;
 
 procedure TMainForm.GetArgs;
@@ -708,7 +708,7 @@ begin
   end;
 end;
 
-procedure TMainForm.Image1DblClick(Sender: TObject);
+procedure TMainForm.ImageDblClick(Sender: TObject);
 begin
   AddCurrentImage;
 end;
@@ -779,7 +779,7 @@ procedure TMainForm.LoadPicksFromSavedFile;
 var
   last_pick: String;
 begin
-  last_pick := LoadPicksFile(OpenDialog1, editTitle, Picks, StatusBar1);
+  last_pick := LoadPicksFile(OpenDialog, editTitle, Picks, StatusBar);
   if 0 < Length(last_pick) then
     LoadImagesList(last_pick, False);
 end;
