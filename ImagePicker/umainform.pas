@@ -160,255 +160,66 @@ var
 
 { TMainForm }
 
-procedure TMainForm.LoadImage(const ATag: String = '');
-var
-  filename: String;
-  t: String;
+
+procedure TMainForm.btnNavFirstClick(Sender: TObject);
 begin
-  t := ATag;
-  if 0 < Length(t) then
-    t := ' [' + t + ']';
-
-  filename := ImagesList.CurrentImage;
-  if Length(filename) = 0 then
-    Exit;
-
-  StatusBar.SimpleText := '(' + IntToStr(ImagesList.Index + 1) + ' of '
-    + IntToStr(ImagesList.Count) + ') ' + ExtractFileName(filename) + t;
-
-  PanelImage.Caption := '';
-
-  Image.Picture.LoadFromFile(filename);
-
-  TrackBar.Position := ImagesList.Index + 1;
+  ImageFirst;
 end;
 
-procedure TMainForm.ImageFirst;
+procedure TMainForm.btnNavLastClick(Sender: TObject);
 begin
-  ImagesList.GoFirst;
-  LoadImage;
+  ImageLast;
 end;
 
-procedure TMainForm.ImagePrev;
-begin
-  ImagesList.GoPrevious;
-  LoadImage;
-end;
-
-procedure TMainForm.ImageNext;
-begin
-  if not ImagesList.GoNext then
-    if Timer.Enabled then
-      PlayStop;
-  LoadImage;
-end;
-
-procedure TMainForm.ImageLast;
-begin
-  ImagesList.GoLast;
-  LoadImage;
-end;
-
-procedure TMainForm.PlayStop;
-begin
-  if Timer.Enabled then
-     begin
-       Timer.Enabled := False;
-       btnNavTogglePlay.ImageIndex := GLYPH_PLAY;
-     end
-  else
-    begin
-      Timer.Enabled := True;
-      btnNavTogglePlay.ImageIndex := GLYPH_STOP;
-    end;
-end;
-
-procedure TMainForm.mnuFileExitClick(Sender: TObject);
-begin
-  Close;
-end;
-
-procedure TMainForm.LoadImagesList(FileName: String; AllowSubDirs: Boolean);
-begin
-  ImagesList.Load(FileName, AllowSubDirs);
-  if not ImagesList.SetCurrentImage(FileName) then
-    ImagesList.GoFirst;
-  if ImagesList.Count = 0 then
-    begin
-      PanelImage.Caption := 'No images.';
-      TrackBar.Enabled := False;
-    end
-  else
-    begin
-      PanelImage.Caption := '';
-      TrackBar.Min := 1;
-      TrackBar.Max := ImagesList.Count;
-      TrackBar.Enabled := True;
-      LoadImage;
-    end;
-end;
-
-procedure TMainForm.mnuFileOpenClick(Sender: TObject);
-var
-  dirname: String;
-begin
-  dirname := AppOptions.LastOpenDir;
-  if (0 < Length(dirname)) and DirectoryExists(dirname) then
-    OpenDialog.InitialDir := dirname;
-
-  OpenDialog.Filter := 'Image files|*.jpg;*.png;*.jpeg;*.bmp;*.gif;'
-    + '*.JPG;*.PNG;*.JPEG;*.BMP;*.GIF';
-
-  if OpenDialog.Execute then
-    begin
-      AskToClearPicks;
-      LoadImagesList(OpenDialog.FileName, True);
-      AppOptions.LastOpenDir := ExtractFileDir(OpenDialog.FileName);
-      SaveAppOptions;
-    end;
-end;
-
-procedure TMainForm.mnuFileOpenDirClick(Sender: TObject);
-var
-  dirname: String;
-begin
-  dirname := AppOptions.LastOpenDir;
-  if (0 < Length(dirname)) and DirectoryExists(dirname) then
-    OpenDirDialog.InitialDir := dirname;
-
-  if OpenDirDialog.Execute then
-    begin
-      AskToClearPicks;
-      LoadImagesList(OpenDirDialog.FileName, True);
-      AppOptions.LastOpenDir := ExtractFileDir(OpenDialog.FileName);
-      SaveAppOptions;
-    end;
-end;
-
-procedure TMainForm.mnuToolsOptionsClick(Sender: TObject);
-var
-  filename: String;
-  mr: Integer;
-begin
-  filename := AppOptions.OptFileName;
-
-  mr := MessageDlg(
-    'Open Folder?',
-    'Open the folder containing' + #13#10 + filename,
-    mtConfirmation, [mbYes, mbNo], 0);
-
-  if mr = mrYes then
-    // Open the folder using the default associated application.
-    OpenDocument(ExtractFileDir(filename));
-
-  { TODO: (maybe) Create a form for editing application options. For this
-    application, that may not be necessary. For a commercial product,
-    you'd want a form with input validation. }
-end;
-
-procedure TMainForm.SavePicks(FileName: String);
-begin
-  SavePicksFile(FileName, editTitle.Text, Picks, StatusBar);
-end;
-
-procedure TMainForm.mnuFileSaveClick(Sender: TObject);
-var
-  dirname: String;
-  filename: String;
-  title: String;
-  dt: String;
-begin
-  title := StringReplace(editTitle.Text, ' ', '_', [rfReplaceAll]);
-  if 0 < Length(title) then
-    title := title + '-';
-
-  dirname := AppOptions.LastSaveDir;
-  if (Length(dirname) = 0) or (not DirectoryExists(dirname)) then
-    dirname := GetCurrentDir;
-
-  dt := FormatDateTime('yyyymmdd_hhnnss', Now);
-  filename := 'ImageList-' + title + dt + '.txt';
-
-  SaveDialog.InitialDir:= dirname;
-  SaveDialog.FileName := filename;
-  if SaveDialog.Execute then
-    begin
-      SavePicks(SaveDialog.FileName);
-      AppOptions.LastSaveDir := ExtractFileDir(SaveDialog.FileName);
-      SaveAppOptions;
-    end;
-end;
-
-procedure TMainForm.SpinEditChange(Sender: TObject);
-begin
-  if SpinEdit.Value < MIN_PLAY_MS then
-    SpinEdit.Value := MIN_PLAY_MS
-  else if MAX_PLAY_MS < SpinEdit.Value then
-    SpinEdit.Value := MAX_PLAY_MS;
-
-  AppOptions.SpeedMs := SpinEdit.Value;
-  // To not slow things down, do not SaveAppOptions now.
-  // Setting will be saved on form close.
-
-  Timer.Interval := SpinEdit.Value;
-end;
-
-procedure TMainForm.SpinEditEnter(Sender: TObject);
-begin
-  InEdit := True;
-end;
-
-procedure TMainForm.SpinEditExit(Sender: TObject);
-begin
-  InEdit := False;
-end;
-
-procedure TMainForm.TimerTimer(Sender: TObject);
+procedure TMainForm.btnNavNextClick(Sender: TObject);
 begin
   ImageNext;
 end;
 
-procedure TMainForm.TrackBarMouseUp(Sender: TObject; Button: TMouseButton;
-  Shift: TShiftState; X, Y: Integer);
-{  Note: Using MouseUp instead of OnChange because OnChange fires for
-   every position change when dragging the marker, and would load the
-   image at each step, making it very slow to drag to a new position
-   in a large set of images.
-}
-var
-  p: Integer;
+procedure TMainForm.btnNavPrevClick(Sender: TObject);
 begin
-  p := TrackBar.Position;
-  if ImagesList.SetCurrentIndex(p - 1) then
-    LoadImage;
-end;
-
-procedure TMainForm.TogglePanel2;
-begin
-  if PanelPicks.Width < P2_DEFAULT_WIDTH then
-    begin
-      // Expand.
-      PanelPicks.Width := P2_DEFAULT_WIDTH;
-      btnNavToggle.ImageIndex := GLYPH_COLLAPSE;
-      editTitle.Enabled := True;
-      editTag.Enabled := True;
-    end
-  else
-    begin
-      // Collapse.
-      PanelPicks.Width := 4;
-      btnNavToggle.ImageIndex := GLYPH_EXPAND;
-      editTitle.Enabled := False;
-      editTag.Enabled := False;
-      Picks.ClearSelection;
-      Picks.SetFocus;
-    end;
-  PanelSide.Width := PanelPicks.Width + PanelNav.Width + 4;
+  ImagePrev;
 end;
 
 procedure TMainForm.btnNavToggleClick(Sender: TObject);
 begin
   TogglePanel2;
+end;
+
+procedure TMainForm.btnNavTogglePlayClick(Sender: TObject);
+begin
+  PlayStop;
+end;
+
+procedure TMainForm.btnPickAddClick(Sender: TObject);
+begin
+  AddCurrentImage;
+end;
+
+procedure TMainForm.btnPickCopyAllClick(Sender: TObject);
+var
+  i: Integer;
+  item: TImageInfo;
+  s: string;
+begin
+  s := '';
+  for i := 0 to Picks.Items.Count - 1 do
+  begin
+    item := TImageInfo(Picks.Items.Objects[i]);
+    s := s + '"' + item.FullName + '"' + #13#10;
+  end;
+  if 0 = Length(s) then
+    StatusBar.SimpleText := 'Nothing to copy.'
+  else
+    begin
+      TextToClipboard(s);
+      StatusBar.SimpleText := 'File paths copied to clipboard.'
+    end;
+end;
+
+procedure TMainForm.btnPickDownClick(Sender: TObject);
+begin
+  MoveSelectedDown;
 end;
 
 procedure TMainForm.btnPickRemoveClick(Sender: TObject);
@@ -431,9 +242,43 @@ begin
       end;
 end;
 
+procedure TMainForm.btnPickShowClick(Sender: TObject);
+begin
+  ShowSelectedImage;
+end;
+
+procedure TMainForm.btnPickShowNextClick(Sender: TObject);
+begin
+  SelectShowNext;
+end;
+
+procedure TMainForm.btnPickShowPrevClick(Sender: TObject);
+begin
+  SelectShowPrev;
+end;
+
 procedure TMainForm.btnPickUpClick(Sender: TObject);
 begin
   MoveSelectedUp;
+end;
+
+procedure TMainForm.btnTagApplyClick(Sender: TObject);
+var
+  i: Integer;
+  item: TImageInfo;
+begin
+  if Picks.SelCount = 0 then
+    begin
+      StatusBar.SimpleText := 'No items selected in list of images.';
+      Exit;
+    end;
+
+  for i := Picks.Items.Count - 1 downto 0 do
+    if Picks.Selected[i] then
+      begin
+        item := TImageInfo(Picks.Items.Objects[i]);
+        item.Tag := editTag.Text;
+      end;
 end;
 
 procedure TMainForm.chkLoopChange(Sender: TObject);
@@ -471,86 +316,6 @@ end;
 procedure TMainForm.FormClose(Sender: TObject; var CloseAction: TCloseAction);
 begin
   AppOptions.SaveOptions;
-end;
-
-procedure TMainForm.btnNavFirstClick(Sender: TObject);
-begin
-  ImageFirst;
-end;
-
-procedure TMainForm.btnTagApplyClick(Sender: TObject);
-var
-  i: Integer;
-  item: TImageInfo;
-begin
-  if Picks.SelCount = 0 then
-    begin
-      StatusBar.SimpleText := 'No items selected in list of images.';
-      Exit;
-    end;
-
-  for i := Picks.Items.Count - 1 downto 0 do
-    if Picks.Selected[i] then
-      begin
-        item := TImageInfo(Picks.Items.Objects[i]);
-        item.Tag := editTag.Text;
-      end;
-end;
-
-procedure TMainForm.btnPickAddClick(Sender: TObject);
-begin
-  AddCurrentImage;
-end;
-
-procedure TMainForm.btnPickCopyAllClick(Sender: TObject);
-var
-  i: Integer;
-  item: TImageInfo;
-  s: string;
-begin
-  s := '';
-  for i := 0 to Picks.Items.Count - 1 do
-  begin
-    item := TImageInfo(Picks.Items.Objects[i]);
-    s := s + '"' + item.FullName + '"' + #13#10;
-  end;
-  if 0 = Length(s) then
-    StatusBar.SimpleText := 'Nothing to copy.'
-  else
-    begin
-      TextToClipboard(s);
-      StatusBar.SimpleText := 'File paths copied to clipboard.'
-    end;
-end;
-
-procedure TMainForm.btnPickDownClick(Sender: TObject);
-begin
-  MoveSelectedDown;
-end;
-
-procedure TMainForm.btnPickShowNextClick(Sender: TObject);
-begin
-  SelectShowNext;
-end;
-
-procedure TMainForm.btnNavLastClick(Sender: TObject);
-begin
-  ImageLast;
-end;
-
-procedure TMainForm.btnNavNextClick(Sender: TObject);
-begin
-  ImageNext;
-end;
-
-procedure TMainForm.btnNavTogglePlayClick(Sender: TObject);
-begin
-  PlayStop;
-end;
-
-procedure TMainForm.btnNavPrevClick(Sender: TObject);
-begin
-  ImagePrev;
 end;
 
 procedure TMainForm.FormCreate(Sender: TObject);
@@ -666,23 +431,164 @@ begin
   StatusBar.SimpleText := ImagesList.CurrentImage;
 end;
 
-procedure TMainForm.GetArgs;
-var
-  params: TStringList;
-  s: String;
+procedure TMainForm.ImageDblClick(Sender: TObject);
 begin
-  params := TStringList.Create;
-  try
-    Application.GetNonOptions('', [], params);
-    if 0 < params.Count then
-      // Take first argument as file or directory to load.
-      begin
-        s := params[0];
-        LoadImagesList(s, True);
-      end;
-  finally
-    FreeAndNil(params);
-  end;
+  AddCurrentImage;
+end;
+
+procedure TMainForm.mnuFileExitClick(Sender: TObject);
+begin
+  Close;
+end;
+
+procedure TMainForm.mnuFileLoadClick(Sender: TObject);
+begin
+  LoadPicksFromSavedFile;
+end;
+
+procedure TMainForm.mnuFileOpenClick(Sender: TObject);
+var
+  dirname: String;
+begin
+  dirname := AppOptions.LastOpenDir;
+  if (0 < Length(dirname)) and DirectoryExists(dirname) then
+    OpenDialog.InitialDir := dirname;
+
+  OpenDialog.Filter := 'Image files|*.jpg;*.png;*.jpeg;*.bmp;*.gif;'
+    + '*.JPG;*.PNG;*.JPEG;*.BMP;*.GIF';
+
+  if OpenDialog.Execute then
+    begin
+      AskToClearPicks;
+      LoadImagesList(OpenDialog.FileName, True);
+      AppOptions.LastOpenDir := ExtractFileDir(OpenDialog.FileName);
+      SaveAppOptions;
+    end;
+end;
+
+procedure TMainForm.mnuFileOpenDirClick(Sender: TObject);
+var
+  dirname: String;
+begin
+  dirname := AppOptions.LastOpenDir;
+  if (0 < Length(dirname)) and DirectoryExists(dirname) then
+    OpenDirDialog.InitialDir := dirname;
+
+  if OpenDirDialog.Execute then
+    begin
+      AskToClearPicks;
+      LoadImagesList(OpenDirDialog.FileName, True);
+      AppOptions.LastOpenDir := ExtractFileDir(OpenDialog.FileName);
+      SaveAppOptions;
+    end;
+end;
+
+procedure TMainForm.mnuFileSaveClick(Sender: TObject);
+var
+  dirname: String;
+  filename: String;
+  title: String;
+  dt: String;
+begin
+  title := StringReplace(editTitle.Text, ' ', '_', [rfReplaceAll]);
+  if 0 < Length(title) then
+    title := title + '-';
+
+  dirname := AppOptions.LastSaveDir;
+  if (Length(dirname) = 0) or (not DirectoryExists(dirname)) then
+    dirname := GetCurrentDir;
+
+  dt := FormatDateTime('yyyymmdd_hhnnss', Now);
+  filename := 'ImageList-' + title + dt + '.txt';
+
+  SaveDialog.InitialDir:= dirname;
+  SaveDialog.FileName := filename;
+  if SaveDialog.Execute then
+    begin
+      SavePicks(SaveDialog.FileName);
+      AppOptions.LastSaveDir := ExtractFileDir(SaveDialog.FileName);
+      SaveAppOptions;
+    end;
+end;
+
+procedure TMainForm.mnuToolsCopyClick(Sender: TObject);
+var
+  mr: TModalResult;
+begin
+  mr := CopyFilesDlg.ShowModal;
+  if mr = mrOk then
+    with CopyFilesDlg do
+        CopyFilesInList(editFolder.Text, chkNewNames.Checked, chkSubDir.Checked);
+end;
+
+procedure TMainForm.mnuToolsOptionsClick(Sender: TObject);
+var
+  filename: String;
+  mr: Integer;
+begin
+  filename := AppOptions.OptFileName;
+
+  mr := MessageDlg(
+    'Open Folder?',
+    'Open the folder containing' + #13#10 + filename,
+    mtConfirmation, [mbYes, mbNo], 0);
+
+  if mr = mrYes then
+    // Open the folder using the default associated application.
+    OpenDocument(ExtractFileDir(filename));
+
+  { TODO: (maybe) Create a form for editing application options. For this
+    application, that may not be necessary. For a commercial product,
+    you'd want a form with input validation. }
+end;
+
+procedure TMainForm.PicksDblClick(Sender: TObject);
+begin
+  ShowSelectedImage;
+end;
+
+procedure TMainForm.SpinEditChange(Sender: TObject);
+begin
+  if SpinEdit.Value < MIN_PLAY_MS then
+    SpinEdit.Value := MIN_PLAY_MS
+  else if MAX_PLAY_MS < SpinEdit.Value then
+    SpinEdit.Value := MAX_PLAY_MS;
+
+  AppOptions.SpeedMs := SpinEdit.Value;
+  // To not slow things down, do not SaveAppOptions now.
+  // Setting will be saved on form close.
+
+  Timer.Interval := SpinEdit.Value;
+end;
+
+procedure TMainForm.SpinEditEnter(Sender: TObject);
+begin
+  InEdit := True;
+end;
+
+procedure TMainForm.SpinEditExit(Sender: TObject);
+begin
+  InEdit := False;
+end;
+
+procedure TMainForm.TimerTimer(Sender: TObject);
+begin
+  ImageNext;
+end;
+
+procedure TMainForm.TrackBarMouseUp(Sender: TObject; Button: TMouseButton;
+  Shift: TShiftState; X, Y: Integer);
+{  Note: Using MouseUp instead of OnChange because OnChange fires for
+   every position change when dragging the marker, and would load the
+   image at each step, making it very slow to drag to a new position
+   in a large set of images.
+}
+var
+  p: Integer;
+begin
+  p := TrackBar.Position;
+  if ImagesList.SetCurrentIndex(p - 1) then
+    LoadImage;
 end;
 
 procedure TMainForm.AddCurrentImage;
@@ -708,153 +614,17 @@ begin
   end;
 end;
 
-procedure TMainForm.ImageDblClick(Sender: TObject);
+procedure TMainForm.AskToClearPicks;
 begin
-  AddCurrentImage;
-end;
-
-procedure TMainForm.ShowSelectedImage;
-var
-  i: Integer;
-  fn: String;
-  t: String;
-begin
-  fn := '';
-  // Get the full file name of the first selected item.
-  if 0 < Picks.SelCount then
-    for i := 0 to Picks.Items.Count - 1 do
-      if Picks.Selected[i] then
-        begin
-          with TImageInfo(Picks.Items.Objects[i]) do
-          begin
-            fn := FullName;
-            t := Tag;
-          end;
-          break;
-        end;
-
-  // If there is a file name, show the image.
-  if 0 < Length(fn) then
-     if ImagesList.SetCurrentImage(fn) then
-        LoadImage(t)
-     else
-       { The selected pick is not in the current ImagesList. This is probably
-         because the list of picks was loaded from a saved file where multiple
-         source directories were used in picking the images. Try re-loading
-         the ImagesList based on the selected pick.
-       }
-       begin
-         LoadImagesList(fn, False);
-         if ImagesList.SetCurrentImage(fn) then
-            LoadImage(t);
-       end;
-end;
-
-procedure TMainForm.btnPickShowClick(Sender: TObject);
-begin
-  ShowSelectedImage;
-end;
-
-procedure TMainForm.btnPickShowPrevClick(Sender: TObject);
-begin
-  SelectShowPrev;
-end;
-
-procedure TMainForm.PicksDblClick(Sender: TObject);
-begin
-  ShowSelectedImage;
-end;
-
-procedure TMainForm.mnuToolsCopyClick(Sender: TObject);
-var
-  mr: TModalResult;
-begin
-  mr := CopyFilesDlg.ShowModal;
-  if mr = mrOk then
-    with CopyFilesDlg do
-        CopyFilesInList(editFolder.Text, chkNewNames.Checked, chkSubDir.Checked);
-end;
-
-procedure TMainForm.LoadPicksFromSavedFile;
-var
-  last_pick: String;
-begin
-  last_pick := LoadPicksFile(OpenDialog, editTitle, Picks, StatusBar);
-  if 0 < Length(last_pick) then
-    LoadImagesList(last_pick, False);
-end;
-
-procedure TMainForm.mnuFileLoadClick(Sender: TObject);
-begin
-  LoadPicksFromSavedFile;
-end;
-
-procedure TMainForm.SelectShowNext;
-var
-  i: Integer;
-begin
-  if 0 < Picks.SelCount then
-  begin
-    for i := 0 to Picks.Items.Count - 2 do
-      if Picks.Selected[i] then
-        begin
-          Picks.Selected[i] := False;
-          Picks.Selected[i + 1] := True;
-          break;
-        end;
-    ShowSelectedImage;
-  end;
-end;
-
-procedure TMainForm.SelectShowPrev;
-var
-  i: Integer;
-begin
-  if 0 < Picks.SelCount then
-  begin
-    for i := 1 to Picks.Items.Count - 1 do
-      if Picks.Selected[i] then
-        begin
-          Picks.Selected[i] := False;
-          Picks.Selected[i - 1] := True;
-          break;
-        end;
-    ShowSelectedImage;
-  end;
-end;
-
-procedure TMainForm.MoveSelectedUp;
-var
-  i: Integer;
-begin
-  if 0 < Picks.SelCount then
-  begin
-    for i := 1 to Picks.Items.Count - 1 do
-      if Picks.Selected[i] then
-        begin
-          Picks.Items.Exchange(i, i - 1);
-          Picks.Selected[i] := False;
-          Picks.Selected[i - 1] := True;
-          break;
-        end;
-  end;
-end;
-
-procedure TMainForm.MoveSelectedDown;
-var
-  i: Integer;
-begin
-  if 0 < Picks.SelCount then
-  begin
-    for i := 0 to Picks.Items.Count - 2 do
-      if Picks.Selected[i] then
-        begin
-          Picks.Items.Exchange(i, i + 1);
-          Picks.Selected[i] := False;
-          Picks.Selected[i + 1] := True;
-          break;
-        end;
-  end;
+  If Picks.Items.Count = 0 then
+    Exit;
+  if mrNo = MessageDlg(
+    'Keep current picks?',
+    'Keep the current list of picks?' + #13#10
+    + 'Choose No to clear the list of picked images.',
+    mtConfirmation, [mbYes, mbNo], 0)
+  then
+    Picks.Items.Clear;
 end;
 
 procedure TMainForm.CopyFilesInList(DestDir: String; DoNewNames: Boolean; DoSubDir: Boolean);
@@ -941,23 +711,254 @@ begin
     end;
 end;
 
+procedure TMainForm.GetArgs;
+var
+  params: TStringList;
+  s: String;
+begin
+  params := TStringList.Create;
+  try
+    Application.GetNonOptions('', [], params);
+    if 0 < params.Count then
+      // Take first argument as file or directory to load.
+      begin
+        s := params[0];
+        LoadImagesList(s, True);
+      end;
+  finally
+    FreeAndNil(params);
+  end;
+end;
+
+procedure TMainForm.ImageFirst;
+begin
+  ImagesList.GoFirst;
+  LoadImage;
+end;
+
+procedure TMainForm.ImageLast;
+begin
+  ImagesList.GoLast;
+  LoadImage;
+end;
+
+procedure TMainForm.ImageNext;
+begin
+  if not ImagesList.GoNext then
+    if Timer.Enabled then
+      PlayStop;
+  LoadImage;
+end;
+
+procedure TMainForm.ImagePrev;
+begin
+  ImagesList.GoPrevious;
+  LoadImage;
+end;
+
+procedure TMainForm.LoadImage(const ATag: String = '');
+var
+  filename: String;
+  t: String;
+begin
+  t := ATag;
+  if 0 < Length(t) then
+    t := ' [' + t + ']';
+
+  filename := ImagesList.CurrentImage;
+  if Length(filename) = 0 then
+    Exit;
+
+  StatusBar.SimpleText := '(' + IntToStr(ImagesList.Index + 1) + ' of '
+    + IntToStr(ImagesList.Count) + ') ' + ExtractFileName(filename) + t;
+
+  PanelImage.Caption := '';
+
+  Image.Picture.LoadFromFile(filename);
+
+  TrackBar.Position := ImagesList.Index + 1;
+end;
+
+procedure TMainForm.LoadImagesList(FileName: String; AllowSubDirs: Boolean);
+begin
+  ImagesList.Load(FileName, AllowSubDirs);
+  if not ImagesList.SetCurrentImage(FileName) then
+    ImagesList.GoFirst;
+  if ImagesList.Count = 0 then
+    begin
+      PanelImage.Caption := 'No images.';
+      TrackBar.Enabled := False;
+    end
+  else
+    begin
+      PanelImage.Caption := '';
+      TrackBar.Min := 1;
+      TrackBar.Max := ImagesList.Count;
+      TrackBar.Enabled := True;
+      LoadImage;
+    end;
+end;
+
+procedure TMainForm.LoadPicksFromSavedFile;
+var
+  last_pick: String;
+begin
+  last_pick := LoadPicksFile(OpenDialog, editTitle, Picks, StatusBar);
+  if 0 < Length(last_pick) then
+    LoadImagesList(last_pick, False);
+end;
+
+procedure TMainForm.MoveSelectedDown;
+var
+  i: Integer;
+begin
+  if 0 < Picks.SelCount then
+  begin
+    for i := 0 to Picks.Items.Count - 2 do
+      if Picks.Selected[i] then
+        begin
+          Picks.Items.Exchange(i, i + 1);
+          Picks.Selected[i] := False;
+          Picks.Selected[i + 1] := True;
+          break;
+        end;
+  end;
+end;
+
+procedure TMainForm.MoveSelectedUp;
+var
+  i: Integer;
+begin
+  if 0 < Picks.SelCount then
+  begin
+    for i := 1 to Picks.Items.Count - 1 do
+      if Picks.Selected[i] then
+        begin
+          Picks.Items.Exchange(i, i - 1);
+          Picks.Selected[i] := False;
+          Picks.Selected[i - 1] := True;
+          break;
+        end;
+  end;
+end;
+
+procedure TMainForm.PlayStop;
+begin
+  if Timer.Enabled then
+     begin
+       Timer.Enabled := False;
+       btnNavTogglePlay.ImageIndex := GLYPH_PLAY;
+     end
+  else
+    begin
+      Timer.Enabled := True;
+      btnNavTogglePlay.ImageIndex := GLYPH_STOP;
+    end;
+end;
+
 procedure TMainForm.SaveAppOptions;
 begin
   if not AppOptions.SaveOptions then
     MessageDlg('ERROR', AppOptions.LastError, mtError, [mbOk], 0);
 end;
 
-procedure TMainForm.AskToClearPicks;
+procedure TMainForm.SavePicks(FileName: String);
 begin
-  If Picks.Items.Count = 0 then
-    Exit;
-  if mrNo = MessageDlg(
-    'Keep current picks?',
-    'Keep the current list of picks?' + #13#10
-    + 'Choose No to clear the list of picked images.',
-    mtConfirmation, [mbYes, mbNo], 0)
-  then
-    Picks.Items.Clear;
+  SavePicksFile(FileName, editTitle.Text, Picks, StatusBar);
+end;
+
+procedure TMainForm.SelectShowNext;
+var
+  i: Integer;
+begin
+  if 0 < Picks.SelCount then
+  begin
+    for i := 0 to Picks.Items.Count - 2 do
+      if Picks.Selected[i] then
+        begin
+          Picks.Selected[i] := False;
+          Picks.Selected[i + 1] := True;
+          break;
+        end;
+    ShowSelectedImage;
+  end;
+end;
+
+procedure TMainForm.SelectShowPrev;
+var
+  i: Integer;
+begin
+  if 0 < Picks.SelCount then
+  begin
+    for i := 1 to Picks.Items.Count - 1 do
+      if Picks.Selected[i] then
+        begin
+          Picks.Selected[i] := False;
+          Picks.Selected[i - 1] := True;
+          break;
+        end;
+    ShowSelectedImage;
+  end;
+end;
+
+procedure TMainForm.ShowSelectedImage;
+var
+  i: Integer;
+  fn: String;
+  t: String;
+begin
+  fn := '';
+  // Get the full file name of the first selected item.
+  if 0 < Picks.SelCount then
+    for i := 0 to Picks.Items.Count - 1 do
+      if Picks.Selected[i] then
+        begin
+          with TImageInfo(Picks.Items.Objects[i]) do
+          begin
+            fn := FullName;
+            t := Tag;
+          end;
+          break;
+        end;
+
+  // If there is a file name, show the image.
+  if 0 < Length(fn) then
+     if ImagesList.SetCurrentImage(fn) then
+        LoadImage(t)
+     else
+       { The selected pick is not in the current ImagesList. This is probably
+         because the list of picks was loaded from a saved file where multiple
+         source directories were used in picking the images. Try re-loading
+         the ImagesList based on the selected pick.
+       }
+       begin
+         LoadImagesList(fn, False);
+         if ImagesList.SetCurrentImage(fn) then
+            LoadImage(t);
+       end;
+end;
+
+procedure TMainForm.TogglePanel2;
+begin
+  if PanelPicks.Width < P2_DEFAULT_WIDTH then
+    begin
+      // Expand.
+      PanelPicks.Width := P2_DEFAULT_WIDTH;
+      btnNavToggle.ImageIndex := GLYPH_COLLAPSE;
+      editTitle.Enabled := True;
+      editTag.Enabled := True;
+    end
+  else
+    begin
+      // Collapse.
+      PanelPicks.Width := 4;
+      btnNavToggle.ImageIndex := GLYPH_EXPAND;
+      editTitle.Enabled := False;
+      editTag.Enabled := False;
+      Picks.ClearSelection;
+      Picks.SetFocus;
+    end;
+  PanelSide.Width := PanelPicks.Width + PanelNav.Width + 4;
 end;
 
 end.
