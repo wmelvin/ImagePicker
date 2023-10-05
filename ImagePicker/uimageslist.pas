@@ -161,7 +161,10 @@ begin
   else
     dirpath := ExtractFileDir(FileName);
 
-  ScanDirectory(dirpath);
+  if DirectoryExists(dirpath) then
+    ScanDirectory(dirpath)
+  else
+    MessageDlg('ERROR', 'Directory not found: ' + dirpath, mtError, [mbOk], 0);
 
   // FFileList.SaveToFile('DEBUG-FileList.txt');
 end;

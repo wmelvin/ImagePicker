@@ -786,6 +786,7 @@ begin
     ImagesList.GoFirst;
   if ImagesList.Count = 0 then
     begin
+      Image.Picture.Clear;
       PanelImage.Caption := 'No images.';
       TrackBar.Enabled := False;
     end

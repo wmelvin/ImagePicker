@@ -116,6 +116,7 @@ var
   title: String;
   paths_list: TStringList;
   tags_list: TStringList;
+  err_list: TStringList;
   i: Integer;
   info: TImageInfo;
   tag_nv: String;
@@ -149,6 +150,7 @@ begin
       fn := OpenDialog.FileName;
       paths_list := TStringList.Create;
       tags_list := TStringList.Create;
+      err_list := TStringList.Create;
       title := '';
       tag_nv := '';
       try
@@ -195,20 +197,30 @@ begin
 
       if 0 < paths_list.Count then
       begin
-        LoadPicksFile := paths_list[paths_list.Count - 1];
-
         editTitle.Text := title;
         Picks.Clear;
         for i := 0 to paths_list.Count -1 do
         begin
-          info := TImageInfo.Create(paths_list[i], '');
-          // Names and values in tags_list are in double quotes.
-          tag_val := tags_list.Values['"' + info.GetFileName + '"'];
-          if (0 < Length(tag_val)) then
-            info.Tag := TrimSet(tag_val, ['"']);
-          Picks.Items.AddObject(info.GetFileName, info);
+          if FileExists(paths_list[i]) then
+            begin
+              // Return the last valid file path.
+              LoadPicksFile := paths_list[i];
+
+              info := TImageInfo.Create(paths_list[i], '');
+
+              // Names and values in tags_list are in double quotes.
+              tag_val := tags_list.Values['"' + info.GetFileName + '"'];
+              if (0 < Length(tag_val)) then
+                info.Tag := TrimSet(tag_val, ['"']);
+
+              Picks.Items.AddObject(info.GetFileName, info);
+            end
+          else
+            err_list.Add('NOT FOUND: ' + paths_list[i]);
         end;
       end;
+      if 0 < err_list.Count then
+        MessageDlg('ERRORS', err_list.GetText, mtError, [mbOk], 0);
     end;
 end;
 
