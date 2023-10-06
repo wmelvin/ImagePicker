@@ -478,7 +478,7 @@ begin
     begin
       AskToClearPicks;
       LoadImagesList(OpenDirDialog.FileName, True);
-      AppOptions.LastOpenDir := ExtractFileDir(OpenDialog.FileName);
+      AppOptions.LastOpenDir := ExtractFileDir(OpenDirDialog.FileName);
       SaveAppOptions;
     end;
 end;
