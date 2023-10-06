@@ -14,7 +14,7 @@ function LoadPicksFile(OpenDialog: TOpenDialog; editTitle: TLabeledEdit; Picks: 
 
 implementation
 
-uses uApp, uImageInfo, StrUtils;
+uses uApp, uAppOptions, uImageInfo, StrUtils;
 
 procedure SavePicksFile(FileName: String; TitleText: String; Picks: TListBox; StatusBar: TStatusBar);
 var
@@ -108,9 +108,15 @@ begin
   end;
 end;
 
-function LoadPicksFile(OpenDialog: TOpenDialog; editTitle: TLabeledEdit; Picks: TListBox; StatusBar: TStatusBar): String;
+function LoadPicksFile(
+  OpenDialog: TOpenDialog;
+  editTitle: TLabeledEdit;
+  Picks: TListBox;
+  StatusBar: TStatusBar
+): String;
 var
   tf: TextFile;
+  dirname: String;
   fn: String;
   s: String;
   title: String;
@@ -144,10 +150,15 @@ var
 
 begin
   LoadPicksFile := '';
+  dirname := AppOptions.LastLoadDir;
+  if (Length(dirname) = 0) or (not DirectoryExists(dirname)) then
+    dirname := GetCurrentDir;
+  OpenDialog.InitialDir:= dirname;
   OpenDialog.Filter := 'Text files (*.txt)|*.txt;*.TXT';
   if OpenDialog.Execute then
     begin
       fn := OpenDialog.FileName;
+      AppOptions.LastLoadDir := ExtractFileDir(fn);
       paths_list := TStringList.Create;
       tags_list := TStringList.Create;
       err_list := TStringList.Create;

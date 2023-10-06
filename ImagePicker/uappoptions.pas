@@ -17,6 +17,8 @@ type
       procedure SetLastOpenDir(DirName: String);
       function GetLastSaveDir: String;
       procedure SetLastSaveDir(DirName: String);
+      function GetLastLoadDir: String;
+      procedure SetLastLoadDir(DirName: String);
       function GetLastCopyDir: String;
       procedure SetLastCopyDir(DirName: String);
       function GetDoLoop: Boolean;
@@ -31,6 +33,7 @@ type
     published
       property LastOpenDir: String read GetLastOpenDir write SetLastOpenDir;
       property LastSaveDir: String read GetLastSaveDir write SetLastSaveDir;
+      property LastLoadDir: String read GetLastLoadDir write SetLastLoadDir;
       property LastCopyDir: String read GetLastCopyDir write SetLastCopyDir;
       property DoLoop: Boolean read GetDoLoop write SetDoLoop;
       property SpeedMs: Integer read GetSpeedMs write SetSpeedMs;
@@ -108,6 +111,17 @@ procedure TAppOptions.SetLastSaveDir(DirName: String);
 begin
   FChanged := True;
   FOptList.Values['LastSaveDir'] := DirName;
+end;
+
+function TAppOptions.GetLastLoadDir: String;
+begin
+  GetLastLoadDir := FOptList.Values['LastLoadDir'];
+end;
+
+procedure TAppOptions.SetLastLoadDir(DirName: String);
+begin
+  FChanged := True;
+  FOptList.Values['LastLoadDir'] := DirName;
 end;
 
 function TAppOptions.GetLastCopyDir: String;

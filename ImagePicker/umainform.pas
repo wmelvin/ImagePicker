@@ -807,6 +807,7 @@ begin
   last_pick := LoadPicksFile(OpenDialog, editTitle, Picks, StatusBar);
   if 0 < Length(last_pick) then
     LoadImagesList(last_pick, False);
+  SaveAppOptions;
 end;
 
 procedure TMainForm.MoveSelectedDown;
