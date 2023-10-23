@@ -225,6 +225,7 @@ end;
 procedure TMainForm.btnPickRemoveClick(Sender: TObject);
 var
   i: Integer;
+  x: Integer;
 begin
   if Picks.SelCount = 0 then
     Exit;
@@ -234,12 +235,22 @@ begin
   ) = mrYes then
     Exit;
 
+  x := -1;
   for i := Picks.Items.Count - 1 downto 0 do
     if Picks.Selected[i] then
       begin
+        if i < (Picks.Items.Count - 1) then
+          x := i
+        else
+          x := i - 1;
         Picks.Items.Objects[i].Free;  // TImageInfo object
         Picks.Items.Delete(i);
       end;
+  if 0 <= x then
+    begin
+      Picks.Selected[x] := True;
+      ShowSelectedImage;
+    end;
 end;
 
 procedure TMainForm.btnPickShowClick(Sender: TObject);
