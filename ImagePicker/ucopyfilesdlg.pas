@@ -15,11 +15,12 @@ type
   TCopyFilesDlg = class(TForm)
     btnOK: TButton;
     btnCancel: TButton;
-    chkNewNames: TCheckBox;
     chkSubDir: TCheckBox;
     editFolder: TLabeledEdit;
     btnBrowse: TSpeedButton;
     dlgSelectDir: TSelectDirectoryDialog;
+    Label1: TLabel;
+    rgFileNames: TRadioGroup;
     procedure btnBrowseClick(Sender: TObject);
     procedure FormShow(Sender: TObject);
   private
@@ -59,6 +60,7 @@ begin
   dirname := AppOptions.LastCopyDir;
   if (0 < Length(dirname)) and DirectoryExists(dirname) then
     editFolder.Text := dirname;
+  rgFileNames.ItemIndex := AppOptions.LastCopyOpt;
 end;
 
 end.

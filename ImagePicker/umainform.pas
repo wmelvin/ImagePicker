@@ -104,10 +104,11 @@ type
     procedure TrackBarMouseUp(Sender: TObject; Button: TMouseButton;
       Shift: TShiftState; X, Y: Integer);
   private
+    IsActivated: Boolean;
     InEdit: Boolean;
     procedure AddCurrentImage;
     procedure AskToClearPicks;
-    procedure CopyFilesInList(DestDir: String; DoNewNames: Boolean; DoSubDir: Boolean);
+    procedure CopyFilesInList(DestDir: String; FileNamesOption: Integer; DoSubDir: Boolean);
     procedure GetArgs;
     procedure ImageFirst;
     procedure ImageLast;
@@ -324,7 +325,9 @@ end;
 
 procedure TMainForm.FormActivate(Sender: TObject);
 begin
-  GetArgs;
+  if not IsActivated then
+    GetArgs;
+  IsActivated := True;
 end;
 
 procedure TMainForm.FormClose(Sender: TObject; var CloseAction: TCloseAction);
@@ -334,6 +337,7 @@ end;
 
 procedure TMainForm.FormCreate(Sender: TObject);
 begin
+  IsActivated := False;
   MainForm.Caption := APP_TITLE;
   InEdit := False;
   ImagesList := TImagesList.Create;
@@ -542,7 +546,7 @@ begin
   mr := CopyFilesDlg.ShowModal;
   if mr = mrOk then
     with CopyFilesDlg do
-        CopyFilesInList(editFolder.Text, chkNewNames.Checked, chkSubDir.Checked);
+      CopyFilesInList(editFolder.Text, rgFileNames.ItemIndex, chkSubDir.Checked);
 end;
 
 procedure TMainForm.mnuToolsOptionsClick(Sender: TObject);
@@ -651,7 +655,7 @@ begin
     Picks.Items.Clear;
 end;
 
-procedure TMainForm.CopyFilesInList(DestDir: String; DoNewNames: Boolean; DoSubDir: Boolean);
+procedure TMainForm.CopyFilesInList(DestDir: String; FileNamesOption: Integer; DoSubDir: Boolean);
 var
   ok: Boolean;
   i: Integer;
@@ -661,8 +665,12 @@ var
   src: String;
   ext: String;
   stem: String;
-  seq: String;
-  t: String;
+  seqL: String;
+  seqR: String;
+  tagL: String;
+  title: String;
+  titleL: String;
+  titleR: String;
   do_replace: Boolean = False;
   mr: Integer;
 begin
@@ -673,6 +681,7 @@ begin
     end;
 
   AppOptions.LastCopyDir := DestDir;
+  AppOptions.LastCopyOpt := FileNamesOption;
 
   if Picks.Count = 0 then
     begin
@@ -693,21 +702,51 @@ begin
       src := item.FullName;
       stem := ChangeFileExt(item.GetFileName, '');
       ext := ExtractFileExt(item.GetFileName);
-      if item.HasTag then
-        t := '-' + item.Tag
-      else
-        t := '';
 
-      if DoNewNames then
+      if item.HasTag then
+        tagL := '-' + item.Tag
+      else
+        tagL := '';
+
+      title := ForFileName(editTitle.Text);
+      if 0 < Length(title) then
         begin
-          seq := '-' + format('%.3d', [i + 1]);
-          if 0 < Length(editTitle.Text) then
-            dst := ForFileName(editTitle.Text) + seq + t + ext
-          else
-            dst := stem + t + ext;
+          titleL := '-' + title;
+          titleR := title + '-';
         end
       else
-        dst := stem + t + ext;
+        begin
+          titleL := '';
+          titleR := '';
+        end;
+
+      seqL := '-' + format('%.3d', [i + 1]);
+      seqR := format('%.3d', [i + 1]) + '-';
+
+      case FileNamesOption of
+        // 1: Sequence-FileName-Tag
+        1: dst := seqR + stem + tagL + ext;
+
+        // 2: Title-FileName-Tag-Sequence
+        2: dst := titleR + stem + tagL + seqL + ext;
+
+        // 3: Title-Sequence-Tag
+        3:
+          if (Length(title) + Length(tagL) = 0) then
+            dst := 'Image' + seqL + ext
+          else
+            dst := title + seqL + tagL + ext;
+
+        // 4: Title-Tag-Sequence
+        4:
+          if (Length(title) + Length(tagL) = 0) then
+            dst := 'Image' + seqL + ext
+          else
+            dst := title + tagL + seqL + ext;
+      else
+        // 0: FileName-Tag
+        dst := stem + tagL + ext;
+      end;
 
       dst := AsPath(dst_dir) + dst;
 

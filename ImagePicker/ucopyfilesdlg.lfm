@@ -1,18 +1,18 @@
 object CopyFilesDlg: TCopyFilesDlg
   Left = 500
-  Height = 266
+  Height = 339
   Top = 246
   Width = 673
   BorderStyle = bsDialog
   Caption = 'Copy Files'
-  ClientHeight = 266
+  ClientHeight = 339
   ClientWidth = 673
   OnShow = FormShow
   LCLVersion = '2.2.6.0'
   object btnOK: TButton
     Left = 24
     Height = 25
-    Top = 198
+    Top = 296
     Width = 75
     Caption = '&OK'
     ModalResult = 1
@@ -21,7 +21,7 @@ object CopyFilesDlg: TCopyFilesDlg
   object btnCancel: TButton
     Left = 120
     Height = 25
-    Top = 198
+    Top = 296
     Width = 75
     Cancel = True
     Caption = '&Cancel'
@@ -30,10 +30,10 @@ object CopyFilesDlg: TCopyFilesDlg
   end
   object editFolder: TLabeledEdit
     Left = 24
-    Height = 26
+    Height = 28
     Top = 37
     Width = 600
-    EditLabel.Height = 17
+    EditLabel.Height = 16
     EditLabel.Width = 600
     EditLabel.Caption = 'Copy to Folder'
     EditLabel.ParentColor = False
@@ -51,28 +51,56 @@ object CopyFilesDlg: TCopyFilesDlg
     ShowHint = True
     ParentShowHint = False
   end
-  object chkNewNames: TCheckBox
+  object chkSubDir: TCheckBox
     Left = 24
-    Height = 21
-    Top = 96
-    Width = 335
-    Caption = 'Give files new names based on Title, sequence, and Tag.'
+    Height = 23
+    Top = 80
+    Width = 431
+    Caption = 'Copy files to a new sub-folder named per the current date and time.'
     Checked = True
     State = cbChecked
     TabOrder = 3
   end
-  object chkSubDir: TCheckBox
+  object rgFileNames: TRadioGroup
     Left = 24
-    Height = 21
-    Top = 140
-    Width = 399
-    Caption = 'Copy files to a new sub-folder named per the current date and time.'
-    Checked = True
-    State = cbChecked
+    Height = 153
+    Top = 120
+    Width = 297
+    AutoFill = True
+    Caption = 'File Name Format:'
+    ChildSizing.LeftRightSpacing = 6
+    ChildSizing.EnlargeHorizontal = crsHomogenousChildResize
+    ChildSizing.EnlargeVertical = crsHomogenousChildResize
+    ChildSizing.ShrinkHorizontal = crsScaleChilds
+    ChildSizing.ShrinkVertical = crsScaleChilds
+    ChildSizing.Layout = cclLeftToRightThenTopToBottom
+    ChildSizing.ControlsPerLine = 1
+    ClientHeight = 136
+    ClientWidth = 295
+    ItemIndex = 0
+    Items.Strings = (
+      'FileName-Tag'
+      'Sequence-FileName-Tag'
+      'Title-FileName-Tag-Sequence'
+      'Title-Sequence-Tag'
+      'Title-Tag-Sequence'
+    )
     TabOrder = 4
   end
+  object Label1: TLabel
+    Left = 345
+    Height = 17
+    Top = 141
+    Width = 223
+    Caption = '( ''FileName'' = Original file name )'
+    Font.Color = clInactiveCaption
+    Font.Height = -13
+    Font.Name = 'Sans'
+    ParentColor = False
+    ParentFont = False
+  end
   object dlgSelectDir: TSelectDirectoryDialog
-    Left = 544
-    Top = 64
+    Left = 600
+    Top = 72
   end
 end
