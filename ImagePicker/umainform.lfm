@@ -386,6 +386,14 @@ object MainForm: TMainForm
         Caption = '&Save list ...'
         OnClick = mnuFileSaveClick
       end
+      object Separator4: TMenuItem
+        Caption = '-'
+      end
+      object mnuFileCurrent: TMenuItem
+        Caption = '&Current folder'
+        Hint = 'Open the folder containing the current image.'
+        OnClick = mnuFileCurrentClick
+      end
       object Separator2: TMenuItem
         Caption = '-'
       end

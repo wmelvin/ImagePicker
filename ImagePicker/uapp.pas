@@ -6,7 +6,7 @@ interface
 
 const
   APP_NAME = 'ImagePicker';
-  APP_VERSION = '231023a';
+  APP_VERSION = '231030a';
   APP_TITLE = APP_NAME + ' (' + APP_VERSION + ')';
   DEFAULT_PLAY_MS = 1000;
   MIN_PLAY_MS = 100;

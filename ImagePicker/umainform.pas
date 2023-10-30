@@ -28,6 +28,7 @@ type
     Glyphs: TImageList;
     editTag: TLabeledEdit;
     editTitle: TLabeledEdit;
+    Separator4: TMenuItem;
     SpinEditLabel: TLabel;
     Picks: TListBox;
     MainMenu: TMainMenu;
@@ -37,6 +38,7 @@ type
     mnuFileOpen: TMenuItem;
     mnuFileOpenDir: TMenuItem;
     mnuFileSave: TMenuItem;
+    mnuFileCurrent: TMenuItem;
     mnuTools: TMenuItem;
     mnuToolsCopy: TMenuItem;
     mnuToolsOptions: TMenuItem;
@@ -86,6 +88,7 @@ type
     procedure FormKeyDown(Sender: TObject; var Key: Word; Shift: TShiftState);
     procedure ImageClick(Sender: TObject);
     procedure ImageDblClick(Sender: TObject);
+    procedure mnuFileCurrentClick(Sender: TObject);
     procedure mnuFileExitClick(Sender: TObject);
     procedure mnuFileLoadClick(Sender: TObject);
     procedure mnuFileOpenClick(Sender: TObject);
@@ -520,6 +523,16 @@ begin
       AppOptions.LastSaveDir := ExtractFileDir(SaveDialog.FileName);
       SaveAppOptions;
     end;
+end;
+
+procedure TMainForm.mnuFileCurrentClick(Sender: TObject);
+var
+  filename: String;
+begin
+  filename := ImagesList.CurrentImage;
+  if 0 < Length(filename) then
+    // Open the folder using the default associated application.
+    OpenDocument(ExtractFileDir(filename));
 end;
 
 procedure TMainForm.mnuToolsCopyClick(Sender: TObject);
