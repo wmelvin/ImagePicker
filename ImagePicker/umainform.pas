@@ -29,6 +29,7 @@ type
     editTag: TLabeledEdit;
     editTitle: TLabeledEdit;
     Separator4: TMenuItem;
+    Separator5: TMenuItem;
     SpinEditLabel: TLabel;
     Picks: TListBox;
     MainMenu: TMainMenu;
@@ -42,6 +43,7 @@ type
     mnuTools: TMenuItem;
     mnuToolsCopy: TMenuItem;
     mnuToolsOptions: TMenuItem;
+    mnuToolsSort: TMenuItem;
     PanelImage: TPanel;
     PanelNav: TPanel;
     PanelPicks: TPanel;
@@ -96,6 +98,7 @@ type
     procedure mnuFileSaveClick(Sender: TObject);
     procedure mnuToolsCopyClick(Sender: TObject);
     procedure mnuToolsOptionsClick(Sender: TObject);
+    procedure mnuToolsSortClick(Sender: TObject);
     procedure PicksDblClick(Sender: TObject);
     procedure SpinEditChange(Sender: TObject);
     procedure SpinEditEnter(Sender: TObject);
@@ -568,6 +571,22 @@ begin
   { TODO: (maybe) Create a form for editing application options. For this
     application, that may not be necessary. For a commercial product,
     you'd want a form with input validation. }
+end;
+
+procedure TMainForm.mnuToolsSortClick(Sender: TObject);
+var
+  sl : TStringList;
+begin
+  if 1 < Picks.Items.Count then
+    begin
+      // Assign the items to a TStringList and call its Sort method.
+      sl := TStringList.Create;
+      sl.Assign(Picks.Items);
+      sl.Sort;
+      // Assign the sorted items back to the TListBox.Items.
+      Picks.Items.Assign(sl);
+      sl.Free;
+    end;
 end;
 
 procedure TMainForm.PicksDblClick(Sender: TObject);

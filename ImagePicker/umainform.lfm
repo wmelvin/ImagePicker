@@ -334,7 +334,7 @@ object MainForm: TMainForm
         Left = 20
         Height = 16
         Top = 64
-        Width = 68
+        Width = 69
         Caption = 'Speed (ms):'
         ParentColor = False
       end
@@ -414,6 +414,13 @@ object MainForm: TMainForm
       object mnuToolsCopy: TMenuItem
         Caption = 'Copy files ...'
         OnClick = mnuToolsCopyClick
+      end
+      object Separator5: TMenuItem
+        Caption = '-'
+      end
+      object mnuToolsSort: TMenuItem
+        Caption = 'Sort picks'
+        OnClick = mnuToolsSortClick
       end
     end
   end
