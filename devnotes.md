@@ -1,5 +1,33 @@
 # Developer Notes for ImagePicker project
 
+
+## Notes
+
+### IDE Macros
+
+In project options, what are settings like `$(ProjOutDir)`?
+
+Reference: [IDE Macros in paths and filenames](https://wiki.freepascal.org/IDE_Macros_in_paths_and_filenames)
+
+### Unit not found error
+
+Error when clicking on an Event in the Object Inspector (wanting to add an OnCreate event handler):
+
+**"Error: unit not found ExtCtrls"**
+
+Fixed:
+
+`Tools` / `Options` / `Files` / `FPC source directory`:
+
+Changed from
+`/usr/share/fpcsrc/$(FPCVER)`
+to
+`/usr/share/fpcsrc/3.2.2`
+
+The 'unit not found' error went away. Changed back to the original setting. The error did not come back. Hmmm...
+
+
+
 ## Links and Commits
 
 [Lazarus Homepage](https://www.lazarus-ide.org/)
@@ -17,8 +45,6 @@
 
 [TStatusBar](https://lazarus-ccr.sourceforge.io/docs/lcl/comctrls/tstatusbar.html)
 
-
-
 - [x] **Add initial components.**
 <sup>Commit [3bf104d](https://github.com/wmelvin/ImagePicker/commit/3bf104de6c89bbaf05b25410a09a7d4c1ea24560) (2023-03-08 07:15:18)</sup>
 
@@ -35,45 +61,63 @@
 
 [glyphs.fyi - Directory](https://glyphs.fyi/dir?c=multimedia&amp;i=play&amp;v=bold&amp;w)
 
+[TImage](https://wiki.lazarus.freepascal.org/TImage)
+
+How to scale image in TImage component? Properties:
+
+```pascal
+    Center := True;
+    Proportional := True;
+    Stretch := True;
+```
+
+[Howto Use TOpenDialog](https://wiki.lazarus.freepascal.org/Howto_Use_TOpenDialog)
+
 - [x] **Add images for button.**
 <sup>Commit [e5d4bf3](https://github.com/wmelvin/ImagePicker/commit/e5d4bf315a2c3e57cd8b54119dc89c86bb50dd34) (2023-03-08 09:35:44)</sup>
-
----
 
 - [x] **Add image component, and file dialogs.**
 <sup>Commit [def69e4](https://github.com/wmelvin/ImagePicker/commit/def69e4febd7e8f79f851401c67286298c6f8833) (2023-03-08 15:25:55)</sup>
 
----
-
 - [x] **Add more images for buttons.**
 <sup>Commit [fe158cb](https://github.com/wmelvin/ImagePicker/commit/fe158cbfed46e90f64c7a86fb38ecf7a63202d07) (2023-03-08 15:45:18)</sup>
-
----
 
 - [x] **Add buttons and glyphs.**
 <sup>Commit [ad932e6](https://github.com/wmelvin/ImagePicker/commit/ad932e6790045c221b8373e2275fc05b2e780fdf) (2023-03-08 16:27:09)</sup>
 
 ---
 
+[TStringList](https://lazarus-ccr.sourceforge.io/docs/rtl/classes/tstringlist.html)
+
+[TStringList-TStrings Tutorial](https://wiki.lazarus.freepascal.org/TStringList-TStrings_Tutorial)
+
 - [x] **Units for image viewing functions.**
 <sup>Commit [009f815](https://github.com/wmelvin/ImagePicker/commit/009f815543e9305c9b240d9703b8af22dd4c074d) (2023-03-08 16:51:07)</sup>
 
 ---
 
+[TTimer](https://wiki.freepascal.org/TTimer)
+
 - [x] **Implement slideshow using default dir.**
 <sup>Commit [c7b6cc6](https://github.com/wmelvin/ImagePicker/commit/c7b6cc67c11fab4ff66540841dc34fce7fa71f91) (2023-03-08 17:59:26)</sup>
-
----
 
 - [x] **Change button layout.**
 <sup>Commit [3a51089](https://github.com/wmelvin/ImagePicker/commit/3a51089c23a47c1fa2c5c06c369e1d1bfb709e19) (2023-03-08 18:06:34)</sup>
 
 ---
 
+[key down](https://wiki.lazarus.freepascal.org/key_down)
+
+[LCL Key Handling](https://wiki.lazarus.freepascal.org/LCL_Key_Handling)
+
+[virtual keyboard strokes/de](https://wiki.freepascal.org/virtual_keyboard_strokes/de)
+
 - [x] **Add keyboard commands.**
 <sup>Commit [81e8398](https://github.com/wmelvin/ImagePicker/commit/81e8398861c97601d450c450664684af47c84d7c) (2023-03-08 19:31:40)</sup>
 
 ---
+
+[TListBox](https://wiki.lazarus.freepascal.org/TListBox)
 
 - [x] **Add list of selected images.**
 <sup>Commit [57933e5](https://github.com/wmelvin/ImagePicker/commit/57933e5782334a61f45f16458b7c1ce46b23f2b6) (2023-03-08 21:37:27)</sup>
@@ -83,57 +127,57 @@
 - [x] **Implement File/Open.**
 <sup>Commit [1a3568d](https://github.com/wmelvin/ImagePicker/commit/1a3568d9bf881f57d6dd3c813b3a6c21b45d6b82) (2023-03-09 07:29:29)</sup>
 
----
-
 - [x] **Clear Panel1.Caption when image loaded.**
 <sup>Commit [cdf464c](https://github.com/wmelvin/ImagePicker/commit/cdf464c6e0f833484078e10c926c1a6de01f65df) (2023-03-09 08:11:08)</sup>
 
----
-
 - [x] **Include arrow keys for navigation.**
 <sup>Commit [0bc415a](https://github.com/wmelvin/ImagePicker/commit/0bc415a1677e3632c07d8bd20a4065ea77db549c) (2023-03-09 08:16:54)</sup>
-
----
 
 - [x] **Delete from selected images list.**
 <sup>Commit [51c2af2](https://github.com/wmelvin/ImagePicker/commit/51c2af269e87740a586eb856e05dbc879b0d0d30) (2023-03-09 08:24:36)</sup>
 
 ---
 
+Had trouble figuring out how to get command-line args.
+
+[Command line parameters and environment variables](https://wiki.lazarus.freepascal.org/Command_line_parameters_and_environment_variables)
+
+In the IDE, used `Run` / `Run Parameters` / `Command line parameters` to pass the path to the `Pictures` dir.
+
+[IDE Window: Run parameters](https://wiki.freepascal.org/IDE_Window:_Run_parameters)
+
+Using [ParamCount](https://www.freepascal.org/docs-html/rtl/system/paramcount.html) and [ParamStr](https://www.freepascal.org/docs-html/rtl/system/paramstr.html) does not work in a Lazarus application. It seems the Application object gets the parameters and then (maybe) clears them from the original ParamStr.
+
+[TCustomApplication](https://www.freepascal.org/docs-html/fcl/custapp/tcustomapplication.html)
+
+The parameters are available via `GetNonOptions`. I messed up at first, thinking the first parameter was still the name of the executable (like `ParamStr(0)`). That is not the case. The first item in the list is the first parameter.
+
+[TCustomApplication.GetNonOptions](https://lazarus-ccr.sourceforge.io/docs/fcl/custapp/tcustomapplication.getnonoptions.html)
+
 - [x] **Take command-line argument.**
 <sup>Commit [ea18552](https://github.com/wmelvin/ImagePicker/commit/ea1855278f021b8a5b1ab9b65cdd24ac4e5c3ca8) (2023-03-09 10:01:14)</sup>
 
 ---
 
+Save the list of picked images to a text file. The format of the text file includes the list of the full path to each image file, and a section with `mv` commands to rename the files based on *Title* and *Tag*. At this point, the idea is to provide commands that can be copied into a separate script for whatever task is to be done with the current set of image files.
+
 - [x] **Implement File/Save.**
 <sup>Commit [0ced44b](https://github.com/wmelvin/ImagePicker/commit/0ced44b3563788f214b298035acbcd34f73a7443) (2023-03-09 14:03:44)</sup>
-
----
 
 - [x] **Enter Tag for selected images.**
 <sup>Commit [412ba2a](https://github.com/wmelvin/ImagePicker/commit/412ba2adff0d902a5df2bbfd938bfe75dbdbbb17) (2023-03-09 14:59:45)</sup>
 
----
-
 - [x] **Arrow keys navigation conditional.**
 <sup>Commit [abdf356](https://github.com/wmelvin/ImagePicker/commit/abdf35627edc0c804ea70dfba41db92b80cc2c7e) (2023-03-09 16:49:21)</sup>
-
----
 
 - [x] **Improve arrow key handling.**
 <sup>Commit [fe9e732](https://github.com/wmelvin/ImagePicker/commit/fe9e732fc94fbfa5f4e1c7d25699ca603ded4a5e) (2023-03-09 17:22:53)</sup>
 
----
-
 - [x] **Add title to output file name.**
 <sup>Commit [1ab770f](https://github.com/wmelvin/ImagePicker/commit/1ab770fdb04288c0fa5ee427afe3d391cdd89aaa) (2023-03-09 18:05:32)</sup>
 
----
-
 - [x] **Add hints re hotkeys to buttons.**
 <sup>Commit [d42c405](https://github.com/wmelvin/ImagePicker/commit/d42c405c07e2b583687ec72fd4c4e1e3c71a85ab) (2023-03-09 19:49:07)</sup>
-
----
 
 - [x] **Add title and tags section to output.**
 <sup>Commit [4afb6da](https://github.com/wmelvin/ImagePicker/commit/4afb6da871ae13284de39acea0ea444186365987) (2023-03-10 07:38:38)</sup>
@@ -145,30 +189,38 @@
 
 ---
 
+Confirm remove from list with Yes/No `MessageDlg`.
+
+[Dialog Examples](https://wiki.lazarus.freepascal.org/Dialog_Examples)
+
 - [x] **Change Delete to Remove. No dups in lists.**
 <sup>Commit [c98e3d1](https://github.com/wmelvin/ImagePicker/commit/c98e3d178d5fd77c889a941fcfd1e3d637b17160) (2023-03-10 09:38:40)</sup>
 
----
-
 - [x] **Also show tag in status bar.**
 <sup>Commit [3e4406d](https://github.com/wmelvin/ImagePicker/commit/3e4406db19e28ce55fac0e865c96d4d7ef24abb8) (2023-03-10 09:53:51)</sup>
-
----
 
 - [x] **Anchor buttons below list box.**
 <sup>Commit [146d6ad](https://github.com/wmelvin/ImagePicker/commit/146d6ad386f16d21780db11428c03ced383be407) (2023-03-10 10:33:30)</sup>
 
 ---
 
+Add a TrackBar for navigation in large sets of images.
+
+[TTrackBar](https://wiki.lazarus.freepascal.org/TTrackBar)
+
 - [x] **Add TrackBar for browsing images.**
 <sup>Commit [47517b5](https://github.com/wmelvin/ImagePicker/commit/47517b5f6aa1d1606830616f17e1ca403ac328a4) (2023-03-10 14:40:33)</sup>
 
 ---
 
+Any settings that can improve image quality? Turning on anti-aliasing did help.
+
 - [x] **Set AntialiasingMode = amOn.**
 <sup>Commit [5e56e97](https://github.com/wmelvin/ImagePicker/commit/5e56e975301838ed1d1e8055e55237128b7ab752) (2023-03-10 14:51:24)</sup>
 
 ---
+
+No need for Splitter. Toggling Panel2 in and out is good enough.
 
 - [x] **Change panel layout to fix toggle.**
 <sup>Commit [7c6be41](https://github.com/wmelvin/ImagePicker/commit/7c6be415ecab5df0e7e7214a642c3d0f055abf04) (2023-03-10 17:14:33)</sup>
