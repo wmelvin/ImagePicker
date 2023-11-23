@@ -1,5 +1,12 @@
 # Developer Notes for ImagePicker project
 
+## Initial Plan
+
+The image below is a scan of the notepad page with the initial plan for the application.
+
+![Scanned notepad page with initial plan for the ImagePicker application](readme_images/initial-plan-notepad-page.jpg)
+
+It did not turn out exactly as envisioned, but close.
 
 ## Notes
 
