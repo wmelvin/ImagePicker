@@ -33,7 +33,41 @@ to
 
 The 'unit not found' error went away. Changed back to the original setting. The error did not come back. Hmmm...
 
+### GLIBC version issue
 
+When attempting to run the compiled Linux executable on an older version of Ubuntu (18.04) the application failed to start. It showed the following error message:
+
+```console
+./ImagePicker: /lib/x86_64-linux-gnu/libc.so.6: version `GLIBC_2.34' not found (required by ./ImagePicker)
+```
+
+Use `ldd` to see the version of GLIBC.
+
+```console
+$ ldd --version
+ldd (Ubuntu GLIBC 2.27-3ubuntu1.6) 2.27
+```
+
+What is the version on the machine where the project is being built?
+
+```console
+$ ldd --version
+ldd (Ubuntu GLIBC 2.35-0ubuntu3.1) 2.35
+```
+
+Lazarus forum:
+
+- [/lib/x86_64-linux-gnu/libc.so.6: version GLIBC_2.34; not found](https://forum.lazarus.freepascal.org/index.php?topic=58888.30)
+- [/lib/x86_64-linux-gnu/libc.so.6: version GLIBC_2.34; not found](https://forum.lazarus.freepascal.org/index.php?topic=58888.0)
+
+
+Stack Overflow: [glibc - Is there anyway to include libc.so in a Lazarus/Free pascal compiled binary?](https://stackoverflow.com/questions/45896280/is-there-anyway-to-include-libc-so-in-a-lazarus-free-pascal-compiled-binary) (the answer was *no*)
+
+> Your best bet is to build on the oldest OS you plan to support...
+
+Built the ImagePicker project on Xubuntu 18.04 and the compiled executable also worked on newer Ubuntu versions.
+
+---
 
 ## Links and Commits
 
