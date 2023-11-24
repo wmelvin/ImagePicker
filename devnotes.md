@@ -6,7 +6,7 @@ The image below is a scan of the notepad page with the initial plan for the appl
 
 ![Scanned notepad page with initial plan for the ImagePicker application](readme_images/initial-plan-notepad-page.jpg)
 
-It did not turn out exactly as envisioned, but close.
+It did not turn out exactly as envisioned. A software project always evolves as you build it, especially when it gets to the point where you can start using it.
 
 ## Notes
 
@@ -14,7 +14,7 @@ It did not turn out exactly as envisioned, but close.
 
 In project options, what are settings like `$(ProjOutDir)`?
 
-Reference: [IDE Macros in paths and filenames](https://wiki.freepascal.org/IDE_Macros_in_paths_and_filenames)
+Doc: [IDE Macros in paths and filenames](https://wiki.freepascal.org/IDE_Macros_in_paths_and_filenames)
 
 ### Unit not found error
 
@@ -73,36 +73,33 @@ Built the ImagePicker project on Xubuntu 18.04 and the compiled executable also 
 
 [Lazarus Homepage](https://www.lazarus-ide.org/)
 
-[gitignore/Global/Lazarus.gitignore](https://github.com/github/gitignore/blob/main/Global/Lazarus.gitignore)
+Lazarus [gitignore](https://github.com/github/gitignore/blob/main/Global/Lazarus.gitignore)
 
 - [x] **Initial commit. New project.**
 <sup>Commit [a4d571f](https://github.com/wmelvin/ImagePicker/commit/a4d571fd48eaedfd1fd0533299fd028498b4a62d) (2023-03-07 06:57:34)</sup>
 
 ---
 
-[TMainMenu](https://wiki.lazarus.freepascal.org/TMainMenu)
-
-[TPanel](https://wiki.lazarus.freepascal.org/TPanel)
-
-[TStatusBar](https://lazarus-ccr.sourceforge.io/docs/lcl/comctrls/tstatusbar.html)
+Docs: [TMainMenu](https://wiki.lazarus.freepascal.org/TMainMenu), [TPanel](https://wiki.lazarus.freepascal.org/TPanel), [TStatusBar](https://lazarus-ccr.sourceforge.io/docs/lcl/comctrls/tstatusbar.html)
 
 - [x] **Add initial components.**
 <sup>Commit [3bf104d](https://github.com/wmelvin/ImagePicker/commit/3bf104de6c89bbaf05b25410a09a7d4c1ea24560) (2023-03-08 07:15:18)</sup>
 
 ---
 
-[TSplitter](https://wiki.lazarus.freepascal.org/TSplitter)
+Docs: [TSplitter](https://wiki.lazarus.freepascal.org/TSplitter)
 
 - [x] **Set properties. Add toggle button.**
 <sup>Commit [9039e1d](https://github.com/wmelvin/ImagePicker/commit/9039e1dfbd1ca628699cab72daba9420c931e36e) (2023-03-08 07:31:58)</sup>
 
 ---
 
-[Glyphs](https://glyphs.fyi/) - The Complete Icon Design System
+Are there open source icons available to use for buttons?
 
-[glyphs.fyi - Directory](https://glyphs.fyi/dir?c=multimedia&amp;i=play&amp;v=bold&amp;w)
+- [Glyphs](https://glyphs.fyi/) - The Complete Icon Design System
+- [glyphs.fyi - Directory](https://glyphs.fyi/dir?c=multimedia&amp;i=play&amp;v=bold&amp;w)
 
-[TImage](https://wiki.lazarus.freepascal.org/TImage)
+Docs: [TImage](https://wiki.lazarus.freepascal.org/TImage)
 
 How to scale image in TImage component? Properties:
 
@@ -112,7 +109,7 @@ How to scale image in TImage component? Properties:
     Stretch := True;
 ```
 
-[Howto Use TOpenDialog](https://wiki.lazarus.freepascal.org/Howto_Use_TOpenDialog)
+Docs: [Howto Use TOpenDialog](https://wiki.lazarus.freepascal.org/Howto_Use_TOpenDialog)
 
 - [x] **Add images for button.**
 <sup>Commit [e5d4bf3](https://github.com/wmelvin/ImagePicker/commit/e5d4bf315a2c3e57cd8b54119dc89c86bb50dd34) (2023-03-08 09:35:44)</sup>
@@ -128,16 +125,14 @@ How to scale image in TImage component? Properties:
 
 ---
 
-[TStringList](https://lazarus-ccr.sourceforge.io/docs/rtl/classes/tstringlist.html)
-
-[TStringList-TStrings Tutorial](https://wiki.lazarus.freepascal.org/TStringList-TStrings_Tutorial)
+Docs: [TStringList](https://lazarus-ccr.sourceforge.io/docs/rtl/classes/tstringlist.html), [TStringList-TStrings Tutorial](https://wiki.lazarus.freepascal.org/TStringList-TStrings_Tutorial)
 
 - [x] **Units for image viewing functions.**
 <sup>Commit [009f815](https://github.com/wmelvin/ImagePicker/commit/009f815543e9305c9b240d9703b8af22dd4c074d) (2023-03-08 16:51:07)</sup>
 
 ---
 
-[TTimer](https://wiki.freepascal.org/TTimer)
+Docs: [TTimer](https://wiki.freepascal.org/TTimer)
 
 - [x] **Implement slideshow using default dir.**
 <sup>Commit [c7b6cc6](https://github.com/wmelvin/ImagePicker/commit/c7b6cc67c11fab4ff66540841dc34fce7fa71f91) (2023-03-08 17:59:26)</sup>
@@ -147,18 +142,14 @@ How to scale image in TImage component? Properties:
 
 ---
 
-[key down](https://wiki.lazarus.freepascal.org/key_down)
-
-[LCL Key Handling](https://wiki.lazarus.freepascal.org/LCL_Key_Handling)
-
-[virtual keyboard strokes/de](https://wiki.freepascal.org/virtual_keyboard_strokes/de)
+Docs: [key down](https://wiki.lazarus.freepascal.org/key_down), [LCL Key Handling](https://wiki.lazarus.freepascal.org/LCL_Key_Handling), [virtual keyboard strokes/de](https://wiki.freepascal.org/virtual_keyboard_strokes/de)
 
 - [x] **Add keyboard commands.**
 <sup>Commit [81e8398](https://github.com/wmelvin/ImagePicker/commit/81e8398861c97601d450c450664684af47c84d7c) (2023-03-08 19:31:40)</sup>
 
 ---
 
-[TListBox](https://wiki.lazarus.freepascal.org/TListBox)
+Docs: [TListBox](https://wiki.lazarus.freepascal.org/TListBox)
 
 - [x] **Add list of selected images.**
 <sup>Commit [57933e5](https://github.com/wmelvin/ImagePicker/commit/57933e5782334a61f45f16458b7c1ce46b23f2b6) (2023-03-08 21:37:27)</sup>
@@ -181,19 +172,19 @@ How to scale image in TImage component? Properties:
 
 Had trouble figuring out how to get command-line args.
 
-[Command line parameters and environment variables](https://wiki.lazarus.freepascal.org/Command_line_parameters_and_environment_variables)
+Docs: [Command line parameters and environment variables](https://wiki.lazarus.freepascal.org/Command_line_parameters_and_environment_variables)
 
 In the IDE, used `Run` / `Run Parameters` / `Command line parameters` to pass the path to the `Pictures` dir.
 
-[IDE Window: Run parameters](https://wiki.freepascal.org/IDE_Window:_Run_parameters)
+Docs: [IDE Window: Run parameters](https://wiki.freepascal.org/IDE_Window:_Run_parameters)
 
 Using [ParamCount](https://www.freepascal.org/docs-html/rtl/system/paramcount.html) and [ParamStr](https://www.freepascal.org/docs-html/rtl/system/paramstr.html) does not work in a Lazarus application. It seems the Application object gets the parameters and then (maybe) clears them from the original ParamStr.
 
-[TCustomApplication](https://www.freepascal.org/docs-html/fcl/custapp/tcustomapplication.html)
+Docs: [TCustomApplication](https://www.freepascal.org/docs-html/fcl/custapp/tcustomapplication.html)
 
 The parameters are available via `GetNonOptions`. I messed up at first, thinking the first parameter was still the name of the executable (like `ParamStr(0)`). That is not the case. The first item in the list is the first parameter.
 
-[TCustomApplication.GetNonOptions](https://lazarus-ccr.sourceforge.io/docs/fcl/custapp/tcustomapplication.getnonoptions.html)
+Docs: [TCustomApplication.GetNonOptions](https://lazarus-ccr.sourceforge.io/docs/fcl/custapp/tcustomapplication.getnonoptions.html)
 
 - [x] **Take command-line argument.**
 <sup>Commit [ea18552](https://github.com/wmelvin/ImagePicker/commit/ea1855278f021b8a5b1ab9b65cdd24ac4e5c3ca8) (2023-03-09 10:01:14)</sup>
@@ -232,7 +223,7 @@ Save the list of picked images to a text file. The format of the text file inclu
 
 Confirm remove from list with Yes/No `MessageDlg`.
 
-[Dialog Examples](https://wiki.lazarus.freepascal.org/Dialog_Examples)
+Docs: [Dialog Examples](https://wiki.lazarus.freepascal.org/Dialog_Examples)
 
 - [x] **Change Delete to Remove. No dups in lists.**
 <sup>Commit [c98e3d1](https://github.com/wmelvin/ImagePicker/commit/c98e3d178d5fd77c889a941fcfd1e3d637b17160) (2023-03-10 09:38:40)</sup>
@@ -247,7 +238,7 @@ Confirm remove from list with Yes/No `MessageDlg`.
 
 Add a TrackBar for navigation in large sets of images.
 
-[TTrackBar](https://wiki.lazarus.freepascal.org/TTrackBar)
+Docs: [TTrackBar](https://wiki.lazarus.freepascal.org/TTrackBar)
 
 - [x] **Add TrackBar for browsing images.**
 <sup>Commit [47517b5](https://github.com/wmelvin/ImagePicker/commit/47517b5f6aa1d1606830616f17e1ca403ac328a4) (2023-03-10 14:40:33)</sup>
@@ -268,11 +259,7 @@ No need for Splitter. Toggling Panel2 in and out is good enough.
 
 ---
 
-[Copy2SymbDel](https://lazarus-ccr.sourceforge.io/docs/rtl/strutils/copy2symbdel.html)
-
-[TrimSet](https://lazarus-ccr.sourceforge.io/docs/rtl/strutils/trimset.html)
-
-[TStrings.Values](https://lazarus-ccr.sourceforge.io/docs/rtl/classes/tstrings.values.html)
+Docs: [Copy2SymbDel](https://lazarus-ccr.sourceforge.io/docs/rtl/strutils/copy2symbdel.html), [TrimSet](https://lazarus-ccr.sourceforge.io/docs/rtl/strutils/trimset.html), [TStrings.Values](https://lazarus-ccr.sourceforge.io/docs/rtl/classes/tstrings.values.html)
 
 - [x] **Load from previous output file (initial).**
 <sup>Commit [15cdfcf](https://github.com/wmelvin/ImagePicker/commit/15cdfcf7332f63e0532da403c362c06b62f291d0) (2023-03-10 18:49:06)</sup>
@@ -291,9 +278,7 @@ No need for Splitter. Toggling Panel2 in and out is good enough.
 
 ---
 
-[Configuration files](https://wiki.lazarus.freepascal.org/Multiplatform_Programming_Guide#Configuration_files) - Multiplatform Programming Guide
-
-[Data and Resource files](https://wiki.lazarus.freepascal.org/Multiplatform_Programming_Guide#Data_and_resource_files) - Multiplatform Programming Guide
+Docs (Multiplatform Programming Guide): [Configuration files](https://wiki.lazarus.freepascal.org/Multiplatform_Programming_Guide#Configuration_files), [Data and Resource files](https://wiki.lazarus.freepascal.org/Multiplatform_Programming_Guide#Data_and_resource_files)
 
 - [x] **Add Tools/Options menu (initial).**
 <sup>Commit [a0178d3](https://github.com/wmelvin/ImagePicker/commit/a0178d336fac4c7637f9f84293cc6755e967f1c6) (2023-03-12 15:57:17)</sup>
@@ -306,9 +291,7 @@ No need for Splitter. Toggling Panel2 in and out is good enough.
 
 ---
 
-[TListBox](https://wiki.lazarus.freepascal.org/TListBox)
-
-[TStrings.Exchange](https://lazarus-ccr.sourceforge.io/docs/rtl/classes/tstrings.exchange.html)
+Docs: [TListBox](https://wiki.lazarus.freepascal.org/TListBox), [TStrings.Exchange](https://lazarus-ccr.sourceforge.io/docs/rtl/classes/tstrings.exchange.html)
 
 - [x] **Add buttons to show and move ListBox items.**
 <sup>Commit [dbf83a6](https://github.com/wmelvin/ImagePicker/commit/dbf83a611a523460915f5e70cb48f7d4e438e5f8) (2023-03-13 12:05:46)</sup>
@@ -350,7 +333,7 @@ Without the speed control, Panel3 can be more narrow. Put the buttons in one col
 
 ---
 
-[GetAppConfigDir](https://lazarus-ccr.sourceforge.io/docs/rtl/sysutils/getappconfigdir.html)
+Docs: [GetAppConfigDir](https://lazarus-ccr.sourceforge.io/docs/rtl/sysutils/getappconfigdir.html)
 
 - [x] **Add TAppOptions class.**
 <sup>Commit [095f1b7](https://github.com/wmelvin/ImagePicker/commit/095f1b7c38113af9ae340e9c267e04da6a69ab37) (2023-03-17 19:16:30)</sup>
@@ -362,11 +345,7 @@ Without the speed control, Panel3 can be more narrow. Put the buttons in one col
 
 Add methods to actually copy the selected files in the ListBox.
 
-[TSelectDirectoryDialog - Wiki](https://wiki.lazarus.freepascal.org/TSelectDirectoryDialog)
-
-[TSelectDirectoryDialog](https://lazarus-ccr.sourceforge.io/docs/lcl/dialogs/tselectdirectorydialog.html)
-
-[CopyFile](https://wiki.lazarus.freepascal.org/CopyFile)
+Docs: [TSelectDirectoryDialog](https://wiki.lazarus.freepascal.org/TSelectDirectoryDialog), [TSelectDirectoryDialog](https://lazarus-ccr.sourceforge.io/docs/lcl/dialogs/tselectdirectorydialog.html), [CopyFile](https://wiki.lazarus.freepascal.org/CopyFile)
 
 - [x] **New form saved as uCopyFilesDlg.**
 <sup>Commit [cca565f](https://github.com/wmelvin/ImagePicker/commit/cca565f4c66f1d7f1ba66af5342a285bd4787993) (2023-03-18 07:34:49)</sup>
@@ -398,9 +377,7 @@ Add methods to actually copy the selected files in the ListBox.
 
 Use `OpenDocument` from the `LCLIntf` unit to open the options file using the default associated application for text files.
 
-[Executing External Programs](https://wiki.lazarus.freepascal.org/Executing_External_Programs#LCLIntf_Alternatives)
-
-[OpenDocument](https://wiki.lazarus.freepascal.org/OpenDocument)
+Docs: [Executing External Programs](https://wiki.lazarus.freepascal.org/Executing_External_Programs#LCLIntf_Alternatives), [OpenDocument](https://wiki.lazarus.freepascal.org/OpenDocument)
 
 - [x] **Open options file using associated app for text files**
 <sup>Commit [e875273](https://github.com/wmelvin/ImagePicker/commit/e87527383e71784fc2bdf69436371ef8010ea50d) (2023-03-19 20:56:34)</sup>
@@ -412,11 +389,7 @@ Use `OpenDocument` from the `LCLIntf` unit to open the options file using the de
 
 Tools/Options OpenDocument not working on Windows.
 
-[MkDir](https://www.freepascal.org/docs-html/rtl/system/mkdir.html)
-
-[CreateDir](https://www.freepascal.org/docs-html/rtl/sysutils/createdir.html)
-
-[ForceDirectories](https://www.freepascal.org/docs-html/rtl/sysutils/forcedirectories.html)
+Docs: [MkDir](https://www.freepascal.org/docs-html/rtl/system/mkdir.html), [CreateDir](https://www.freepascal.org/docs-html/rtl/sysutils/createdir.html), [ForceDirectories](https://www.freepascal.org/docs-html/rtl/sysutils/forcedirectories.html)
 
 - [x] **Use ForceDirectories. Tools-Options opens folder**
 <sup>Commit [cc1b95d](https://github.com/wmelvin/ImagePicker/commit/cc1b95db6000f7b575e3c7ac8bb551dd2696226f) (2023-03-20 09:09:48)</sup>
@@ -447,7 +420,7 @@ Tools/Options OpenDocument not working on Windows.
 
 Option to recurse sub-folders on open image location.
 
-[Enum Type](https://wiki.lazarus.freepascal.org/Enum_Type)
+Docs: [Enum Type](https://wiki.lazarus.freepascal.org/Enum_Type)
 
 - [x] **Prompt to scan sub-folders for image files**
 <sup>Commit [939dd49](https://github.com/wmelvin/ImagePicker/commit/939dd4937489ed5d5b90ad28ac7ee722eaa912c7) (2023-03-31 19:15:43)</sup>
@@ -475,7 +448,7 @@ Separate menu item for Open Folder vs Open File.
 
 ---
 
-[Clipboard - Lazarus wiki](https://wiki.freepascal.org/Clipboard)
+Docs: [Clipboard](https://wiki.freepascal.org/Clipboard)
 
 - [x] **Copy file paths to clipboard**
 <sup>Commit [a247cd5](https://github.com/wmelvin/ImagePicker/commit/a247cd5da75db355d06ffe4f0f67055ccba91265) (2023-06-04 12:24:19)</sup>
@@ -521,7 +494,7 @@ Separate menu item for Open Folder vs Open File.
 
 ---
 
-Refactorings.
+**Refactoring**
 
 - [x] **Refactor rename Form1 to MainForm**
 <sup>Commit [9583134](https://github.com/wmelvin/ImagePicker/commit/958313434fcafa7abf8538f3613c19e2fae482b6) (2023-07-12 08:24:03)</sup>
@@ -572,7 +545,7 @@ Refactorings.
 
 ---
 
-[TRadioGroup](https://wiki.lazarus.freepascal.org/TRadioGroup)
+Docs: [TRadioGroup](https://wiki.lazarus.freepascal.org/TRadioGroup)
 
 - [x] **Add file naming options to CopyFilesInList**
 <sup>Commit [4be6b3a](https://github.com/wmelvin/ImagePicker/commit/4be6b3a745f631625323d33f6fd1671d8c64bc68) (2023-10-30 15:01:54)</sup>
