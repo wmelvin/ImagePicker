@@ -843,16 +843,21 @@ var
   filename: String;
   t: String;
 begin
-  t := ATag;
-  if 0 < Length(t) then
-    t := ' [' + t + ']';
-
   filename := ImagesList.CurrentImage;
   if Length(filename) = 0 then
     Exit;
 
+  t := ATag;
+  if 0 < Length(t) then
+    begin
+      t := ' [' + t + ']';
+      if not chkAutoTag.Checked then
+        editTag.Text := ATag;
+    end;
+
   StatusBar.SimpleText := '(' + IntToStr(ImagesList.Index + 1) + ' of '
     + IntToStr(ImagesList.Count) + ') ' + ExtractFileName(filename) + t;
+
 
   PanelImage.Caption := '';
 
