@@ -86,6 +86,14 @@
         <IsPartOfProject Value="True"/>
         <UnitName Value="uPicksFile"/>
       </Unit>
+      <Unit>
+        <Filename Value="uaboutdlg.pas"/>
+        <IsPartOfProject Value="True"/>
+        <ComponentName Value="AboutDlg"/>
+        <HasResources Value="True"/>
+        <ResourceBaseClass Value="Form"/>
+        <UnitName Value="uAboutDlg"/>
+      </Unit>
     </Units>
   </ProjectOptions>
   <CompilerOptions>

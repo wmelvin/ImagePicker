@@ -28,6 +28,7 @@ type
     Glyphs: TImageList;
     editTag: TLabeledEdit;
     editTitle: TLabeledEdit;
+    mnuAbout: TMenuItem;
     Separator4: TMenuItem;
     Separator5: TMenuItem;
     SpinEditLabel: TLabel;
@@ -90,6 +91,7 @@ type
     procedure FormKeyDown(Sender: TObject; var Key: Word; Shift: TShiftState);
     procedure ImageClick(Sender: TObject);
     procedure ImageDblClick(Sender: TObject);
+    procedure mnuAboutClick(Sender: TObject);
     procedure mnuFileCurrentClick(Sender: TObject);
     procedure mnuFileExitClick(Sender: TObject);
     procedure mnuFileLoadClick(Sender: TObject);
@@ -145,6 +147,7 @@ uses
   uAppFuncs,
   uAppOptions,
   uClipboard,
+  uAboutDlg,
   uCopyFilesDlg,
   uImageInfo,
   uImagesList,
@@ -587,6 +590,11 @@ begin
       Picks.Items.Assign(sl);
       sl.Free;
     end;
+end;
+
+procedure TMainForm.mnuAboutClick(Sender: TObject);
+begin
+  AboutDlg.ShowModal;
 end;
 
 procedure TMainForm.PicksDblClick(Sender: TObject);

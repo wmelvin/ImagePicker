@@ -11,7 +11,7 @@ uses
   {$ENDIF}
   Interfaces, // this includes the LCL widgetset
   Forms, uMainForm, uImagesList, uAppFuncs, uImageInfo, uApp, uAppOptions, 
-uCopyFilesDlg, uClipboard, uPicksFile
+uCopyFilesDlg, uClipboard, uPicksFile, uAboutDlg
   { you can add units after this };
 
 {$R *.res}
@@ -22,6 +22,7 @@ begin
   Application.Initialize;
   Application.CreateForm(TMainForm, MainForm);
   Application.CreateForm(TCopyFilesDlg, CopyFilesDlg);
+  Application.CreateForm(TAboutDlg, AboutDlg);
   Application.Run;
 end.
 

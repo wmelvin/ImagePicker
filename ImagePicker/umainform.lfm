@@ -423,6 +423,10 @@ object MainForm: TMainForm
         OnClick = mnuToolsSortClick
       end
     end
+    object mnuAbout: TMenuItem
+      Caption = '&About'
+      OnClick = mnuAboutClick
+    end
   end
   object Glyphs: TImageList
     Height = 32
