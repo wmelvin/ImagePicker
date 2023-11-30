@@ -25,7 +25,6 @@ type
     procedure FormShow(Sender: TObject);
     procedure lblFpcUrlClick(Sender: TObject);
     procedure lblLazarusUrlClick(Sender: TObject);
-    procedure lblLazClick(Sender: TObject);
     procedure lblSourceUrlClick(Sender: TObject);
   private
 
@@ -62,11 +61,6 @@ end;
 procedure TAboutDlg.lblLazarusUrlClick(Sender: TObject);
 begin
   OpenURL(lblLazarusUrl.Caption);
-end;
-
-procedure TAboutDlg.lblLazClick(Sender: TObject);
-begin
-
 end;
 
 procedure TAboutDlg.lblSourceUrlClick(Sender: TObject);

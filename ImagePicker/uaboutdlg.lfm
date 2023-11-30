@@ -55,7 +55,6 @@ object AboutDlg: TAboutDlg
       Width = 232
       Caption = 'Built with Lazarus-IDE and Free Pascal:'
       ParentColor = False
-      OnClick = lblLazClick
     end
     object lblSource: TLabel
       Left = 32
