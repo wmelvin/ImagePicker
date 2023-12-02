@@ -556,3 +556,30 @@ Docs: [TRadioGroup](https://wiki.lazarus.freepascal.org/TRadioGroup)
 <sup>Commit [b980a0e](https://github.com/wmelvin/ImagePicker/commit/b980a0ea8fbc3eb2d0415eb6f1037a3399c538ab) (2023-11-14 14:06:35)</sup>
 
 ---
+
+Docs: [Calendar Versioning](https://calver.org/)
+
+- [x] **Use calver. Update editTag on show image in list**
+<sup>Commit [ab69ec8](https://github.com/wmelvin/ImagePicker/commit/ab69ec8ea30873ffd04921ef725e765002ee02fa) (2023-11-26 15:09:53)</sup>
+
+---
+
+Docs: [OpenURL](https://wiki.freepascal.org/OpenURL)
+
+- [x] **Add About dialog**
+<sup>Commit [b9f90a8](https://github.com/wmelvin/ImagePicker/commit/b9f90a868a8c4e72db34364ddafddc3404b96aa1) (2023-11-29 16:11:06)</sup>
+
+- [x] **Add to About dialog**
+<sup>Commit [4947ac1](https://github.com/wmelvin/ImagePicker/commit/4947ac15684833a575e0cd87afebc2b054482ce6) (2023-11-29 17:09:36)</sup>
+
+- [x] **Add LICENSE**
+<sup>Commit [9c2042c](https://github.com/wmelvin/ImagePicker/commit/9c2042c543ee5a604f50e38c4a19eb36fcb8767f) (2023-11-29 19:49:22)</sup>
+
+---
+
+Docs: [Application manifests - Win32 apps](https://learn.microsoft.com/en-us/windows/win32/sbscs/application-manifests#assemblyidentity)
+
+- [x] **Update project name in manifest**
+<sup>Commit [0fd760b](https://github.com/wmelvin/ImagePicker/commit/0fd760b43b593a0cb252e7927ace50c4aa57be1e) (2023-12-01 20:39:17)</sup>
+
+---

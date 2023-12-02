@@ -2,9 +2,7 @@
 
 *ImagePicker* is a desktop application for selecting images and saving the list to a text file for use in other applications. It is implemented using the [Lazarus](https://www.lazarus-ide.org/) IDE for Free Pascal.
 
-**This project is still in development. There are currently no published executable releases.**
-
-More details about developing the application are in [devnotes](devnotes.md).
+More details about the development of this application are in [devnotes](devnotes.md).
 
 ## Picking from a set of screenshots
 
@@ -27,7 +25,7 @@ As stated above, this application was created mainly to review and select from s
 
 ## License
 
-The source code for the **ImagePicker** application itself is licensed using the [MIT license](LICENSE).
+The source code for the **ImagePicker** application itself is licensed using the [MIT license](LICENSE). None of the source code for Free Pascal, Lazarus, or its component libraries, was modified in any way.
 
 The Lazarus IDE and Free Pascal compiler use versions of the GPL and LGPL licenses. However, according to the [licensing documentation](https://wiki.lazarus.freepascal.org/licensing), executables produced by Lazarus are not subject to the same licensing requirements.
 
