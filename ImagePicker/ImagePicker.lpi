@@ -6,11 +6,12 @@
       <SessionStorage Value="InProjectDir"/>
       <Title Value="ImagePicker"/>
       <Scaled Value="True"/>
+      <UseAppBundle Value="False"/>
       <ResourceType Value="res"/>
       <UseXPManifest Value="True"/>
       <XPManifest>
         <DpiAware Value="True"/>
-        <TextName Value="Bogusoft.Futilities.ImagePicker"/>
+        <TextName Value="wmelvin.tools.ImagePicker"/>
         <TextDesc Value="Pick images and write the list to a text file."/>
       </XPManifest>
       <Icon Value="0"/>
