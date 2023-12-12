@@ -31,6 +31,7 @@ type
     mnuAbout: TMenuItem;
     Separator4: TMenuItem;
     Separator5: TMenuItem;
+    btnMode: TSpeedButton;
     SpinEditLabel: TLabel;
     Picks: TListBox;
     MainMenu: TMainMenu;
@@ -65,6 +66,7 @@ type
     SaveDialog: TSaveDialog;
     Timer: TTimer;
     TrackBar: TTrackBar;
+    procedure btnModeClick(Sender: TObject);
     procedure btnNavFirstClick(Sender: TObject);
     procedure btnNavLastClick(Sender: TObject);
     procedure btnNavNextClick(Sender: TObject);
@@ -111,6 +113,7 @@ type
   private
     IsActivated: Boolean;
     InEdit: Boolean;
+    IsPicksMode: Boolean;
     procedure AddCurrentImage;
     procedure AskToClearPicks;
     procedure CopyFilesInList(DestDir: String; FileNamesOption: Integer; DoSubDir: Boolean);
@@ -130,6 +133,7 @@ type
     procedure SelectShowNext;
     procedure SelectShowPrev;
     procedure ShowSelectedImage;
+    procedure TogglePicksMode;
     procedure TogglePanel2;
   public
 
@@ -163,6 +167,8 @@ const
   GLYPH_EXPAND = 1;
   GLYPH_PLAY = 4;
   GLYPH_STOP = 5;
+  GLYPH_MODE0 = 8;
+  GLYPH_MODE1 = 9;
 
 
 var
@@ -174,6 +180,11 @@ var
 procedure TMainForm.btnNavFirstClick(Sender: TObject);
 begin
   ImageFirst;
+end;
+
+procedure TMainForm.btnModeClick(Sender: TObject);
+begin
+  TogglePicksMode;
 end;
 
 procedure TMainForm.btnNavLastClick(Sender: TObject);
@@ -346,6 +357,7 @@ begin
   IsActivated := False;
   MainForm.Caption := APP_TITLE;
   InEdit := False;
+  IsPicksMode := False;
   ImagesList := TImagesList.Create;
   AppOptions := TAppOptions.Create;
   AppOptions.LoadOptions;
@@ -382,6 +394,12 @@ begin
       VK_END: if not InEdit then
         begin
           ImageLast;
+          Key := 0;
+        end;
+
+      VK_F2:
+        begin
+          TogglePicksMode;
           Key := 0;
         end;
 
@@ -1033,6 +1051,19 @@ begin
          if ImagesList.SetCurrentImage(fn) then
             LoadImage(t);
        end;
+end;
+
+procedure TMainForm.TogglePicksMode;
+begin
+  IsPicksMode := not IsPicksMode;
+  if IsPicksMode then
+    begin
+      btnMode.ImageIndex := GLYPH_MODE1;
+    end
+  else
+    begin
+      btnMode.ImageIndex := GLYPH_MODE0;
+    end;
 end;
 
 procedure TMainForm.TogglePanel2;
