@@ -165,8 +165,10 @@ const
   P2_DEFAULT_WIDTH = 300;
   GLYPH_COLLAPSE = 0;
   GLYPH_EXPAND = 1;
+  GLYPH_FIRST = 2;
   GLYPH_PLAY = 4;
   GLYPH_STOP = 5;
+  GLYPH_LAST = 7;
   GLYPH_MODE0 = 8;
   GLYPH_MODE1 = 9;
 
@@ -177,14 +179,14 @@ var
 { TMainForm }
 
 
-procedure TMainForm.btnNavFirstClick(Sender: TObject);
-begin
-  ImageFirst;
-end;
-
 procedure TMainForm.btnModeClick(Sender: TObject);
 begin
   TogglePicksMode;
+end;
+
+procedure TMainForm.btnNavFirstClick(Sender: TObject);
+begin
+  ImageFirst;
 end;
 
 procedure TMainForm.btnNavLastClick(Sender: TObject);
@@ -194,12 +196,18 @@ end;
 
 procedure TMainForm.btnNavNextClick(Sender: TObject);
 begin
-  ImageNext;
+  if IsPicksMode then
+    SelectShowNext
+  else
+    ImageNext;
 end;
 
 procedure TMainForm.btnNavPrevClick(Sender: TObject);
 begin
-  ImagePrev;
+  if IsPicksMode then
+    SelectShowPrev
+  else
+    ImagePrev;
 end;
 
 procedure TMainForm.btnNavToggleClick(Sender: TObject);
@@ -375,25 +383,48 @@ begin
     case Key of
       VK_HOME: if not InEdit then
         begin
-          ImageFirst;
+          if not IsPicksMode then
+            ImageFirst;
           Key := 0;
         end;
 
       VK_LEFT: if not InEdit then
         begin
-          ImagePrev;
+          if IsPicksMode then
+            SelectShowPrev
+          else
+            ImagePrev;
           Key := 0;
         end;
 
       VK_RIGHT: if not InEdit then
         begin
-          ImageNext;
+          if IsPicksMode then
+            SelectShowNext
+          else
+            ImageNext;
           Key := 0;
         end;
 
       VK_END: if not InEdit then
         begin
-          ImageLast;
+          if not IsPicksMode then
+            ImageLast;
+          Key := 0;
+        end;
+
+
+      VK_UP:
+        begin
+          if IsPicksMode then
+            SelectShowPrev;
+          Key := 0;
+        end;
+
+      VK_DOWN:
+        begin
+          if IsPicksMode then
+            SelectShowNext;
           Key := 0;
         end;
 
@@ -411,13 +442,15 @@ begin
 
       VK_F5:
         begin
-          PlayStop;
+          if not IsPicksMode then
+            PlayStop;
           Key := 0;
         end;
 
       VK_SPACE: if not InEdit then
         begin
-          PlayStop;
+          if not IsPicksMode then
+            PlayStop;
           Key := 0;
         end;
 
@@ -455,13 +488,15 @@ begin
 
       VK_LEFT:
         begin
-          ImagePrev;
+          if not IsPicksMode then
+            ImagePrev;
           Key := 0;
         end;
 
       VK_RIGHT:
         begin
-          ImageNext;
+          if not IsPicksMode then
+            ImageNext;
           Key := 0;
         end;
     end;
@@ -671,6 +706,8 @@ var
   dup: Integer;
   info: TImageInfo;
 begin
+  if IsPicksMode then
+    Exit;
   s := ImagesList.CurrentImage;
   if 0 < Length(s) then
   begin
@@ -1055,14 +1092,42 @@ end;
 
 procedure TMainForm.TogglePicksMode;
 begin
+  // Do not enter picks-mode while playing images.
+  if Timer.Enabled then
+    Exit;
+
+  // Do not enter picks-mode if no images have been picked.
+  if (not IsPicksMode) and (Picks.Items.Count = 0) then
+    begin
+      StatusBar.SimpleText := 'No images picked.';
+      Exit;
+    end;
+
   IsPicksMode := not IsPicksMode;
   if IsPicksMode then
     begin
       btnMode.ImageIndex := GLYPH_MODE1;
+      TrackBar.Enabled := False;
+      btnNavFirst.Enabled := False;
+      btnNavFirst.ImageIndex := -1;
+      btnNavLast.Enabled := False;
+      btnNavLast.ImageIndex := -1;
+      btnNavTogglePlay.Enabled := False;
+      btnNavTogglePlay.ImageIndex := -1;
+      if (0 < Picks.Items.Count) and (Picks.SelCount = 0) then
+        Picks.Selected[0] := True;
+      ShowSelectedImage;
     end
   else
     begin
       btnMode.ImageIndex := GLYPH_MODE0;
+      TrackBar.Enabled := True;
+      btnNavFirst.Enabled := True;
+      btnNavFirst.ImageIndex := GLYPH_FIRST;
+      btnNavLast.Enabled := True;
+      btnNavLast.ImageIndex := GLYPH_LAST;
+      btnNavTogglePlay.Enabled := True;
+      btnNavTogglePlay.ImageIndex := GLYPH_PLAY;
     end;
 end;
 
