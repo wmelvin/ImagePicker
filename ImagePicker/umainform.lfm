@@ -214,12 +214,16 @@ object MainForm: TMainForm
       object editTag: TLabeledEdit
         Left = 20
         Height = 28
-        Top = 117
+        Hint = 'Tag to apply to selected pick.'
+        Top = 115
         Width = 180
         EditLabel.Height = 16
         EditLabel.Width = 180
-        EditLabel.Caption = 'Tag'
+        EditLabel.Caption = 'Ta&g'
         EditLabel.ParentColor = False
+        EditLabel.ParentShowHint = False
+        ParentShowHint = False
+        ShowHint = True
         TabOrder = 3
         OnEnter = editTagEnter
         OnExit = editTagExit
