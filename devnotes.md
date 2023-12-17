@@ -583,3 +583,23 @@ Docs: [Application manifests - Win32 apps](https://learn.microsoft.com/en-us/win
 <sup>Commit [0fd760b](https://github.com/wmelvin/ImagePicker/commit/0fd760b43b593a0cb252e7927ace50c4aa57be1e) (2023-12-01 20:39:17)</sup>
 
 ---
+
+While using ImagePicker to collect and tag a series of screenshots, it seemed that the process could be improved if there was a separate *mode* for working only with the list of images already picked.
+
+A **picks-mode** would:
+
+- Disable navigation within the source images folder.
+- Reassign some navigation functions to work within the *picks* list instead of the source images.
+
+This would make it easier to **focus on the picks list** for selecting, tagging, reordering, and removing items.
+
+- [x] **Add picks-mode button and initial code**
+<sup>Commit [d5fb072](https://github.com/wmelvin/ImagePicker/commit/d5fb07297fb015550c849feca4e071476b9921b6) (2023-12-12 18:16:48)</sup>
+
+- [x] **Implement picks-mode**
+<sup>Commit [b1f04c5](https://github.com/wmelvin/ImagePicker/commit/b1f04c502b0f7d91220f1b9f28181e25bcb9b808) (2023-12-12 21:43:24)</sup>
+
+- [x] **Change editTag caption to assign Alt+G**
+<sup>Commit [52bbee6](https://github.com/wmelvin/ImagePicker/commit/52bbee648064f6d5cbeb42a09b9a1655551e0e1a) (2023-12-16 15:09:52)</sup>
+
+---
