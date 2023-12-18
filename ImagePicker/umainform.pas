@@ -536,6 +536,8 @@ begin
 
   if OpenDialog.Execute then
     begin
+      if IsPicksMode then
+        TogglePicksMode;
       AskToClearPicks;
       LoadImagesList(OpenDialog.FileName, True);
       AppOptions.LastOpenDir := ExtractFileDir(OpenDialog.FileName);
@@ -553,6 +555,8 @@ begin
 
   if OpenDirDialog.Execute then
     begin
+      if IsPicksMode then
+        TogglePicksMode;
       AskToClearPicks;
       LoadImagesList(OpenDirDialog.FileName, True);
       AppOptions.LastOpenDir := ExtractFileDir(OpenDirDialog.FileName);
@@ -956,7 +960,11 @@ var
 begin
   last_pick := LoadPicksFile(OpenDialog, editTitle, Picks, StatusBar);
   if 0 < Length(last_pick) then
-    LoadImagesList(last_pick, False);
+    begin
+      if IsPicksMode then
+        TogglePicksMode;
+      LoadImagesList(last_pick, False);
+    end;
   SaveAppOptions;
 end;
 
