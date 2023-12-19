@@ -30,3 +30,51 @@ The source code for the **ImagePicker** application itself is licensed using the
 The Lazarus IDE and Free Pascal compiler use versions of the GPL and LGPL licenses. However, according to the [licensing documentation](https://wiki.lazarus.freepascal.org/licensing), executables produced by Lazarus are not subject to the same licensing requirements.
 
 > The GPL does not cover any application binary created with Lazarus. The application binary itself is only limited by the components you actually link to, and in the FPC/Lazarus project those are all LGPL_with_exception. So though potentially confusing this licensing is not a problem when developing binaries with Lazarus, even if you have commercial components with designtime parts.
+
+## Menus
+
+### File
+
+#### Open file
+
+Use the file-open dialog to select a file. Other image files in the same folder will be in the set of images to navigate and pick from. The file that was opened will be the current image displayed.
+
+#### Open folder
+
+Use the folder-open dialog to select a folder. All image files in the folder will be in the set of images to navigate and pick from.
+
+#### Load List
+
+Load a previously saved list of picked images. Provided the folder where the images were picked from is accessible, the images will be displayed.
+
+#### Save List
+
+Save the current list of picked images to a file. The file is a text file that can be loaded into the application later. It also is in a format that can be used to create a script to do operations with the list of images using some other tool.
+
+#### Current Folder
+
+Open the folder than contains the current image.
+
+#### Exit
+
+Exit the ImagePicker application.
+
+### Tools
+
+#### Options
+
+Open the folder containing the ImagePicker options file. The options file is a text file containing saved settings as key-value pairs.
+
+#### Copy files
+
+TODO: ...
+
+#### Sort picks
+
+Sort the file names in the Picks list.
+
+### About
+
+TODO: ...
+
+---
