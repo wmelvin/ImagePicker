@@ -130,6 +130,8 @@ type
     procedure PlayStop;
     procedure SaveAppOptions;
     procedure SavePicks(FileName: String);
+    procedure SelectShowFirst;
+    procedure SelectShowLast;
     procedure SelectShowNext;
     procedure SelectShowPrev;
     procedure ShowSelectedImage;
@@ -383,7 +385,9 @@ begin
     case Key of
       VK_HOME: if not InEdit then
         begin
-          if not IsPicksMode then
+          if IsPicksMode then
+            SelectShowFirst
+          else
             ImageFirst;
           Key := 0;
         end;
@@ -408,7 +412,9 @@ begin
 
       VK_END: if not InEdit then
         begin
-          if not IsPicksMode then
+          if IsPicksMode then
+            SelectShowLast
+          else
             ImageLast;
           Key := 0;
         end;
@@ -1025,6 +1031,40 @@ end;
 procedure TMainForm.SavePicks(FileName: String);
 begin
   SavePicksFile(FileName, editTitle.Text, Picks, StatusBar);
+end;
+
+procedure TMainForm.SelectShowFirst;
+var
+  i: Integer;
+begin
+  if 0 < Picks.SelCount then
+  begin
+    for i := 0 to Picks.Items.Count - 2 do
+      if Picks.Selected[i] then
+        begin
+          Picks.Selected[i] := False;
+          break;
+        end;
+    Picks.Selected[0] := True;
+    ShowSelectedImage;
+  end;
+end;
+
+procedure TMainForm.SelectShowLast;
+var
+  i: Integer;
+begin
+  if 0 < Picks.SelCount then
+  begin
+    for i := 0 to Picks.Items.Count - 2 do
+      if Picks.Selected[i] then
+        begin
+          Picks.Selected[i] := False;
+          break;
+        end;
+    Picks.Selected[Picks.Items.Count -1] := True;
+    ShowSelectedImage;
+  end;
 end;
 
 procedure TMainForm.SelectShowNext;

@@ -350,7 +350,7 @@ object MainForm: TMainForm
         Left = 20
         Height = 16
         Top = 64
-        Width = 69
+        Width = 68
         Caption = 'Speed (ms):'
         ParentColor = False
       end
