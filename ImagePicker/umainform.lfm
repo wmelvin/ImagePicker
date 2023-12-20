@@ -439,9 +439,19 @@ object MainForm: TMainForm
         OnClick = mnuToolsSortClick
       end
     end
-    object mnuAbout: TMenuItem
-      Caption = '&About'
-      OnClick = mnuAboutClick
+    object mnuHelp: TMenuItem
+      Caption = '&Help'
+      object mnuHelpReadme: TMenuItem
+        Caption = '&Online docs'
+        OnClick = mnuHelpReadmeClick
+      end
+      object Separator6: TMenuItem
+        Caption = '-'
+      end
+      object mnuHelpAbout: TMenuItem
+        Caption = '&About'
+        OnClick = mnuHelpAboutClick
+      end
     end
   end
   object Glyphs: TImageList

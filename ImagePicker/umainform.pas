@@ -28,10 +28,13 @@ type
     Glyphs: TImageList;
     editTag: TLabeledEdit;
     editTitle: TLabeledEdit;
-    mnuAbout: TMenuItem;
+    mnuHelpReadme: TMenuItem;
+    mnuHelpAbout: TMenuItem;
+    mnuHelp: TMenuItem;
     Separator4: TMenuItem;
     Separator5: TMenuItem;
     btnMode: TSpeedButton;
+    Separator6: TMenuItem;
     SpinEditLabel: TLabel;
     Picks: TListBox;
     MainMenu: TMainMenu;
@@ -93,13 +96,14 @@ type
     procedure FormKeyDown(Sender: TObject; var Key: Word; Shift: TShiftState);
     procedure ImageClick(Sender: TObject);
     procedure ImageDblClick(Sender: TObject);
-    procedure mnuAboutClick(Sender: TObject);
     procedure mnuFileCurrentClick(Sender: TObject);
     procedure mnuFileExitClick(Sender: TObject);
     procedure mnuFileLoadClick(Sender: TObject);
     procedure mnuFileOpenClick(Sender: TObject);
     procedure mnuFileOpenDirClick(Sender: TObject);
     procedure mnuFileSaveClick(Sender: TObject);
+    procedure mnuHelpAboutClick(Sender: TObject);
+    procedure mnuHelpReadmeClick(Sender: TObject);
     procedure mnuToolsCopyClick(Sender: TObject);
     procedure mnuToolsOptionsClick(Sender: TObject);
     procedure mnuToolsSortClick(Sender: TObject);
@@ -173,7 +177,7 @@ const
   GLYPH_LAST = 7;
   GLYPH_MODE0 = 8;
   GLYPH_MODE1 = 9;
-
+  README_URL = 'https://github.com/wmelvin/ImagePicker/blob/main/README.md';
 
 var
   ImagesList: TImagesList;
@@ -655,9 +659,14 @@ begin
     end;
 end;
 
-procedure TMainForm.mnuAboutClick(Sender: TObject);
+procedure TMainForm.mnuHelpAboutClick(Sender: TObject);
 begin
   AboutDlg.ShowModal;
+end;
+
+procedure TMainForm.mnuHelpReadmeClick(Sender: TObject);
+begin
+  OpenURL(README_URL);
 end;
 
 procedure TMainForm.PicksDblClick(Sender: TObject);
