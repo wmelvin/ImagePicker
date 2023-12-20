@@ -177,7 +177,7 @@ const
   GLYPH_LAST = 7;
   GLYPH_MODE0 = 8;
   GLYPH_MODE1 = 9;
-  README_URL = 'https://github.com/wmelvin/ImagePicker/blob/main/README.md';
+  README_URL = 'https://github.com/wmelvin/ImagePicker#usage';
 
 var
   ImagesList: TImagesList;
