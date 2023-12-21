@@ -60,26 +60,41 @@ The navigation panel has the following buttons:
 
 #### Picks panel
 
-*TODO:*
-- Title
-- Speed
-- Loop
-- Tag
-- Apply
-- Auto
-- Picks list
-- Add
-- Remove
-- Show (current, prev, next)
-- Copy
-- Up
-- Down
+
+**Title** input field: Enter an optional *Title* for the current picks.
+
+**Speed** input field (numeric up/down): Set the interval (milliseconds) between images in slideshow-mode.
+
+**Loop** checkbox: When checked, the image display will loop back to the first image after reaching the last image. Applies to navigation and slideshow-mode.
+
+**Tag** input field: Enter an optional *Tag* to apply to the selected image in the picks list when the `Apply` button is clicked.
+
+**Apply** button is sets the Tag on the selected image in the Picks list.
+
+**Auto** checkbox: When checked, the value in the *Tag* field is automatically applied when an image is added to the Picks list.
+
+**Picks list**: Holds the list of file names of picked images. Items in the list can be *selected* to have a tag applied, moved up or down, or removed from the list.
+
+**Add** button: Adds the current image to the picks list.
+
+**Remove** button: Removes the selected pick from the list.
+
+**Show** button: Show the selected pick in the Current Image panel. The `<` (previous pick) and `>` (next pick) buttons navigate within the picks list, showing the selected image.
+
+**Copy** button: Copies the list of picked file names (full path) to the system *clipboard* for pasting elsewhere.
+
+**Up** button: Moves the selected pick up in the list.
+
+**Down** button: Moves the selected pick down in the list.
 
 ### Modes
 
-*TODO:*
-- Slideshow
-- Picks
+**Slideshow-mode** automatically displays the next image after a defined interval (*speed* setting).
+
+**Picks-mode** makes it easier to focus on the picks list for selecting, tagging, reordering, and removing items.
+
+- Disables navigation within the open images folder.
+- Reassigns some navigation functions to work only within the picks list.
 
 ### Menus
 
