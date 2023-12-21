@@ -20,14 +20,14 @@ Picking photos - running on Linux (Ubuntu). [Animation](pick-photos.md)
 
 ## Scope and Limitations
 
-As stated above, this application was created mainly to review and select from sets of screenshot images. While **ImagePicker** can be used for any set of images, it **does not rotate images**. Many image viewer applcations can read the [Exif](https://en.wikipedia.org/wiki/Exif) *Orientation* tag, when present in the image metadata, and automatically rotate images.
+As stated above, this application was created mainly to review and select from sets of screenshot images. While **ImagePicker** can be used for any set of images, it **does not rotate images**. Many image viewer/editor applications can read the [Exif](https://en.wikipedia.org/wiki/Exif) *Orientation* tag, when present in the image metadata, and automatically rotate images.
 
 
 ## License
 
 The source code for the **ImagePicker** application itself is licensed using the [MIT license](LICENSE). None of the source code for Free Pascal, Lazarus, or its component libraries, was modified in any way.
 
-The Lazarus IDE and Free Pascal compiler use versions of the GPL and LGPL licenses. However, according to the [licensing documentation](https://wiki.lazarus.freepascal.org/licensing), executables produced by Lazarus are not subject to the same licensing requirements.
+The Lazarus IDE and Free Pascal compiler use versions of the GPL and LGPL licenses. However, according to the [licensing documentation](https://wiki.lazarus.freepascal.org/licensing), applications (executable binary files) produced by Lazarus are not subject to the same licensing requirements.
 
 > The GPL does not cover any application binary created with Lazarus. The application binary itself is only limited by the components you actually link to, and in the FPC/Lazarus project those are all LGPL_with_exception. So though potentially confusing this licensing is not a problem when developing binaries with Lazarus, even if you have commercial components with designtime parts.
 
@@ -105,7 +105,7 @@ Sort the file names in the Picks list.
 
 ##### Help / Online docs
 
-Open the URL for the README file in using default web browser.
+Open the URL for this README file using the default web browser.
 
 ##### Help / About
 
@@ -113,10 +113,41 @@ Display the *About* dialog box.
 
 ### Keyboard commands
 
-Key    | Default-mode        | Picks-mode
--------|---------------------|-------------------
-`Home` | Display first image | Select first pick
+In the following table...
 
-*TODO: ...*
+- **image** refers to an image file in the open folder, displayed in the main window.
+- **pick** refers to a file name in the list box in the right panel.
+
+Key | Default-mode | Picks-mode
+----|--------------|-----------
+`Home` | Display first image | Select first pick
+`End` | Display last image | Select last pick
+`Left-arrow` | Display the previous image | Select previous pick
+`Right-arrow` | Display the next image | Select next pick
+`Up-arrow` | n/a | Select previous pick
+`Down-arrow` | n/a | Select next pick
+`F2` | Toggle picks-mode | (same)
+`F4` | Toggle picks panel | (same)
+`F5` `spacebar` | Toggle Play/Stop (slideshow) | n/a
+`F6` | Show selected pick | (same)
+`F7` | Show previous pick | (same)
+`F8` | Show next pick | (same)
+`Ctrl`+`Left-arrow` | Display the previous image | n/a
+`Ctrl`+`Right-arrow` | Display the next image | n/a
+
+### Buttons (Picks panel)
+
+Button | Key | Default-mode | Picks-mode
+-------|-----|--------------|-----------
+`Apply` | | Apply the text in the *Tag* field to the selected pick | (same)
+`Add` | `Alt`+`A` | Add image to picks | n/a
+`Remove` | `Alt`+`R` | Remove selected pick from list | (same)
+`Show` | `F6` | Show selected pick | (same)
+`<` | `F7` | Show previous pick | (same)
+`>` | `F8` | Show next pick | (same)
+`Copy` | `Alt`+`p` | Copy list of picks (file names) to clipboard | (same)
+`Up` | `Ctrl`+`Up-arrow` | Move selected pick up | (same)
+`Down` | `Ctrl`+`Down-arrow` | Move selected pick down | (same)
+
 
 ---

@@ -370,7 +370,7 @@ object MainForm: TMainForm
         Top = 408
         Width = 56
         Anchors = [akRight, akBottom]
-        Caption = 'Copy'
+        Caption = 'Co&py'
         OnClick = btnPickCopyAllClick
         ParentShowHint = False
         ShowHint = True
