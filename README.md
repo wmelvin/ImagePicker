@@ -33,6 +33,54 @@ The Lazarus IDE and Free Pascal compiler use versions of the GPL and LGPL licens
 
 ## Usage
 
+### User Interface
+
+The ImagePicker application user interface has three panels (from left to right):
+
+- The **Current Image** panel displays the image from the open folder or the Picks list.
+- The **Navigation** panel has buttons to move through a set of images.
+- The **Picks** panel has the list of picked image files and other input fields, mostly related to the picks.
+
+#### Current Image panel
+
+- The Current Image panel has a *trackbar* at the bottom with a slider for quickly navigating to a different point in the set of images.
+- *Double-clicking* on the current image adds it to the Picks list.
+
+#### Navigation panel
+
+The navigation panel has the following buttons:
+
+- Toggle panel (`F4`): Collapses or expands the Picks panel to increase the display area for the current image.
+- First (`Home`): Show the first image.
+- Previous (`Left-arrow`): Show the previous image.
+- Next (`Right-arrow`): Show the next image.
+- Last (`End`): Show the last image.
+- Play/Stop (`F5` or `spacebar`): Starts or stops automatically showing the next image after a defined interval.
+- Picks-mode (`F2`): Toggles picks-mode.
+
+#### Picks panel
+
+*TODO:*
+- Title
+- Speed
+- Loop
+- Tag
+- Apply
+- Auto
+- Picks list
+- Add
+- Remove
+- Show (current, prev, next)
+- Copy
+- Up
+- Down
+
+### Modes
+
+*TODO:*
+- Slideshow
+- Picks
+
 ### Menus
 
 #### File
