@@ -37,49 +37,79 @@ The Lazarus IDE and Free Pascal compiler use versions of the GPL and LGPL licens
 
 #### File
 
-##### Open file
+##### File / Open file
 
 Use the file-open dialog to select a file. Other image files in the same folder will be in the set of images to navigate and pick from. The file that was opened will be the current image displayed.
 
-##### Open folder
+##### File / Open folder
 
 Use the folder-open dialog to select a folder. All image files in the folder will be in the set of images to navigate and pick from.
 
-##### Load List
+##### File / Load List
 
 Load a previously saved list of picked images. Provided the folder where the images were picked from is accessible, the images will be displayed.
 
-##### Save List
+##### File / Save List
 
 Save the current list of picked images to a file. The file is a text file that can be loaded into the application later. It also is in a format that can be used to create a script to do operations with the list of images using some other tool.
 
-##### Current Folder
+##### File / Current Folder
 
 Open the folder than contains the current image.
 
-##### Exit
+##### File / Exit
 
 Exit the ImagePicker application.
 
 #### Tools
 
-##### Options
+##### Tools / Options
 
-Open the folder containing the ImagePicker options file. The options file is a text file containing saved settings as key-value pairs.
+Open the **folder** containing the file `ImagePicker-Options.txt`. The options file is a text file containing saved settings as key-value pairs.
 
-##### Copy files
+##### Tools / Copy files
 
-*TODO: ...*
+Open the **Copy Files** dialog.
 
-##### Sort picks
+![Copy Files dialog](readme_images/copy-files-dialog.jpg)
+
+The following options are available for copying the picked image files:
+
+**Copy to Folder** - Enter or browse for the destination folder.
+
+To have the files copied to a new sub-folder under the selected destination, check the box for *Copy files to a new sub-folder named per the current date and time.*
+
+There are five **File Name Format:** options:
+
+- `FileName-Tag`
+- `Sequence-FileName-Tag`
+- `Title-FileName-Tag-Sequence`
+- `Title-Sequence-Tag`
+- `Title-Tag-Sequence`
+
+The file naming components are as follows:
+
+`FileName` is the original file name of the image.
+
+`Sequence` comes from the order of the images in the *Picks* list.
+
+`Tag` comes from the optional *Tag* as applied to individual images in the *Picks* list.
+
+`Title` comes from the value in the *Title* text box.
+
+##### Tools / Sort picks
 
 Sort the file names in the Picks list.
 
 #### Help
 
-##### About
+##### Help / Online docs
 
-*TODO: ...*
+Open the URL for the README file in using default web browser.
+
+##### Help / About
+
+Display the *About* dialog box. 
 
 ### Keyboard commands
 
