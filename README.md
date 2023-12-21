@@ -31,6 +31,8 @@ The Lazarus IDE and Free Pascal compiler use versions of the GPL and LGPL licens
 
 > The GPL does not cover any application binary created with Lazarus. The application binary itself is only limited by the components you actually link to, and in the FPC/Lazarus project those are all LGPL_with_exception. So though potentially confusing this licensing is not a problem when developing binaries with Lazarus, even if you have commercial components with designtime parts.
 
+---
+
 ## Usage
 
 ### User Interface
@@ -59,7 +61,6 @@ The navigation panel has the following buttons:
 - Picks-mode (`F2`): Toggles picks-mode.
 
 #### Picks panel
-
 
 **Title** input field: Enter an optional *Title* for the current picks.
 
@@ -176,10 +177,7 @@ Display the *About* dialog box.
 
 ### Keyboard commands
 
-In the following table...
-
-- **image** refers to an image file in the open folder, displayed in the main window.
-- **pick** refers to a file name in the list box in the right panel.
+In the tables below, **'image'** refers to an image file in the open folder, displayed in the main window, and **'pick'** refers to a file name in the list box in the *Picks panel*.
 
 Key | Default-mode | Picks-mode
 ----|--------------|-----------
@@ -211,6 +209,5 @@ Button | Key | Default-mode | Picks-mode
 `Copy` | `Alt`+`p` | Copy list of picks (file names) to clipboard | (same)
 `Up` | `Ctrl`+`Up-arrow` | Move selected pick up | (same)
 `Down` | `Ctrl`+`Down-arrow` | Move selected pick down | (same)
-
 
 ---

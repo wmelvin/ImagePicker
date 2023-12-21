@@ -603,3 +603,18 @@ This would make it easier to **focus on the picks list** for selecting, tagging,
 <sup>Commit [52bbee6](https://github.com/wmelvin/ImagePicker/commit/52bbee648064f6d5cbeb42a09b9a1655551e0e1a) (2023-12-16 15:09:52)</sup>
 
 ---
+
+Additional changes after using picks-mode.
+
+- [x] **Cancel picks-mode on file-open or load-list**
+<sup>Commit [09c0924](https://github.com/wmelvin/ImagePicker/commit/09c092436c6552eebdec7d0a72062233cc5d4e6c) (2023-12-18 18:49:43)</sup>
+
+- [x] **Enable Home and End keys in picks-mode**
+<sup>Commit [efeedd0](https://github.com/wmelvin/ImagePicker/commit/efeedd01d6e4f7049d17e439c6b22f750d5af522) (2023-12-20 17:59:59)</sup>
+
+---
+
+- [x] **Move About to new Help menu**
+<sup>Commit [dc3096c](https://github.com/wmelvin/ImagePicker/commit/dc3096c62798bac18ef6774a1b56c067435970cb) (2023-12-20 18:26:05)</sup>
+
+---

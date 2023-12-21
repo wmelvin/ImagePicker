@@ -103,7 +103,7 @@ object AboutDlg: TAboutDlg
     object imgLogo: TImage
       Left = 400
       Height = 96
-      Hint = 'Mascot: Red-bellied Imagepecker'
+      Hint = 'Mascot: the Red-bellied Imagepecker'
       Top = 16
       Width = 96
       ParentShowHint = False
