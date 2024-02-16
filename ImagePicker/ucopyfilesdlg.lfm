@@ -1,18 +1,19 @@
 object CopyFilesDlg: TCopyFilesDlg
-  Left = 500
-  Height = 339
-  Top = 246
+  Left = 784
+  Height = 396
+  Top = 218
   Width = 673
   BorderStyle = bsDialog
   Caption = 'Copy Files'
-  ClientHeight = 339
+  ClientHeight = 396
   ClientWidth = 673
   OnShow = FormShow
-  LCLVersion = '2.2.6.0'
+  Position = poMainFormCenter
+  LCLVersion = '3.0.0.3'
   object btnOK: TButton
     Left = 24
     Height = 25
-    Top = 296
+    Top = 328
     Width = 75
     Caption = '&OK'
     ModalResult = 1
@@ -21,7 +22,7 @@ object CopyFilesDlg: TCopyFilesDlg
   object btnCancel: TButton
     Left = 120
     Height = 25
-    Top = 296
+    Top = 328
     Width = 75
     Cancel = True
     Caption = '&Cancel'
@@ -63,7 +64,7 @@ object CopyFilesDlg: TCopyFilesDlg
   end
   object rgFileNames: TRadioGroup
     Left = 24
-    Height = 153
+    Height = 185
     Top = 120
     Width = 297
     AutoFill = True
@@ -75,12 +76,14 @@ object CopyFilesDlg: TCopyFilesDlg
     ChildSizing.ShrinkVertical = crsScaleChilds
     ChildSizing.Layout = cclLeftToRightThenTopToBottom
     ChildSizing.ControlsPerLine = 1
-    ClientHeight = 136
+    ClientHeight = 168
     ClientWidth = 295
     ItemIndex = 0
     Items.Strings = (
       'FileName-Tag'
       'Sequence-FileName-Tag'
+      'Title-Sequence-FileName-Tag'
+      'Title-Sequence-Tag-FileName'
       'Title-FileName-Tag-Sequence'
       'Title-Sequence-Tag'
       'Title-Tag-Sequence'

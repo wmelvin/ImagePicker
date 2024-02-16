@@ -769,6 +769,7 @@ var
   seqL: String;
   seqR: String;
   tagL: String;
+  tagR: String;
   title: String;
   titleL: String;
   titleR: String;
@@ -805,9 +806,15 @@ begin
       ext := ExtractFileExt(item.GetFileName);
 
       if item.HasTag then
-        tagL := '-' + item.Tag
+        begin
+          tagL := '-' + item.Tag;
+          tagR := item.Tag + '-';
+        end
       else
-        tagL := '';
+        begin
+          tagL := '';
+          tagR := '';
+        end;
 
       title := ForFileName(editTitle.Text);
       if 0 < Length(title) then
@@ -828,18 +835,24 @@ begin
         // 1: Sequence-FileName-Tag
         1: dst := seqR + stem + tagL + ext;
 
-        // 2: Title-FileName-Tag-Sequence
-        2: dst := titleR + stem + tagL + seqL + ext;
+        // 2: Title-Sequence-FileName-Tag
+        2: dst := titleR + seqR + stem + tagL + ext;
 
-        // 3: Title-Sequence-Tag
-        3:
+        // 3: Title-Sequence-Tag-FileName
+        3: dst := titleR + seqR + tagR + stem + ext;
+
+        // 4: Title-FileName-Tag-Sequence
+        4: dst := titleR + stem + tagL + seqL + ext;
+
+        // 5: Title-Sequence-Tag
+        5:
           if (Length(title) + Length(tagL) = 0) then
             dst := 'Image' + seqL + ext
           else
             dst := title + seqL + tagL + ext;
 
-        // 4: Title-Tag-Sequence
-        4:
+        // 6: Title-Tag-Sequence
+        6:
           if (Length(title) + Length(tagL) = 0) then
             dst := 'Image' + seqL + ext
           else

@@ -5,7 +5,7 @@ object MainForm: TMainForm
   Width = 972
   ActiveControl = PanelImage
   Caption = 'MainForm'
-  ClientHeight = 459
+  ClientHeight = 483
   ClientWidth = 972
   KeyPreview = True
   Menu = MainMenu
@@ -13,29 +13,29 @@ object MainForm: TMainForm
   OnClose = FormClose
   OnCreate = FormCreate
   OnKeyDown = FormKeyDown
-  LCLVersion = '2.2.6.0'
+  LCLVersion = '3.0.0.3'
   object StatusBar: TStatusBar
     Left = 0
     Height = 18
-    Top = 441
+    Top = 465
     Width = 972
     Panels = <>
   end
   object PanelImage: TPanel
     Left = 0
-    Height = 441
+    Height = 465
     Top = 0
     Width = 612
     Align = alClient
     BevelInner = bvLowered
     BorderWidth = 2
     Caption = 'No image.'
-    ClientHeight = 441
+    ClientHeight = 465
     ClientWidth = 612
     TabOrder = 1
     object Image: TImage
       Left = 4
-      Height = 395
+      Height = 419
       Top = 4
       Width = 604
       AntialiasingMode = amOn
@@ -49,7 +49,7 @@ object MainForm: TMainForm
     object TrackBar: TTrackBar
       Left = 4
       Height = 38
-      Top = 399
+      Top = 423
       Width = 604
       Position = 0
       Align = alBottom
@@ -59,20 +59,20 @@ object MainForm: TMainForm
   end
   object PanelSide: TPanel
     Left = 612
-    Height = 441
+    Height = 465
     Top = 0
     Width = 360
     Align = alRight
-    ClientHeight = 441
+    ClientHeight = 465
     ClientWidth = 360
     TabOrder = 2
     object PanelNav: TPanel
       Left = 1
-      Height = 439
+      Height = 463
       Top = 1
       Width = 55
       Align = alLeft
-      ClientHeight = 439
+      ClientHeight = 463
       ClientWidth = 55
       TabOrder = 0
       UseDockManager = False
@@ -164,39 +164,39 @@ object MainForm: TMainForm
     end
     object PanelPicks: TPanel
       Left = 59
-      Height = 439
+      Height = 463
       Top = 1
       Width = 300
       Align = alRight
-      ClientHeight = 439
+      ClientHeight = 463
       ClientWidth = 300
       TabOrder = 1
       UseDockManager = False
       object Picks: TListBox
         Left = 8
-        Height = 217
+        Height = 241
         Top = 152
         Width = 282
         Anchors = [akTop, akLeft, akRight, akBottom]
         ItemHeight = 0
-        OnDblClick = PicksDblClick
         ParentShowHint = False
         ShowHint = True
         TabOrder = 6
         TopIndex = -1
+        OnDblClick = PicksDblClick
       end
       object btnPickRemove: TButton
         Left = 24
         Height = 25
         Hint = 'Delete selected item from the list.'
-        Top = 409
+        Top = 433
         Width = 56
         Anchors = [akRight, akBottom]
         Caption = '&Remove'
-        OnClick = btnPickRemoveClick
         ParentShowHint = False
         ShowHint = True
         TabOrder = 14
+        OnClick = btnPickRemoveClick
       end
       object editTitle: TLabeledEdit
         Left = 8
@@ -235,10 +235,10 @@ object MainForm: TMainForm
         Top = 118
         Width = 56
         Caption = 'Apply'
-        OnClick = btnTagApplyClick
         ParentShowHint = False
         ShowHint = True
         TabOrder = 4
+        OnClick = btnTagApplyClick
       end
       object chkAutoTag: TCheckBox
         Left = 207
@@ -255,79 +255,79 @@ object MainForm: TMainForm
         Left = 24
         Height = 25
         Hint = 'Add the current image.'
-        Top = 377
+        Top = 401
         Width = 56
         Anchors = [akRight, akBottom]
         Caption = '&Add'
-        OnClick = btnPickAddClick
         ParentShowHint = False
         ShowHint = True
         TabOrder = 7
+        OnClick = btnPickAddClick
       end
       object btnPickShow: TButton
         Left = 128
         Height = 25
         Hint = 'Show selected (F6)'
-        Top = 377
+        Top = 401
         Width = 40
         Anchors = [akRight, akBottom]
         Caption = 'Sho&w'
-        OnClick = btnPickShowClick
         ParentShowHint = False
         ShowHint = True
         TabOrder = 9
+        OnClick = btnPickShowClick
       end
       object btnPickShowNext: TButton
         Left = 168
         Height = 25
         Hint = 'Show next (F8)'
-        Top = 377
+        Top = 401
         Width = 24
         Anchors = [akRight, akBottom]
         Caption = '>'
-        OnClick = btnPickShowNextClick
         ParentShowHint = False
         ShowHint = True
         TabOrder = 10
+        OnClick = btnPickShowNextClick
       end
       object btnPickShowPrev: TButton
         Left = 104
         Height = 25
         Hint = 'Show previous (F7)'
-        Top = 377
+        Top = 401
         Width = 24
         Anchors = [akRight, akBottom]
         Caption = '<'
-        OnClick = btnPickShowPrevClick
         ParentShowHint = False
         ShowHint = True
         TabOrder = 8
+        OnClick = btnPickShowPrevClick
       end
       object btnPickDown: TButton
         Left = 215
         Height = 25
         Hint = 'Move Down (Ctrl+DownArrow)'
-        Top = 409
+        Top = 433
         Width = 56
         Anchors = [akRight, akBottom]
         Caption = 'Down'
-        OnClick = btnPickDownClick
         ParentShowHint = False
         ShowHint = True
         TabOrder = 12
+        OnClick = btnPickDownClick
       end
       object btnPickUp: TButton
         Left = 215
         Height = 25
         Hint = 'Move Up Move Down (Ctrl+UpArrow)'
-        Top = 377
+        Top = 401
         Width = 56
         Anchors = [akRight, akBottom]
         Caption = 'Up'
-        OnClick = btnPickUpClick
         ParentShowHint = False
         ShowHint = True
         TabOrder = 11
+        OnClick = btnPickUpClick
       end
       object SpinEdit: TSpinEdit
         Left = 96
@@ -360,21 +360,21 @@ object MainForm: TMainForm
         Top = 63
         Width = 57
         Caption = 'Loop'
-        OnChange = chkLoopChange
         TabOrder = 2
+        OnChange = chkLoopChange
       end
       object btnPickCopyAll: TButton
         Left = 120
         Height = 25
         Hint = 'Copy file paths to the clipboard.'
-        Top = 408
+        Top = 432
         Width = 56
         Anchors = [akRight, akBottom]
         Caption = 'Co&py'
-        OnClick = btnPickCopyAllClick
         ParentShowHint = False
         ShowHint = True
         TabOrder = 13
+        OnClick = btnPickCopyAllClick
       end
     end
   end
