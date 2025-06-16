@@ -844,15 +844,18 @@ begin
         // 4: Title-FileName-Tag-Sequence
         4: dst := titleR + stem + tagL + seqL + ext;
 
-        // 5: Title-Sequence-Tag
-        5:
+        // 5: Title-FileName-Tag
+        5: dst := titleR + stem + tagL + ext;
+
+        // 6: Title-Sequence-Tag
+        6:
           if (Length(title) + Length(tagL) = 0) then
             dst := 'Image' + seqL + ext
           else
             dst := title + seqL + tagL + ext;
 
-        // 6: Title-Tag-Sequence
-        6:
+        // 7: Title-Tag-Sequence
+        7:
           if (Length(title) + Length(tagL) = 0) then
             dst := 'Image' + seqL + ext
           else
