@@ -649,13 +649,17 @@ var
 begin
   if 1 < Picks.Items.Count then
     begin
-      // Assign the items to a TStringList and call its Sort method.
-      sl := TStringList.Create;
-      sl.Assign(Picks.Items);
-      sl.Sort;
-      // Assign the sorted items back to the TListBox.Items.
-      Picks.Items.Assign(sl);
-      sl.Free;
+      if MessageDlg('Sort Picks', 'Sort the list of picks alphabetically?',
+                    mtConfirmation, [mbYes, mbNo], 0) = mrYes then
+      begin
+        // Assign the items to a TStringList and call its Sort method.
+        sl := TStringList.Create;
+        sl.Assign(Picks.Items);
+        sl.Sort;
+        // Assign the sorted items back to the TListBox.Items.
+        Picks.Items.Assign(sl);
+        sl.Free;
+      end;
     end;
 end;
 

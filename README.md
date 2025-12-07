@@ -2,7 +2,7 @@
 
 *ImagePicker* is a desktop application for selecting images and saving the list to a text file for use in other applications. It is implemented using the [Lazarus](https://www.lazarus-ide.org/) IDE for Free Pascal.
 
-More details about the development of this application are in [devnotes](devnotes.md).
+More details about the development of this application are in [devnotes](devnotes.md) and [devnotes-20251207](devnotes-20251207.md).
 
 ## Picking from a set of screenshots
 

@@ -1,7 +1,7 @@
 object MainForm: TMainForm
-  Left = 514
+  Left = 433
   Height = 483
-  Top = 166
+  Top = 160
   Width = 972
   ActiveControl = PanelImage
   Caption = 'MainForm'
@@ -9,11 +9,11 @@ object MainForm: TMainForm
   ClientWidth = 972
   KeyPreview = True
   Menu = MainMenu
+  LCLVersion = '4.0.0.4'
   OnActivate = FormActivate
   OnClose = FormClose
   OnCreate = FormCreate
   OnKeyDown = FormKeyDown
-  LCLVersion = '3.0.0.3'
   object StatusBar: TStatusBar
     Left = 0
     Height = 18
@@ -42,9 +42,9 @@ object MainForm: TMainForm
       Align = alClient
       AutoSize = True
       Center = True
+      Proportional = True
       OnClick = ImageClick
       OnDblClick = ImageDblClick
-      Proportional = True
     end
     object TrackBar: TTrackBar
       Left = 4
@@ -53,8 +53,8 @@ object MainForm: TMainForm
       Width = 604
       Position = 0
       Align = alBottom
-      OnMouseUp = TrackBarMouseUp
       TabOrder = 0
+      OnMouseUp = TrackBarMouseUp
     end
   end
   object PanelSide: TPanel
@@ -85,9 +85,9 @@ object MainForm: TMainForm
         Images = Glyphs
         ImageIndex = 0
         ImageWidth = 25
-        OnClick = btnNavToggleClick
         ShowHint = True
         ParentShowHint = False
+        OnClick = btnNavToggleClick
       end
       object btnNavFirst: TSpeedButton
         Left = 8
@@ -97,9 +97,9 @@ object MainForm: TMainForm
         Width = 36
         Images = Glyphs
         ImageIndex = 2
-        OnClick = btnNavFirstClick
         ShowHint = True
         ParentShowHint = False
+        OnClick = btnNavFirstClick
       end
       object btnNavPrev: TSpeedButton
         Left = 8
@@ -109,9 +109,9 @@ object MainForm: TMainForm
         Width = 36
         Images = Glyphs
         ImageIndex = 3
-        OnClick = btnNavPrevClick
         ShowHint = True
         ParentShowHint = False
+        OnClick = btnNavPrevClick
       end
       object btnNavTogglePlay: TSpeedButton
         Left = 8
@@ -121,9 +121,9 @@ object MainForm: TMainForm
         Width = 36
         Images = Glyphs
         ImageIndex = 4
-        OnClick = btnNavTogglePlayClick
         ShowHint = True
         ParentShowHint = False
+        OnClick = btnNavTogglePlayClick
       end
       object btnNavNext: TSpeedButton
         Left = 8
@@ -133,9 +133,9 @@ object MainForm: TMainForm
         Width = 36
         Images = Glyphs
         ImageIndex = 6
-        OnClick = btnNavNextClick
         ShowHint = True
         ParentShowHint = False
+        OnClick = btnNavNextClick
       end
       object btnNavLast: TSpeedButton
         Left = 8
@@ -145,9 +145,9 @@ object MainForm: TMainForm
         Width = 36
         Images = Glyphs
         ImageIndex = 7
-        OnClick = btnNavLastClick
         ShowHint = True
         ParentShowHint = False
+        OnClick = btnNavLastClick
       end
       object btnMode: TSpeedButton
         Left = 8
@@ -157,9 +157,9 @@ object MainForm: TMainForm
         Width = 36
         Images = Glyphs
         ImageIndex = 8
-        OnClick = btnModeClick
         ShowHint = True
         ParentShowHint = False
+        OnClick = btnModeClick
       end
     end
     object PanelPicks: TPanel
@@ -338,13 +338,13 @@ object MainForm: TMainForm
         Increment = 100
         MaxValue = 10000
         MinValue = 100
-        OnChange = SpinEditChange
-        OnEnter = SpinEditEnter
-        OnExit = SpinEditExit
         ParentShowHint = False
         ShowHint = True
         TabOrder = 1
         Value = 1000
+        OnChange = SpinEditChange
+        OnEnter = SpinEditEnter
+        OnExit = SpinEditExit
       end
       object SpinEditLabel: TLabel
         Left = 20
