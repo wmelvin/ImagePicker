@@ -9,7 +9,7 @@ object MainForm: TMainForm
   ClientWidth = 972
   KeyPreview = True
   Menu = MainMenu
-  LCLVersion = '4.0.0.4'
+  LCLVersion = '4.4.0.0'
   OnActivate = FormActivate
   OnClose = FormClose
   OnCreate = FormCreate
@@ -350,7 +350,7 @@ object MainForm: TMainForm
         Left = 20
         Height = 16
         Top = 64
-        Width = 68
+        Width = 69
         Caption = 'Speed (ms):'
         ParentColor = False
       end

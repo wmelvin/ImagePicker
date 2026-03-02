@@ -134,6 +134,7 @@ type
     procedure PlayStop;
     procedure SaveAppOptions;
     procedure SavePicks(FileName: String);
+    procedure SaveListWithCopiedFiles(DestDir: String);
     procedure SelectShowFirst;
     procedure SelectShowLast;
     procedure SelectShowNext;
@@ -760,6 +761,20 @@ begin
     Picks.Items.Clear;
 end;
 
+procedure TMainForm.SaveListWithCopiedFiles(DestDir: String);
+var
+  filename: String;
+  title: String;
+  dt: String;
+begin
+  title := StringReplace(editTitle.Text, ' ', '_', [rfReplaceAll]);
+  if 0 < Length(title) then
+    title := title + '-';
+  dt := FormatDateTime('yyyymmdd_hhnnss', Now);
+  filename := AsPath(DestDir) + 'ImageList-' + title + dt + '.txt';
+  SavePicks(filename);
+end;
+
 procedure TMainForm.CopyFilesInList(DestDir: String; FileNamesOption: Integer; DoSubDir: Boolean);
 var
   ok: Boolean;
@@ -893,6 +908,7 @@ begin
           Exit;
         end;
     end;
+  SaveListWithCopiedFiles(dst_dir);
 end;
 
 procedure TMainForm.GetArgs;
