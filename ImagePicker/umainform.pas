@@ -357,6 +357,7 @@ end;
 
 procedure TMainForm.FormActivate(Sender: TObject);
 begin
+  Randomize;
   if not IsActivated then
     GetArgs;
   IsActivated := True;
@@ -718,7 +719,11 @@ procedure TMainForm.TrackBarMouseUp(Sender: TObject; Button: TMouseButton;
 var
   p: Integer;
 begin
-  p := TrackBar.Position;
+  if Button = mbRight then
+     // Right-clicking on the TrackBar selects an image at random.
+    p := Random(ImagesList.Count)
+  else
+    p := TrackBar.Position;
   if ImagesList.SetCurrentIndex(p - 1) then
     LoadImage;
 end;
