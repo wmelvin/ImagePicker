@@ -262,13 +262,16 @@ procedure TMainForm.btnPickRemoveClick(Sender: TObject);
 var
   i: Integer;
   x: Integer;
+  mr: TModalResult;
 begin
   if Picks.SelCount = 0 then
     Exit;
 
-  if not MessageDlg('Confirm', 'Remove selected item from the list?',
-    mtConfirmation, [mbYes, mbNo],0
-  ) = mrYes then
+  mr := MessageDlg(
+    'Confirm', 'Remove selected item from the list?',
+    mtConfirmation, [mbYes, mbNo], 0
+  );
+  if mr <> mrYes then
     Exit;
 
   x := -1;
