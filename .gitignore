@@ -50,3 +50,5 @@ ImageList-*.txt
 
 # Debugging output files.
 DEBUG*.txt
+
+.vscode/
