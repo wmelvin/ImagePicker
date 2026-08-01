@@ -96,6 +96,8 @@ type
     procedure FormKeyDown(Sender: TObject; var Key: Word; Shift: TShiftState);
     procedure ImageClick(Sender: TObject);
     procedure ImageDblClick(Sender: TObject);
+    procedure ImageMouseUp(Sender: TObject; Button: TMouseButton;
+      Shift: TShiftState; X, Y: Integer);
     procedure mnuFileCurrentClick(Sender: TObject);
     procedure mnuFileExitClick(Sender: TObject);
     procedure mnuFileLoadClick(Sender: TObject);
@@ -528,6 +530,20 @@ begin
   AddCurrentImage;
 end;
 
+procedure TMainForm.ImageMouseUp(Sender: TObject; Button: TMouseButton;
+  Shift: TShiftState; X, Y: Integer);
+var
+  s: string;
+begin
+  // Right-click copies the current image path to the clipboard.
+  if Button = mbRight then
+  begin
+    s := ImagesList.CurrentImage;
+    TextToClipboard(s);
+    StatusBar.SimpleText := 'Clipboard: ' + s;
+  end
+end;
+
 procedure TMainForm.mnuFileExitClick(Sender: TObject);
 begin
   Close;
@@ -798,7 +814,7 @@ var
   tagL: String;
   tagR: String;
   title: String;
-  titleL: String;
+  // titleL: String;
   titleR: String;
   do_replace: Boolean = False;
   mr: Integer;
@@ -846,12 +862,12 @@ begin
       title := ForFileName(editTitle.Text);
       if 0 < Length(title) then
         begin
-          titleL := '-' + title;
+          // titleL := '-' + title;
           titleR := title + '-';
         end
       else
         begin
-          titleL := '';
+          // titleL := '';
           titleR := '';
         end;
 

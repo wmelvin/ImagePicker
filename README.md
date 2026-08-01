@@ -45,8 +45,10 @@ The ImagePicker application user interface has three panels (from left to right)
 
 #### Current Image panel
 
-- The Current Image panel has a *trackbar* at the bottom with a slider for quickly navigating to a different point in the set of images.
 - *Double-clicking* on the current image adds it to the Picks list.
+- *Right-clicking* on the current image copies the file path to the clipboard.
+- The Current Image panel has a *trackbar* at the bottom with a slider for quickly navigating to a different point in the set of images.
+- *Right-clicking* on the *trackbar* moves it to a random point in the set of images.
 
 #### Navigation panel
 
