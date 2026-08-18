@@ -23,6 +23,7 @@ type
       property FullName: String read FPath;
   end;
 
+  function CompareImageInfoFullPath(List: TStringList; Index1: Integer; Index2: Integer):Integer;
 
 implementation
 
@@ -80,6 +81,22 @@ begin
 
   AsMvCmd := 'mv ' + PadRight('"' + name + '"', PadLen + 2)
     + ' "' + new_name + '"';
+end;
+
+
+
+function CompareImageInfoFullPath(List: TStringList; Index1: Integer; Index2: Integer):Integer;
+// Function type TStringListSortCompare for use in TStringList.CustomSort.
+// Docs as of 2026-08-18:
+//   https://lazarus-ccr.sourceforge.io/docs/rtl/classes/tstringlist.customsort.html
+var
+  item1: TImageInfo;
+  item2: TImageInfo;
+begin
+  item1 := TImageInfo(List.Objects[index1]);
+  item2 := TImageInfo(List.Objects[index2]);
+  // CompareText is case insensitive - matches TStringList.Sort behavior.
+  CompareImageInfoFullPath := CompareText(item1.FullName, item2.FullName);
 end;
 
 end.

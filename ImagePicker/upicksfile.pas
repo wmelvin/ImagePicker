@@ -14,7 +14,7 @@ function LoadPicksFile(OpenDialog: TOpenDialog; editTitle: TLabeledEdit; Picks: 
 
 implementation
 
-uses uApp, uAppOptions, uImageInfo, StrUtils;
+uses uApp, uAppOptions, uImageInfo, Controls, Forms, StrUtils;
 
 procedure SavePicksFile(FileName: String; TitleText: String; Picks: TListBox; StatusBar: TStatusBar);
 var
@@ -129,6 +129,7 @@ var
   tag_val: String;
   first_line: Boolean;
   ok: Boolean;
+  mr: TModalResult;
 
   {local} function ParsedTag(const TagStr: String; VAR TagNameValue: String): Boolean;
   var
@@ -178,14 +179,19 @@ begin
               begin
                 first_line := False;
                 if not ((LeftStr(s, 1) = '#')
-                and (0 < Pos('ImagePicker', s))) then
+                and (Pos('ImagePicker', s) > 0)) then
                   begin
-                    MessageDlg(
-                      'Cannot Load',
-                      'File does not match ImagePicker format.',
-                      mtWarning, [mbClose],0);
-                    ok := False;
-                    continue;
+                    mr := MessageDlg(
+                      'WARNING',
+                      'File does not match ImagePicker format. '
+                      + 'Try loading as a simple list of image files?',
+                      mtConfirmation, [mbYes, mbNo], 0
+                    );
+                    if mr <> mrYes then
+                    begin
+                      ok := False;
+                      continue;
+                    end;
                   end;
               end;
 

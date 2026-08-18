@@ -667,16 +667,27 @@ end;
 procedure TMainForm.mnuToolsSortClick(Sender: TObject);
 var
   sl : TStringList;
+  mr : TModalResult;
 begin
   if 1 < Picks.Items.Count then
     begin
-      if MessageDlg('Sort Picks', 'Sort the list of picks alphabetically?',
-                    mtConfirmation, [mbYes, mbNo], 0) = mrYes then
+      mr := MessageDlg('Sort Picks',
+        'Sort the list of picks by full file paths?  '
+        + 'Choose "No" to sort by file names only.',
+        mtConfirmation, [mbYes, mbNo, mbCancel], 0
+      );
+
+      if mr <> mrCancel then
       begin
         // Assign the items to a TStringList and call its Sort method.
         sl := TStringList.Create;
         sl.Assign(Picks.Items);
-        sl.Sort;
+
+        if mr = mrYes then
+          sl.CustomSort(@CompareImageInfoFullPath)
+        else
+         sl.Sort;
+
         // Assign the sorted items back to the TListBox.Items.
         Picks.Items.Assign(sl);
         sl.Free;
