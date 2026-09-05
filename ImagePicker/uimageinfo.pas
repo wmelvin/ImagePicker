@@ -74,7 +74,7 @@ begin
   else
     ns := '';
 
-  if 0 < Length(Title) then
+  if Length(Title) > 0 then
     new_name := ForFileName(Title) + ns + t + ext
   else
     new_name := ChangeFileExt(name, '') + t + ext;

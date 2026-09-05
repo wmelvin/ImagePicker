@@ -1,7 +1,7 @@
 object MainForm: TMainForm
-  Left = 433
+  Left = 824
   Height = 483
-  Top = 160
+  Top = 132
   Width = 972
   ActiveControl = PanelImage
   Caption = 'MainForm'

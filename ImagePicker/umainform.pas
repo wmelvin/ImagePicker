@@ -603,7 +603,7 @@ var
   dt: String;
 begin
   title := StringReplace(editTitle.Text, ' ', '_', [rfReplaceAll]);
-  if 0 < Length(title) then
+  if Length(title) > 0 then
     title := title + '-';
 
   dirname := AppOptions.LastSaveDir;
@@ -628,7 +628,7 @@ var
   filename: String;
 begin
   filename := ImagesList.CurrentImage;
-  if 0 < Length(filename) then
+  if Length(filename) > 0 then
     // Open the folder using the default associated application.
     OpenDocument(ExtractFileDir(filename));
 end;
@@ -768,7 +768,7 @@ begin
   if IsPicksMode then
     Exit;
   s := ImagesList.CurrentImage;
-  if 0 < Length(s) then
+  if Length(s) > 0 then
   begin
     dup := Picks.Items.IndexOf(ExtractFileName(s));
     if dup = -1 then
@@ -803,7 +803,7 @@ var
   dt: String;
 begin
   title := StringReplace(editTitle.Text, ' ', '_', [rfReplaceAll]);
-  if 0 < Length(title) then
+  if Length(title) > 0 then
     title := title + '-';
   dt := FormatDateTime('yyyymmdd_hhnnss', Now);
   filename := AsPath(DestDir) + 'ImageList-' + title + dt + '.txt';
@@ -871,7 +871,7 @@ begin
         end;
 
       title := ForFileName(editTitle.Text);
-      if 0 < Length(title) then
+      if Length(title) > 0 then
         begin
           // titleL := '-' + title;
           titleR := title + '-';
@@ -954,7 +954,7 @@ begin
   params := TStringList.Create;
   try
     Application.GetNonOptions('', [], params);
-    if 0 < params.Count then
+    if params.Count > 0 then
       // Take first argument as file or directory to load.
       begin
         s := params[0];
@@ -1001,11 +1001,11 @@ begin
     Exit;
 
   t := ATag;
-  if 0 < Length(t) then
+  if Length(t) > 0 then
     begin
       t := ' [' + t + ']';
-      if not chkAutoTag.Checked then
-        editTag.Text := ATag;
+      // if not chkAutoTag.Checked then
+      //  editTag.Text := ATag;
     end;
 
   StatusBar.SimpleText := '(' + IntToStr(ImagesList.Index + 1) + ' of '
@@ -1045,7 +1045,7 @@ var
   last_pick: String;
 begin
   last_pick := LoadPicksFile(OpenDialog, editTitle, Picks, StatusBar);
-  if 0 < Length(last_pick) then
+  if Length(last_pick) > 0 then
     begin
       if IsPicksMode then
         TogglePicksMode;
@@ -1058,7 +1058,7 @@ procedure TMainForm.MoveSelectedDown;
 var
   i: Integer;
 begin
-  if 0 < Picks.SelCount then
+  if Picks.SelCount > 0 then
   begin
     for i := 0 to Picks.Items.Count - 2 do
       if Picks.Selected[i] then
@@ -1075,7 +1075,7 @@ procedure TMainForm.MoveSelectedUp;
 var
   i: Integer;
 begin
-  if 0 < Picks.SelCount then
+  if Picks.SelCount > 0 then
   begin
     for i := 1 to Picks.Items.Count - 1 do
       if Picks.Selected[i] then
@@ -1117,7 +1117,7 @@ procedure TMainForm.SelectShowFirst;
 var
   i: Integer;
 begin
-  if 0 < Picks.SelCount then
+  if Picks.SelCount > 0 then
   begin
     for i := 0 to Picks.Items.Count - 2 do
       if Picks.Selected[i] then
@@ -1134,7 +1134,7 @@ procedure TMainForm.SelectShowLast;
 var
   i: Integer;
 begin
-  if 0 < Picks.SelCount then
+  if Picks.SelCount > 0 then
   begin
     for i := 0 to Picks.Items.Count - 2 do
       if Picks.Selected[i] then
@@ -1151,7 +1151,7 @@ procedure TMainForm.SelectShowNext;
 var
   i: Integer;
 begin
-  if 0 < Picks.SelCount then
+  if Picks.SelCount > 0 then
   begin
     for i := 0 to Picks.Items.Count - 2 do
       if Picks.Selected[i] then
@@ -1168,7 +1168,7 @@ procedure TMainForm.SelectShowPrev;
 var
   i: Integer;
 begin
-  if 0 < Picks.SelCount then
+  if Picks.SelCount > 0 then
   begin
     for i := 1 to Picks.Items.Count - 1 do
       if Picks.Selected[i] then
@@ -1189,7 +1189,7 @@ var
 begin
   fn := '';
   // Get the full file name of the first selected item.
-  if 0 < Picks.SelCount then
+  if Picks.SelCount > 0 then
     for i := 0 to Picks.Items.Count - 1 do
       if Picks.Selected[i] then
         begin
@@ -1202,7 +1202,7 @@ begin
         end;
 
   // If there is a file name, show the image.
-  if 0 < Length(fn) then
+  if Length(fn) > 0 then
      if ImagesList.SetCurrentImage(fn) then
         LoadImage(t)
      else

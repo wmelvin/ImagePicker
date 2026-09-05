@@ -61,7 +61,7 @@ begin
           pad_tagged := n;
     end;
 
-    if 0 < pad_tagged then
+    if pad_tagged > 0 then
       // There are one or more items with a tag.
       begin
         writeln(tf, '');
@@ -212,7 +212,7 @@ begin
           StatusBar.SimpleText := 'ERROR: ' + E.Message;
       end;
 
-      if 0 < paths_list.Count then
+      if paths_list.Count > 0 then
       begin
         editTitle.Text := title;
         Picks.Clear;
@@ -236,7 +236,7 @@ begin
             err_list.Add('NOT FOUND: ' + paths_list[i]);
         end;
       end;
-      if 0 < err_list.Count then
+      if err_list.Count > 0 then
         MessageDlg('ERRORS', err_list.GetText, mtError, [mbOk], 0);
     end;
 end;
