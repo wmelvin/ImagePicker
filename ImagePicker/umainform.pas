@@ -28,6 +28,7 @@ type
     Glyphs: TImageList;
     editTag: TLabeledEdit;
     editTitle: TLabeledEdit;
+    mnuFileWriteCSV: TMenuItem;
     mnuHelpReadme: TMenuItem;
     mnuHelpAbout: TMenuItem;
     mnuHelp: TMenuItem;
@@ -104,6 +105,7 @@ type
     procedure mnuFileOpenClick(Sender: TObject);
     procedure mnuFileOpenDirClick(Sender: TObject);
     procedure mnuFileSaveClick(Sender: TObject);
+    procedure mnuFileWriteCSVClick(Sender: TObject);
     procedure mnuHelpAboutClick(Sender: TObject);
     procedure mnuHelpReadmeClick(Sender: TObject);
     procedure mnuToolsCopyClick(Sender: TObject);
@@ -620,6 +622,59 @@ begin
       SavePicks(SaveDialog.FileName);
       AppOptions.LastSaveDir := ExtractFileDir(SaveDialog.FileName);
       SaveAppOptions;
+    end;
+end;
+
+procedure TMainForm.mnuFileWriteCSVClick(Sender: TObject);
+var
+  dirname: String;
+  filename: String;
+  title: String;
+  dt: String;
+
+  procedure WriteCSV(FileName: String);
+  var
+    tf: TextFile;
+    i: Integer;
+    item: TImageInfo;
+  begin
+    StatusBar.SimpleText := 'Write picks to ' + FileName;
+    AssignFile(tf, FileName);
+    try
+      rewrite(tf);
+
+      writeln(tf, '"Sequence","File","Tag"');
+      for i := 0 to Picks.Items.Count - 1 do
+      begin
+        item := TImageInfo(Picks.Items.Objects[i]);
+        writeln(tf, IntToStr(i + 1) + ',"' + item.FullName + '","' + item.Tag + '"');
+      end;
+
+      CloseFile(tf);
+    except
+      on E: EInOutError do
+        StatusBar.SimpleText := 'ERROR: ' + E.Message;
+    end;
+  end;
+
+begin
+  title := StringReplace(editTitle.Text, ' ', '_', [rfReplaceAll]);
+  if Length(title) > 0 then
+    title := title + '-';
+
+  // Defaut to the LastSaveDir, but don't change it if CSV is written elsewhere.
+  dirname := AppOptions.LastSaveDir;
+  if (Length(dirname) = 0) or (not DirectoryExists(dirname)) then
+    dirname := GetCurrentDir;
+
+  dt := FormatDateTime('yyyymmdd_hhnnss', Now);
+  filename := 'Picks-' + title + dt + '.csv';
+
+  SaveDialog.InitialDir:= dirname;
+  SaveDialog.FileName := filename;
+  if SaveDialog.Execute then
+    begin
+      WriteCSV(SaveDialog.FileName);
     end;
 end;
 

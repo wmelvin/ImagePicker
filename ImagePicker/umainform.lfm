@@ -1,7 +1,7 @@
 object MainForm: TMainForm
-  Left = 824
+  Left = 838
   Height = 483
-  Top = 132
+  Top = 178
   Width = 972
   ActiveControl = PanelImage
   Caption = 'MainForm'
@@ -380,7 +380,7 @@ object MainForm: TMainForm
     end
   end
   object MainMenu: TMainMenu
-    Left = 63
+    Left = 64
     Top = 36
     object mnuFile: TMenuItem
       Caption = '&File'
@@ -405,6 +405,10 @@ object MainForm: TMainForm
       end
       object Separator4: TMenuItem
         Caption = '-'
+      end
+      object mnuFileWriteCSV: TMenuItem
+        Caption = '&Write CSV'
+        OnClick = mnuFileWriteCSVClick
       end
       object mnuFileCurrent: TMenuItem
         Caption = '&Current folder'

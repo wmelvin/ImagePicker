@@ -119,6 +119,11 @@ Load a previously saved list of picked images. Provided the folder where the ima
 
 Save the current list of picked images to a file. The file is a text file that can be loaded into the application later. It also is in a format that can be used to create a script to do operations with the list of images using some other tool.
 
+##### File / Write CSV
+
+Write the current list of picked images to a CSV (Comma-Separated-Value) file with the format `Sequence, File, Tag`.
+
+
 ##### File / Current Folder
 
 Open the folder than contains the current image.
